@@ -29,10 +29,5 @@ trim_trailing_whitespace = true
 # Possible values - true, false
 insert_final_newline = true
 
-
-[*.{yaml,yml,yml.sh}]
-indent_style = space
-indent_size = 2
-
 [package.json]
 indent_size = 2
