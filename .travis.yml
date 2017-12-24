@@ -11,6 +11,16 @@ script:
 
 deploy:
   skip_cleanup: true
+  provider: X
+  edge:
+    branch: ha-s3-endpoint
+  endpoint: https://nyc3.digitaloceanspaces.com
+  acl: public_read
+  access_key_id: $SPACES_ACCESS_KEY
+  secret_access_key: $SPACES_SECRET
+  bucket: "mustachebash-public"
+  local_dir: dist
+  upload-dir: travis-builds
 
 branches:
   only:
