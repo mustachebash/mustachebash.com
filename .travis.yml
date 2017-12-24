@@ -11,7 +11,7 @@ script:
 
 deploy:
   skip_cleanup: true
-  provider: X
+  provider: s3
   edge:
     branch: ha-s3-endpoint
   endpoint: https://nyc3.digitaloceanspaces.com
