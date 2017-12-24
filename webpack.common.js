@@ -30,7 +30,7 @@ const config = {
 		]
 	},
 	plugins: [
-		new CleanWebpackPlugin(['dist']),
+		new CleanWebpackPlugin(['dist', 'templates']),
 		new HtmlWebpackPlugin({
 			inject: false,
 			chunks: ['privacyPolicy'],

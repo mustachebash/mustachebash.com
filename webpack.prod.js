@@ -37,7 +37,7 @@ const config = {
 		new HtmlWebpackPlugin({
 			inject: 'head',
 			chunks: ['main'],
-			filename: 'index.hbs',
+			filename: '../templates/index.hbs',
 			template: 'src/index.hbs'
 		}),
 		new StyleExtHtmlWebpackPlugin({
