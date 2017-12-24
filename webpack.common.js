@@ -41,7 +41,7 @@ const config = {
 			defaultAttribute: 'defer'
 		}),
 		new SuppressChunksPlugin(['privacyPolicy']),
-		new CopyPlugin([{from: 'src/img', to: 'img'}], {debug: 'debug'}),
+		new CopyPlugin([{from: 'src/img', to: 'img'}]),
 		extractLess
 	]
 };
