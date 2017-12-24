@@ -2,6 +2,7 @@ const path = require('path'),
 	CleanWebpackPlugin = require('clean-webpack-plugin'),
 	HtmlWebpackPlugin = require('html-webpack-plugin'),
 	ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin'),
+	SuppressChunksPlugin = require('suppress-chunks-webpack-plugin').default,
 	ExtractTextPlugin = require('extract-text-webpack-plugin'),
 	CopyPlugin = require('copy-webpack-plugin');
 
@@ -11,13 +12,11 @@ const extractLess = new ExtractTextPlugin({
 });
 
 const config = {
+	entry: {
+		privacyPolicy: './src/privacy-policy.less'
+	},
 	resolve: {
 		modules: [path.resolve(__dirname, 'src'), 'node_modules']
-	},
-	output: {
-		path: path.resolve(__dirname, 'dist'),
-		filename: 'app.[hash].js',
-		publicPath: '/'
 	},
 	module: {
 		rules: [
@@ -33,13 +32,15 @@ const config = {
 	plugins: [
 		new CleanWebpackPlugin(['dist']),
 		new HtmlWebpackPlugin({
-			inject: 'head',
+			inject: false,
+			chunks: ['privacyPolicy'],
 			filename: 'privacy-policy.html',
 			template: 'src/privacy-policy.html'
 		}),
 		new ScriptExtHtmlWebpackPlugin({
 			defaultAttribute: 'defer'
 		}),
+		new SuppressChunksPlugin(['privacyPolicy']),
 		new CopyPlugin([{from: 'src/img', to: 'img'}], {debug: 'debug'}),
 		extractLess
 	]

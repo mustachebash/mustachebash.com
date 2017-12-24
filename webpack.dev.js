@@ -1,14 +1,22 @@
-const merge = require('webpack-merge'),
+const path = require('path'),
+	merge = require('webpack-merge'),
 	HtmlWebpackPlugin = require('html-webpack-plugin'),
 	webpack = require('webpack'),
 	common = require('./webpack.common');
 
 const config = {
-	entry: [
-		'react-hot-loader/patch',
-		'react-devtools',
-		'./src/app.js'
-	],
+	entry: {
+		main: [
+			'react-hot-loader/patch',
+			'react-devtools',
+			'./src/main.js'
+		]
+	},
+	output: {
+		path: path.resolve(__dirname, 'dist'),
+		filename: '[name].[hash].js',
+		publicPath: '/'
+	},
 	devtool: 'inline-source-map',
 	devServer: {
 		contentBase: './dist',
@@ -40,6 +48,7 @@ const config = {
 	plugins: [
 		new HtmlWebpackPlugin({
 			inject: 'head',
+			chunks: ['main'],
 			template: 'src/index.hbs'
 		}),
 		new webpack.NamedModulesPlugin(),

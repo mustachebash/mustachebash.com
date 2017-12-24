@@ -1,11 +1,5 @@
 @import 'base.less';
 
-body {
-	font: 16px @proxima;
-	-webkit-font-smoothing: antialiased;
-	color: @light-gray;
-}
-
 .container-1230 {
 	max-width: 1230px;
 	box-sizing: border-box;
@@ -17,24 +11,19 @@ body {
 	.make-row();
 }
 
-a {
-	text-decoration: none;
-	color: @pink;
+.ghost-button {
+	background: transparent;
+	border: 1px solid @gray;
+	border-radius: 2px;
+	color: @gray;
+	padding: 10px 20px;
+	font-weight: bold;
+	width: 180px;
+	transition: color, background-color, .2s;
 
-	&.ghost-button {
-		background: transparent;
-		border: 1px solid @gray;
-		border-radius: 2px;
-		color: @gray;
-		padding: 10px 20px;
-		font-weight: bold;
-		width: 180px;
-		transition: color, background-color, .2s;
-
-		&:hover {
-			background: @gray;
-			color: @white;
-		}
+	&:hover {
+		background: @gray;
+		color: @white;
 	}
 }
 
@@ -100,19 +89,6 @@ nav {
 			margin: 0 15px;
 		}
 	}
-}
-
-h3 {
-	font-family: @brandon;
-	font-weight: 700;
-	margin: 20px 0 0 0;
-}
-
-h2,
-h4 {
-	font-family: @league;
-	font-size: 24px;
-	font-weight: 100;
 }
 
 .instagram-link {
@@ -632,19 +608,3 @@ footer {
 		}
 	}
 }
-
-// --------------------------------------------------
-// PRIVACY POLICY
-
-#privacy-policy {
-	color: @gray;
-	background: @white;
-	padding: 20px;
-
-	h5 {
-		color: @red;
-	}
-}
-
-// END PRIVACY POLICY
-// --------------------------------------------------
