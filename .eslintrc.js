@@ -14,6 +14,7 @@ module.exports = {
 	],
 	globals: {
 		API_HOST: false,
+		BRAINTREE_TOKEN: false,
 		fetch: false
 	},
 	extends: [

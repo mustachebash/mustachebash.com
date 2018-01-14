@@ -20,6 +20,7 @@
 		"babel-plugin-transform-object-rest-spread": "^6.26.0",
 		"babel-preset-env": "^1.6.1",
 		"babel-preset-react": "^6.24.1",
+		"braintree-web": "^3.28.0",
 		"classnames": "^2.2.5",
 		"clean-webpack-plugin": "^0.1.17",
 		"concurrently": "^3.5.1",

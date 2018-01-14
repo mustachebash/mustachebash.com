@@ -54,7 +54,8 @@ const config = {
 		new webpack.NamedModulesPlugin(),
 		new webpack.NoEmitOnErrorsPlugin(),
 		new webpack.DefinePlugin({
-			'API_HOST': JSON.stringify('http://localhost:4000')
+			'API_HOST': JSON.stringify('http://localhost:5000'),
+			'BRAINTREE_TOKEN': JSON.stringify('sandbox_qsrxjzth_ht835xhgsgwsz2hn')
 		})
 	]
 };

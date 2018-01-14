@@ -7,8 +7,8 @@
 	margin: 0 auto;
 }
 
-.row {
-	.make-row();
+.flex-row {
+	display: flex;
 }
 
 .ghost-button {
@@ -367,6 +367,26 @@ header {
 	}
 }
 
+#card-number,
+#expiration,
+#cvv {
+	margin-bottom: 20px;
+	border: 1px solid @gray;
+	transition: box-shadow 200ms;
+	height: 40px;
+	padding: 0 2em;
+	box-sizing: border-box;
+
+	&.braintree-hosted-fields-focused {
+		box-shadow: 0 0 4px 1px @gray;
+	}
+
+	&.braintree-hosted-fields-invalid {
+		border-color: @red;
+		box-shadow: 0 0 4px 1px @red;
+	}
+}
+
 #gallery {
 	-webkit-user-select: none;
 	user-select: none;
@@ -494,7 +514,7 @@ header {
 	}
 
 	.faq-column {
-		.make-column(4);
+
 	}
 
 	.faq {

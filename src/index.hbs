@@ -106,6 +106,81 @@
 		</div>
 	</section>
 
+	<section id="tickets">
+		<div class="container-1230">
+			<h3 class="tickets-header">TICKETS</span></h3>
+			<h4 class="hot-tix">GET 'EM WHILE THEY'RE HOT</h4>
+			<div class="flex-row">
+				<div id="ticket-instructions" class="flex-item">
+					<p>
+						We're offering early bird ticket deals, but they go quick!<br>
+						Tickets sold out last year, so make sure to get yours before it's too late.
+					</p>
+					<h5><span class="old-price">EARLY BIRD (limited amount available)</span> <span class="price">$44</span><span class="sold-out"> - SOLD OUT!</span></h5>
+					<h5 {{#unless dayOf}}class="current-price"{{/unless}}>STANDARD (on or before March 24th) <span class="price">$56</span></h5>
+					<h5 {{#if dayOf}}class="current-price"{{/if}}>DAY OF SALES (contingent on availability) <span class="price">$60</span></h5>
+					<div class="img-responsive">
+						<img class="ticket" src="/img/assets/ticket.png" alt="Ticket">
+						<img class="mobile_ticket" src="/img/assets/ticket.png" alt="Mobile Ticket">
+					</div>
+				</div>
+				<form method="post" action="/" class="flex-item" name="purchase">
+					<fieldset name="ticket-info">
+						<label>Full Name</label>
+						<input type="text" name="name" placeholder="eg. Dirk Diggler" maxlength="45" data-error-message="Please enter your first and last name">
+
+						<label>Email</label>
+						<input type="email" name="email" placeholder="ninerod.salami@example.com" maxlength="45" data-error-message="Please enter your email">
+
+						<label>Quantity</label>
+						<div class="select-wrap">
+							<select name="quantity" data-error-message="Please select a quantity">
+								<option value="1" selected>1 Ticket</option>
+								<option value="2">2 Tickets</option>
+								<option value="3">3 Tickets</option>
+								<option value="4">4 Tickets</option>
+								<option value="5">5 Tickets</option>
+							</select>
+						</div>
+
+						<h4>Total: $<span class="total-price"></span></h4>
+						<h4 class="service-fee">(includes $2 service fee per ticket)</h4>
+					</fieldset>
+					<fieldset name="payment-info">
+						<label>Credit Card Number</label>
+						<div id="card-number"></div>
+
+						<div class="flex-row">
+							<div class="flex-item">
+								<label>Card Exp.</label>
+								<div id="expiration"></div>
+							</div>
+							<div class="flex-item">
+								<div class="flex-row">
+									<div class="flex-item">
+										<label>CVV</label>
+										<div id="cvv"></div>
+									</div>
+									<div class="flex-item">
+										<div id="cvv-help">
+											<aside>?</aside>
+											<img src="/img/cvv-help.png">
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</fieldset>
+
+					<div class="purchase">
+						<button type="submit">BUY TICKETS</button>
+						<span class="ssl-secure">This site is SSL Secured</span>
+					</div>
+				</form>
+			</div>
+		</div>
+	</section>
+
 	<section id="gallery">
 		<div id="slide-container">
 			<div class="poster active"></div>
@@ -125,8 +200,8 @@
 	<section id="faq" class="sections">
 		<div class="container-1230">
 			<h3>FREQUENTLY ASKED QUESTIONS</h3>
-			<div class="row">
-				<div class="faq-column">
+			<div class="flex-row">
+				<div class="faq-column flex-item">
 					<div class="faq">
 						<h5>Where is The Mustache Bash This Year?</h5>
 						<p>The Bash will be Downtown San Diego at The Port Pavillion on Broadway Pier - 1000 N. Harbor Drive, San Diego, California 92101.</p>
@@ -144,7 +219,7 @@
 						<p>Yes, if there’s space, however it’s highly encouraged to purchase a ticket as soon as possible. Day-of tickets will cost more and be in extremely limited supply.</p>
 					</div>
 				</div>
-				<div class="faq-column">
+				<div class="faq-column flex-item">
 					<div class="faq">
 						<h5>Can I Invite My Friends?</h5>
 						<p>The more the merrier. We welcome newcomers with open arms. Invite anyone who might be interested in coming and help spread the word.</p>
@@ -162,7 +237,7 @@
 						<p>There will be gourmet food trucks on site to fill your bellies throughout the day and night, and the newly expanded 11th Anniversary Stache Bash Bar will be fully stocked and staffed with double the amount of bartenders from last year.</p>
 					</div>
 				</div>
-				<div class="faq-column">
+				<div class="faq-column flex-item">
 					<div class="faq">
 						<h5>Do I Have to Have a Mustache to Go?</h5>
 						<p>No stache, no bash has been our motto since the beginning, but we won’t turn you away. Every funky, fun-loving soul is welcome!</p>
