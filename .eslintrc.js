@@ -5,20 +5,16 @@ module.exports = {
 		sourceType: 'module',
 		ecmaFeatures: {
 			impliedStrict: true,
-			jsx: true,
 			experimentalObjectRestSpread: true
 		}
 	},
-	plugins: [
-		'react'
-	],
 	globals: {
 		API_HOST: false,
+		BRAINTREE_TOKEN: false,
 		fetch: false
 	},
 	extends: [
-		'eslint:recommended',
-		'plugin:react/recommended'
+		'eslint:recommended'
 	],
 	env: {
 		browser: true,

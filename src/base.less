@@ -22,54 +22,12 @@
 // Text Color
 @text-color : #555;
 
-// Grid
-// Used with the grid mixins below
-@grid-columns :          12;
-@grid-column-padding :   15px; // Left and right inner padding
-@grid-float-breakpoint : @mobile;
-
 // Breakpoints
 @small-mobile : 321px; // iPhone 5, smaller phones
 @mobile : 600px; // Start catching big mobile phones
 @tablet : 769px;
 @desktop : 1230px; // Use max container width here
 @desktop-wide : 1400px; // Use PSD document bounds
-
-// Grid
-.make-row() {
-	// Negative margin the row out to align the content of columns
-	margin-left: -@grid-column-padding;
-	margin-right: -@grid-column-padding;
-	// Then clear the floated columns
-	.clearfix();
-}
-
-.make-column(@columns, @total-columns: @grid-columns, @breakpoint: @grid-float-breakpoint) {
-	@media (min-width: @breakpoint) {
-		float: left;
-		// Calculate width based on number of columns available
-		width: percentage(@columns / @total-columns);
-	}
-	// Prevent columns from collapsing when empty
-	min-height: 1px;
-	// Set inner padding as gutters instead of margin
-	padding-left: @grid-column-padding;
-	padding-right: @grid-column-padding;
-	// Proper box-model (padding doesn't add to width)
-	box-sizing: border-box;
-}
-
-.clearfix() {
-	&:before,
-	&:after {
-		content: " "; // 1
-		display: table; // 2
-	}
-	&:after {
-		clear: both;
-	}
-}
-
 
 // Typography
 body {
@@ -94,4 +52,73 @@ h4 {
 a {
 	text-decoration: none;
 	color: @pink;
+}
+
+fieldset {
+	display: block;
+	border: 0;
+	background: none;
+	padding: 0;
+	margin: 0;
+}
+
+input[type="text"],
+input[type="email"],
+select {
+	-webkit-appearance: none;
+	display: block;
+	height: 40px;
+	padding: 0 2em;
+	margin-bottom: 20px;
+	box-sizing: border-box;
+	width: 100%;
+	background: none;
+	border: 1px solid @gray;
+	border-radius: 0;
+	font: 400 16px @proxima;
+	color: @gray;
+	outline: 0;
+	transition: box-shadow 200ms;
+
+	@media (min-width: @mobile) {
+		font-weight: 600;
+	}
+
+	&:focus {
+		outline: 0;
+		box-shadow: 0 0 4px 1px @gray;
+	}
+
+	&:disabled {
+		opacity: .7;
+	}
+}
+
+label {
+	display: block;
+	margin-bottom: 0.5em;
+}
+
+.select-wrap {
+	position: relative;
+
+	&:after {
+		content: '';
+		pointer-events: none;
+		position: absolute;
+		display: block;
+		height: 0;
+		width: 0;
+		right: 1em;
+		top: 50%;
+		margin-top: -3px;
+		border: 6px solid transparent;
+		border-top-color: @black;
+	}
+}
+
+button {
+	-webkit-appearance: none;
+	font-family: @proxima;
+	cursor: pointer;
 }

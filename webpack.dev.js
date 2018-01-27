@@ -5,13 +5,6 @@ const path = require('path'),
 	common = require('./webpack.common');
 
 const config = {
-	entry: {
-		main: [
-			'react-hot-loader/patch',
-			'react-devtools',
-			'./src/main.js'
-		]
-	},
 	output: {
 		path: path.resolve(__dirname, 'dist'),
 		filename: '[name].[hash].js',
@@ -27,19 +20,6 @@ const config = {
 	module: {
 		rules: [
 			{
-				test: /\.js$/,
-				exclude: [/node_modules/],
-				use: [
-					{
-						loader: 'babel-loader',
-						options: {
-							presets: ['react', ['env', {modules: false}]],
-							plugins: ['react-hot-loader/babel', 'transform-object-rest-spread', 'transform-decorators-legacy']
-						}
-					}
-				]
-			},
-			{
 				test: /\.hbs$/,
 				loader: 'handlebars-loader'
 			}
@@ -48,13 +28,15 @@ const config = {
 	plugins: [
 		new HtmlWebpackPlugin({
 			inject: 'head',
+			salesOn: false,
 			chunks: ['main'],
 			template: 'src/index.hbs'
 		}),
 		new webpack.NamedModulesPlugin(),
 		new webpack.NoEmitOnErrorsPlugin(),
 		new webpack.DefinePlugin({
-			'API_HOST': JSON.stringify('http://localhost:4000')
+			'API_HOST': JSON.stringify('http://localhost:5000'),
+			'BRAINTREE_TOKEN': JSON.stringify('sandbox_qsrxjzth_ht835xhgsgwsz2hn')
 		})
 	]
 };
