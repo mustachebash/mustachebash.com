@@ -13,6 +13,7 @@ const extractLess = new ExtractTextPlugin({
 
 const config = {
 	entry: {
+		main: './src/main.js',
 		privacyPolicy: './src/privacy-policy.less'
 	},
 	resolve: {
@@ -20,6 +21,19 @@ const config = {
 	},
 	module: {
 		rules: [
+			{
+				test: /\.js$/,
+				exclude: [/node_modules/],
+				use: [
+					{
+						loader: 'babel-loader',
+						options: {
+							presets: [['env', {modules: false}]],
+							plugins: ['transform-object-rest-spread']
+						}
+					}
+				]
+			},
 			{
 				test: /(\.less$)|(\.css$)/,
 				use: extractLess.extract({

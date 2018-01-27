@@ -38,6 +38,11 @@
 
 	  gtag('config', 'UA-38968259-2');
 	</script>
+	{{#if htmlWebpackPlugin.options.salesOn}}
+	<script>
+		window.salesOn = true;
+	</script>
+	{{/if}}
 </head>
 
 <body>
@@ -106,6 +111,7 @@
 		</div>
 	</section>
 
+	{{#if htmlWebpackPlugin.options.salesOn}}
 	<section id="tickets">
 		<div class="container-1230">
 			<h3 class="tickets-header">TICKETS</span></h3>
@@ -180,6 +186,7 @@
 			</div>
 		</div>
 	</section>
+	{{/if}}
 
 	<section id="gallery">
 		<div id="slide-container">

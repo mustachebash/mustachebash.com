@@ -8,30 +8,10 @@ const path = require('path'),
 	common = require('./webpack.common');
 
 const config = {
-	entry: {
-		main: './src/main.js'
-	},
 	output: {
 		path: path.resolve(__dirname, 'dist'),
 		filename: 'main.[chunkhash].js',
 		publicPath: '/'
-	},
-	module: {
-		rules: [
-			{
-				test: /\.js$/,
-				exclude: [/node_modules/],
-				use: [
-					{
-						loader: 'babel-loader',
-						options: {
-							presets: ['react', ['env', {modules: false}]],
-							plugins: ['transform-object-rest-spread', 'transform-decorators-legacy']
-						}
-					}
-				]
-			}
-		]
 	},
 	plugins: [
 		new HtmlWebpackPlugin({
