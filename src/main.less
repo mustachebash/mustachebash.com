@@ -12,8 +12,24 @@ body {
 	margin: 0 auto;
 }
 
+.no-mobile {
+	@media (max-width: @mobile) {
+		display: none;
+	}
+}
+
+.mobile-only {
+	@media (min-width: @mobile) {
+		display: none;
+	}
+}
+
 .flex-row {
 	display: flex;
+
+	@media (max-width: @mobile) {
+		flex-direction: column;
+	}
 }
 
 .img-wrap {
@@ -86,7 +102,13 @@ header {
 	.logo {
 		flex: 0 3 7.375em;
 		width: 7.375em; /* 118/16 */
-		height: 3.125em; /* 50/16 */
+
+		@media (max-width: @mobile) {
+			position: relative;
+			top: 4px;
+			width: 6em; /* 96/16 */
+			flex: 0 3 6em;
+		}
 	}
 
 	nav {
@@ -190,6 +212,13 @@ header {
 	padding-top: 9.375em; /* 150/16 */
 	height: 36em; /* 576/16 */
 
+	@media (max-width: @mobile) {
+		height: auto;
+		padding-top: 3em;
+		padding-bottom: 3em;
+		background-image: url('/img/hero-mobile.jpg');
+	}
+
 	.titles {
 		margin-bottom: 3em;
 
@@ -225,6 +254,28 @@ header {
 			font-weight: 400;
 			letter-spacing: 3px;
 		}
+
+		@media (max-width: @mobile) {
+			h2 {
+				text-align: center;
+				font-size: 1.75em; /* 28/16 */
+				letter-spacing: -1px;
+				color: @white;
+				margin-bottom: .125em;
+			}
+
+			h1 {
+				text-align: center;
+				font-size: 2.5em; /* 40/16 */
+				letter-spacing: -1.5px;
+				margin-bottom: 0.25em;
+			}
+
+			h3 {
+				text-align: center;
+				margin-bottom: 250px;
+			}
+		}
 	}
 
 	.cta {
@@ -238,6 +289,10 @@ header {
 			font-size: 1.125em; /* 18/16 */
 			color: @white;
 			letter-spacing: 1px;
+		}
+
+		@media (max-width: @mobile) {
+			text-align: center;
 		}
 	}
 }
@@ -262,11 +317,15 @@ header {
 			color: fade(@white, 50%);
 			margin: 0;
 		}
+	}
 
-		@media (min-width: @mobile) {
-			.mobile-only {
-				display: none;
-			}
+	@media (max-width: @mobile) {
+		padding: 2.1875em 0; /* 35/16 */
+
+		h3 {
+			font-size: 1.125em; /* 18/16 */
+			margin-bottom: 0;
+			line-height: 1.5em;
 		}
 	}
 }
@@ -276,10 +335,19 @@ header {
 	background-size: cover;
 	box-sizing: border-box;
 	height: 49.3125em; /* 789/16 */
+
+	@media (max-width: @mobile) {
+		background-image: url('/img/video-cover-mobile.jpg');
+		height: 18.9375em; /* 303/16 */
+	}
 }
 
 #lineup {
 	padding-top: 6.25em; /* 100/16 */
+
+	@media (max-width: @mobile) {
+		padding-top: 1.75em;
+	}
 
 	h3 {
 		text-align: center;
@@ -287,6 +355,10 @@ header {
 
 	.lineup-image {
 		margin-bottom: 6.25em; /* 100/16 */
+
+		@media (max-width: @mobile) {
+			margin-bottom: 2em;
+		}
 	}
 
 	.flex-row {
@@ -299,6 +371,26 @@ header {
 
 	.bands {
 		margin-bottom: 3em;
+	}
+
+	.floozies-image {
+		overflow: hidden;
+		background: url('/img/band-floozies.jpg') top left no-repeat;
+		background-size: 100% auto;
+
+		&:after {
+			content: '';
+			display: block;
+			margin-top: 34.188034%;
+		}
+
+		@media (max-width: @mobile) {
+			background-image: url('/img/band-floozies-mobile.jpg');
+
+			&:after {
+				margin-top: 70.13333333%;
+			}
+		}
 	}
 
 	.band {
@@ -327,8 +419,18 @@ header {
 	background-size: cover;
 	padding-bottom: 6.25em; /* 100/16 */
 
+	@media (max-width: @mobile) {
+		background-image: url('/img/set-times-mobile.jpg');
+		padding-bottom: 2em;
+	}
+
 	h3 {
 		text-align: center;
+
+		@media (max-width: @mobile) {
+			text-align: left;
+			margin-bottom: .5em;
+		}
 	}
 
 	.flex-row {
@@ -358,22 +460,29 @@ header {
 
 	.main-stage,
 	.inside-stage {
-		flex: 0 0 50%;
-		box-sizing: border-box;
-		padding: 0 3em;
+		@media (min-width: @mobile) {
+			flex: 0 0 50%;
+			box-sizing: border-box;
+			padding: 0 3em;
 
-		h4 {
-			margin-top: 0;
-			margin-bottom: 1em;
+			h4 {
+				margin-top: 0;
+				margin-bottom: 1em;
+			}
 		}
 	}
 
 	.main-stage {
-		border-right: 2px solid @navy;
+		margin-bottom: 1.5em;
 
-		h4,
-		dl {
-			text-align: right;
+		@media (min-width: @mobile) {
+			border-right: 2px solid @navy;
+			margin-bottom: 0;
+
+			h4,
+			dl {
+				text-align: right;
+			}
 		}
 	}
 }
@@ -407,6 +516,17 @@ header {
 	.venue-description {
 		padding: 6.25em 0 0 4.375em; /* 70/16 */
 	}
+
+	@media (max-width: @mobile) {
+		.venue-description {
+			order: 1;
+			padding: 2em 0;
+		}
+
+		.venue-image {
+			order: 2;
+		}
+	}
 }
 
 #tradition {
@@ -429,6 +549,10 @@ header {
 	.tradition-description {
 		flex: 5 1;
 		padding: 6.25em 2em 0 0; /* 100/16 */
+
+		@media (max-width: @mobile) {
+			padding: 2em 0;
+		}
 	}
 
 	.tradition-image {
@@ -570,6 +694,10 @@ header {
 	.afterparty-description {
 		flex: 5 1;
 		padding: 6.25em 2em 0 0; /* 100/16 */
+
+		@media (max-width: @mobile) {
+			padding: 2em 0;
+		}
 	}
 
 	.afterparty-image {
@@ -586,6 +714,14 @@ header {
 
 	.cta-hornblower {
 		justify-content: space-between;
+		flex-direction: row;
+
+		@media (max-width: @mobile) {
+			.img-wrap {
+				margin-top: 0.625em; /* 10/16 */
+				max-width: 7.5em; /* 120/16 */
+			}
+		}
 	}
 
 	.ghost-button {
@@ -623,6 +759,18 @@ header {
 
 	.giving-back-description {
 		padding: 6.25em 1em 0 2em;
+	}
+
+	@media (max-width: @mobile) {
+		.giving-back-image {
+			order: 2;
+			padding-bottom: 1.5em;
+		}
+
+		.giving-back-description {
+			padding: 2em 0;
+			order: 1;
+		}
 	}
 }
 
@@ -670,10 +818,26 @@ header {
 	.shop-description {
 		flex: 5 1;
 		padding: 6.25em 2em 0 0; /* 100/16 */
+
+		@media (max-width: @mobile) {
+			padding: 2em 0;
+		}
 	}
 
 	.shop-image {
 		flex: 7 1;
+	}
+
+	.shop-image-mobile {
+		overflow: hidden;
+		background: url('/img/shop-mobile.jpg') @white top left no-repeat;
+		background-size: 100% auto;
+
+		&:after {
+			content: '';
+			display: block;
+			margin-top: 100%;
+		}
 	}
 }
 
@@ -681,9 +845,17 @@ header {
 	padding: 6.25em 0; /* 100/16 */
 	background-color: @navy;
 
+	@media (max-width: @mobile) {
+		padding: 2em 0;
+	}
+
 	h3 {
 		text-align: center;
 		color: @peach;
+
+		@media (max-width: @mobile) {
+			text-align: left;
+		}
 	}
 
 	p {
@@ -697,6 +869,10 @@ header {
 
 		&:last-child {
 			margin-right: 0;
+		}
+
+		@media (max-width: @mobile) {
+			margin: 0;
 		}
 	}
 
@@ -720,6 +896,17 @@ header {
 			text-align: center;
 			color: @peach;
 		}
+
+		@media (max-width: @mobile) {
+			h5,
+			p {
+				text-align: left;
+			}
+
+			h5 {
+				margin-bottom: .5em;
+			}
+		}
 	}
 }
 
@@ -729,6 +916,20 @@ header {
 
 	h3 {
 		text-align: center;
+	}
+
+	@media (max-width: @mobile) {
+		padding: 2em 0;
+
+		h3 {
+			font-size: 1.25em; /* 20/16 */
+			margin-bottom: 2em;
+		}
+
+		.img-wrap {
+			max-width: 7.5em; /* 120/16 */
+			margin: 0 auto;
+		}
 	}
 }
 
@@ -744,11 +945,20 @@ footer {
 		.svg-froman {
 			fill: @blue;
 		}
+
+		@media (max-width: @mobile) {
+			width: 12.5em; /* 200/16 */
+		}
 	}
 
 	nav {
 		li {
 			text-transform: uppercase;
+
+			@media (max-width: @mobile) {
+				font-size: 1em; /* 20/16 */
+				margin-bottom: .5em;
+			}
 		}
 	}
 
