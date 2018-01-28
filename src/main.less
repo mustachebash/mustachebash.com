@@ -205,7 +205,7 @@ header {
 			font-family: @brandon;
 			font-weight: 900;
 			letter-spacing: -2.5px;
-			line-height: 1em;
+			line-height: 0.9em;
 		}
 
 		h2 {
@@ -259,7 +259,7 @@ header {
 		text-align: center;
 
 		&.fade {
-			color: fade(@white, 40%);
+			color: fade(@white, 50%);
 			margin: 0;
 		}
 
@@ -630,14 +630,14 @@ header {
 #expiration,
 #cvv {
 	margin-bottom: 20px;
-	border: 1px solid @gray;
+	border: 1px solid @navy;
 	transition: box-shadow 200ms;
 	height: 40px;
 	padding: 0 2em;
 	box-sizing: border-box;
 
 	&.braintree-hosted-fields-focused {
-		box-shadow: 0 0 4px 1px @gray;
+		box-shadow: 0 0 4px 1px @navy;
 	}
 
 	&.braintree-hosted-fields-invalid {

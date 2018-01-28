@@ -13,19 +13,12 @@
 @pink : #ee438b;
 @peach: #f8a28e;
 @green: #70d59e;
-@gray : #303032;
-@grey : @gray;
-@light-gray : #4c4c4c;
-@light-grey : @light-gray;
 @red : #e25740;
 
 // Typography
 @proxima : 'proxima-nova', Helvetica, Arial, sans-serif;
 @league : 'league-gothic', Helvetica, Arial, sans-serif;
 @brandon : 'brandon-grotesque', Helvetica, Arial, sans-serif;
-
-// Text Color
-@text-color : #555;
 
 // Breakpoints
 @small-mobile : 321px; // iPhone 5, smaller phones
@@ -54,7 +47,7 @@ h4 {
 	font-family: @league;
 	font-size: 2em; /* 32/16 */
 	font-weight: 400;
-	letter-spacing: 1px;
+	letter-spacing: 2px;
 	text-transform: uppercase;
 	margin: 0.5em 0;
 }
@@ -93,10 +86,10 @@ select {
 	box-sizing: border-box;
 	width: 100%;
 	background: none;
-	border: 1px solid @gray;
+	border: 1px solid @navy;
 	border-radius: 0;
 	font: 400 16px @proxima;
-	color: @gray;
+	color: @navy;
 	outline: 0;
 	transition: box-shadow 200ms;
 
@@ -106,7 +99,7 @@ select {
 
 	&:focus {
 		outline: 0;
-		box-shadow: 0 0 4px 1px @gray;
+		box-shadow: 0 0 4px 1px @navy;
 	}
 
 	&:disabled {
