@@ -2,17 +2,22 @@
 // Variables
 // --------------------------------------------------
 
+@black : #303032;
+@white : #ffffff;
+@off-white: #f2f2f2;
+@navy : #1a1e3e;
+@blue: #5768fb;
+@lavender: #7c8afd;
+@light-lavender: #95a3fd;
+@teal : #2087c7;
+@pink : #ee438b;
+@peach: #f8a28e;
+@green: #70d59e;
 @gray : #303032;
 @grey : @gray;
 @light-gray : #4c4c4c;
 @light-grey : @light-gray;
-@teal : #12a89d;
 @red : #e25740;
-@black : #303032;
-@white : #f2f2f2;
-@pink : #ff4284;
-@purple : #4f005e;
-@cream: #ffeda5;
 
 // Typography
 @proxima : 'proxima-nova', Helvetica, Arial, sans-serif;
@@ -33,25 +38,40 @@
 body {
 	font: 16px @proxima;
 	-webkit-font-smoothing: antialiased;
-	color: @light-gray;
+	color: @navy;
 }
 
 h3 {
 	font-family: @brandon;
-	font-weight: 700;
-	margin: 20px 0 0 0;
+	font-weight: 900;
+	font-size: 3.75em; /* 60/16 */
+	letter-spacing: -1px;
+	margin: 0 0 0.5em;
+	text-transform: uppercase;
 }
 
-h2,
 h4 {
 	font-family: @league;
-	font-size: 24px;
-	font-weight: 100;
+	font-size: 2em; /* 32/16 */
+	font-weight: 400;
+	letter-spacing: 1px;
+	text-transform: uppercase;
+	margin: 0.5em 0;
+}
+
+h5 {
+	font-family: @league;
+	font-size: 1.375em; /* 22/16 */
+	font-weight: 400;
+	letter-spacing: 1px;
+	color: @teal;
+	margin: 0;
+	text-transform: uppercase;
 }
 
 a {
 	text-decoration: none;
-	color: @pink;
+	color: @blue;
 }
 
 fieldset {
