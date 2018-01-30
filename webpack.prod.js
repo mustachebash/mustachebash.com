@@ -27,6 +27,7 @@ const config = {
 		new UglifyJSPlugin(),
 		new DefinePlugin({
 			'API_HOST': JSON.stringify('https://api.mustachebash.com'),
+			'BRAINTREE_TOKEN': JSON.stringify('prod_token'),
 			'process.env': {
 				'NODE_ENV': JSON.stringify('production')
 			}

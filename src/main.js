@@ -5,9 +5,9 @@ import client from 'braintree-web/client';
 import hostedFields from 'braintree-web/hosted-fields';
 
 // Set some state here
-const cart = window.cart = [],
-	customer = window.customer = {},
-	availableProducts = window.availableProducts = {},
+const cart = [],
+	customer = {},
+	availableProducts = {},
 	pageSettings = {
 		serviceFee: 2
 	};
