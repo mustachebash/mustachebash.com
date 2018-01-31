@@ -18,6 +18,15 @@ let scrollAnimationReqId;
 document.querySelectorAll('nav, #hero-cta, #afterparty-cta').forEach(el => el.addEventListener('click', e => {
 	if(e.target.hash) {
 		e.preventDefault();
+
+		// Track hero CTA clicks
+		if(typeof window.gtag === 'function' && e.target.id === 'hero-cta') {
+			window.gtag('event', 'click', {
+				event_category: 'CTA',
+				event_label: 'Hero Tickets Link'
+			});
+		}
+
 		window.cancelAnimationFrame(scrollAnimationReqId);
 
 		document.querySelector('#menu-icon').classList.remove('open');
@@ -42,6 +51,17 @@ document.querySelectorAll('nav, #hero-cta, #afterparty-cta').forEach(el => el.ad
 		scrollAnimation();
 	}
 }));
+
+// Track video link clicks
+// Track hero CTA clicks
+if(typeof window.gtag === 'function') {
+	document.querySelector('#video a').addEventListener('click', () => {
+		window.gtag('event', 'click', {
+			event_category: 'CTA',
+			event_label: 'Video Link'
+		});
+	});
+}
 
 // Mobile menu
 document.querySelector('#menu-icon').addEventListener('click', e => {
