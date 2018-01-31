@@ -1004,15 +1004,19 @@ header {
 				.quantity-controls {
 					.minus,
 					.plus {
-						background: @light-lavender;
-						cursor: default;
-
-						&:hover {
-							background: @light-lavender;
+						svg {
+							cursor: default;
 						}
 
+						path {
+							fill: @light-lavender;
+						}
+
+						&:hover,
 						&:active {
-							box-shadow: none;
+							path {
+								fill: @light-lavender;
+							}
 						}
 					}
 				}
@@ -1034,10 +1038,12 @@ header {
 
 		.quantity-controls {
 			text-align: center;
+			user-select: none;
 
 			.quantity {
 				display: inline-block;
 				margin: 0 0.625em; /* 10/16 */
+				user-select: none;
 			}
 
 			.minus,
@@ -1047,42 +1053,50 @@ header {
 				text-align: center;
 				width: 1.25rem; /* 20/16 */
 				height: 1.25rem; /* 20/16 */
-				color: @lavender;
-				background-color: @navy;
-				border-radius: 100%;
-				line-height: 1.15rem; /* 20/16 */
-				font-weight: 900;
-				font-size: 1.25rem; /* 20/16 */
 				vertical-align: bottom;
-				cursor: pointer;
-				transition: background-color 200ms;
 				user-select: none;
 
+
+				svg {
+					width: 1.25rem; /* 20/16 */
+					height: 1.25rem; /* 20/16 */
+					cursor: pointer;
+					user-select: none;
+				}
+
+				path {
+					fill: @navy;
+					transition: fill 200ms;
+				}
+
 				&:hover {
-					background-color: lighten(@navy, 10%);
+					path {
+						fill: lighten(@navy, 10%);
+					}
 				}
 
 				&:active {
-					box-shadow: inset 0 0 6px darken(@navy, 20%);
+					path {
+						fill: lighten(@navy, 20%);
+					}
 				}
 
 				&.disabled {
-					background: @light-lavender;
-					cursor: default;
-
-					&:hover {
-						background: @light-lavender;
+					svg {
+						cursor: default;
 					}
 
+					path {
+						fill: @light-lavender;
+					}
+
+					&:hover,
 					&:active {
-						box-shadow: none;
+						path {
+							fill: @light-lavender;
+						}
 					}
 				}
-			}
-
-			.plus {
-				font-size: 1.3125rem; /* 21/16 */
-				line-height: 1.375rem; /* 22/16 */
 			}
 		}
 

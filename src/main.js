@@ -114,6 +114,55 @@ function updateSubtotals() {
 	`;
 }
 
+function addItemToCart(el) {
+	const cartItemIndex = cart.findIndex(i => i.productId === el.dataset.productId);
+
+	if(~cartItemIndex) {
+		// 4 ticket max
+		if(cart[cartItemIndex].quantity >= 4) return;
+
+		cart[cartItemIndex].quantity++;
+
+		if(cart[cartItemIndex].quantity === 4) el.querySelector('.plus').classList.add('disabled');
+
+		el.querySelector('.quantity').innerText = cart[cartItemIndex].quantity;
+		el.querySelector('.product-total span').innerText = availableProducts[el.dataset.productId].price * cart[cartItemIndex].quantity;
+	} else {
+		cart.push({
+			productId: el.dataset.productId,
+			quantity: 1
+		});
+
+		el.querySelector('.quantity').innerText = 1;
+		el.querySelector('.product-total span').innerText = availableProducts[el.dataset.productId].price;
+		el.querySelector('.minus').classList.remove('disabled');
+	}
+
+	updateSubtotals();
+}
+
+function removeItemFromCart(el) {
+	const cartItemIndex = cart.findIndex(i => i.productId === el.dataset.productId);
+
+	if(~cartItemIndex) {
+		cart[cartItemIndex].quantity--;
+
+		el.querySelector('.quantity').innerText = cart[cartItemIndex].quantity;
+		el.querySelector('.plus').classList.remove('disabled');
+
+		// If it's zero, remove the item entirely, otherwise update the subtotal
+		if(!cart[cartItemIndex].quantity) {
+			cart.splice(cartItemIndex, 1);
+			el.querySelector('.product-total span').innerText = 0;
+			el.querySelector('.minus').classList.add('disabled');
+		} else {
+			el.querySelector('.product-total span').innerText = availableProducts[el.dataset.productId].price * cart[cartItemIndex].quantity;
+		}
+	}
+
+	updateSubtotals();
+}
+
 function purchaseFlowInit(hostedFieldsInstance) {
 	for(const id in availableProducts) {
 		document.querySelectorAll(`[data-product-id="${id}"]`).forEach(el => el.classList.remove('disabled'));
@@ -285,63 +334,21 @@ function purchaseFlowInit(hostedFieldsInstance) {
 	});
 
 	// Quantity controls
-	document.querySelector('.product-table').addEventListener('click', e => {
-		if(e.target.classList.contains('disabled')) return;
-		if(e.target.parentElement.parentElement.classList.contains('disabled')) return;
+	document.querySelectorAll('.plus').forEach(plus => plus.addEventListener('click', e => {
+		if(e.currentTarget.classList.contains('disabled')) return;
+		if(e.currentTarget.parentElement.parentElement.classList.contains('disabled')) return;
 
-		// Increment
-		if(e.target.classList.contains('plus')) {
-			const el = e.target.parentElement.parentElement,
-				cartItemIndex = cart.findIndex(i => i.productId === el.dataset['product-id']);
+		// Increment based on product row data
+		addItemToCart(e.currentTarget.parentElement.parentElement);
+	}));
 
-			if(~cartItemIndex) {
-				// 4 ticket max
-				if(cart[cartItemIndex].quantity >= 4) return;
-
-				cart[cartItemIndex].quantity++;
-
-				if(cart[cartItemIndex].quantity === 4) e.target.classList.add('disabled');
-
-				el.querySelector('.quantity').innerText = cart[cartItemIndex].quantity;
-				el.querySelector('.product-total span').innerText = availableProducts[el.dataset['product-id']].price * cart[cartItemIndex].quantity;
-			} else {
-				cart.push({
-					productId: el.dataset['product-id'],
-					quantity: 1
-				});
-
-				el.querySelector('.quantity').innerText = 1;
-				el.querySelector('.product-total span').innerText = availableProducts[el.dataset['product-id']].price;
-				el.querySelector('.minus').classList.remove('disabled');
-			}
-
-			updateSubtotals();
-		}
+	document.querySelectorAll('.minus').forEach(minus => minus.addEventListener('click', e => {
+		if(e.currentTarget.classList.contains('disabled')) return;
+		if(e.currentTarget.parentElement.parentElement.classList.contains('disabled')) return;
 
 		// Decrement
-		if(e.target.classList.contains('minus')) {
-			const el = e.target.parentElement.parentElement,
-				cartItemIndex = cart.findIndex(i => i.productId === el.dataset['product-id']);
-
-			if(~cartItemIndex) {
-				cart[cartItemIndex].quantity--;
-
-				el.querySelector('.quantity').innerText = cart[cartItemIndex].quantity;
-				el.querySelector('.plus').classList.remove('disabled');
-
-				// If it's zero, remove the item entirely, otherwise update the subtotal
-				if(!cart[cartItemIndex].quantity) {
-					cart.splice(cartItemIndex, 1);
-					el.querySelector('.product-total span').innerText = 0;
-					e.target.classList.add('disabled');
-				} else {
-					el.querySelector('.product-total span').innerText = availableProducts[el.dataset['product-id']].price * cart[cartItemIndex].quantity;
-				}
-			}
-
-			updateSubtotals();
-		}
-	});
+		removeItemFromCart(e.currentTarget.parentElement.parentElement);
+	}));
 }
 
 // Setup braintree client
