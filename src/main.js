@@ -15,7 +15,7 @@ const cart = [],
 // Animate Nav links - quick n dirty vanilla style
 // TODO: Make this less janky
 let scrollAnimationReqId;
-document.querySelectorAll('nav').forEach(el => el.addEventListener('click', e => {
+document.querySelectorAll('nav, #hero-cta, #afterparty-cta').forEach(el => el.addEventListener('click', e => {
 	if(e.target.hash) {
 		e.preventDefault();
 		window.cancelAnimationFrame(scrollAnimationReqId);
@@ -166,6 +166,21 @@ function removeItemFromCart(el) {
 function purchaseFlowInit(hostedFieldsInstance) {
 	for(const id in availableProducts) {
 		document.querySelectorAll(`[data-product-id="${id}"]`).forEach(el => el.classList.remove('disabled'));
+	}
+
+	// Preselect a ticket
+	if (availableProducts['cde8e827-76ba-4266-99c7-8913b402c2b4']) {
+		addItemToCart(document.querySelector('.table-row[data-product-id="cde8e827-76ba-4266-99c7-8913b402c2b4"]'));
+	}
+
+	// Add a ticket if someone clicks the afterparty CTA
+	if (availableProducts['2671de71-d101-4feb-96f3-b84e09bf846e']) {
+		document.querySelector('#afterparty-cta').addEventListener('click', () => {
+			const cartItemIndex = cart.findIndex(i => i.productId === '2671de71-d101-4feb-96f3-b84e09bf846e');
+			if (!~cartItemIndex) {
+				addItemToCart(document.querySelector('.table-row[data-product-id="2671de71-d101-4feb-96f3-b84e09bf846e"]'));
+			}
+		});
 	}
 
 	// Ticket Flow with a precarious dependency on DOM order
