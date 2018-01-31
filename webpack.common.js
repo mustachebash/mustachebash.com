@@ -13,7 +13,7 @@ const extractLess = new ExtractTextPlugin({
 
 const config = {
 	entry: {
-		main: './src/main.js',
+		main: ['whatwg-fetch', './src/main.js'],
 		privacyPolicy: './src/privacy-policy.less'
 	},
 	resolve: {
