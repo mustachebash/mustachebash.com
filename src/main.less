@@ -557,7 +557,11 @@ header {
 		padding: 6.25em 2em 0 0; /* 100/16 */
 
 		@media (max-width: @mobile) {
-			padding: 2em 0;
+			padding: 2em 0 0;
+
+			p:last-child {
+				margin-bottom: 0;
+			}
 		}
 	}
 
@@ -570,6 +574,10 @@ header {
 
 		img {
 			margin: 0;
+		}
+
+		@media (max-width: @mobile) {
+			margin: 0 -1.875em; /* 30/16 */
 		}
 	}
 }
