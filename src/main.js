@@ -345,6 +345,7 @@ function purchaseFlowInit(hostedFieldsInstance) {
 				document.querySelector('#confirm-order').disabled = false;
 				document.querySelector('#back-to-payment').style.display = '';
 
+				// eslint-disable-next-line
 				alert('Order Failed, please check your payment details and try again');
 
 				console.error('Payment Error', e);
