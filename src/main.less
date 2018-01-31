@@ -70,7 +70,7 @@ nav {
 	li {
 		display: block;
 		padding: 0;
-		margin: 0 0.625em 1.25em; /* 10/16 */ /* 20/16 */
+		margin: 0 0.625em 1em; /* 10/16 */ /* 20/16 */
 		font-family: @brandon;
 		font-size: 1.625em; /* 26/16 */
 		font-weight: 700;
@@ -124,13 +124,15 @@ header {
 		@media (max-width: @mobile) {
 			position: absolute;
 			left: 0;
+			top: 0; /* 90/16 */
 			width: 100%;
 			background: @navy;
 			padding-top: 0;
+			height: 100vh;
 		}
 
 		@media (min-width: @mobile) {
-			max-height: 1000px;
+			max-height: 100vh;
 		}
 
 		ul {
