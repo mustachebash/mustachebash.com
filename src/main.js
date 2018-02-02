@@ -220,6 +220,23 @@ function purchaseFlowInit(hostedFieldsInstance) {
 				ticks[1].classList.add('active');
 				document.querySelectorAll('.leg')[0].classList.add('active');
 			});
+
+			if(typeof window.gtag === 'function') {
+				try {
+					window.gtag('event', 'begin_checkout', {
+						checkout_step: 1,
+						items: cart.map(i => ({
+							id: i.productId,
+							quantity: i.quantity,
+							name: availableProducts[i.productId].name,
+							category: 'Tickets',
+							price: String(availableProducts[i.productId].price)
+						}))
+					});
+				} catch(e) {
+					// Don't let gtag break the site
+				}
+			}
 		}
 	});
 
@@ -274,6 +291,23 @@ function purchaseFlowInit(hostedFieldsInstance) {
 				ticks[2].classList.add('active');
 				document.querySelectorAll('.leg')[1].classList.add('active');
 			});
+
+			if(typeof window.gtag === 'function') {
+				try {
+					window.gtag('event', 'checkout_progress', {
+						checkout_step: 2,
+						items: cart.map(i => ({
+							id: i.productId,
+							quantity: i.quantity,
+							name: availableProducts[i.productId].name,
+							category: 'Tickets',
+							price: String(availableProducts[i.productId].price)
+						}))
+					});
+				} catch(e) {
+					// Don't let gtag break the site
+				}
+			}
 		}
 	});
 
@@ -302,6 +336,23 @@ function purchaseFlowInit(hostedFieldsInstance) {
 		document.querySelector('#confirm-order').disabled = true;
 		document.querySelector('#back-to-payment').style.display = 'none';
 
+		if(typeof window.gtag === 'function') {
+			try {
+				window.gtag('event', 'checkout_progress', {
+					checkout_step: 3,
+					items: cart.map(i => ({
+						id: i.productId,
+						quantity: i.quantity,
+						name: availableProducts[i.productId].name,
+						category: 'Tickets',
+						price: String(availableProducts[i.productId].price)
+					}))
+				});
+			} catch(e) {
+				// Don't let gtag break the site
+			}
+		}
+
 		hostedFieldsInstance.tokenize()
 			.then(({ nonce }) => fetch(API_HOST + '/v1/transactions', {
 				method: 'POST',
@@ -324,10 +375,9 @@ function purchaseFlowInit(hostedFieldsInstance) {
 					throw err;
 				}
 
-				return response;
+				return Promise.all([response.headers, response.json()]);
 			})
-			.then(response => response.json())
-			.then(confirmation => {
+			.then(([ headers, confirmation ]) => {
 				window.requestAnimationFrame(() => {
 					document.querySelectorAll('.step')[2].classList.remove('active');
 					document.querySelectorAll('.step')[3].classList.add('active');
@@ -338,6 +388,30 @@ function purchaseFlowInit(hostedFieldsInstance) {
 					tick.classList.remove('active');
 					tick.classList.add('complete');
 				});
+
+				if(typeof window.gtag === 'function') {
+					try {
+						const quantity = cart.reduce((tot, cur) => tot + cur.quantity, 0),
+							subtotal = cart.reduce((tot, cur) => tot + (cur.quantity * availableProducts[cur.productId].price), 0),
+							feeTotal = quantity * pageSettings.serviceFee;
+
+						window.gtag('event', 'purchase', {
+							transaction_id: headers.get('Location').split('/').pop(),
+							value: subtotal + feeTotal,
+							currency: 'USD',
+							checkout_step: 4,
+							items: cart.map(i => ({
+								id: i.productId,
+								quantity: i.quantity,
+								name: availableProducts[i.productId].name,
+								category: 'Tickets',
+								price: String(availableProducts[i.productId].price)
+							}))
+						});
+					} catch(e) {
+						// Don't let gtag break the site
+					}
+				}
 			})
 			.catch(e => {
 				submitting = false;
