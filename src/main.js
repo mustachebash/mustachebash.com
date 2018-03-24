@@ -189,8 +189,8 @@ function purchaseFlowInit(hostedFieldsInstance) {
 	}
 
 	// Preselect a ticket
-	if (availableProducts['2cddfba7-8992-445a-a6f7-3295e2abfae8']) {
-		addItemToCart(document.querySelector('.table-row[data-product-id="2cddfba7-8992-445a-a6f7-3295e2abfae8"]'));
+	if (availableProducts['2671de71-d101-4feb-96f3-b84e09bf846e']) {
+		addItemToCart(document.querySelector('.table-row[data-product-id="2671de71-d101-4feb-96f3-b84e09bf846e"]'));
 	}
 
 	// Add a ticket if someone clicks the afterparty CTA
