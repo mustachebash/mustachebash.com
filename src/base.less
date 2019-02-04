@@ -4,16 +4,11 @@
 
 @black : #303032;
 @white : #ffffff;
-@off-white: #f2f2f2;
-@navy : #1a1e3e;
-@blue: #5768fb;
-@lavender: #7c8afd;
-@light-lavender: #95a3fd;
-@teal : #2087c7;
-@pink : #ee438b;
-@peach: #f8a28e;
-@green: #70d59e;
-@red : #e25740;
+@off-white: #faeed0;
+@manila : #fbedd0;
+@fudge : #643a17;
+@mustard : #ecc659;
+@salmon : #e66a40;
 
 // Typography
 @proxima : 'proxima-nova', Helvetica, Arial, sans-serif;
@@ -32,7 +27,7 @@
 body {
 	font: 16px @proxima;
 	-webkit-font-smoothing: antialiased;
-	color: @navy;
+	color: @fudge;
 	// This stops the insanity regarding an entire div getting highlighted when adding tickets
 	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
@@ -70,14 +65,14 @@ h5 {
 	font-size: 1.375em; /* 22/16 */
 	font-weight: 400;
 	letter-spacing: 1px;
-	color: @teal;
+	color: @mustard;
 	margin: 0;
 	text-transform: uppercase;
 }
 
 a {
 	text-decoration: none;
-	color: @blue;
+	color: @salmon;
 }
 
 input[type="text"],
@@ -91,10 +86,10 @@ input[type="email"] {
 	box-sizing: border-box;
 	width: 100%;
 	background: none;
-	border: 1px solid @navy;
+	border: 1px solid @fudge;
 	border-radius: 0;
 	font: 400 16px @proxima;
-	color: @navy;
+	color: @fudge;
 	outline: 0;
 	transition: box-shadow 200ms;
 
@@ -104,7 +99,7 @@ input[type="email"] {
 
 	&:focus {
 		outline: 0;
-		box-shadow: 0 0 4px 1px fade(@navy, 30%);
+		box-shadow: 0 0 4px 1px fade(@fudge, 30%);
 	}
 
 	&:disabled {
@@ -122,7 +117,7 @@ fieldset {
 	&.invalid {
 		input[type="text"],
 		input[type="email"] {
-			border-color: @red;
+			border-color: @salmon;
 		}
 
 		label {
@@ -133,7 +128,7 @@ fieldset {
 				display: inline-block;
 				margin-left: 1em;
 				color: @white;
-				background: @red;
+				background: @salmon;
 				padding: 0 1em;
 
 				@media (max-width: @mobile) {
@@ -155,14 +150,14 @@ fieldset {
 				line-height: 20px;
 				border-radius: 100%;
 				color: @white;
-				background: @red;
+				background: @salmon;
 			}
 		}
 	}
 }
 
 ::placeholder {
-	color: fade(@navy, 50%);
+	color: fade(@fudge, 50%);
 }
 
 label {
@@ -176,7 +171,7 @@ label {
 
 button {
 	-webkit-appearance: none;
-	background: @navy;
+	background: @fudge;
 	border: none;
 	color: @white;
 	font-family: @proxima;
@@ -190,10 +185,10 @@ button {
 	transition: background-color 200ms;
 
 	&:hover {
-		background-color: lighten(@navy, 10%);
+		background-color: lighten(@fudge, 10%);
 	}
 
 	&:active {
-		box-shadow: inset 0 0 6px 0 darken(@navy, 10%);
+		box-shadow: inset 0 0 6px 0 darken(@fudge, 10%);
 	}
 }
