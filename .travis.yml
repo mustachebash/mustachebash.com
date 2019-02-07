@@ -10,8 +10,6 @@ script:
 deploy:
   - provider: s3
     skip_cleanup: true
-    edge:
-      branch: ha-s3-endpoint
     endpoint: https://nyc3.digitaloceanspaces.com
     acl: public_read
     access_key_id: $SPACES_ACCESS_KEY
