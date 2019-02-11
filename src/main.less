@@ -4,11 +4,12 @@ body {
 	padding-top: 5.625em; /* 90/16 */
 }
 
+@container-padding: 1.875em;
 .container-1230 {
 	position: relative;
 	max-width: 1230px;
 	box-sizing: border-box;
-	padding: 0 1.875em; /* 30/16 */
+	padding: 0 @container-padding; /* 30/16 */
 	margin: 0 auto;
 }
 
@@ -223,20 +224,47 @@ header {
 	}
 
 	.graphics {
-		display: flex;
+		@media (min-width: @tablet + 1) {
+			display: flex;
 
-		.title {
-			margin-left: -2em;
+			.title {
+				margin-left: -2em;
+			}
+
+			.info {
+				margin-top: -1.5625em; /* 25/16 */
+				margin-bottom: -11.25em; /* 180/16 */
+			}
 		}
 
-		.info {
-			margin-top: -1.5625em; /* 25/16 */
-			margin-bottom: -11.25em; /* 180/16 */
+		@media (max-width: @tablet) {
+			.title {
+				svg {
+					width: 100%;
+				}
+			}
+
+			.info {
+				margin: 2em -@container-padding -7em;
+				overflow: hidden;
+				text-align: center;
+
+				svg {
+					position: relative;
+					margin-left: -15vw;
+					width: 120vw;
+				}
+			}
 		}
 	}
 
 	.cta {
-		margin-left: 14.75em; /* 244/16 */
+		position: relative;
+		z-index: 3;
+
+		@media (min-width: @tablet + 1) {
+			margin-left: 14.75em; /* 244/16 */
+		}
 
 		a {
 			display: inline-block;
@@ -354,7 +382,7 @@ header {
 			background-image: url('/img/band-tuxedo-mobile.jpg');
 
 			&:after {
-				margin-top: 70.13333333%;
+				margin-top: 70.30625832%;
 			}
 		}
 	}
@@ -387,7 +415,15 @@ header {
 	padding: 6.25em 0; /* 100/16 */
 
 	@media (max-width: @mobile) {
-		padding-bottom: 2em;
+		padding: 2em 0;
+	}
+
+	@media (min-width: @tablet + 1) {
+		.family-band {
+			br {
+				display: none;
+			}
+		}
 	}
 
 	h3 {
@@ -396,7 +432,7 @@ header {
 
 		@media (max-width: @mobile) {
 			text-align: left;
-			margin-bottom: .5em;
+			margin-bottom: 0;
 		}
 	}
 
@@ -498,11 +534,16 @@ header {
 	@media (max-width: @mobile) {
 		.venue-description {
 			order: 1;
-			padding: 2em 0;
+			padding: 2em 0 0;
 		}
 
 		.venue-image {
 			order: 2;
+
+			img {
+				height: auto;
+				max-width: 100%;
+			}
 		}
 	}
 }
@@ -551,13 +592,13 @@ header {
 		flex: 7 1;
 
 		img {
-			margin: -3em 0 -4em;
-			margin-right: -4em;
-			transform: scale(1.1);
-		}
+			margin-bottom: 1em;
 
-		@media (max-width: @mobile) {
-			margin: 0 -1.875em; /* 30/16 */
+			@media (min-width: @tablet + 1) {
+				margin: -3em 0 -4em;
+				margin-right: -4em;
+				transform: scale(1.1);
+			}
 		}
 	}
 }
@@ -679,7 +720,11 @@ header {
 
 	p {
 		color: @white;
-		margin-bottom: 4em;
+		margin-bottom: 2em;
+
+		@media (min-width: @tablet + 1) {
+			margin-bottom: 4em;
+		}
 	}
 
 	.afterparty-description,
@@ -700,9 +745,15 @@ header {
 		flex: 7 1;
 
 		img {
-			margin: 6.25em 0 0;
-			transform: scale(1.5);
+			margin-left: -3.5em;
+			transform: scale(1.8);
 			transform-origin: 0 0;
+
+			@media (min-width: @tablet + 1) {
+				margin: 6.25em 0 0;
+				transform: scale(1.5);
+				transform-origin: 0 0;
+			}
 		}
 	}
 
@@ -732,7 +783,11 @@ header {
 #giving-back {
 	background: @mustard;
 	overflow: hidden;
-	padding-bottom: 4.25em;
+	padding-bottom: 2em;
+
+	@media (min-width: @tablet + 1) {
+		padding-bottom: 4.25em;
+	}
 
 	h3 {
 		margin-bottom: 0;
@@ -744,7 +799,11 @@ header {
 	}
 
 	p {
-		margin-bottom: 3em;
+		margin-bottom: 2em;
+
+		@media (min-width: @tablet + 1) {
+			margin-bottom: 3em;
+		}
 	}
 
 	.giving-back-image,
@@ -755,8 +814,10 @@ header {
 
 	.giving-back-image {
 		img {
-			margin-top: -2	em;
-			max-height: 565px;
+			@media (min-width: @tablet + 1) {
+				margin-top: -2em;
+				max-height: 565px;
+			}
 		}
 	}
 
@@ -767,7 +828,6 @@ header {
 	@media (max-width: @mobile) {
 		.giving-back-image {
 			order: 2;
-			padding-bottom: 1.5em;
 		}
 
 		.giving-back-description {
@@ -1334,6 +1394,8 @@ header {
 }
 
 #shop {
+	// Shop is not currently available
+	display: none;
 	background-color: @white;
 
 	h3 {

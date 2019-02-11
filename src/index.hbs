@@ -42,8 +42,7 @@
 				"price": "55",
 				"priceCurrency": "USD",
 				"url": "https://mustachebash.com#tickets",
-				"availability": "https://schema.org/InStock",
-				"validFrom": "2019-02-12T11:00-08:00"
+				"availability": "https://schema.org/InStock"
 			},
 			"performer": [
 				{
@@ -322,7 +321,13 @@
 	<section id="lineup">
 		<div class="container-1230">
 			<h3>Live Music By</h3>
-			<div class="img-wrap lineup-image"><img src="/img/lineup.svg" alt="Mustache Bash Lineup"></div>
+			<div class="img-wrap lineup-image">
+				<picture>
+					<source media="(min-width: 680px)" srcset="/img/lineup.svg">
+					<source srcset="/img/lineup-mobile.svg">
+					<img src="/img/lineup.svg" alt="Mustache Bash Lineup">
+				</picture>
+			</div>
 
 			<div class="bands">
 				<div class="band" id="tuxedo">
@@ -430,7 +435,7 @@
 						<dt>Orgone</dt>
 						<dd>6:15 pm</dd>
 
-						<dt>The Mustache Bash Family Band</dt>
+						<dt class="family-band">The Mustache Bash<br> Family Band</dt>
 						<dd>4:30pm</dd>
 
 						<dt>Midtown Social</dt>
