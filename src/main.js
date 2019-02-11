@@ -1,6 +1,7 @@
 import 'normalize.css';
 import 'main.less';
 
+import url from 'url';
 import client from 'braintree-web/client';
 import hostedFields from 'braintree-web/hosted-fields';
 
@@ -11,6 +12,8 @@ const cart = [],
 	pageSettings = {
 		serviceFee: 3
 	};
+
+let promo;
 
 // Animate Nav links - quick n dirty vanilla style
 // TODO: Make this less janky
@@ -184,61 +187,100 @@ function removeItemFromCart(el) {
 }
 
 function purchaseFlowInit(hostedFieldsInstance) {
-	for(const id in availableProducts) {
-		document.querySelectorAll(`[data-product-id="${id}"]`).forEach(el => el.classList.remove('disabled'));
-	}
+	if(!promo) {
+		for(const id in availableProducts) {
+			document.querySelectorAll(`[data-product-id="${id}"]`).forEach(el => el.classList.remove('disabled'));
+		}
 
-	// Preselect a ticket
-	if (availableProducts['31f2a17a-604c-4451-a3fe-50795afa74fd']) {
-		addItemToCart(document.querySelector('.table-row[data-product-id="31f2a17a-604c-4451-a3fe-50795afa74fd"]'));
-	}
+		// Preselect a ticket
+		if (availableProducts['31f2a17a-604c-4451-a3fe-50795afa74fd']) {
+			addItemToCart(document.querySelector('.table-row[data-product-id="31f2a17a-604c-4451-a3fe-50795afa74fd"]'));
+		}
 
-	// Add a ticket if someone clicks the afterparty CTA
-	if (availableProducts['f9fc55b4-446c-477e-8eae-0599c065c0bc']) {
-		document.querySelector('#afterparty-cta').addEventListener('click', () => {
-			const cartItemIndex = cart.findIndex(i => i.productId === 'f9fc55b4-446c-477e-8eae-0599c065c0bc');
-			if (!~cartItemIndex) {
-				addItemToCart(document.querySelector('.table-row[data-product-id="f9fc55b4-446c-477e-8eae-0599c065c0bc"]'));
-			}
-		});
-	}
-
-	// Ticket Flow with a precarious dependency on DOM order
-	// Step 1
-	document.querySelector('#confirm-quantity').addEventListener('click', () => {
-		// Make sure there's items in the cart to purchase
-		const valid = cart.length;
-
-		if(valid) {
-			window.requestAnimationFrame(() => {
-				document.querySelectorAll('.step')[0].classList.remove('active');
-				document.querySelectorAll('.step')[1].classList.add('active');
-
-				const ticks = document.querySelectorAll('.ticks > div');
-				ticks[0].classList.remove('active');
-				ticks[0].classList.add('complete');
-				ticks[1].classList.add('active');
-				document.querySelectorAll('.leg')[0].classList.add('active');
+		// Add a ticket if someone clicks the afterparty CTA
+		if (availableProducts['f9fc55b4-446c-477e-8eae-0599c065c0bc']) {
+			document.querySelector('#afterparty-cta').addEventListener('click', () => {
+				const cartItemIndex = cart.findIndex(i => i.productId === 'f9fc55b4-446c-477e-8eae-0599c065c0bc');
+				if (!~cartItemIndex) {
+					addItemToCart(document.querySelector('.table-row[data-product-id="f9fc55b4-446c-477e-8eae-0599c065c0bc"]'));
+				}
 			});
+		}
 
-			if(typeof window.gtag === 'function') {
-				try {
-					window.gtag('event', 'begin_checkout', {
-						checkout_step: 1,
-						items: cart.map(i => ({
-							id: i.productId,
-							quantity: i.quantity,
-							name: availableProducts[i.productId].name,
-							category: 'Tickets',
-							price: String(availableProducts[i.productId].price)
-						}))
-					});
-				} catch(e) {
-					// Don't let gtag break the site
+		// Ticket Flow with a precarious dependency on DOM order
+		// Step 1
+		document.querySelector('#confirm-quantity').addEventListener('click', () => {
+			// Make sure there's items in the cart to purchase
+			const valid = cart.length;
+
+			if(valid) {
+				window.requestAnimationFrame(() => {
+					document.querySelectorAll('.step')[0].classList.remove('active');
+					document.querySelectorAll('.step')[1].classList.add('active');
+
+					const ticks = document.querySelectorAll('.ticks > div');
+					ticks[0].classList.remove('active');
+					ticks[0].classList.add('complete');
+					ticks[1].classList.add('active');
+					document.querySelectorAll('.leg')[0].classList.add('active');
+				});
+
+				if(typeof window.gtag === 'function') {
+					try {
+						window.gtag('event', 'begin_checkout', {
+							checkout_step: 1,
+							items: cart.map(i => ({
+								id: i.productId,
+								quantity: i.quantity,
+								name: availableProducts[i.productId].name,
+								category: 'Tickets',
+								price: String(availableProducts[i.productId].price)
+							}))
+						});
+					} catch(e) {
+						// Don't let gtag break the site
+					}
 				}
 			}
-		}
-	});
+		});
+	} else if(promo.type === 'single-use'){
+		cart.push({
+			productId: promo.product.id,
+			quantity: 1
+		});
+
+		const steps = document.querySelector('.steps'),
+			promoInfo = document.createElement('h5');
+
+		promoInfo.innerHTML = `Promo Ticket: ${promo.product.name} - $${promo.price}<br>${promo.product.description}`;
+
+		steps.parentNode.insertBefore(promoInfo, steps);
+
+		const subtotal = promo.price,
+			feeTotal = pageSettings.serviceFee,
+			orderSummaryList = document.querySelector('.order-summary dl');
+
+		document.querySelector('#quantity-subtotal span').innerText = subtotal;
+		document.querySelector('#grand-total span').innerText = subtotal + feeTotal;
+
+		orderSummaryList.innerHTML = `
+			<dt>${promo.product.name} (<span class="quantity">1</span>)</dt>
+			<dd>$<span class="subtotal">${subtotal}</span></dd>
+			<dt>Fees</dt>
+			<dd>$<span class="subtotal">${feeTotal}</span></dd>
+		`;
+
+		window.requestAnimationFrame(() => {
+			document.querySelectorAll('.step')[0].classList.remove('active');
+			document.querySelectorAll('.step')[1].classList.add('active');
+
+			const ticks = document.querySelectorAll('.ticks > div');
+			ticks[0].classList.remove('active');
+			ticks[0].classList.add('complete');
+			ticks[1].classList.add('active');
+			document.querySelectorAll('.leg')[0].classList.add('active');
+		});
+	}
 
 	// Step 2
 	document.querySelector('#enter-payment').addEventListener('click', () => {
@@ -292,7 +334,7 @@ function purchaseFlowInit(hostedFieldsInstance) {
 				document.querySelectorAll('.leg')[1].classList.add('active');
 			});
 
-			if(typeof window.gtag === 'function') {
+			if(typeof window.gtag === 'function' && !promo) {
 				try {
 					window.gtag('event', 'checkout_progress', {
 						checkout_step: 2,
@@ -311,19 +353,23 @@ function purchaseFlowInit(hostedFieldsInstance) {
 		}
 	});
 
-	document.querySelector('#back-to-quantity').addEventListener('click', e => {
-		e.preventDefault();
-		window.requestAnimationFrame(() => {
-			document.querySelectorAll('.step')[1].classList.remove('active');
-			document.querySelectorAll('.step')[0].classList.add('active');
+	if(!promo) {
+		document.querySelector('#back-to-quantity').addEventListener('click', e => {
+			e.preventDefault();
+			window.requestAnimationFrame(() => {
+				document.querySelectorAll('.step')[1].classList.remove('active');
+				document.querySelectorAll('.step')[0].classList.add('active');
 
-			const ticks = document.querySelectorAll('.ticks > div');
-			ticks[1].classList.remove('active');
-			ticks[0].classList.remove('complete');
-			ticks[0].classList.add('active');
-			document.querySelectorAll('.leg')[0].classList.remove('active');
+				const ticks = document.querySelectorAll('.ticks > div');
+				ticks[1].classList.remove('active');
+				ticks[0].classList.remove('complete');
+				ticks[0].classList.add('active');
+				document.querySelectorAll('.leg')[0].classList.remove('active');
+			});
 		});
-	});
+	} else {
+		document.querySelector('#back-to-quantity').remove();
+	}
 
 	// Step 3
 	let submitting = false;
@@ -336,7 +382,7 @@ function purchaseFlowInit(hostedFieldsInstance) {
 		document.querySelector('#confirm-order').disabled = true;
 		document.querySelector('#back-to-payment').style.display = 'none';
 
-		if(typeof window.gtag === 'function') {
+		if(typeof window.gtag === 'function' && !promo) {
 			try {
 				window.gtag('event', 'checkout_progress', {
 					checkout_step: 3,
@@ -362,7 +408,8 @@ function purchaseFlowInit(hostedFieldsInstance) {
 				body: JSON.stringify({
 					paymentMethodNonce: nonce,
 					customer,
-					cart
+					cart,
+					promoId: promo && promo.id
 				})
 			}))
 			.then(response => {
@@ -443,22 +490,24 @@ function purchaseFlowInit(hostedFieldsInstance) {
 		});
 	});
 
-	// Quantity controls
-	document.querySelectorAll('.plus').forEach(plus => plus.addEventListener('click', e => {
-		if(e.currentTarget.classList.contains('disabled')) return;
-		if(e.currentTarget.parentElement.parentElement.classList.contains('disabled')) return;
+	if(!promo) {
+		// Quantity controls
+		document.querySelectorAll('.plus').forEach(plus => plus.addEventListener('click', e => {
+			if(e.currentTarget.classList.contains('disabled')) return;
+			if(e.currentTarget.parentElement.parentElement.classList.contains('disabled')) return;
 
-		// Increment based on product row data
-		addItemToCart(e.currentTarget.parentElement.parentElement);
-	}));
+			// Increment based on product row data
+			addItemToCart(e.currentTarget.parentElement.parentElement);
+		}));
 
-	document.querySelectorAll('.minus').forEach(minus => minus.addEventListener('click', e => {
-		if(e.currentTarget.classList.contains('disabled')) return;
-		if(e.currentTarget.parentElement.parentElement.classList.contains('disabled')) return;
+		document.querySelectorAll('.minus').forEach(minus => minus.addEventListener('click', e => {
+			if(e.currentTarget.classList.contains('disabled')) return;
+			if(e.currentTarget.parentElement.parentElement.classList.contains('disabled')) return;
 
-		// Decrement
-		removeItemFromCart(e.currentTarget.parentElement.parentElement);
-	}));
+			// Decrement
+			removeItemFromCart(e.currentTarget.parentElement.parentElement);
+		}));
+	}
 }
 
 // Setup braintree client
@@ -505,25 +554,63 @@ function braintreeInit() {
 		});
 }
 
-// Fetch the initial settings and products
-fetch(API_HOST + '/v1/sites/mustachebash.com/settings')
-	.then(response => {
-		if(!response.ok) throw new Error('Settings not loaded');
+const { promo: promoId } = url.parse(location.href, true).query;
 
-		return response;
-	})
-	.then(response => response.json())
-	.then(siteSettings => {
-		siteSettings.products.forEach(p => availableProducts[p.id] = p);
-		Object.assign(pageSettings, siteSettings.settings);
-	})
-	.catch(e => {
-		console.error('Settings Error', e);
+if(!promoId) {
+	// Fetch the initial settings and products
+	fetch(API_HOST + '/v1/sites/mustachebash.com/settings')
+		.then(response => {
+			if(!response.ok) throw new Error('Settings not loaded');
 
-		throw e;
-	})
-	.then(braintreeInit)
-	.catch(() => {
-		// If anything errors, we need to show a message in the tickets section
-		document.querySelector('.tickets-flow').innerHTML = '<h5 style="padding-top: 5em; color: white; text-align: center">Something seems to be broken,<br>please refresh the page and try again</h5>';
-	});
+			return response;
+		})
+		.then(response => response.json())
+		.then(siteSettings => {
+			siteSettings.products.forEach(p => availableProducts[p.id] = p);
+			Object.assign(pageSettings, siteSettings.settings);
+		})
+		.catch(e => {
+			console.error('Settings Error', e);
+
+			throw e;
+		})
+		.then(braintreeInit)
+		.catch(() => {
+			// If anything errors, we need to show a message in the tickets section
+			document.querySelector('.tickets-flow').innerHTML = '<h5 style="padding-top: 5em; color: white; text-align: center">Something seems to be broken,<br>please refresh the page and try again</h5>';
+		});
+} else {
+	// Fetch the initial settings and products
+	fetch(`${API_HOST}/v1/promos/${promoId}`)
+		.then(response => {
+			if(!response.ok) {
+				const err = new Error('Promo Error');
+
+				err.status = response.status;
+				throw err;
+			}
+
+			return response;
+		})
+		.then(response => response.json())
+		.then(responseJson => promo = responseJson)
+		.then(braintreeInit)
+		.catch(e => {
+			let promoMessage;
+			switch(e.status) {
+				case 404:
+					promoMessage = 'Promo Code is not valid';
+					break;
+
+				case 410:
+					promoMessage = 'Promo Code is no longer valid';
+					break;
+
+				default:
+					promoMessage = 'Something seems to be broken,<br>please refresh the page and try again';
+					break;
+			}
+
+			document.querySelector('.tickets-flow').innerHTML = `<h5 style="padding-top: 5em; color: #e66a40; text-align: center">${promoMessage}</h5>`;
+		});
+}
