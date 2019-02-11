@@ -282,6 +282,18 @@ function purchaseFlowInit(hostedFieldsInstance) {
 		});
 	}
 
+	// Donation
+	document.querySelector('#donate-derek').addEventListener('change', () => {
+		const donateCheckbox = document.querySelector('#donate-derek'),
+			currentTotal = Number(document.querySelector('#grand-total span').innerText);
+
+		if(donateCheckbox.checked) {
+			document.querySelector('#grand-total span').innerText = currentTotal + Number(donateCheckbox.value);
+		} else {
+			updateSubtotals();
+		}
+	});
+
 	// Step 2
 	document.querySelector('#enter-payment').addEventListener('click', () => {
 		// Let's get ridiculous so we can check
@@ -409,7 +421,8 @@ function purchaseFlowInit(hostedFieldsInstance) {
 					paymentMethodNonce: nonce,
 					customer,
 					cart,
-					promoId: promo && promo.id
+					promoId: promo && promo.id,
+					donation: document.querySelector('#donate-derek').checked
 				})
 			}))
 			.then(response => {
