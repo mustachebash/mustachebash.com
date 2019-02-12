@@ -106,6 +106,15 @@ document.querySelector('#prev-slide').addEventListener('click', () => {
 	setTimeout(() => currentSlide.style.display = 'none', 600);
 });
 
+const gallerySize = window.innerWidth > 768 ? 'Desktop' : 'Mobile';
+for (let i = 1; i < 9; i++) {
+	const img = new Image();
+
+	img.onload = () => document.querySelector(`.slide-${i}`).style.backgroundImage = `url('/img/gallery/Gallery_${gallerySize}_2019_${i}.jpg')`;
+
+	img.src = `/img/gallery/Gallery_${gallerySize}_2019_${i}.jpg`;
+}
+
 // Never allow this form to submit
 document.forms.purchase.addEventListener('submit', e => {
 	e.preventDefault();

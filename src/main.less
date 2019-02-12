@@ -637,10 +637,10 @@ header {
 
 			&:first-child {
 				display: block;
-				background-image: url('/img/gallery-poster-mobile.jpg');
+				background-image: url('/img/gallery/Gallery_Mobile_2019_PosterImage.jpg');
 
 				@media (min-width: @tablet) {
-					background-image: url('/img/gallery-poster-desktop.jpg');
+					background-image: url('/img/gallery/Gallery_Desktop_2019_PosterImage.jpg');
 				}
 			}
 
@@ -653,52 +653,33 @@ header {
 					transform: translate3d(100%, 0, 0);
 				}
 			}
-
-			.generate-slides(8);
-			.generate-slides(@n, @i: 1) when (@i =< @n) {
-				&.slide-@{i} {
-					background-image: url('/img/gallery/desktop-@{i}.jpg');
-				}
-
-				.generate-slides(@n, (@i + 1));
-			}
 		}
 	}
 
-	@media (min-width: @tablet) {
-		&:hover {
-			#prev-slide,
-			#next-slide {
-				opacity: 1;
-			}
-		}
+	#prev-slide,
+	#next-slide {
+		position: absolute;
+		top: 50%;
+		margin-top: -29px;
+		width: 32px;
+		height: 58px;
+		background: url('/img/gallery-arrow.png') transparent center center no-repeat;
+		cursor: pointer;
+		transition: opacity 300ms;
 
-		#prev-slide,
-		#next-slide {
-			position: absolute;
-			top: 50%;
-			margin-top: -29px;
-			width: 32px;
-			height: 58px;
-			background: url('/img/gallery-arrow.png') transparent center center no-repeat;
-			cursor: pointer;
-			opacity: 0;
-			transition: opacity 300ms;
-
-			&:active {
-				margin-left: -4px;
-				margin-right: -4px;
-			}
+		&:active {
+			margin-left: -4px;
+			margin-right: -4px;
 		}
+	}
 
-		#prev-slide {
-			transform: rotate(180deg);
-			left: 30px;
-		}
+	#prev-slide {
+		transform: rotate(180deg);
+		left: 30px;
+	}
 
-		#next-slide {
-			right: 30px;
-		}
+	#next-slide {
+		right: 30px;
 	}
 }
 
