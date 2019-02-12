@@ -599,7 +599,8 @@ if(!promoId) {
 		.then(braintreeInit)
 		.catch(() => {
 			// If anything errors, we need to show a message in the tickets section
-			document.querySelector('.tickets-flow').innerHTML = '<h5 style="padding-top: 5em; color: white; text-align: center">Something seems to be broken,<br>please refresh the page and try again</h5>';
+			// eslint-disable-next-line max-len
+			document.querySelector('.tickets-flow').innerHTML = '<h5 style="padding-top: 5em; color: #e66a40; text-align: center">Something seems to be broken,<br>please refresh the page and try again</h5>';
 		});
 } else {
 	// Fetch the initial settings and products

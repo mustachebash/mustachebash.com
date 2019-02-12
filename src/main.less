@@ -460,8 +460,9 @@ header {
 		margin-bottom: 1em;
 	}
 
-	.main-stage,
-	.inside-stage {
+	.earth-stage,
+	.wind-stage,
+	.fire-stage {
 		@media (min-width: @mobile) {
 			flex: 0 0 50%;
 			box-sizing: border-box;
@@ -474,7 +475,7 @@ header {
 		}
 	}
 
-	.main-stage {
+	.earth-stage {
 		margin-bottom: 1.5em;
 
 		@media (min-width: @mobile) {
@@ -484,6 +485,29 @@ header {
 			h4,
 			dl {
 				text-align: right;
+			}
+		}
+	}
+
+	.wind-stage {
+		display: none;
+
+		@media (max-width: @tablet) {
+			&.mobile {
+				display: block;
+				margin-bottom: 1.5em;
+			}
+		}
+
+		@media (min-width: @tablet + 1) {
+			&.desktop {
+				display: block;
+				margin-top: 3em;
+
+				h4,
+				dl {
+					text-align: center;
+				}
 			}
 		}
 	}
