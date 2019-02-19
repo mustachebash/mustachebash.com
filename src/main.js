@@ -481,6 +481,22 @@ function purchaseFlowInit(hostedFieldsInstance) {
 						// Don't let gtag break the site
 					}
 				}
+
+				if(typeof window.fbq === 'function') {
+					try {
+						window.fbq('track', 'Purchase', {
+							value: 35,
+							currency: 'USD',
+							contents: cart.map(i => ({
+								id: i.productId,
+								quantity: i.quantity,
+								item_price: Number(availableProducts[i.productId].price)
+							}))
+						});
+					} catch(e) {
+						// Don't let FB break the site
+					}
+				}
 			})
 			.catch(e => {
 				submitting = false;
