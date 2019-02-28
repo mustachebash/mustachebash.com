@@ -1,0 +1,80 @@
+@import 'base.less';
+
+body {
+	background: @salmon;
+}
+
+h2 {
+	font-family: @brandon;
+	font-weight: 900;
+	letter-spacing: -1px;
+	color: @white;
+	text-transform: uppercase;
+	text-align: center;
+	margin: 0;
+	font-size: 3em; /* 48/16 */
+	text-shadow: 2px 2px 0px @fudge;
+
+	@media (max-width: 374px) {
+		font-size: 2.5em; /* 40/16 */
+	}
+}
+
+.img-wrap {
+	img {
+		display: block;
+		margin: 0 auto;
+		max-width: 100%;
+	}
+}
+
+.title {
+	background: @white;
+	padding: 1em 2em;
+	text-align: center;
+
+	svg {
+		width: 100%;
+		max-width: 18.75em; /* 300/16 */
+	}
+}
+
+.lineup-image {
+	padding: 2em;
+	background: @white;
+}
+
+.cta {
+	text-align: center;
+	background: @white;
+}
+
+#tickets-cta {
+	display: inline-block;
+	background: @fudge;
+	padding: 0.5em 2em;
+	text-transform: uppercase;
+	font-family: @proxima;
+	font-weight: 700;
+	font-size: 1.125em; /* 18/16 */
+	color: @white;
+	letter-spacing: 1px;
+}
+
+footer {
+	background: @white;
+	padding-top: 2em;
+	padding-bottom: 1em;
+	text-align: center;
+
+	#copyright {
+		color: @salmon;
+		font-size: 14px;
+		text-align: center;
+		margin-bottom: 0;
+
+		@media (min-width: @mobile) {
+			font-size: 16px;
+		}
+	}
+}
