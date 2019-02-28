@@ -15,7 +15,10 @@ module.exports = (env = {}, argv) => {
 		debugMode = env.debug,
 		entry = {
 			main: ['whatwg-fetch', './src/main.js'],
-			privacyPolicy: './src/privacy-policy.less'
+			privacyPolicy: './src/privacy-policy.less',
+			videoLander: './src/video-lander.js',
+			lineupLander: './src/lineup-lander.js',
+			presellLander: './src/presell-lander.js'
 		};
 
 	if(debugMode) entry.main.unshift('react-devtools');
@@ -28,7 +31,7 @@ module.exports = (env = {}, argv) => {
 		},
 		output: {
 			path: path.resolve(__dirname, 'dist'),
-			filename: 'main.[hash].js',
+			filename: '[name].[hash].js',
 			publicPath: '/'
 		},
 		devServer: {
@@ -87,6 +90,24 @@ module.exports = (env = {}, argv) => {
 				filename: 'privacy-policy.html',
 				template: 'src/privacy-policy.html'
 			}),
+			new HtmlWebpackPlugin({
+				inject: 'head',
+				chunks: ['videoLander'],
+				filename: 'video-lander.html',
+				template: 'src/video-lander.html'
+			}),
+			new HtmlWebpackPlugin({
+				inject: 'head',
+				chunks: ['lineupLander'],
+				filename: 'lineup-lander.html',
+				template: 'src/lineup-lander.html'
+			}),
+			new HtmlWebpackPlugin({
+				inject: 'head',
+				chunks: ['presellLander'],
+				filename: 'presell-lander.html',
+				template: 'src/presell-lander.html'
+			}),
 			new ScriptExtHtmlWebpackPlugin({
 				defaultAttribute: 'defer'
 			}),
@@ -95,7 +116,7 @@ module.exports = (env = {}, argv) => {
 			}),
 			new HTMLInlineCSSWebpackPlugin({
 				filter(filename) {
-					return /privacy/.test(filename);
+					return /privacy|lander/.test(filename);
 				}
 			}),
 			new CopyPlugin([{from: 'src/img', to: 'img'}]),
