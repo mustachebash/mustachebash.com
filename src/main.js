@@ -484,8 +484,12 @@ function purchaseFlowInit(hostedFieldsInstance) {
 
 				if(typeof window.fbq === 'function') {
 					try {
+						const quantity = cart.reduce((tot, cur) => tot + cur.quantity, 0),
+							subtotal = cart.reduce((tot, cur) => tot + (cur.quantity * availableProducts[cur.productId].price), 0),
+							feeTotal = quantity * pageSettings.serviceFee;
+
 						window.fbq('track', 'Purchase', {
-							value: 35,
+							value: subtotal + feeTotal,
 							currency: 'USD',
 							contents: cart.map(i => ({
 								id: i.productId,
