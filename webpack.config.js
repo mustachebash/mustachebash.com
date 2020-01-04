@@ -1,7 +1,7 @@
 const path = require('path'),
 	webpack = require('webpack'),
-	CleanWebpackPlugin = require('clean-webpack-plugin'),
-	UglifyJSPlugin = require('uglifyjs-webpack-plugin'),
+	{ CleanWebpackPlugin } = require('clean-webpack-plugin'),
+	TerserPlugin = require('terser-webpack-plugin'),
 	MiniCssExtractPlugin = require('mini-css-extract-plugin'),
 	OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin'),
 	HtmlWebpackPlugin = require('html-webpack-plugin'),
@@ -15,6 +15,7 @@ module.exports = (env = {}, argv) => {
 		debugMode = env.debug,
 		entry = {
 			main: ['whatwg-fetch', './src/main.js'],
+			mytickets: ['whatwg-fetch', './src/mytickets.js'],
 			privacyPolicy: './src/privacy-policy.less',
 			videoLander: './src/video-lander.js',
 			lineupLander: './src/lineup-lander.js',
@@ -73,16 +74,22 @@ module.exports = (env = {}, argv) => {
 				new OptimizeCssAssetsPlugin({
 					cssProcessorOptions: {discardComments: {removeAll: true}}
 				}),
-				new UglifyJSPlugin()
+				new TerserPlugin()
 			]
 		},
 		plugins: [
-			new CleanWebpackPlugin(['dist']),
+			new CleanWebpackPlugin(),
 			new HtmlWebpackPlugin({
 				inject: 'head',
 				chunks: ['main'],
 				filename: devMode ? 'index.html' : '../templates/index.hbs',
 				template: 'src/index.hbs'
+			}),
+			new HtmlWebpackPlugin({
+				inject: 'head',
+				chunks: ['mytickets'],
+				filename: 'mytickets.html',
+				template: 'src/mytickets.html'
 			}),
 			new HtmlWebpackPlugin({
 				inject: false,

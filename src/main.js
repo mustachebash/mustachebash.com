@@ -8,9 +8,9 @@ import hostedFields from 'braintree-web/hosted-fields';
 // Set some state here
 const cart = [],
 	customer = {},
-	availableProducts = {},
+	products = {},
 	pageSettings = {
-		serviceFee: 3
+		serviceFee: 0
 	};
 
 let promo;
@@ -76,6 +76,13 @@ document.querySelector('#next-slide').addEventListener('click', () => {
 	const currentSlide = document.querySelector('#slide-container .active'),
 		nextSlide = currentSlide.nextElementSibling;
 
+	if(typeof window.gtag === 'function') {
+		window.gtag('event', 'click', {
+			event_category: 'gallery',
+			event_label: 'Next Slide'
+		});
+	}
+
 	if(nextSlide) {
 		nextSlide.style.display = 'block';
 		window.requestAnimationFrame(() => nextSlide.classList.add('active'));
@@ -92,6 +99,13 @@ document.querySelector('#next-slide').addEventListener('click', () => {
 document.querySelector('#prev-slide').addEventListener('click', () => {
 	const currentSlide = document.querySelector('#slide-container .active'),
 		prevSlide = currentSlide.previousElementSibling;
+
+	if(typeof window.gtag === 'function') {
+		window.gtag('event', 'click', {
+			event_category: 'gallery',
+			event_label: 'Previous Slide'
+		});
+	}
 
 	if(prevSlide) {
 		prevSlide.style.display = 'block';
@@ -121,33 +135,26 @@ document.forms.purchase.addEventListener('submit', e => {
 });
 
 function updateSubtotals() {
-	const quantity = cart.reduce((tot, cur) => tot + cur.quantity, 0),
-		subtotal = cart.reduce((tot, cur) => tot + (cur.quantity * availableProducts[cur.productId].price), 0),
-		feeTotal = quantity * pageSettings.serviceFee,
+	const subtotal = cart.reduce((tot, cur) => tot + (cur.quantity * products[cur.productId].price), 0),
 		orderSummaryList = document.querySelector('.order-summary dl');
 
-	document.querySelector('#quantity-subtotal span').innerText = subtotal;
-	document.querySelector('#grand-total span').innerText = subtotal + feeTotal;
+	document.querySelector('#grand-total span').innerText = subtotal;
 
 	orderSummaryList.innerHTML = '';
 
 	cart.forEach(i => {
-		const product = availableProducts[i.productId];
+		const product = products[i.productId];
 
 		orderSummaryList.innerHTML += `
 			<dt>${product.name} (<span class="quantity">${i.quantity}</span>)</dt>
 			<dd>$<span class="subtotal">${i.quantity * product.price}</span></dd>
 		`;
 	});
-
-	orderSummaryList.innerHTML += `
-		<dt>Fees</dt>
-		<dd>$<span class="subtotal">${feeTotal}</span></dd>
-	`;
 }
 
-function addItemToCart(el) {
-	const cartItemIndex = cart.findIndex(i => i.productId === el.dataset.productId);
+const quantityControls = document.querySelector('.quantity-controls');
+function addItemToCart(id) {
+	const cartItemIndex = cart.findIndex(i => i.productId === id);
 
 	if(~cartItemIndex) {
 		// 4 ticket max
@@ -155,40 +162,34 @@ function addItemToCart(el) {
 
 		cart[cartItemIndex].quantity++;
 
-		if(cart[cartItemIndex].quantity === 4) el.querySelector('.plus').classList.add('disabled');
+		if(cart[cartItemIndex].quantity === 4) quantityControls.querySelector('.plus').classList.add('disabled');
+		if(cart[cartItemIndex].quantity > 1) quantityControls.querySelector('.minus').classList.remove('disabled');
 
-		el.querySelector('.quantity').innerText = cart[cartItemIndex].quantity;
-		el.querySelector('.product-total span').innerText = availableProducts[el.dataset.productId].price * cart[cartItemIndex].quantity;
+		quantityControls.querySelector('.quantity').innerText = cart[cartItemIndex].quantity;
 	} else {
 		cart.push({
-			productId: el.dataset.productId,
+			productId: id,
 			quantity: 1
 		});
 
-		el.querySelector('.quantity').innerText = 1;
-		el.querySelector('.product-total span').innerText = availableProducts[el.dataset.productId].price;
-		el.querySelector('.minus').classList.remove('disabled');
+		quantityControls.querySelector('.quantity').innerText = 1;
 	}
 
 	updateSubtotals();
 }
 
-function removeItemFromCart(el) {
-	const cartItemIndex = cart.findIndex(i => i.productId === el.dataset.productId);
+function removeItemFromCart(id) {
+	const cartItemIndex = cart.findIndex(i => i.productId === id);
 
 	if(~cartItemIndex) {
 		cart[cartItemIndex].quantity--;
 
-		el.querySelector('.quantity').innerText = cart[cartItemIndex].quantity;
-		el.querySelector('.plus').classList.remove('disabled');
+		quantityControls.querySelector('.quantity').innerText = cart[cartItemIndex].quantity;
+		quantityControls.querySelector('.plus').classList.remove('disabled');
 
-		// If it's zero, remove the item entirely, otherwise update the subtotal
-		if(!cart[cartItemIndex].quantity) {
-			cart.splice(cartItemIndex, 1);
-			el.querySelector('.product-total span').innerText = 0;
-			el.querySelector('.minus').classList.add('disabled');
-		} else {
-			el.querySelector('.product-total span').innerText = availableProducts[el.dataset.productId].price * cart[cartItemIndex].quantity;
+		// One is the minimum
+		if(cart[cartItemIndex].quantity === 1) {
+			quantityControls.querySelector('.minus').classList.add('disabled');
 		}
 	}
 
@@ -196,24 +197,26 @@ function removeItemFromCart(el) {
 }
 
 function purchaseFlowInit(hostedFieldsInstance) {
+	const ticketsList = document.querySelector('#tickets-list'),
+		ticketsListHTML = [];
+
 	if(!promo) {
-		for(const id in availableProducts) {
-			document.querySelectorAll(`[data-product-id="${id}"]`).forEach(el => el.classList.remove('disabled'));
+		for(const id of pageSettings.ticketsOrder) {
+		// for(const [id, product] of Object.entries(products)) {
+			const { name, description, price, status } = products[id],
+				classes = [];
+
+			if(status !== 'active') classes.push('disabled');
+			if(status === 'archived') classes.push('sold-out');
+
+			ticketsListHTML.push(`<h6 class="${classes.join(' ')}" data-product-id="${id}">${name} $${price}<sup>${description}</sup></h6>`);
 		}
+
+		ticketsList.innerHTML = ticketsListHTML.join('\n');
 
 		// Preselect a ticket
-		if (availableProducts['f9fc55b4-446c-477e-8eae-0599c065c0bc']) {
-			addItemToCart(document.querySelector('.table-row[data-product-id="f9fc55b4-446c-477e-8eae-0599c065c0bc"]'));
-		}
-
-		// Add a ticket if someone clicks the afterparty CTA
-		if (availableProducts['f9fc55b4-446c-477e-8eae-0599c065c0bc']) {
-			document.querySelector('#afterparty-cta').addEventListener('click', () => {
-				const cartItemIndex = cart.findIndex(i => i.productId === 'f9fc55b4-446c-477e-8eae-0599c065c0bc');
-				if (!~cartItemIndex) {
-					addItemToCart(document.querySelector('.table-row[data-product-id="f9fc55b4-446c-477e-8eae-0599c065c0bc"]'));
-				}
-			});
+		if(pageSettings.currentTicket) {
+			addItemToCart(pageSettings.currentTicket);
 		}
 
 		// Ticket Flow with a precarious dependency on DOM order
@@ -241,9 +244,9 @@ function purchaseFlowInit(hostedFieldsInstance) {
 							items: cart.map(i => ({
 								id: i.productId,
 								quantity: i.quantity,
-								name: availableProducts[i.productId].name,
+								name: products[i.productId].name,
 								category: 'Tickets',
-								price: String(availableProducts[i.productId].price)
+								price: String(products[i.productId].price)
 							}))
 						});
 					} catch(e) {
@@ -252,7 +255,7 @@ function purchaseFlowInit(hostedFieldsInstance) {
 				}
 			}
 		});
-	} else if(promo.type === 'single-use'){
+	} else if(promo.type === 'single-use') {
 		cart.push({
 			productId: promo.product.id,
 			quantity: 1
@@ -266,17 +269,13 @@ function purchaseFlowInit(hostedFieldsInstance) {
 		steps.parentNode.insertBefore(promoInfo, steps);
 
 		const subtotal = promo.price,
-			feeTotal = pageSettings.serviceFee,
 			orderSummaryList = document.querySelector('.order-summary dl');
 
-		document.querySelector('#quantity-subtotal span').innerText = subtotal;
-		document.querySelector('#grand-total span').innerText = subtotal + feeTotal;
+		document.querySelector('#grand-total span').innerText = subtotal;
 
 		orderSummaryList.innerHTML = `
 			<dt>${promo.product.name} (<span class="quantity">1</span>)</dt>
 			<dd>$<span class="subtotal">${subtotal}</span></dd>
-			<dt>Fees</dt>
-			<dd>$<span class="subtotal">${feeTotal}</span></dd>
 		`;
 
 		window.requestAnimationFrame(() => {
@@ -290,18 +289,6 @@ function purchaseFlowInit(hostedFieldsInstance) {
 			document.querySelectorAll('.leg')[0].classList.add('active');
 		});
 	}
-
-	// Donation
-	document.querySelector('#donate-derek').addEventListener('change', () => {
-		const donateCheckbox = document.querySelector('#donate-derek'),
-			currentTotal = Number(document.querySelector('#grand-total span').innerText);
-
-		if(donateCheckbox.checked) {
-			document.querySelector('#grand-total span').innerText = currentTotal + Number(donateCheckbox.value);
-		} else {
-			updateSubtotals();
-		}
-	});
 
 	// Step 2
 	document.querySelector('#enter-payment').addEventListener('click', () => {
@@ -362,9 +349,9 @@ function purchaseFlowInit(hostedFieldsInstance) {
 						items: cart.map(i => ({
 							id: i.productId,
 							quantity: i.quantity,
-							name: availableProducts[i.productId].name,
+							name: products[i.productId].name,
 							category: 'Tickets',
-							price: String(availableProducts[i.productId].price)
+							price: String(products[i.productId].price)
 						}))
 					});
 				} catch(e) {
@@ -410,9 +397,9 @@ function purchaseFlowInit(hostedFieldsInstance) {
 					items: cart.map(i => ({
 						id: i.productId,
 						quantity: i.quantity,
-						name: availableProducts[i.productId].name,
+						name: products[i.productId].name,
 						category: 'Tickets',
-						price: String(availableProducts[i.productId].price)
+						price: String(products[i.productId].price)
 					}))
 				});
 			} catch(e) {
@@ -446,12 +433,13 @@ function purchaseFlowInit(hostedFieldsInstance) {
 
 				return Promise.all([response.headers, response.json()]);
 			})
-			.then(([ headers, confirmation ]) => {
+			.then(([ headers, { confirmationId, token } ]) => {
 				window.requestAnimationFrame(() => {
 					document.querySelectorAll('.step')[2].classList.remove('active');
 					document.querySelectorAll('.step')[3].classList.add('active');
 
-					document.querySelector('.confirmation-number span').innerText = confirmation;
+					document.querySelector('.confirmation-number span').innerText = confirmationId;
+					document.querySelector('.tickets-link a').href = `/mytickets?t=${token}`;
 
 					const tick = document.querySelectorAll('.ticks > div')[2];
 					tick.classList.remove('active');
@@ -461,7 +449,7 @@ function purchaseFlowInit(hostedFieldsInstance) {
 				if(typeof window.gtag === 'function') {
 					try {
 						const quantity = cart.reduce((tot, cur) => tot + cur.quantity, 0),
-							subtotal = cart.reduce((tot, cur) => tot + (cur.quantity * availableProducts[cur.productId].price), 0),
+							subtotal = cart.reduce((tot, cur) => tot + (cur.quantity * products[cur.productId].price), 0),
 							feeTotal = quantity * pageSettings.serviceFee;
 
 						window.gtag('event', 'purchase', {
@@ -472,9 +460,9 @@ function purchaseFlowInit(hostedFieldsInstance) {
 							items: cart.map(i => ({
 								id: i.productId,
 								quantity: i.quantity,
-								name: availableProducts[i.productId].name,
+								name: products[i.productId].name,
 								category: 'Tickets',
-								price: String(availableProducts[i.productId].price)
+								price: String(products[i.productId].price)
 							}))
 						});
 					} catch(e) {
@@ -485,7 +473,7 @@ function purchaseFlowInit(hostedFieldsInstance) {
 				if(typeof window.fbq === 'function') {
 					try {
 						const quantity = cart.reduce((tot, cur) => tot + cur.quantity, 0),
-							subtotal = cart.reduce((tot, cur) => tot + (cur.quantity * availableProducts[cur.productId].price), 0),
+							subtotal = cart.reduce((tot, cur) => tot + (cur.quantity * products[cur.productId].price), 0),
 							feeTotal = quantity * pageSettings.serviceFee;
 
 						window.fbq('track', 'Purchase', {
@@ -494,7 +482,7 @@ function purchaseFlowInit(hostedFieldsInstance) {
 							contents: cart.map(i => ({
 								id: i.productId,
 								quantity: i.quantity,
-								item_price: Number(availableProducts[i.productId].price)
+								item_price: Number(products[i.productId].price)
 							}))
 						});
 					} catch(e) {
@@ -532,22 +520,20 @@ function purchaseFlowInit(hostedFieldsInstance) {
 		});
 	});
 
-	if(!promo) {
+	if(!promo && pageSettings.currentTicket) {
 		// Quantity controls
 		document.querySelectorAll('.plus').forEach(plus => plus.addEventListener('click', e => {
 			if(e.currentTarget.classList.contains('disabled')) return;
-			if(e.currentTarget.parentElement.parentElement.classList.contains('disabled')) return;
 
 			// Increment based on product row data
-			addItemToCart(e.currentTarget.parentElement.parentElement);
+			addItemToCart(pageSettings.currentTicket);
 		}));
 
 		document.querySelectorAll('.minus').forEach(minus => minus.addEventListener('click', e => {
 			if(e.currentTarget.classList.contains('disabled')) return;
-			if(e.currentTarget.parentElement.parentElement.classList.contains('disabled')) return;
 
 			// Decrement
-			removeItemFromCart(e.currentTarget.parentElement.parentElement);
+			removeItemFromCart(pageSettings.currentTicket);
 		}));
 	}
 }
@@ -560,16 +546,16 @@ function braintreeInit() {
 			styles: {
 				input: {
 					'font-size': '16px',
-					color: '#643a17'
+					color: '#0e2245'
 				},
 				'.invalid': {
-					color: '#e25740'
+					color: '#e66a40'
 				},
 				':focus': {
 					outline: 0
 				},
 				'::placeholder': {
-					color: 'rgba(100,58,23,.5)'
+					color: 'rgba(14,34,69,.5)'
 				}
 			},
 			fields: {
@@ -607,9 +593,13 @@ if(!promoId) {
 			return response;
 		})
 		.then(response => response.json())
-		.then(siteSettings => {
-			siteSettings.products.forEach(p => availableProducts[p.id] = p);
-			Object.assign(pageSettings, siteSettings.settings);
+		.then(({ settings, products: siteProducts, events }) => {
+			siteProducts.forEach(p => products[p.id] = p);
+
+			Object.assign(pageSettings, {
+				...settings,
+				...events[0] && {currentTicket: events[0].currentTicket}
+			});
 		})
 		.catch(e => {
 			console.error('Settings Error', e);
@@ -620,7 +610,7 @@ if(!promoId) {
 		.catch(() => {
 			// If anything errors, we need to show a message in the tickets section
 			// eslint-disable-next-line max-len
-			document.querySelector('.tickets-flow').innerHTML = '<h5 style="padding-top: 5em; color: #e66a40; text-align: center">Something seems to be broken,<br>please refresh the page and try again</h5>';
+			document.querySelector('.tickets-flow').innerHTML = '<h5 style="padding-top: 5em; color: #602a34; text-align: center">Something seems to be broken,<br>please refresh the page and try again</h5>';
 		});
 } else {
 	// Fetch the initial settings and products

@@ -4,11 +4,16 @@
 
 @black : #303032;
 @white : #ffffff;
-@off-white: #faeed0;
-@manila : #fbedd0;
-@fudge : #643a17;
-@mustard : #ecc659;
-@salmon : #e66a40;
+@off-white: #f7f1df;
+@chocolate : #8e664f;
+@caramel : #af7644;
+@clay : #9c6456;
+@burgundy : #602a34;
+@orange : #e66a40;
+@sky: #61add8;
+@blue : #006cab;
+@navy : #0e2245;
+@cream : #efd188;
 
 // Typography
 @proxima : 'proxima-nova', Helvetica, Arial, sans-serif;
@@ -27,7 +32,7 @@
 body {
 	font: 16px @proxima;
 	-webkit-font-smoothing: antialiased;
-	color: @fudge;
+	color: @navy;
 	// This stops the insanity regarding an entire div getting highlighted when adding tickets
 	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
@@ -48,7 +53,7 @@ h3 {
 
 h4 {
 	font-family: @league;
-	font-size: 2em; /* 32/16 */
+	font-size: 1.875em; /* 30/16 */
 	font-weight: 400;
 	letter-spacing: 2px;
 	text-transform: uppercase;
@@ -65,14 +70,14 @@ h5 {
 	font-size: 1.375em; /* 22/16 */
 	font-weight: 400;
 	letter-spacing: 1px;
-	color: @mustard;
+	color: @sky;
 	margin: 0;
 	text-transform: uppercase;
 }
 
 a {
 	text-decoration: none;
-	color: @salmon;
+	color: @navy;
 }
 
 input[type="text"],
@@ -86,10 +91,10 @@ input[type="email"] {
 	box-sizing: border-box;
 	width: 100%;
 	background: none;
-	border: 1px solid @fudge;
+	border: 1px solid @navy;
 	border-radius: 0;
 	font: 400 16px @proxima;
-	color: @fudge;
+	color: @navy;
 	outline: 0;
 	transition: box-shadow 200ms;
 
@@ -99,7 +104,7 @@ input[type="email"] {
 
 	&:focus {
 		outline: 0;
-		box-shadow: 0 0 4px 1px fade(@fudge, 30%);
+		box-shadow: 0 0 4px 1px fade(@navy, 30%);
 	}
 
 	&:disabled {
@@ -117,7 +122,7 @@ fieldset {
 	&.invalid {
 		input[type="text"],
 		input[type="email"] {
-			border-color: @salmon;
+			border-color: @orange;
 		}
 
 		label {
@@ -128,7 +133,7 @@ fieldset {
 				display: inline-block;
 				margin-left: 1em;
 				color: @white;
-				background: @salmon;
+				background: @orange;
 				padding: 0 1em;
 
 				@media (max-width: @mobile) {
@@ -150,14 +155,14 @@ fieldset {
 				line-height: 20px;
 				border-radius: 100%;
 				color: @white;
-				background: @salmon;
+				background: @orange;
 			}
 		}
 	}
 }
 
 ::placeholder {
-	color: fade(@fudge, 50%);
+	color: fade(@navy, 50%);
 }
 
 label {
@@ -171,7 +176,7 @@ label {
 
 button {
 	-webkit-appearance: none;
-	background: @fudge;
+	background: @navy;
 	border: none;
 	color: @white;
 	font-family: @proxima;
@@ -185,10 +190,10 @@ button {
 	transition: background-color 200ms;
 
 	&:hover {
-		background-color: lighten(@fudge, 10%);
+		background-color: lighten(@navy, 10%);
 	}
 
 	&:active {
-		box-shadow: inset 0 0 6px 0 darken(@fudge, 10%);
+		box-shadow: inset 0 0 6px 0 darken(@navy, 10%);
 	}
 }
