@@ -1,0 +1,169 @@
+@import 'base.less';
+
+body {
+	background-color: @sky;
+}
+
+.img-wrap {
+	img {
+		display: block;
+		margin: 0 auto;
+		max-width: 100%;
+	}
+}
+
+.title {
+	background: @sky;
+	padding: 1em 2em;
+	text-align: center;
+
+	svg {
+		width: 100%;
+		max-width: 18.75em; /* 300/16 */
+	}
+}
+
+@container-padding: 1.875em;
+.container-1230 {
+	position: relative;
+	max-width: 1230px;
+	box-sizing: border-box;
+	padding: 0 @container-padding; /* 30/16 */
+	margin: 0 auto;
+}
+
+.no-mobile {
+	@media (max-width: @mobile) {
+		display: none;
+	}
+}
+
+.mobile-only {
+	@media (min-width: @mobile) {
+		display: none;
+	}
+}
+
+.flex-row {
+	display: flex;
+
+	@media (max-width: @mobile) {
+		&:not(.flex-row-mobile) {
+			flex-direction: column;
+		}
+	}
+}
+
+.img-wrap {
+	img {
+		display: block;
+		margin: 0 auto;
+		max-width: 100%;
+	}
+}
+
+header {
+	height: 5.625em; /* 90/16 */
+	padding-top: 1.25em; /* 20/16 */
+	box-sizing: border-box;
+	background: @navy;
+	z-index: 9999;
+
+	.logo {
+		flex: 0 3 7.375em;
+		width: 7.375em; /* 118/16 */
+
+		@media (max-width: @mobile) {
+			position: relative;
+			top: 4px;
+			width: 6em; /* 96/16 */
+			flex: 0 3 6em;
+		}
+	}
+}
+
+h1 {
+	color: @white;
+}
+
+h2 {
+	margin: 0;
+	color: @blue;
+}
+
+h2 + h2 {
+	margin-bottom: 1em;
+}
+
+h4 {
+	margin: 0;
+	line-height: 1;
+}
+
+.download-wallet {
+	@media (max-width: @mobile) {
+		text-align: center;
+	}
+
+	.download {
+		display: inline-block;
+		background: @navy;
+		padding: 0.5em 2em;
+		text-transform: uppercase;
+		font-family: @proxima;
+		font-weight: 700;
+		font-size: 1.125em; /* 18/16 */
+		color: @white;
+		letter-spacing: 1px;
+
+		@media (max-width: @mobile) {
+			margin-bottom: 1em;
+			display: block;
+			box-sizing: border-box;
+		}
+	}
+
+	.wallet {
+		display: inline-block;
+		position: relative;
+		top: 14px;
+		margin-left: 1em;
+
+		img {
+			height: 40px;
+		}
+
+		@media (max-width: @tablet) {
+			margin-left: 0;
+			top: 0;
+
+			img {
+				height: 50px;
+			}
+		}
+	}
+}
+
+.tickets {
+	position: relative;
+	padding-top: 1em;
+}
+
+.ticket {
+	text-align: center;
+	margin-bottom: 3em;
+}
+
+footer {
+	padding-top: 2em;
+	text-align: center;
+
+	#copyright {
+		font-size: 14px;
+		text-align: center;
+
+		@media (min-width: @mobile) {
+			font-size: 16px;
+		}
+	}
+}
