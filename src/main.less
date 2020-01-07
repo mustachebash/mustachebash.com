@@ -214,7 +214,6 @@ header {
 	background: @sky;
 	box-sizing: border-box;
 	padding-top: 1.625em; /* 26/16 */
-	// height: 31.875em; /* 510/16 */
 
 	@media (max-width: @mobile) {
 		height: auto;
@@ -223,22 +222,33 @@ header {
 	}
 
 	.graphics {
-		margin-left: 4em;
+		img {
+			width: 98vw;
+			margin: 0 -1.75em;
+		}
+
+		@media (min-width: @tablet + 1) {
+			margin-left: 4em;
+
+			img {
+				max-width: 100%;
+			}
+		}
 	}
 
 	.cta {
 		position: relative;
 		z-index: 3;
+		text-align: center;
 
 		@media (max-width: @tablet) {
-			margin-left: 10em;
+			margin: 2em auto 0;
 		}
 
 		@media (min-width: @tablet + 1) {
 			width: 14em;
 			margin-left: 12.75em; /* 244/16 */
 			top: -7.25em;
-			text-align: center;
 		}
 
 		a {
@@ -262,14 +272,19 @@ header {
 }
 
 #tagline {
-	background-color: @cream;
-	padding: 2em 0; /* 50/16 */
+	background-color: @off-white;
+	padding: 2.1875em 0; /* 35/16 */
+
+	@media (min-width: @tablet + 1) {
+		background-color: @cream;
+		padding: 2em 0; /* 50/16 */
+	}
 
 	h3 {
 		font-family: @brandon;
 		font-weight: 900;
 		font-size: 1.375em; /* 22/16 */
-		color: @burgundy;
+		color: @sky;
 		text-transform: uppercase;
 		margin: 0;
 		margin-bottom: .5em;
@@ -277,42 +292,59 @@ header {
 		line-height: 1em;
 		text-align: center;
 
-		&.next-line {
-			margin: 0;
+		@media (min-width: @tablet + 1) {
+			color: @burgundy;
 		}
-	}
 
-	@media (max-width: @mobile) {
-		padding: 2.1875em 0; /* 35/16 */
-
-		h3 {
+		@media (max-width: @mobile) {
 			font-size: 1.125em; /* 18/16 */
 			margin-bottom: 0;
 			line-height: 1.5em;
+		}
+
+		&.next-line {
+			margin: 0;
 		}
 	}
 }
 
 #video {
-	padding: 6.25em 0; /* 100/16 */
+	overflow: hidden;
 	background-color: @off-white;
 
+	@media (min-width: @tablet + 1) {
+		padding: 6.25em 0; /* 100/16 */
+	}
+
 	.video-text {
-		flex: 3 1 auto;
-		margin-right: 2em;
+		flex: 3 1;
+
+		@media (min-width: @tablet + 1) {
+			margin-right: 2em;
+		}
 
 		h4 {
 			color: @sky;
 			line-height: 1em;
+
+			@media (max-width: @tablet) {
+				display: none;
+			}
 		}
 
 		p {
 			font-size: 1.125em; /* 18/16 */
+
+			@media (max-width: @tablet) {
+				margin-top: 0;
+				text-align: center;
+			}
 		}
 	}
 
 	.video-image {
-		flex: 7 1 auto;
+		flex: 7 1;
+		margin: 0 -2em;
 	}
 }
 
@@ -359,7 +391,8 @@ header {
 		}
 
 		@media (max-width: @mobile) {
-			background-image: url('/img/band-lee-fields-mobile.jpg');
+			background-size: cover;
+			background-position: center;
 
 			&:after {
 				margin-top: 70.30625832%;
@@ -551,6 +584,13 @@ header {
 	h4 {
 		margin-top: 0;
 		color: @caramel;
+		letter-spacing: 1.5px;
+
+		@media (min-width: @tablet + 1) {
+			br {
+				display: none;
+			}
+		}
 	}
 
 	p {
@@ -581,16 +621,7 @@ header {
 		justify-content: flex-end;
 		align-items: flex-end;
 		flex: 7 1;
-
-		img {
-			margin-bottom: 1em;
-
-			@media (min-width: @tablet + 1) {
-				margin: -3em 0 -4em;
-				margin-right: -4em;
-				transform: scale(1.1);
-			}
-		}
+		margin: 3em 0;
 	}
 }
 
@@ -691,10 +722,32 @@ header {
 	p {
 		color: @white
 	}
+
+	.afterparty-image,
+	.afterparty-description {
+		box-sizing: border-box;
+	}
+
+	.afterparty-description {
+		flex: 4 1;
+		margin-top: 5em;
+		margin-right: 3em;
+
+		@media (max-width: @mobile) {
+			margin-top: 2em;
+			margin-right: 0;
+		}
+	}
+
+	.afterparty-image {
+		flex: 7 1;
+		margin: 3em 0;
+	}
 }
 
 #family-band {
 	background-color: #9c6456; // custom color
+	overflow: hidden;
 
 	h3 {
 		color: @off-white;
@@ -708,6 +761,38 @@ header {
 
 	p {
 		color: @white
+	}
+
+	.family-band-image,
+	.family-band-description {
+		box-sizing: border-box;
+	}
+
+	.family-band-description {
+		flex: 4 1;
+		margin-top: 5em;
+
+		@media (max-width: @mobile) {
+			order: 1;
+			margin-top: 2em;
+		}
+	}
+
+	.family-band-image {
+		flex: 7 1;
+		margin-bottom: 2em;
+
+		img {
+			margin: 0;
+		}
+
+		@media (max-width: @mobile) {
+			order: 2;
+		}
+
+		@media (min-width: @tablet + 1) {
+			margin: 3em 0 -17em;
+		}
 	}
 }
 
@@ -1155,21 +1240,41 @@ header {
 	}
 
 	.order-confirmation {
+		background: @sky;
+		padding: 1em;
+		border: 2px dashed @blue;
+
 		h6 {
 			font-family: @brandon;
 			font-weight: 900;
 			font-size: 1.375em; /* 22/16 */
 			margin: 0 0 0.75em;
 			text-transform: uppercase;
-			color: @navy;
+			color: @white;
 		}
 
 		p {
-			color: @navy;
+			color: @white;
 
 			&.confirmation-number {
 				text-transform: uppercase;
 				font-weight: 700;
+
+				span {
+					color: @navy;
+				}
+			}
+
+			&.tickets-link {
+				margin: 2em 0;
+
+				a {
+					background-color: @navy;
+					text-transform: uppercase;
+					font-weight: 700;
+					color: @white;
+					padding: .5em 2em;
+				}
 			}
 		}
 	}
@@ -1280,6 +1385,10 @@ header {
 	h5 {
 		color: @cream;
 		letter-spacing: 2px;
+
+		@media (max-width: 375px) {
+			font-size: 1.25em;
+		}
 	}
 
 	p {

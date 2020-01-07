@@ -202,7 +202,7 @@ function purchaseFlowInit(hostedFieldsInstance) {
 
 	if(!promo) {
 		for(const id of pageSettings.ticketsOrder) {
-		// for(const [id, product] of Object.entries(products)) {
+			if(!products[id]) continue;
 			const { name, description, price, status } = products[id],
 				classes = [];
 
@@ -417,8 +417,7 @@ function purchaseFlowInit(hostedFieldsInstance) {
 					paymentMethodNonce: nonce,
 					customer,
 					cart,
-					promoId: promo && promo.id,
-					donation: document.querySelector('#donate-derek').checked
+					promoId: promo && promo.id
 				})
 			}))
 			.then(response => {
@@ -448,13 +447,11 @@ function purchaseFlowInit(hostedFieldsInstance) {
 
 				if(typeof window.gtag === 'function') {
 					try {
-						const quantity = cart.reduce((tot, cur) => tot + cur.quantity, 0),
-							subtotal = cart.reduce((tot, cur) => tot + (cur.quantity * products[cur.productId].price), 0),
-							feeTotal = quantity * pageSettings.serviceFee;
+						const total = cart.reduce((tot, cur) => tot + (cur.quantity * products[cur.productId].price), 0);
 
 						window.gtag('event', 'purchase', {
 							transaction_id: headers.get('Location').split('/').pop(),
-							value: subtotal + feeTotal,
+							value: total,
 							currency: 'USD',
 							checkout_step: 4,
 							items: cart.map(i => ({
@@ -472,12 +469,10 @@ function purchaseFlowInit(hostedFieldsInstance) {
 
 				if(typeof window.fbq === 'function') {
 					try {
-						const quantity = cart.reduce((tot, cur) => tot + cur.quantity, 0),
-							subtotal = cart.reduce((tot, cur) => tot + (cur.quantity * products[cur.productId].price), 0),
-							feeTotal = quantity * pageSettings.serviceFee;
+						const total = cart.reduce((tot, cur) => tot + (cur.quantity * products[cur.productId].price), 0);
 
 						window.fbq('track', 'Purchase', {
-							value: subtotal + feeTotal,
+							value: total,
 							currency: 'USD',
 							contents: cart.map(i => ({
 								id: i.productId,

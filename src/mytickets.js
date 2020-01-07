@@ -26,32 +26,38 @@ if(transactionToken) {
 		.then(tickets => {
 			if(!tickets.length) throw new Error('No tickets returned');
 
-			const { confirmationId } = tickets[0];
+			// FIXME: This isn't ideal, but works with our system
+			// This only works with "Guest #" suffixes added to guest names.
+			tickets.sort((a, b) => a.lastName > b.lastName ? 1 : -1);
+
+			const { confirmationId, firstName, lastName, eventName, eventDate } = tickets[0],
+				dateString = (new Date(eventDate)).toLocaleDateString('en-US', {
+					weekday: 'long',
+					year: 'numeric',
+					month: 'long',
+					day: 'numeric'
+				});
 
 			const ticketsHTML = `
 				<h1>Your tickets</h1>
 				<h2>Order #${confirmationId}</h2>
+				<h2>Purchased by ${firstName} ${lastName}</h2>
+				<h4>${eventName}</h4>
+				<h4>${dateString}</h4>
 				<p class="download-wallet">
-					<a href="${API_HOST}/v1/mytickets/pdf?t=${transactionToken}">Print/Download PDF</a>
-					<a href="#">Add to Apple Wallet</a>
+					<a class="download" href="${API_HOST}/v1/mytickets/pdf?t=${transactionToken}">Print/Download PDF</a>
+					<a class="wallet" href="#"><img src="/img/apple-wallet.svg" /></a>
 				</p>
-				${tickets.map(({ firstName, lastName, eventName, eventDate, qrCode }) => (`
-					<div class="flex-row ticket">
-						<dl>
-							<dt>Guest</dt>
-							<dd>${firstName} ${lastName}</dd>
-
-							<dt>Event</dt>
-							<dd>${eventName}</dd>
-
-							<dt>Date</dt>
-							<dd>${(new Date(eventDate)).toString()}</dd>
-						</dl>
-						<div class="img-wrap">
-							<img src="${qrCode}" />
+				<div class="tickets">
+					${tickets.map(({ qrCode }, i) => (`
+						<div class="ticket">
+							<div class="img-wrap">
+								<img src="${qrCode}" />
+							</div>
+							<p>${i + 1} of ${tickets.length}</p>
 						</div>
-					</div>
-				`)).join('\n')}
+					`)).join('\n')}
+				</div>
 			`;
 
 			document.querySelector('main').innerHTML = ticketsHTML;

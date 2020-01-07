@@ -39,7 +39,12 @@ module.exports = (env = {}, argv) => {
 			publicPath: '/',
 			contentBase: './dist',
 			historyApiFallback: {
-				disableDotRule: true
+				rewrites: [
+					{from: /^\/$/, to: '/index.html'},
+					{from: /^\/privacy-policy\/?$/, to: '/privacy-policy.html'},
+					{from: /^\/mytickets\/?$/, to: '/mytickets.html'},
+					{from: /^\/v\/?$/, to: '/video-lander.html'}
+				]
 			}
 		},
 		module: {
