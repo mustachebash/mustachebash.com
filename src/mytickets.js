@@ -1,7 +1,9 @@
 import 'normalize.css';
+import 'swiper/css/swiper.css';
 import 'mytickets.less';
 
 import url from 'url';
+import Swiper from 'swiper';
 
 const { t: transactionToken } = url.parse(location.href, true).query,
 	handleError = () => {
@@ -46,23 +48,39 @@ if(transactionToken) {
 				<h4>${dateString}</h4>
 				<p class="download-wallet">
 					<a class="download" href="${API_HOST}/v1/mytickets/pdf?t=${transactionToken}">Print/Download PDF</a>
-					<a class="wallet" href="#"><img src="/img/apple-wallet.svg" /></a>
+					<!-- <a class="wallet" href="#"><img src="/img/apple-wallet.svg" /></a> -->
 				</p>
-				<div class="tickets">
-					${tickets.map(({ qrCode }, i) => (`
-						<div class="ticket">
-							<div class="img-wrap">
-								<img src="${qrCode}" />
+				<div class="tickets swiper-container">
+					<div class="swiper-wrapper">
+						${tickets.map(({ qrCode }, i) => (`
+							<div class="ticket swiper-slide">
+								<div class="img-wrap">
+									<img src="${qrCode}" />
+								</div>
+								<p>${i + 1}/${tickets.length}</p>
 							</div>
-							<p>${i + 1} of ${tickets.length}</p>
-						</div>
-					`)).join('\n')}
+						`)).join('\n')}
+					</div>
+					<div class="swiper-pagination"></div>
+					<div class="swiper-button-next"></div>
+					<div class="swiper-button-prev"></div>
 				</div>
 			`;
 
 			document.querySelector('main').innerHTML = ticketsHTML;
 		})
-		.then()
+		.then(() => {
+			// eslint-disable-next-line no-unused-vars
+			const ticketSwiper = new Swiper(document.querySelector('.tickets'), {
+				pagination: {
+					el: '.swiper-pagination'
+				},
+				navigation: {
+					nextEl: '.swiper-button-next',
+					prevEl: '.swiper-button-prev'
+				}
+			});
+		})
 		.catch(handleError);
 } else {
 	// shouldn't land on this page without a transaction token

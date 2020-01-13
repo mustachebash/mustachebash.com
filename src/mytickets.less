@@ -146,12 +146,27 @@ h4 {
 
 .tickets {
 	position: relative;
-	padding-top: 1em;
+	padding: 1em 0 2em;
+	--swiper-navigation-color: @blue;
+	--swiper-pagination-color: @blue;
+
+	.swiper-pagination-fraction {
+		bottom: 0;
+		font-weight: 700;
+		font-size: 1.125em; /* 18/16 */
+		color: @white;
+	}
+
+	@media (max-width: @mobile) {
+		.swiper-button-next,
+		.swiper-button-prev {
+			display: none;
+		}
+	}
 }
 
 .ticket {
 	text-align: center;
-	margin-bottom: 3em;
 }
 
 footer {
