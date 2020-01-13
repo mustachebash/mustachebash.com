@@ -15,7 +15,7 @@
 
 	svg {
 		width: 100%;
-		max-width: 18.75em; /* 300/16 */
+		max-width: 9.375em; /* 150/16 */
 	}
 }
 
@@ -39,29 +39,49 @@
 }
 
 .cta {
+	margin-top: 2em;
 	text-align: center;
 }
 
 #tickets-cta {
 	display: inline-block;
-	background: @navy;
-	padding: 0.5em 2em;
+	background: #e2c126;
+	padding: 1em 3em;
 	text-transform: uppercase;
 	font-family: @proxima;
 	font-weight: 700;
 	font-size: 1.125em; /* 18/16 */
 	color: @white;
 	letter-spacing: 1px;
+	box-shadow: 0 0 12px -3px #666;
+}
+
+.description {
+	background-color: @caramel;
+	max-width: 76.875em; /* 1230/16 */
+	margin: 0 auto;
+	padding: 1em 2em;
+
+	h4 {
+		text-align: center;
+		color: @black;
+	}
+
+	p {
+		color: @off-white;
+	}
 }
 
 footer {
-	padding-top: 2em;
+	background-color: @caramel;
+	padding: 2em 0;
 	text-align: center;
 
 	#copyright {
-		color: @cream;
+		color: @black;
 		font-size: 14px;
 		text-align: center;
+		margin-bottom: 0;
 
 		@media (min-width: @mobile) {
 			font-size: 16px;

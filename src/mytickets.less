@@ -69,6 +69,11 @@ header {
 	background: @navy;
 	z-index: 9999;
 
+	@media (max-width: @mobile) {
+		padding-top: 1.0625em; /* 17/16 */
+		height: 4.8125em; /* 77/16 */
+	}
+
 	.logo {
 		flex: 0 3 7.375em;
 		width: 7.375em; /* 118/16 */
@@ -76,19 +81,19 @@ header {
 		@media (max-width: @mobile) {
 			position: relative;
 			top: 4px;
-			width: 6em; /* 96/16 */
+			width: 5.75em; /* 92/16 */
 			flex: 0 3 6em;
 		}
 	}
 }
 
 h1 {
-	color: @white;
+	color: @blue;
 }
 
 h2 {
 	margin: 0;
-	color: @blue;
+	color: @white;
 }
 
 h2 + h2 {
