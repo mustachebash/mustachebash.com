@@ -1,9 +1,11 @@
 import 'normalize.css';
+import 'swiper/css/swiper.css';
 import 'main.less';
 
 import url from 'url';
 import client from 'braintree-web/client';
 import hostedFields from 'braintree-web/hosted-fields';
+import Swiper from 'swiper';
 
 // Set some state here
 const cart = [],
@@ -72,61 +74,54 @@ document.querySelector('#menu-icon').addEventListener('click', e => {
 });
 
 // Gallery
-document.querySelector('#next-slide').addEventListener('click', () => {
-	const currentSlide = document.querySelector('#slide-container .active'),
-		nextSlide = currentSlide.nextElementSibling;
-
-	if(typeof window.gtag === 'function') {
-		window.gtag('event', 'click', {
-			event_category: 'gallery',
-			event_label: 'Next Slide'
-		});
+try {
+	const gallerySize = window.innerWidth > 768 ? 'Desktop' : 'Mobile',
+		slidesHtml = [];
+	for (let i = 1; i < 9; i++) {
+		slidesHtml.push(`
+			<div class="swiper-slide">
+				<img data-src="/img/gallery/Gallery_${gallerySize}_2019_${i}.jpg" class="swiper-lazy" />
+				<div class="swiper-lazy-preloader swiper-lazy-preloader-white"></div>
+			</div>
+		`);
 	}
 
-	if(nextSlide) {
-		nextSlide.style.display = 'block';
-		window.requestAnimationFrame(() => nextSlide.classList.add('active'));
-	} else {
-		const poster = document.querySelector('#slide-container .poster');
-		poster.style.display = 'block';
-		poster.classList.add('active');
-	}
+	document.querySelector('.swiper-wrapper').innerHTML = slidesHtml.join('\n');
 
-	currentSlide.classList.remove('active');
-	setTimeout(() => currentSlide.style.display = 'none', 600);
-});
-
-document.querySelector('#prev-slide').addEventListener('click', () => {
-	const currentSlide = document.querySelector('#slide-container .active'),
-		prevSlide = currentSlide.previousElementSibling;
-
-	if(typeof window.gtag === 'function') {
-		window.gtag('event', 'click', {
-			event_category: 'gallery',
-			event_label: 'Previous Slide'
-		});
-	}
-
-	if(prevSlide) {
-		prevSlide.style.display = 'block';
-		window.requestAnimationFrame(() => prevSlide.classList.add('active'));
-	} else {
-		const lastSlide = document.querySelector('#slide-container').lastElementChild;
-		lastSlide.style.display = 'block';
-		lastSlide.classList.add('active');
-	}
-
-	currentSlide.classList.remove('active');
-	setTimeout(() => currentSlide.style.display = 'none', 600);
-});
-
-const gallerySize = window.innerWidth > 768 ? 'Desktop' : 'Mobile';
-for (let i = 1; i < 9; i++) {
-	const img = new Image();
-
-	img.onload = () => document.querySelector(`.slide-${i}`).style.backgroundImage = `url('/img/gallery/Gallery_${gallerySize}_2019_${i}.jpg')`;
-
-	img.src = `/img/gallery/Gallery_${gallerySize}_2019_${i}.jpg`;
+	// eslint-disable-next-line no-unused-vars
+	const gallerySwiper = new Swiper(document.querySelector('#gallery'), {
+		lazy: {
+			loadPrevNext: true
+		},
+		loop: true,
+		pagination: {
+			el: '.swiper-pagination'
+		},
+		navigation: {
+			nextEl: '.swiper-button-next',
+			prevEl: '.swiper-button-prev'
+		},
+		on: {
+			slideNextTransitionEnd: () => {
+				if(typeof window.gtag === 'function') {
+					window.gtag('event', 'click', {
+						event_category: 'gallery',
+						event_label: 'Next Slide'
+					});
+				}
+			},
+			slidePrevTransitionEnd: () => {
+				if(typeof window.gtag === 'function') {
+					window.gtag('event', 'click', {
+						event_category: 'gallery',
+						event_label: 'Previous Slide'
+					});
+				}
+			}
+		}
+	});
+} catch(e) {
+	console.error('Gallery failed to load', e);
 }
 
 // Never allow this form to submit
