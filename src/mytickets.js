@@ -5,8 +5,34 @@ import 'mytickets.less';
 import url from 'url';
 import Swiper from 'swiper';
 
+function logError({ lineno, colno, message, filename, stack, name }) {
+	fetch(API_HOST + '/v1/errors', {
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json'
+		},
+		body: JSON.stringify({
+			lineno,
+			colno,
+			message,
+			filename,
+			name,
+			stack,
+			path: location.href
+		})
+	})
+		.catch(console.error);
+}
+
+// Global error listener
+window.addEventListener('error', e => {
+	const { lineno, colno, message, filename, error: { stack, name } = {} } = e;
+
+	logError({ lineno, colno, message, filename, stack, name });
+});
+
 const { t: transactionToken } = url.parse(location.href, true).query,
-	handleError = () => {
+	handleError = e => {
 		// If anything errors, we need to show a message in the tickets section
 		document.querySelector('main').innerHTML = `
 			<h5 style="padding-top: 5em; color: #602a34; text-align: center">
@@ -14,6 +40,8 @@ const { t: transactionToken } = url.parse(location.href, true).query,
 			</h5>
 			<p>If the problem persists, please contact support at <a href="mailto:contact@mustachebash.com">contact@mustachebash.com</a></p>
 		`;
+
+		logError(e);
 	};
 
 if(transactionToken) {
@@ -107,5 +135,5 @@ if(transactionToken) {
 		.catch(handleError);
 } else {
 	// shouldn't land on this page without a transaction token
-	handleError();
+	handleError(new Error('No transaction token'));
 }

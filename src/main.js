@@ -7,6 +7,32 @@ import client from 'braintree-web/client';
 import hostedFields from 'braintree-web/hosted-fields';
 import Swiper from 'swiper';
 
+function logError({ lineno, colno, message, filename, stack, name }) {
+	fetch(API_HOST + '/v1/errors', {
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json'
+		},
+		body: JSON.stringify({
+			lineno,
+			colno,
+			message,
+			filename,
+			name,
+			stack,
+			path: location.href
+		})
+	})
+		.catch(console.error);
+}
+
+// Global error listener
+window.addEventListener('error', e => {
+	const { lineno, colno, message, filename, error: { stack, name } = {} } = e;
+
+	logError({ lineno, colno, message, filename, stack, name });
+});
+
 // Set some state here
 const cart = [],
 	customer = {},
@@ -123,6 +149,7 @@ try {
 	});
 } catch(e) {
 	console.error('Gallery failed to load', e);
+	logError(e);
 }
 
 // Never allow this form to submit
@@ -598,10 +625,12 @@ if(!promoId) {
 			throw e;
 		})
 		.then(braintreeInit)
-		.catch(() => {
+		.catch(e => {
 			// If anything errors, we need to show a message in the tickets section
 			// eslint-disable-next-line max-len
 			document.querySelector('.tickets-flow').innerHTML = '<h5 style="padding-top: 5em; color: #602a34; text-align: center">Something seems to be broken,<br>please refresh the page and try again</h5>';
+
+			logError(e);
 		});
 } else {
 	// Fetch the initial settings and products
