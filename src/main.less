@@ -2,6 +2,16 @@
 
 body {
 	padding-top: 5.625em; /* 90/16 */
+
+	@media (max-width: @mobile) {
+		padding-top: 4.8125em; /* 77/16 */
+	}
+}
+
+@media (max-width: @mobile) {
+	p {
+		font-size: 0.875em; /* 14/16 */
+	}
 }
 
 @container-padding: 1.875em;
@@ -102,6 +112,11 @@ header {
 	background: @navy;
 	z-index: 9999;
 
+	@media (max-width: @mobile) {
+		padding-top: 1.0625em; /* 17/16 */
+		height: 4.8125em; /* 77/16 */
+	}
+
 	.logo {
 		flex: 0 3 7.375em;
 		width: 7.375em; /* 118/16 */
@@ -109,7 +124,7 @@ header {
 		@media (max-width: @mobile) {
 			position: relative;
 			top: 4px;
-			width: 6em; /* 96/16 */
+			width: 5.75em; /* 92/16 */
 			flex: 0 3 6em;
 		}
 	}
@@ -217,7 +232,7 @@ header {
 
 	@media (max-width: @mobile) {
 		height: auto;
-		padding-top: 3em;
+		padding-top: 1em;
 		padding-bottom: 3em;
 	}
 
@@ -297,7 +312,7 @@ header {
 		}
 
 		@media (max-width: @mobile) {
-			font-size: 1.125em; /* 18/16 */
+			font-size: 0.9375em; /* 15/16 */
 			margin-bottom: 0;
 			line-height: 1.5em;
 		}
@@ -338,6 +353,11 @@ header {
 			@media (max-width: @tablet) {
 				margin-top: 0;
 				text-align: center;
+			}
+
+			@media (max-width: @mobile) {
+				font-size: 0.875em; /* 14/16 */
+				margin-bottom: 2.125rem;
 			}
 		}
 	}
@@ -405,6 +425,17 @@ header {
 		flex: 1 1 50%;
 		margin-bottom: 3em;
 
+		@media (max-width: @mobile) {
+			h4 {
+				font-size: 1.5625em; /* 25/16 */
+				margin: 0.7i5rem 0;
+			}
+
+			p {
+				margin-bottom: 1rem;
+			}
+		}
+
 		img {
 			width: 100%;
 		}
@@ -430,7 +461,7 @@ header {
  	@media (max-width: @mobile) {
  		padding: 2em 0;
 		background-image: url('/img/set-times-mobile.svg');
-	 	background-position: right;
+	 	background-position: right 1em center;
 		background-size: auto 75%;
  	}
 
@@ -455,6 +486,10 @@ header {
 
 	h4 {
 		color: @black;
+
+		@media (max-width: @mobile) {
+			font-size: 1.4375em; /* 23/16 */
+		}
 	}
 
  	.flex-row {
@@ -475,11 +510,19 @@ header {
  		font-family: @brandon;
  		color: @caramel;
  		line-height: 1em;
+
+		@media (max-width: @mobile) {
+			font-size: 1.0625em; /* 17/16 */
+		}
  	}
 
  	dd {
  		font-size: 1em; /* 16/16 */
  		margin-bottom: 1em;
+
+		@media (max-width: @mobile) {
+			font-size: 0.75em; /* 12/16 */
+		}
  	}
 
  	.outside-stage,
@@ -904,9 +947,12 @@ header {
 
 	.progress {
 		margin: 4em auto 3.5em;
-		margin-top: 4em;
 		height: 0;
 		width: 80%;
+
+		@media (max-width: @mobile) {
+			margin: 3em auto 2em;
+		}
 
 		.leg {
 			width: 50%;
@@ -987,6 +1033,10 @@ header {
 		margin-bottom: 2em;
 		-webkit-user-select: none;
 		user-select: none;
+
+		@media (max-width: @mobile) {
+			padding-top: 3em;
+		}
 
 		h6 {
 			flex: 3 0;

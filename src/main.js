@@ -36,8 +36,9 @@ document.querySelectorAll('nav, #hero-cta, #afterparty-cta').forEach(el => el.ad
 
 		document.querySelector('#menu-icon').classList.remove('open');
 
-		// Offset by 75px for the header
-		const scrollPos = document.querySelector(e.target.hash).offsetTop - 90,
+		// Offset by 90/77px for the header
+		const offset = window.innerWidth > 768 ? 90 : 77,
+			scrollPos = document.querySelector(e.target.hash).offsetTop - offset,
 			scrollPerFrame =  (scrollPos - window.scrollY)/(60 * (300/1000));
 
 		const scrollAnimation = () => {
