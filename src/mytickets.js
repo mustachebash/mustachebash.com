@@ -33,12 +33,23 @@ if(transactionToken) {
 			tickets.sort((a, b) => a.lastName > b.lastName ? 1 : -1);
 
 			const { confirmationId, firstName, lastName, eventName, eventDate } = tickets[0],
-				dateString = (new Date(eventDate)).toLocaleDateString('en-US', {
+				eventDateObj = new Date(eventDate);
+
+			// Gets a UTC time, hardcode the PDT offset
+			eventDateObj.setUTCHours(eventDateObj.getUTCHours() - 8);
+
+			const dateString = eventDateObj.toLocaleDateString('en-US', {
 					weekday: 'long',
 					year: 'numeric',
 					month: 'long',
-					day: 'numeric'
-				});
+					day: 'numeric',
+					timeZone: 'UTC'
+				}),
+				eventHour = eventDateObj.getUTCHours() > 12 ? eventDateObj.getUTCHours() - 12 : eventDateObj.getUTCHours(),
+				eventMinutes = `${eventDateObj.getUTCMinutes() < 10 ? `0${eventDateObj.getUTCMinutes()}` : eventDateObj.getUTCMinutes()}`,
+				eventPeriod = eventDateObj.getUTCHours() >= 12 ? 'pm' : 'am',
+				// eslint-disable-next-line max-len
+				timeString = `${eventHour}:${eventMinutes}${eventPeriod}`;
 
 			const ticketsHTML = `
 				<h1>Your tickets</h1>
@@ -46,9 +57,14 @@ if(transactionToken) {
 				<h2>Purchased by ${firstName} ${lastName}</h2>
 				<h4>${eventName}</h4>
 				<h4>${dateString}</h4>
+				<h4>Doors at ${timeString}</h4>
 				<p class="download-wallet">
 					<a class="download" href="${API_HOST}/v1/mytickets/pdf?t=${transactionToken}">Print/Download PDF</a>
 					<!-- <a class="wallet" href="#"><img src="/img/apple-wallet.svg" /></a> -->
+				</p>
+				<p class="disclaimer">
+					This is event is 21+ only. All guests must have a valid ID and ticket at the door. Do not share your tickets with
+					anyone you do not trust. If you have any additional questions, please <a href="mailto:contact@mustachebash.com">email us</a>.
 				</p>
 				<div class="tickets swiper-container">
 					<div class="swiper-wrapper">
@@ -70,16 +86,23 @@ if(transactionToken) {
 			document.querySelector('main').innerHTML = ticketsHTML;
 		})
 		.then(() => {
-			// eslint-disable-next-line no-unused-vars
-			const ticketSwiper = new Swiper(document.querySelector('.tickets'), {
-				pagination: {
-					el: '.swiper-pagination'
-				},
-				navigation: {
-					nextEl: '.swiper-button-next',
-					prevEl: '.swiper-button-prev'
-				}
-			});
+			try {
+				// eslint-disable-next-line no-unused-vars
+				const ticketSwiper = new Swiper(document.querySelector('.tickets'), {
+					pagination: {
+						el: '.swiper-pagination'
+					},
+					navigation: {
+						nextEl: '.swiper-button-next',
+						prevEl: '.swiper-button-prev'
+					}
+				});
+			} catch(e) {
+				console.error('Swiper intitionalization failed', e);
+
+				document.querySelector('.tickets').classList.remove('swiper-container');
+				document.querySelector('.tickets .swiper-wrapper').classList.remove('swiper-wrapper');
+			}
 		})
 		.catch(handleError);
 } else {
