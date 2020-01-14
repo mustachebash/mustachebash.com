@@ -229,7 +229,7 @@ function purchaseFlowInit(hostedFieldsInstance) {
 			const { name, description, price, status } = products[id],
 				classes = [];
 
-			if(status !== 'active') classes.push('disabled');
+			if(status !== 'active' || !pageSettings.currentTicket) classes.push('disabled');
 			if(status === 'archived') classes.push('sold-out');
 
 			ticketsListHTML.push(`<h6 class="${classes.join(' ')}" data-product-id="${id}">${name} $${price}<sup>${description}</sup></h6>`);
@@ -238,8 +238,17 @@ function purchaseFlowInit(hostedFieldsInstance) {
 		ticketsList.innerHTML = ticketsListHTML.join('\n');
 
 		// Preselect a ticket
-		if(pageSettings.currentTicket) {
+		if(pageSettings.currentTicket && products[pageSettings.currentTicket] && products[pageSettings.currentTicket].status === 'active') {
 			addItemToCart(pageSettings.currentTicket);
+		} else {
+			document.querySelector('.tickets-flow').innerHTML = `
+				<div class="sales-off">
+					<h5>
+						Tickets are currently not available for&nbsp;sale - check back soon!
+					</h5>
+				</div>`;
+
+			return;
 		}
 
 		// Ticket Flow with a precarious dependency on DOM order
@@ -287,7 +296,7 @@ function purchaseFlowInit(hostedFieldsInstance) {
 		const steps = document.querySelector('.steps'),
 			promoInfo = document.createElement('h5');
 
-		promoInfo.innerHTML = `Promo Ticket: ${promo.product.name} - $${promo.price}<br>${promo.product.description}`;
+		promoInfo.innerHTML = `Promo Ticket: ${promo.product.name} - $${promo.price}`;
 
 		steps.parentNode.insertBefore(promoInfo, steps);
 
@@ -430,7 +439,7 @@ function purchaseFlowInit(hostedFieldsInstance) {
 			}
 		}
 
-		hostedFieldsInstance.tokenize()
+		hostedFieldsInstance.tokenize({cardholderName: `${customer.firstName} ${customer.lastName}`})
 			.then(({ nonce }) => fetch(API_HOST + '/v1/transactions', {
 				method: 'POST',
 				headers: {
@@ -460,7 +469,7 @@ function purchaseFlowInit(hostedFieldsInstance) {
 					document.querySelectorAll('.step')[2].classList.remove('active');
 					document.querySelectorAll('.step')[3].classList.add('active');
 
-					document.querySelector('.confirmation-number span').innerText = confirmationId;
+					document.querySelector('.confirmation-number span').innerText = `#${confirmationId}`;
 					document.querySelector('.tickets-link a').href = `/mytickets?t=${token}`;
 
 					const tick = document.querySelectorAll('.ticks > div')[2];
@@ -470,20 +479,27 @@ function purchaseFlowInit(hostedFieldsInstance) {
 
 				if(typeof window.gtag === 'function') {
 					try {
-						const total = cart.reduce((tot, cur) => tot + (cur.quantity * products[cur.productId].price), 0);
+						const total = cart.reduce((tot, cur) => tot + (cur.quantity * products[cur.productId].price), 0),
+							transactionId = headers.get('Location').split('/').pop(),
+							eventData = {
+								transaction_id: transactionId,
+								value: total,
+								currency: 'USD',
+								checkout_step: 4,
+								items: cart.map(i => ({
+									id: i.productId,
+									quantity: i.quantity,
+									name: products[i.productId].name,
+									category: 'Tickets',
+									price: String(products[i.productId].price)
+								}))
+							};
 
-						window.gtag('event', 'purchase', {
-							transaction_id: headers.get('Location').split('/').pop(),
-							value: total,
-							currency: 'USD',
-							checkout_step: 4,
-							items: cart.map(i => ({
-								id: i.productId,
-								quantity: i.quantity,
-								name: products[i.productId].name,
-								category: 'Tickets',
-								price: String(products[i.productId].price)
-							}))
+						window.gtag('event', 'purchase', eventData);
+
+						window.gtag('event', 'conversion', {
+							...eventData,
+							send_to: 'AW-704569520/g7y6CKfiiboBELDB-88C'
 						});
 					} catch(e) {
 						// Don't let gtag break the site

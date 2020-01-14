@@ -87,7 +87,7 @@ if(transactionToken) {
 				<h4>${dateString}</h4>
 				<h4>Doors at ${timeString}</h4>
 				<p class="download-wallet">
-					<a class="download" href="${API_HOST}/v1/mytickets/pdf?t=${transactionToken}">Print/Download PDF</a>
+					<a class="download" href="${API_HOST}/v1/mytickets/pdf?t=${transactionToken}">Download PDF</a>
 					<!-- <a class="wallet" href="#"><img src="/img/apple-wallet.svg" /></a> -->
 				</p>
 				<p class="disclaimer">
