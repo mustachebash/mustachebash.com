@@ -453,14 +453,14 @@ header {
 }
 
 #set-times {
- 	background: url('/img/set-times.svg') @off-white no-repeat;
+ 	background: url('/img/set-times-2020.svg') @off-white no-repeat;
  	background-position: center;
  	background-size: 1200px auto;
  	padding: 6.25em 0; /* 100/16 */
 
  	@media (max-width: @mobile) {
  		padding: 2em 0;
-		background-image: url('/img/set-times-mobile.svg');
+		background-image: url('/img/set-times-mobile-2020.svg');
 	 	background-position: right 1em center;
 		background-size: auto 75%;
  	}
@@ -825,6 +825,22 @@ header {
 		}
 	}
 
+	.sales-off {
+
+		@media (min-width: @tablet + 1) {
+			padding-top: 13em;
+		}
+
+		h5 {
+			color: @navy;
+			text-align: center;
+
+			@media (min-width: @tablet + 1) {
+				padding: 0 3em;
+			}
+		}
+	}
+
 	.tickets-description,
 	.tickets-flow,
 	.prices,
@@ -845,6 +861,7 @@ header {
 			margin-bottom: .25em;
 			text-transform: uppercase;
 			color: @navy;
+			white-space: nowrap;
 
 			sup {
 				position: absolute;
@@ -864,6 +881,20 @@ header {
 
 			&.sold-out {
 				text-decoration: line-through;
+
+				&:after {
+					content: 'Sold out!';
+					display: inline-block;
+					position: relative;
+					white-space: nowrap;
+					text-decoration: none;
+					color: @orange;
+					margin: 0;
+					font-size: 0.625rem; /* 10/16 */
+					left: -2em;
+					top: -5px;
+					transform: rotate(25deg);
+				}
 			}
 		}
 
@@ -1259,6 +1290,7 @@ header {
 		background: @sky;
 		padding: 1em;
 		border: 2px dashed @blue;
+		margin-bottom: 2em;
 
 		h6 {
 			font-family: @brandon;
@@ -1267,6 +1299,10 @@ header {
 			margin: 0 0 0.75em;
 			text-transform: uppercase;
 			color: @white;
+
+			@media (max-width: @mobile) {
+				line-height: 1.125em;
+			}
 		}
 
 		p {
@@ -1284,6 +1320,10 @@ header {
 			&.tickets-link {
 				margin: 2em 0;
 
+				@media (max-width: @mobile) {
+					text-align: center;
+				}
+
 				a {
 					background-color: @navy;
 					text-transform: uppercase;
@@ -1291,6 +1331,14 @@ header {
 					color: @white;
 					padding: .5em 2em;
 				}
+			}
+
+			&.confirmation-footer {
+				margin-top: 3em;
+				color: fade(@white, 70%);
+				font-size: 12px;
+				text-align: center;
+				line-height: 1.5em;
 			}
 		}
 	}
