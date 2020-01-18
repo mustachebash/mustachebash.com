@@ -26,6 +26,7 @@
 		"braintree-web": "^3.56.0",
 		"clean-webpack-plugin": "^3.0.0",
 		"copy-webpack-plugin": "^5.1.1",
+		"core-js": "^3.6.4",
 		"css-loader": "^3.4.0",
 		"eslint": "^6.8.0",
 		"handlebars": "^4.5.3",

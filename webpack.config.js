@@ -64,7 +64,7 @@ module.exports = (env = {}, argv) => {
 						{
 							loader: 'babel-loader',
 							options: {
-								presets: [['@babel/env', {modules: false, useBuiltIns: 'usage'}]],
+								presets: [['@babel/env', {modules: false, useBuiltIns: 'usage', corejs: 3}]],
 								plugins: [
 									'@babel/proposal-object-rest-spread'
 								]
@@ -87,8 +87,8 @@ module.exports = (env = {}, argv) => {
 			new HtmlWebpackPlugin({
 				inject: 'head',
 				chunks: ['main'],
-				filename: devMode ? 'index.html' : '../templates/index.hbs',
-				template: 'src/index.hbs'
+				filename: 'index.html',
+				template: 'src/index.html'
 			}),
 			new HtmlWebpackPlugin({
 				inject: 'head',
