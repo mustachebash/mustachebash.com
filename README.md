@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/mustachebash/mustachebash.com.svg?branch=master)](https://travis-ci.org/mustachebash/mustachebash.com)
+![](https://github.com/mustachebash/mustachebash.com/workflows/Continuous%20Integration/badge.svg) ![](https://github.com/mustachebash/mustachebash.com/workflows/Deployment/badge.svg)
 
 # mustachebash.com Public Site Source
 
