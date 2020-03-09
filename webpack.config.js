@@ -1,4 +1,5 @@
-const path = require('path'),
+const fs = require('fs'),
+	path = require('path'),
 	webpack = require('webpack'),
 	{ CleanWebpackPlugin } = require('clean-webpack-plugin'),
 	TerserPlugin = require('terser-webpack-plugin'),
@@ -37,6 +38,13 @@ module.exports = (env = {}, argv) => {
 		},
 		devServer: {
 			publicPath: '/',
+			https: env.https
+				? {
+					key: fs.readFileSync('../server.key'),
+					cert: fs.readFileSync('../server.crt'),
+					ca: fs.readFileSync('../rootCA.pem')
+				}
+				: false,
 			contentBase: './dist',
 			historyApiFallback: {
 				rewrites: [
@@ -137,7 +145,7 @@ module.exports = (env = {}, argv) => {
 				test: /\.(jpe?g|png|gif|svg)$/i
 			}),
 			new webpack.DefinePlugin({
-				API_HOST: JSON.stringify(devMode ? 'http://localhost:5000' : 'https://api.mustachebash.com'),
+				API_HOST: JSON.stringify(devMode ? 'https://localhost:5000' : 'https://api.mustachebash.com'),
 				BRAINTREE_TOKEN: JSON.stringify(devMode ? 'sandbox_qsrxjzth_ht835xhgsgwsz2hn' : 'production_z4qm4zqx_t7bcxj3vjz92bxr2')
 			})
 		]

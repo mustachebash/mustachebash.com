@@ -1521,8 +1521,12 @@ header {
 		align-items: center;
 	}
 
-	.partner.bon-viv {
-		max-width: 9.375em; /* 150/16 */
+	.partner {
+		margin: 0 1em;
+
+		&.bon-viv {
+			max-width: 9.375em; /* 150/16 */
+		}
 	}
 
 	@media (max-width: @mobile) {
@@ -1535,6 +1539,7 @@ header {
 
 		.partner {
 			max-width: 7.5em; /* 120/16 */
+			margin: 0;
 			margin-bottom: 2em;
 		}
 	}

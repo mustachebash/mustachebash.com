@@ -1,6 +1,7 @@
 dist/
 templates/
 node_modules/
+stats.json
 
 # OS generated files #
 ######################
