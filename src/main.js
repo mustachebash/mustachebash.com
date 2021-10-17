@@ -1,5 +1,5 @@
 import 'normalize.css';
-import 'swiper/css/swiper.css';
+import 'swiper/less';
 import 'main.less';
 
 import url from 'url';
@@ -107,7 +107,7 @@ try {
 	for (let i = 1; i < 9; i++) {
 		slidesHtml.push(`
 			<div class="swiper-slide">
-				<img data-src="/img/gallery/Gallery_${gallerySize}_2019_${i}.jpg" class="swiper-lazy" />
+				<img data-src="./img/gallery/Gallery_${gallerySize}_2019_${i}.jpg" class="swiper-lazy" />
 				<div class="swiper-lazy-preloader swiper-lazy-preloader-white"></div>
 			</div>
 		`);

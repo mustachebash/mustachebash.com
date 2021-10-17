@@ -4,12 +4,10 @@ const fs = require('fs'),
 	{ CleanWebpackPlugin } = require('clean-webpack-plugin'),
 	TerserPlugin = require('terser-webpack-plugin'),
 	MiniCssExtractPlugin = require('mini-css-extract-plugin'),
-	OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin'),
+	CssMinimizerPlugin = require('css-minimizer-webpack-plugin'),
 	HtmlWebpackPlugin = require('html-webpack-plugin'),
-	ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin'),
 	HTMLInlineCSSWebpackPlugin = require('html-inline-css-webpack-plugin').default,
-	CopyPlugin = require('copy-webpack-plugin'),
-	ImageminPlugin = require('imagemin-webpack-plugin').default;
+	ImageMinimizerPlugin = require('image-minimizer-webpack-plugin');
 
 module.exports = (env = {}, argv) => {
 	const devMode = argv.mode !== 'production',
@@ -33,11 +31,11 @@ module.exports = (env = {}, argv) => {
 		},
 		output: {
 			path: path.resolve(__dirname, 'dist'),
-			filename: '[name].[hash].js',
-			publicPath: '/'
+			filename: '[name].[contenthash].js',
+			publicPath: '/',
+			assetModuleFilename: 'img/[name].[hash][ext][query]'
 		},
 		devServer: {
-			publicPath: '/',
 			https: env.https
 				? {
 					key: fs.readFileSync('../server.key'),
@@ -45,7 +43,6 @@ module.exports = (env = {}, argv) => {
 					ca: fs.readFileSync('../rootCA.pem')
 				}
 				: false,
-			contentBase: './dist',
 			historyApiFallback: {
 				rewrites: [
 					{from: /^\/$/, to: '/index.html'},
@@ -67,27 +64,38 @@ module.exports = (env = {}, argv) => {
 				},
 				{
 					test: /\.js$/,
-					exclude: [/node_modules\/(?!(dom7|swiper)\/).*/],
+					exclude: [/node_modules/],
 					use: [
 						{
 							loader: 'babel-loader',
 							options: {
-								presets: [['@babel/env', {modules: false, useBuiltIns: 'usage', corejs: 3}]],
-								plugins: [
-									'@babel/proposal-object-rest-spread'
-								]
+								presets: [['@babel/env', {useBuiltIns: 'usage', corejs: 3}]]
 							}
 						}
 					]
+				},
+				{
+					test: /\.(png|jpg|svg)$/,
+					include: [/img/],
+					type: 'asset/resource'
+				},
+				{
+					test: /\.html$/,
+					use: [{
+						loader: 'html-loader',
+						options: {
+							minimize: false
+						}
+					}]
 				}
 			]
 		},
 		optimization: {
 			minimizer: [
-				new OptimizeCssAssetsPlugin({
-					cssProcessorOptions: {discardComments: {removeAll: true}}
+				new CssMinimizerPlugin({
+					minimizerOptions: { preset: ['default', { discardComments: { removeAll: true } }] }
 				}),
-				new TerserPlugin()
+				new TerserPlugin({extractComments: false, terserOptions: {format: {comments: false}}})
 			]
 		},
 		plugins: [
@@ -128,9 +136,6 @@ module.exports = (env = {}, argv) => {
 				filename: 'presell-lander.html',
 				template: 'src/presell-lander.html'
 			}),
-			new ScriptExtHtmlWebpackPlugin({
-				defaultAttribute: 'defer'
-			}),
 			new MiniCssExtractPlugin({
 				filename: '[name].[contenthash].css'
 			}),
@@ -139,10 +144,16 @@ module.exports = (env = {}, argv) => {
 					return /privacy|lander/.test(filename);
 				}
 			}),
-			new CopyPlugin([{from: 'src/img', to: 'img'}]),
-			new ImageminPlugin({
-				disable: devMode,
-				test: /\.(jpe?g|png|gif|svg)$/i
+			// new CopyPlugin([{from: 'src/img', to: 'img'}]),
+			new ImageMinimizerPlugin({
+				minimizerOptions: {
+					plugins: [
+						['jpegtran', { progressive: false }],
+						['optipng', { optimizationLevel: 3 }],
+						['svgo', {}]
+					]
+				},
+				test: devMode ? 'DISABLED_ON_DEV' : /\.(jpe?g|png|gif|svg)$/i
 			}),
 			new webpack.DefinePlugin({
 				API_HOST: JSON.stringify(devMode ? 'https://localhost:5000' : 'https://api.mustachebash.com'),
