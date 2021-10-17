@@ -1,5 +1,5 @@
 import 'normalize.css';
-import 'swiper/css/swiper.css';
+import 'swiper/less';
 import 'mytickets.less';
 
 import url from 'url';
@@ -88,7 +88,7 @@ if(transactionToken) {
 				<h4>Doors at ${timeString}</h4>
 				<p class="download-wallet">
 					<a class="download" href="${API_HOST}/v1/mytickets/pdf?t=${transactionToken}">Download PDF</a>
-					<!-- <a class="wallet" href="#"><img src="/img/apple-wallet.svg" /></a> -->
+					<!-- <a class="wallet" href="#"><img src="./img/apple-wallet.svg" /></a> -->
 				</p>
 				<p class="disclaimer">
 					This is event is 21+ only. All guests must have a valid ID and ticket at the door. Do not share your tickets with

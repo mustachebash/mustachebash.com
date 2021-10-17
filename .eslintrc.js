@@ -1,12 +1,6 @@
 module.exports = {
-	parser: 'babel-eslint',
 	parserOptions: {
-		ecmaVersion: 8,
-		sourceType: 'module',
-		ecmaFeatures: {
-			impliedStrict: true,
-			experimentalObjectRestSpread: true
-		}
+		sourceType: 'module'
 	},
 	globals: {
 		API_HOST: false,
@@ -19,7 +13,7 @@ module.exports = {
 	env: {
 		browser: true,
 		node: true,
-		es6: true
+		es2021: true
 	},
 	rules: {
 		'comma-dangle': 2,
@@ -39,6 +33,6 @@ module.exports = {
 		semi: [ 2, 'always' ],
 		'space-before-function-paren': [ 2, { anonymous: 'always', named: 'never' } ],
 		'space-infix-ops': 0,
-		yoda: 2,
+		yoda: 2
 	}
 };
