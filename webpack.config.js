@@ -36,6 +36,7 @@ module.exports = (env = {}, argv) => {
 			assetModuleFilename: 'img/[name].[hash][ext][query]'
 		},
 		devServer: {
+			watchFiles: ['src/*.html'],
 			https: env.https
 				? {
 					key: fs.readFileSync('../server.key'),
