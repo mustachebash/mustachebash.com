@@ -106,7 +106,7 @@ document.querySelector('#menu-icon').addEventListener('click', e => {
 function importGallery(r) {
 	return r.keys().reduce((obj, cur) => (obj[cur.replace('./img/gallery/', '')] = r(cur), obj), {});
 }
-const galleryImages = importGallery(require.context('./img/gallery', false, /\.jpg$/));
+const galleryImages = importGallery(require.context('./img/gallery', false, /^\..+\.jpg$/));
 try {
 	const gallerySize = window.innerWidth > 768 ? 'Desktop' : 'Mobile',
 		slidesHtml = Object.keys(galleryImages).filter(key => (new RegExp(gallerySize)).test(key)).map(image => {
@@ -234,10 +234,6 @@ document.forms.newsletter.addEventListener('submit', e => {
 					document.querySelector('input[name="newsletter-email"]').value = '';
 					document.querySelector('input[name="newsletter-name"]').value = '';
 					document.querySelector('#newsletter-success').style.visibility = 'visible';
-
-					const tick = document.querySelectorAll('.ticks > div')[2];
-					tick.classList.remove('active');
-					tick.classList.add('complete');
 				});
 			})
 			.catch(e => {
