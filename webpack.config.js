@@ -19,6 +19,15 @@ module.exports = (env = {}, argv) => {
 			videoLander: './src/video-lander.js',
 			lineupLander: './src/lineup-lander.js',
 			presellLander: './src/presell-lander.js'
+		},
+		htmlMinifyOptions = {
+			collapseWhitespace: true,
+			keepClosingSlash: true,
+			removeComments: true,
+			removeRedundantAttributes: false,
+			removeScriptTypeAttributes: true,
+			removeStyleLinkTypeAttributes: true,
+			useShortDoctype: true
 		};
 
 	if(debugMode) entry.main.unshift('react-devtools');
@@ -105,37 +114,43 @@ module.exports = (env = {}, argv) => {
 				inject: 'head',
 				chunks: ['main'],
 				filename: 'index.html',
-				template: 'src/index.html'
+				template: 'src/index.html',
+				minify: htmlMinifyOptions
 			}),
 			new HtmlWebpackPlugin({
 				inject: 'head',
 				chunks: ['mytickets'],
 				filename: 'mytickets.html',
-				template: 'src/mytickets.html'
+				template: 'src/mytickets.html',
+				minify: htmlMinifyOptions
 			}),
 			new HtmlWebpackPlugin({
 				inject: false,
 				chunks: ['privacyPolicy'],
 				filename: 'privacy-policy.html',
-				template: 'src/privacy-policy.html'
+				template: 'src/privacy-policy.html',
+				minify: htmlMinifyOptions
 			}),
 			new HtmlWebpackPlugin({
 				inject: 'head',
 				chunks: ['videoLander'],
 				filename: 'video-lander.html',
-				template: 'src/video-lander.html'
+				template: 'src/video-lander.html',
+				minify: htmlMinifyOptions
 			}),
 			new HtmlWebpackPlugin({
 				inject: 'head',
 				chunks: ['lineupLander'],
 				filename: 'lineup-lander.html',
-				template: 'src/lineup-lander.html'
+				template: 'src/lineup-lander.html',
+				minify: htmlMinifyOptions
 			}),
 			new HtmlWebpackPlugin({
 				inject: 'head',
 				chunks: ['presellLander'],
 				filename: 'presell-lander.html',
-				template: 'src/presell-lander.html'
+				template: 'src/presell-lander.html',
+				minify: htmlMinifyOptions
 			}),
 			new MiniCssExtractPlugin({
 				filename: '[name].[contenthash].css'

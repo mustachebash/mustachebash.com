@@ -1,11 +1,13 @@
 import 'normalize.css';
 import 'swiper/less';
+import 'swiper/less/navigation';
+import 'swiper/less/pagination';
 import 'main.less';
 
 import url from 'url';
 import client from 'braintree-web/client';
 import hostedFields from 'braintree-web/hosted-fields';
-import Swiper from 'swiper';
+import Swiper, { Navigation, Pagination, Lazy } from 'swiper';
 
 function logError({ lineno, colno, message, filename, stack, name }) {
 	fetch(API_HOST + '/v1/errors', {
@@ -101,26 +103,30 @@ document.querySelector('#menu-icon').addEventListener('click', e => {
 });
 
 // Gallery
+function importGallery(r) {
+	return r.keys().reduce((obj, cur) => (obj[cur.replace('./img/gallery/', '')] = r(cur), obj), {});
+}
+const galleryImages = importGallery(require.context('./img/gallery', false, /\.jpg$/));
 try {
 	const gallerySize = window.innerWidth > 768 ? 'Desktop' : 'Mobile',
-		slidesHtml = [];
-	for (let i = 1; i < 15; i++) {
-		// TODO: these are manually managed currently - find a better way to host/manage these
-		slidesHtml.push(`
-			<div class="swiper-slide">
-				<img data-src="./img/gallery/Gallery_${gallerySize}_2022_${i}.jpg" class="swiper-lazy" />
-				<div class="swiper-lazy-preloader swiper-lazy-preloader-white"></div>
-			</div>
-		`);
-	}
+		slidesHtml = Object.keys(galleryImages).filter(key => (new RegExp(gallerySize)).test(key)).map(image => {
+			return `
+				<div class="swiper-slide">
+					<img data-src="${galleryImages[image]}" class="swiper-lazy" />
+					<div class="swiper-lazy-preloader swiper-lazy-preloader-white"></div>
+				</div>
+			`;
+		});
 
 	document.querySelector('.swiper-wrapper').innerHTML = slidesHtml.join('\n');
 
 	// eslint-disable-next-line no-unused-vars
 	const gallerySwiper = new Swiper(document.querySelector('#gallery'), {
+		preloadImages: false,
 		lazy: {
 			loadPrevNext: true
 		},
+		modules: [Navigation, Pagination, Lazy],
 		loop: true,
 		pagination: {
 			el: '.swiper-pagination'
