@@ -105,7 +105,19 @@ module.exports = (env = {}, argv) => {
 				new CssMinimizerPlugin({
 					minimizerOptions: { preset: ['default', { discardComments: { removeAll: true } }] }
 				}),
-				new TerserPlugin({extractComments: false, terserOptions: {format: {comments: false}}})
+				new TerserPlugin({extractComments: false, terserOptions: {format: {comments: false}}}),
+				new ImageMinimizerPlugin({
+					minimizer: {
+						implementation: ImageMinimizerPlugin.imageminMinify,
+						options: {
+							plugins: [
+								['jpegtran', { progressive: false }],
+								['optipng', { optimizationLevel: 3 }],
+								['svgo', {}]
+							]
+						}
+					}
+				})
 			]
 		},
 		plugins: [
@@ -159,17 +171,6 @@ module.exports = (env = {}, argv) => {
 				filter(filename) {
 					return /privacy|lander/.test(filename);
 				}
-			}),
-			// new CopyPlugin([{from: 'src/img', to: 'img'}]),
-			new ImageMinimizerPlugin({
-				minimizerOptions: {
-					plugins: [
-						['jpegtran', { progressive: false }],
-						['optipng', { optimizationLevel: 3 }],
-						['svgo', {}]
-					]
-				},
-				test: devMode ? 'DISABLED_ON_DEV' : /\.(jpe?g|png|gif|svg)$/i
 			}),
 			new webpack.DefinePlugin({
 				API_HOST: JSON.stringify(devMode ? 'https://localhost:5000' : 'https://api.mustachebash.com'),
