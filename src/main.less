@@ -1371,6 +1371,51 @@ header {
 	}
 }
 
+#newsletter {
+	padding-top: 2em;
+	background: @gray;
+
+	h3 {
+		color: @navy;
+		text-align: center;
+		line-height: 1.1em;
+	}
+
+	h4 {
+		color: @blue;
+		text-align: center;
+	}
+
+	#newsletter-success {
+		max-width: 48.125rem; /* 770/16 */
+		margin: 1em auto 0;
+		visibility: hidden;
+		text-align: center;
+
+		@media (min-width: @mobile + 1) {
+			margin: 0 auto -1.25em;
+		}
+	}
+
+	form[name="newsletter"] {
+		max-width: 48.125em; /* 770/16 */
+		margin: 0 auto;
+
+		fieldset {
+			flex: 1 0 auto;
+			margin: 0 0.3125em; /* 5/16 */
+
+			&[name="newsletter-submit"] {
+				margin-top: .85em;
+
+				button {
+					width: 100%;
+				}
+			}
+		}
+	}
+}
+
 #faq {
 	padding: 6.25em 0; /* 100/16 */
 	background-color: @navy;
@@ -1614,7 +1659,7 @@ footer {
 		}
 	}
 
-	form[name="newsletter"] {
+	form[name="newsletter-slider"] {
 		max-width: 48.125em; /* 770/16 */
 		margin: 0 auto;
 
@@ -1622,7 +1667,7 @@ footer {
 			flex: 1 0 auto;
 			margin: 0 0.3125em; /* 5/16 */
 
-			&[name="newsletter-submit"] {
+			&[name="newsletter-slider-submit"] {
 				margin-top: .85em;
 
 				button {
