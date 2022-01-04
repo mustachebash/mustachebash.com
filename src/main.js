@@ -36,14 +36,15 @@ window.addEventListener('error', e => {
 });
 
 // Set some state here
-const cart = [],
-	customer = {},
+const customer = {},
 	products = {},
+	events = {},
 	pageSettings = {
 		serviceFee: 0
 	};
 
-let promo;
+let cart = [],
+	promo;
 
 // Animate Nav links - quick n dirty vanilla style
 // TODO: Make this less janky
@@ -269,70 +270,67 @@ function updateSubtotals() {
 }
 
 const quantityControls = document.querySelector('.quantity-controls');
-function addItemToCart(id) {
-	const cartItemIndex = cart.findIndex(i => i.productId === id);
-
-	if(~cartItemIndex) {
-		// 4 ticket max
-		if(cart[cartItemIndex].quantity >= 4) return;
-
-		cart[cartItemIndex].quantity++;
-
-		if(cart[cartItemIndex].quantity === 4) quantityControls.querySelector('.plus').classList.add('disabled');
-		if(cart[cartItemIndex].quantity > 1) quantityControls.querySelector('.minus').classList.remove('disabled');
-
-		quantityControls.querySelector('.quantity').innerText = cart[cartItemIndex].quantity;
-	} else {
-		cart.push({
-			productId: id,
-			quantity: 1
-		});
-
-		quantityControls.querySelector('.quantity').innerText = 1;
-	}
-
-	updateSubtotals();
-}
-
-function removeItemFromCart(id) {
-	const cartItemIndex = cart.findIndex(i => i.productId === id);
-
-	if(~cartItemIndex) {
-		cart[cartItemIndex].quantity--;
-
-		quantityControls.querySelector('.quantity').innerText = cart[cartItemIndex].quantity;
-		quantityControls.querySelector('.plus').classList.remove('disabled');
-
-		// One is the minimum
-		if(cart[cartItemIndex].quantity === 1) {
-			quantityControls.querySelector('.minus').classList.add('disabled');
+function updateCartQuantities() {
+	cart = [];
+	quantityControls.querySelectorAll('.ticket select').forEach(el => {
+		const qty = Number(el.value);
+		if(qty) {
+			cart.push({
+				productId: el.name.replace('-quantity', ''),
+				quantity: qty
+			});
 		}
-	}
+	});
 
 	updateSubtotals();
 }
 
 function purchaseFlowInit(hostedFieldsInstance) {
 	const ticketsList = document.querySelector('#tickets-list'),
+		quantitiesHTML = [],
 		ticketsListHTML = [];
 
 	if(!promo) {
 		for(const id of pageSettings.ticketsOrder) {
 			if(!products[id]) continue;
-			const { name, description, price, status } = products[id],
+			const { name, description, price, status, eventId } = products[id],
 				classes = [];
 
-			if(status !== 'active' || !pageSettings.currentTicket) classes.push('disabled');
+			if(status !== 'active' || !Object.values(events).some(ev => ev.salesOn) || !events[eventId].currentTicket) classes.push('disabled');
 			if(status === 'archived') classes.push('sold-out');
 
 			ticketsListHTML.push(`<h6 class="${classes.join(' ')}" data-product-id="${id}">${name} $${price}<sup>${description}</sup></h6>`);
+
+			if(status === 'active' && events[eventId].salesOn && events[eventId].currentTicket === id) {
+				// The regex check is janky, but we don't want to pre-populate afterparty ticket quantities
+				quantitiesHTML.push(`
+					<div class="ticket">
+						<div class="ticket-name"><span>${name}</span></div>
+						<div class="select-wrap">
+							<select name="${id}-quantity">
+								<option ${/afterparty/i.test(events[eventId].name) ? 'selected' : ''} value="0">0</option>
+								<option ${!/afterparty/i.test(events[eventId].name) ? 'selected' : ''} value="1">1</option>
+								<option value="2">2</option>
+								<option value="3">3</option>
+								<option value="4">4</option>
+							</select>
+						</div>
+					</div>
+				`);
+			}
 		}
 
 		ticketsList.innerHTML = ticketsListHTML.join('\n');
+		quantityControls.innerHTML = quantitiesHTML.join('\n');
 
-		// Preselect a ticket
-		if(pageSettings.currentTicket && products[pageSettings.currentTicket] && products[pageSettings.currentTicket].status === 'active') {
-			addItemToCart(pageSettings.currentTicket);
+		// Set the quantities if at least one event has ticket sales turned on, otherwise jump ship
+		if(Object.values(events).some(ev => ev.salesOn)) {
+			updateCartQuantities();
+
+			// Bind the quantity listener
+			quantityControls.addEventListener('change', e => {
+				updateCartQuantities();
+			});
 		} else {
 			document.querySelector('.tickets-flow').innerHTML = `
 				<div class="sales-off">
@@ -646,23 +644,6 @@ function purchaseFlowInit(hostedFieldsInstance) {
 			document.querySelectorAll('.leg')[1].classList.remove('active');
 		});
 	});
-
-	if(!promo && pageSettings.currentTicket) {
-		// Quantity controls
-		document.querySelectorAll('.plus').forEach(plus => plus.addEventListener('click', e => {
-			if(e.currentTarget.classList.contains('disabled')) return;
-
-			// Increment based on product row data
-			addItemToCart(pageSettings.currentTicket);
-		}));
-
-		document.querySelectorAll('.minus').forEach(minus => minus.addEventListener('click', e => {
-			if(e.currentTarget.classList.contains('disabled')) return;
-
-			// Decrement
-			removeItemFromCart(pageSettings.currentTicket);
-		}));
-	}
 }
 
 // Setup braintree client
@@ -720,12 +701,12 @@ if(!promoId) {
 			return response;
 		})
 		.then(response => response.json())
-		.then(({ settings, products: siteProducts, events }) => {
+		.then(({ settings, products: siteProducts, events: siteEvents }) => {
 			siteProducts.forEach(p => products[p.id] = p);
+			siteEvents.forEach(ev => events[ev.id] = ev);
 
 			Object.assign(pageSettings, {
-				...settings,
-				...events[0] && {currentTicket: events[0].currentTicket}
+				...settings
 			});
 		})
 		.catch(e => {

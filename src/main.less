@@ -902,13 +902,10 @@ header {
 	}
 
 	.ticket-image {
-		@media (min-width: @mobile + 1) {
-			padding-top: 5.8125em; /* 93/16 */
-		}
+		flex: 2 0;
 	}
 
 	.tickets-flow {
-		display: none;
 		padding-left: 7.5em; /* 120/16 */
 
 		@media (max-width: @mobile) {
@@ -980,11 +977,11 @@ header {
 			width: 50%;
 			float: left;
 			height: 0;
-			border: 1px solid @orange;
+			border: 1px solid @sky;
 			box-sizing: border-box;
 
 			&.active {
-				border-color: @chocolate;
+				border-color: @navy;
 			}
 		}
 
@@ -1000,8 +997,8 @@ header {
 				position: relative;
 				height: 15px;
 				width: 15px;
-				border: 2px solid @orange;
-				background: @orange;
+				border: 2px solid @sky;
+				background: @sky;
 				transform: translateY(-50%);
 				border-radius: 100%;
 				z-index: 999;
@@ -1017,19 +1014,19 @@ header {
 					font-weight: 700;
 					font-size: 0.75em; /* 12/16 */
 					text-transform: uppercase;
-					color: @orange;
+					color: @sky;
 				}
 
 				&.active,
 				&.complete {
-					border-color: @chocolate;
+					border-color: @navy;
 				}
 
 				&.complete {
-					background: @chocolate;
+					background: @navy;
 
 					span {
-						color: @chocolate;
+						color: @navy;
 					}
 
 					&:after {
@@ -1351,7 +1348,7 @@ header {
 
 	&.braintree-hosted-fields-invalid {
 		position: relative;
-		border-color: @chocolate;
+		border-color: @sky;
 
 		&:after {
 			content: '!';
@@ -1366,7 +1363,7 @@ header {
 			line-height: 20px;
 			border-radius: 100%;
 			color: @white;
-			background: @chocolate;
+			background: @sky;
 		}
 	}
 }
