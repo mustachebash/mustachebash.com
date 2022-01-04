@@ -282,6 +282,12 @@ function updateCartQuantities() {
 		}
 	});
 
+	if(!cart.length) {
+		document.querySelector('#confirm-quantity').disabled = true;
+	} else {
+		document.querySelector('#confirm-quantity').disabled = false;
+	}
+
 	updateSubtotals();
 }
 
@@ -304,7 +310,7 @@ function purchaseFlowInit(hostedFieldsInstance) {
 			if(status === 'active' && events[eventId].salesOn && events[eventId].currentTicket === id) {
 				// The regex check is janky, but we don't want to pre-populate afterparty ticket quantities
 				quantitiesHTML.push(`
-					<div class="ticket">
+					<div class="ticket flex-row flex-row-mobile">
 						<div class="ticket-name"><span>${name}</span></div>
 						<div class="select-wrap">
 							<select name="${id}-quantity">
@@ -328,7 +334,7 @@ function purchaseFlowInit(hostedFieldsInstance) {
 			updateCartQuantities();
 
 			// Bind the quantity listener
-			quantityControls.addEventListener('change', e => {
+			quantityControls.addEventListener('change', () => {
 				updateCartQuantities();
 			});
 		} else {

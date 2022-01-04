@@ -1079,69 +1079,36 @@ header {
 		}
 
 		.quantity-controls {
-			justify-content: space-around;
-			align-items: center;
 			padding: 1.3em 0;
-			text-align: center;
-			user-select: none;
 
-			.quantity {
-				margin: 0 0.625em; /* 10/16 */
-				user-select: none;
-				font-size: 2.5em; /* 40/16 */
-			}
+			.ticket {
+				justify-content: space-between;
+				align-items: center;
+				margin-bottom: 1em;
 
-			.minus,
-			.plus {
-				box-sizing: border-box;
-				text-align: center;
-				width: 2.5em; /* 40/16 */
-				height: 2.5em; /* 40/16 */
-				vertical-align: bottom;
-				user-select: none;
-
-				span {
-					display: inline-block;
-					width: 2.5rem; /* 40/16 */
-					height: 2.5rem; /* 40/16 */
-					cursor: pointer;
-					user-select: none;
-					color: @navy;
+				.ticket-name {
 					font-weight: 700;
-					font-size: 2.5em;
-					transition: color 200ms;
 				}
 
-				&:hover {
-					span {
-						color: lighten(@navy, 10%);
-					}
-				}
-
-				&:active {
-					span {
-						color: lighten(@navy, 20%);
-					}
-				}
-
-				&.disabled {
-					span {
-						cursor: default;
-						color: fade(@navy, 30%);
-					}
-
-					&:hover,
-					&:active {
-						span {
-							color: fade(@navy, 30%);
-						}
-					}
+				.select-wrap {
+					flex: 0 1 4em;
 				}
 			}
 		}
 
 		+ .step-footer {
 			text-align: center;
+		}
+	}
+
+	#confirm-quantity {
+		&:disabled {
+			background-color: @sky;
+			cursor: no-drop;
+
+			&:active {
+				box-shadow: none;
+			}
 		}
 	}
 

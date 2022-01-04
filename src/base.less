@@ -82,7 +82,8 @@ a {
 }
 
 input[type="text"],
-input[type="email"] {
+input[type="email"],
+select {
 	-webkit-appearance: none;
 	display: block;
 	position: relative;
@@ -110,6 +111,28 @@ input[type="email"] {
 
 	&:disabled {
 		opacity: .7;
+	}
+}
+
+.select-wrap {
+	position: relative;
+
+	select {
+		margin-bottom: 0;
+	}
+
+	&:after {
+		content: '';
+		position: absolute;
+		display: block;
+		height: 0;
+		width: 0;
+		right: 1em;
+		top: 50%;
+		transform: translateY(-25%);
+		border: 5px solid transparent;
+		border-top-color: @navy;
+		pointer-events: none;
 	}
 }
 
