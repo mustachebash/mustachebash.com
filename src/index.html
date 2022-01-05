@@ -473,7 +473,7 @@
 			<div class="flex-row">
 				<div class="tickets-description">
 					<h3>Tickets</h3>
-					<h4>Get 'Em While They're Hot</h4>
+					<h4>Get 'Em While The Gettin' is Good</h4>
 					<p>
  						All current 2020 tickets will be honored for the 2022 event with no additional admittance fee!
  					</p>
@@ -490,9 +490,11 @@
  					<div class="progress">
  						<div class="leg"></div>
  						<div class="leg"></div>
+ 						<div class="leg"></div>
  						<div class="flex-row flex-row-mobile ticks">
  							<div class="active"><span>Tickets</span></div>
- 							<div><span>Payment Details</span></div>
+ 							<div><span>Info</span></div>
+ 							<div><span>Payment</span></div>
  							<div><span>Review</span></div>
  						</div>
  					</div>
@@ -508,12 +510,29 @@
  							</div>
  						</div>
  						<div class="step">
- 							<form method="post" action="/" name="purchase">
- 								<h6>Enter Your Payment Info</h6>
+ 							<form method="post" action="/" name="personal-info">
+ 								<h6>Enter Your Info</h6>
  								<fieldset name="name">
  									<label data-error-message="Please enter your first and last name">Full Name</label>
  									<input type="text" name="name" placeholder="Purchaser's Name" maxlength="45">
  								</fieldset>
+ 								<fieldset name="email">
+ 									<label data-error-message="Please enter your email">Email</label>
+ 									<input type="email" name="email" placeholder="Enter your email for confirmation" maxlength="100">
+ 								</fieldset>
+ 								<fieldset name="marketing-opt-in">
+ 									<input id="marketing-opt-in-checkbox" type="checkbox" name="marketing-opt-in">
+ 									<label for="marketing-opt-in-checkbox">Send me all Bash and partner news</label>
+ 								</fieldset>
+ 							</form>
+ 							<div class="flex-row flex-row-mobile step-footer">
+ 								<button id="enter-personal-info">Next</button>
+ 								<a href="#" id="back-to-quantity">Back to Previous</a>
+ 							</div>
+ 						</div>
+ 						<div class="step">
+ 							<form method="post" action="/" name="payment-info">
+								<h6>Enter Your Payment Info</h6>
  								<fieldset name="payment-info">
  									<label>Credit Card Number</label>
  									<div id="card-number"></div>
@@ -528,14 +547,14 @@
  										<div id="cvv"></div>
  									</fieldset>
  								</div>
- 								<fieldset name="email">
- 									<label data-error-message="Please enter your email">Email</label>
- 									<input type="email" name="email" placeholder="Enter your email for confirmation" maxlength="45">
- 								</fieldset>
  							</form>
  							<div class="flex-row flex-row-mobile step-footer">
- 								<button id="enter-payment">Next</button>
- 								<a href="#" id="back-to-quantity">Back to Previous</a>
+ 								<button id="enter-payment-info">Next</button>
+ 								<a href="#" id="back-to-personal">Back to Previous</a>
+ 							</div>
+ 							<div class="apple-pay">
+ 								<p>- or -</p>
+ 								<div id="apple-pay-payment-option"><div class="apple-pay-button apple-pay-button-white"></div></div>
  							</div>
  						</div>
  						<div class="step">

@@ -942,8 +942,6 @@ header {
 
 				@media (max-width: @mobile) {
 					margin-left: .5rem;
-					position: absolute;
-					top: 3.5rem;
 				}
 			}
 
@@ -974,7 +972,7 @@ header {
 		}
 
 		.leg {
-			width: 50%;
+			width: 33.333333333%;
 			float: left;
 			height: 0;
 			border: 1px solid @sky;
@@ -1121,6 +1119,60 @@ header {
 			text-transform: uppercase;
 			color: @black;
 		}
+	}
+
+	fieldset[name="marketing-opt-in"] {
+		margin-bottom: 1em;
+
+		label, input {
+			display: inline;
+		}
+	}
+
+	// Apple pay
+	.apple-pay {
+		display: none;
+
+		p {
+			text-align: center;
+		}
+	}
+
+	#apple-pay-payment-option {
+		// Style this wrapper and not the button - will be shown if Apple Pay is supported
+		max-width: 300px;
+		margin: 1em auto 0;
+
+		@media (max-width: @mobile) {
+			max-width: 200px;
+			text-align: center;
+		}
+	}
+
+	@supports (-webkit-appearance: -apple-pay-button) {
+	    .apple-pay-button {
+	        display: block;
+	        -webkit-appearance: -apple-pay-button;
+			-apple-pay-button-type: check-out;
+			-apple-pay-button-style: black;
+			height: 2.5em; /* 40/16 */
+	    }
+	}
+	@supports not (-webkit-appearance: -apple-pay-button) {
+	    .apple-pay-button {
+	        display: block;
+	        background-size: 100% 60%;
+	        background-repeat: no-repeat;
+	        background-position: 50% 50%;
+	        border-radius: 5px;
+	        padding: 0px;
+	        box-sizing: border-box;
+	        min-width: 200px;
+	        height: 2.5em;
+	        max-height: 64px;
+			background-image: -webkit-named-image(apple-pay-logo-white);
+	        background-color: black;
+	    }
 	}
 
 	fieldset[name="expiration"] {

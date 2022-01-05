@@ -7,6 +7,7 @@ import 'main.less';
 import url from 'url';
 import client from 'braintree-web/client';
 import hostedFields from 'braintree-web/hosted-fields';
+import applePay from 'braintree-web/apple-pay';
 import Swiper, { Navigation, Pagination, Lazy } from 'swiper';
 
 function logError({ lineno, colno, message, filename, stack, name }) {
@@ -161,7 +162,12 @@ try {
 }
 
 // Never allow this form to submit
-document.forms.purchase.addEventListener('submit', e => {
+document.forms['payment-info'].addEventListener('submit', e => {
+	e.preventDefault();
+});
+
+// Never allow this form to submit
+document.forms['personal-info'].addEventListener('submit', e => {
 	e.preventDefault();
 });
 
@@ -291,7 +297,96 @@ function updateCartQuantities() {
 	updateSubtotals();
 }
 
-function purchaseFlowInit(hostedFieldsInstance) {
+function completePurchase(nonce) {
+	return fetch(API_HOST + '/v1/transactions', {
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json'
+		},
+		body: JSON.stringify({
+			paymentMethodNonce: nonce,
+			customer,
+			cart,
+			promoId: promo && promo.id
+		})
+	})
+		.then(response => {
+			// Check for HTTP error statuses, throw errors to skip processing response body
+			if(response.status >= 400) {
+				const err = new Error(response.statusText);
+
+				err.status = response.status;
+
+				throw err;
+			}
+
+			return Promise.all([response.headers, response.json()]);
+		})
+		.then(([ headers, { confirmationId, token } ]) => {
+			window.requestAnimationFrame(() => {
+				// In case Apple Pay takes us here
+				document.querySelectorAll('.step')[2].classList.remove('active');
+				document.querySelectorAll('.step')[3].classList.remove('active');
+				document.querySelectorAll('.step')[4].classList.add('active');
+
+				document.querySelector('.confirmation-number span').innerText = `#${confirmationId}`;
+				document.querySelector('.tickets-link a').href = `/mytickets?t=${token}`;
+
+				const tick = document.querySelectorAll('.ticks > div')[3];
+				tick.classList.remove('active');
+				tick.classList.add('complete');
+			});
+
+			if(typeof window.gtag === 'function') {
+				try {
+					const total = cart.reduce((tot, cur) => tot + (cur.quantity * products[cur.productId].price), 0),
+						transactionId = headers.get('Location').split('/').pop(),
+						eventData = {
+							transaction_id: transactionId,
+							value: total,
+							currency: 'USD',
+							checkout_step: 5,
+							items: cart.map(i => ({
+								id: i.productId,
+								quantity: i.quantity,
+								name: products[i.productId].name,
+								category: 'Tickets',
+								price: String(products[i.productId].price)
+							}))
+						};
+
+					window.gtag('event', 'purchase', eventData);
+
+					window.gtag('event', 'conversion', {
+						...eventData,
+						send_to: 'AW-704569520/g7y6CKfiiboBELDB-88C'
+					});
+				} catch(e) {
+					// Don't let gtag break the site
+				}
+			}
+
+			if(typeof window.fbq === 'function') {
+				try {
+					const total = cart.reduce((tot, cur) => tot + (cur.quantity * products[cur.productId].price), 0);
+
+					window.fbq('track', 'Purchase', {
+						value: total,
+						currency: 'USD',
+						contents: cart.map(i => ({
+							id: i.productId,
+							quantity: i.quantity,
+							item_price: Number(products[i.productId].price)
+						}))
+					});
+				} catch(e) {
+					// Don't let FB break the site
+				}
+			}
+		});
+}
+
+function purchaseFlowInit({hostedFieldsInstance, applePayInstance}) {
 	const ticketsList = document.querySelector('#tickets-list'),
 		quantitiesHTML = [],
 		ticketsListHTML = [];
@@ -346,6 +441,130 @@ function purchaseFlowInit(hostedFieldsInstance) {
 				</div>`;
 
 			return;
+		}
+
+		// Set up Apple Pay listeners
+		if(applePayInstance) {
+			// Show the Apple Pay button and acceptance mark
+			document.querySelector('.apple-pay').style.display = 'block';
+			document.querySelector('.apple-pay-button').addEventListener('click', () => {
+				window.gtag('event', 'click', {
+					event_category: 'CTA',
+					event_label: 'Apple Pay'
+				});
+
+				// "Advance" the UI
+				window.requestAnimationFrame(() => {
+					const ticks = document.querySelectorAll('.ticks > div');
+					ticks[2].classList.remove('active');
+					ticks[2].classList.add('complete');
+					ticks[3].classList.add('active');
+					document.querySelectorAll('.leg')[2].classList.add('active');
+				});
+
+				// This is kinda funky, but people are basically getting to the "review" step here
+				if(typeof window.gtag === 'function' && !promo) {
+					try {
+						window.gtag('event', 'checkout_progress', {
+							checkout_step: 3,
+							items: cart.map(i => ({
+								id: i.productId,
+								quantity: i.quantity,
+								name: products[i.productId].name,
+								category: 'Tickets',
+								price: String(products[i.productId].price)
+							}))
+						});
+					} catch(e) {
+						// Don't let gtag break the site
+					}
+				}
+
+				const paymentRequest = applePayInstance.createPaymentRequest({
+						total: {
+							label: 'Total (All sales final)',
+							amount: cart.reduce((tot, cur) => tot + (cur.quantity * products[cur.productId].price), 0)
+						},
+						lineItems: cart.map(i => ({
+							label: `${products[i.productId].name} (${i.quantity} qty)`,
+							type: 'final',
+							amount: products[i.productId].price * i.quantity
+						})),
+						billingContact: {
+							emailAddress: customer.email,
+							givenName: customer.firstName,
+							familyName: customer.lastName
+						},
+						shippingMethods: [{
+							label: `Free Electronic Delivery`,
+							detail: `Tickets sent to ${customer.email}`,
+							amount: 0,
+							identifier: 'electronicDelivery'
+						}],
+						requiredBillingContactFields: ['email']
+					}),
+					appleSession = new window.ApplePaySession(3, paymentRequest);
+
+				appleSession.onvalidatemerchant = event => {
+					applePayInstance.performValidation({validationURL: event.validationURL, displayName: 'Mustache Bash'})
+						.then(merchantSession => appleSession.completeMerchantValidation(merchantSession))
+						.catch(err => {
+							appleSession.abort();
+							console.error(err);
+
+							// Revert the UI
+							window.requestAnimationFrame(() => {
+								const ticks = document.querySelectorAll('.ticks > div');
+								ticks[2].classList.add('active');
+								ticks[2].classList.remove('complete');
+								ticks[3].classList.remove('active');
+								document.querySelectorAll('.leg')[2].classList.remove('active');
+							});
+						});
+				};
+
+				appleSession.onpaymentauthorized = event => {
+					applePayInstance.tokenize({token: event.payment.token})
+						.then(payload => {
+							console.log(JSON.stringify(event.payment));
+
+							if(typeof window.gtag === 'function' && !promo) {
+								try {
+									window.gtag('event', 'checkout_progress', {
+										checkout_step: 4,
+										items: cart.map(i => ({
+											id: i.productId,
+											quantity: i.quantity,
+											name: products[i.productId].name,
+											category: 'Tickets',
+											price: String(products[i.productId].price)
+										}))
+									});
+								} catch(e) {
+									// Don't let gtag break the site
+								}
+							}
+
+							// After you have transacted with the payload.nonce,
+							// call `completePayment` to dismiss the Apple Pay sheet.
+							// appleSession.completePayment(window.ApplePaySession.STATUS_SUCCESS);
+
+							return payload.nonce;
+						})
+						.then(completePurchase)
+						.then(() => appleSession.completePayment(window.ApplePaySession.STATUS_SUCCESS))
+						.catch(e => {
+							appleSession.completePayment(window.ApplePaySession.STATUS_FAILURE);
+
+							// eslint-disable-next-line
+							alert('Order Failed, please check your payment details and try again');
+
+							console.error('Payment Error', e);
+						});
+				};
+
+				appleSession.begin();
+			});
 		}
 
 		// Ticket Flow with a precarious dependency on DOM order
@@ -420,15 +639,13 @@ function purchaseFlowInit(hostedFieldsInstance) {
 	}
 
 	// Step 2
-	document.querySelector('#enter-payment').addEventListener('click', () => {
+	document.querySelector('#enter-personal-info').addEventListener('click', () => {
 		// Let's get ridiculous so we can check
 		let nameValid = false,
-			emailValid = false,
-			paymentValid = false;
+			emailValid = false;
 
 		const fullName = document.querySelector('input[name="name"]').value,
-			email = document.querySelector('input[name="email"]').value,
-			state = hostedFieldsInstance.getState();
+			email = document.querySelector('input[name="email"]').value;
 
 		// Not much name validation - your bad if you put in a fake name for a guest list
 		if(!fullName || fullName.trim().split(' ').length < 2) {
@@ -449,13 +666,11 @@ function purchaseFlowInit(hostedFieldsInstance) {
 			document.querySelector('fieldset[name="email"]').classList.remove('invalid');
 		}
 
-		// Check the braintree fields with this slick copy/paste job they provided
-		paymentValid = Object.keys(state.fields).every(key => state.fields[key].isValid);
-
-		if(nameValid && emailValid && paymentValid) {
+		if(nameValid && emailValid) {
 			customer.email = email.trim();
 			customer.firstName = fullName.trim().split(' ')[0];
 			customer.lastName = fullName.trim().split(' ').slice(1).join(' ');
+			customer.marketingOptIn = document.querySelector('input[name="marketing-opt-in"]').checked;
 
 			document.querySelector('.reservation-details-name').innerText = fullName.trim();
 			document.querySelector('.reservation-details-email').innerText = email.trim();
@@ -490,6 +705,47 @@ function purchaseFlowInit(hostedFieldsInstance) {
 		}
 	});
 
+	// Step 3
+	document.querySelector('#enter-payment-info').addEventListener('click', () => {
+		let paymentValid = false;
+
+		const state = hostedFieldsInstance.getState();
+
+		// Check the braintree fields with this slick copy/paste job they provided
+		paymentValid = Object.keys(state.fields).every(key => state.fields[key].isValid);
+
+
+		if(paymentValid) {
+			window.requestAnimationFrame(() => {
+				document.querySelectorAll('.step')[2].classList.remove('active');
+				document.querySelectorAll('.step')[3].classList.add('active');
+
+				const ticks = document.querySelectorAll('.ticks > div');
+				ticks[2].classList.remove('active');
+				ticks[2].classList.add('complete');
+				ticks[3].classList.add('active');
+				document.querySelectorAll('.leg')[2].classList.add('active');
+			});
+
+			if(typeof window.gtag === 'function' && !promo) {
+				try {
+					window.gtag('event', 'checkout_progress', {
+						checkout_step: 3,
+						items: cart.map(i => ({
+							id: i.productId,
+							quantity: i.quantity,
+							name: products[i.productId].name,
+							category: 'Tickets',
+							price: String(products[i.productId].price)
+						}))
+					});
+				} catch(e) {
+					// Don't let gtag break the site
+				}
+			}
+		}
+	});
+
 	if(!promo) {
 		document.querySelector('#back-to-quantity').addEventListener('click', e => {
 			e.preventDefault();
@@ -508,7 +764,21 @@ function purchaseFlowInit(hostedFieldsInstance) {
 		document.querySelector('#back-to-quantity').remove();
 	}
 
-	// Step 3
+	document.querySelector('#back-to-personal').addEventListener('click', e => {
+		e.preventDefault();
+		window.requestAnimationFrame(() => {
+			document.querySelectorAll('.step')[2].classList.remove('active');
+			document.querySelectorAll('.step')[1].classList.add('active');
+
+			const ticks = document.querySelectorAll('.ticks > div');
+			ticks[2].classList.remove('active');
+			ticks[1].classList.remove('complete');
+			ticks[1].classList.add('active');
+			document.querySelectorAll('.leg')[1].classList.remove('active');
+		});
+	});
+
+	// Step 4
 	let submitting = false;
 	document.querySelector('#confirm-order').addEventListener('click', () => {
 		// Cool it, cowboy
@@ -522,7 +792,7 @@ function purchaseFlowInit(hostedFieldsInstance) {
 		if(typeof window.gtag === 'function' && !promo) {
 			try {
 				window.gtag('event', 'checkout_progress', {
-					checkout_step: 3,
+					checkout_step: 4,
 					items: cart.map(i => ({
 						id: i.productId,
 						quantity: i.quantity,
@@ -537,90 +807,7 @@ function purchaseFlowInit(hostedFieldsInstance) {
 		}
 
 		hostedFieldsInstance.tokenize({cardholderName: `${customer.firstName} ${customer.lastName}`})
-			.then(({ nonce }) => fetch(API_HOST + '/v1/transactions', {
-				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json'
-				},
-				body: JSON.stringify({
-					paymentMethodNonce: nonce,
-					customer,
-					cart,
-					promoId: promo && promo.id
-				})
-			}))
-			.then(response => {
-				// Check for HTTP error statuses, throw errors to skip processing response body
-				if(response.status >= 400) {
-					const err = new Error(response.statusText);
-
-					err.status = response.status;
-
-					throw err;
-				}
-
-				return Promise.all([response.headers, response.json()]);
-			})
-			.then(([ headers, { confirmationId, token } ]) => {
-				window.requestAnimationFrame(() => {
-					document.querySelectorAll('.step')[2].classList.remove('active');
-					document.querySelectorAll('.step')[3].classList.add('active');
-
-					document.querySelector('.confirmation-number span').innerText = `#${confirmationId}`;
-					document.querySelector('.tickets-link a').href = `/mytickets?t=${token}`;
-
-					const tick = document.querySelectorAll('.ticks > div')[2];
-					tick.classList.remove('active');
-					tick.classList.add('complete');
-				});
-
-				if(typeof window.gtag === 'function') {
-					try {
-						const total = cart.reduce((tot, cur) => tot + (cur.quantity * products[cur.productId].price), 0),
-							transactionId = headers.get('Location').split('/').pop(),
-							eventData = {
-								transaction_id: transactionId,
-								value: total,
-								currency: 'USD',
-								checkout_step: 4,
-								items: cart.map(i => ({
-									id: i.productId,
-									quantity: i.quantity,
-									name: products[i.productId].name,
-									category: 'Tickets',
-									price: String(products[i.productId].price)
-								}))
-							};
-
-						window.gtag('event', 'purchase', eventData);
-
-						window.gtag('event', 'conversion', {
-							...eventData,
-							send_to: 'AW-704569520/g7y6CKfiiboBELDB-88C'
-						});
-					} catch(e) {
-						// Don't let gtag break the site
-					}
-				}
-
-				if(typeof window.fbq === 'function') {
-					try {
-						const total = cart.reduce((tot, cur) => tot + (cur.quantity * products[cur.productId].price), 0);
-
-						window.fbq('track', 'Purchase', {
-							value: total,
-							currency: 'USD',
-							contents: cart.map(i => ({
-								id: i.productId,
-								quantity: i.quantity,
-								item_price: Number(products[i.productId].price)
-							}))
-						});
-					} catch(e) {
-						// Don't let FB break the site
-					}
-				}
-			})
+			.then(({ nonce }) => completePurchase(nonce))
 			.catch(e => {
 				submitting = false;
 				document.querySelector('#confirm-order').innerText = 'Purchase';
@@ -640,14 +827,14 @@ function purchaseFlowInit(hostedFieldsInstance) {
 
 		e.preventDefault();
 		window.requestAnimationFrame(() => {
-			document.querySelectorAll('.step')[2].classList.remove('active');
-			document.querySelectorAll('.step')[1].classList.add('active');
+			document.querySelectorAll('.step')[3].classList.remove('active');
+			document.querySelectorAll('.step')[2].classList.add('active');
 
 			const ticks = document.querySelectorAll('.ticks > div');
-			ticks[2].classList.remove('active');
-			ticks[1].classList.remove('complete');
-			ticks[1].classList.add('active');
-			document.querySelectorAll('.leg')[1].classList.remove('active');
+			ticks[3].classList.remove('active');
+			ticks[2].classList.remove('complete');
+			ticks[2].classList.add('active');
+			document.querySelectorAll('.leg')[2].classList.remove('active');
 		});
 	});
 }
@@ -655,38 +842,55 @@ function purchaseFlowInit(hostedFieldsInstance) {
 // Setup braintree client
 function braintreeInit() {
 	return client.create({authorization: BRAINTREE_TOKEN})
-		.then(clientInstance => hostedFields.create({
-			client: clientInstance,
-			styles: {
-				input: {
-					'font-size': '16px',
-					color: '#0e2245'
+		.then(clientInstance => {
+			const hostedFieldsPromise = hostedFields.create({
+				client: clientInstance,
+				styles: {
+					input: {
+						'font-size': '16px',
+						color: '#0e2245'
+					},
+					'.invalid': {
+						color: '#818ed9'
+					},
+					':focus': {
+						outline: 0
+					},
+					'::placeholder': {
+						color: 'rgba(14,34,69,.5)'
+					}
 				},
-				'.invalid': {
-					color: '#e66a40'
-				},
-				':focus': {
-					outline: 0
-				},
-				'::placeholder': {
-					color: 'rgba(14,34,69,.5)'
+				fields: {
+					number: {
+						selector: '#card-number',
+						placeholder: 'Card Number'
+					},
+					cvv: {
+						selector: '#cvv',
+						placeholder: 'CVV'
+					},
+					expirationDate: {
+						selector: '#expiration',
+						placeholder: 'MM/YYYY'
+					}
 				}
-			},
-			fields: {
-				number: {
-					selector: '#card-number',
-					placeholder: 'Card Number'
-				},
-				cvv: {
-					selector: '#cvv',
-					placeholder: 'CVV'
-				},
-				expirationDate: {
-					selector: '#expiration',
-					placeholder: 'MM/YYYY'
-				}
+			});
+
+			// Apple Pay
+			let applePaySupported = false;
+			try {
+				applePaySupported = window.ApplePaySession && window.ApplePaySession.supportsVersion(3) && window.ApplePaySession.canMakePayments() && pageSettings.enableApplePay;
+			} catch (e) {
+				// Not supported or errored on attempt to check
 			}
-		}))
+
+			let applePayPromise = Promise.resolve(null);
+			if(applePaySupported) {
+				applePayPromise = applePay.create({client: clientInstance}).catch(applePayErr => console.error('Error creating applePayInstance:', applePayErr));
+			}
+
+			return Promise.all([hostedFieldsPromise, applePayPromise]).then(([hostedFieldsInstance, applePayInstance]) => ({hostedFieldsInstance, applePayInstance}));
+		})
 		.then(purchaseFlowInit)
 		.catch(e => {
 			console.error('Braintree/Payments Error', e);
