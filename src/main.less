@@ -810,6 +810,7 @@ header {
 	}
 
 	.sales-off {
+		padding-top: 2em;
 
 		@media (min-width: @tablet + 1) {
 			padding-top: 13em;
@@ -902,13 +903,10 @@ header {
 	}
 
 	.ticket-image {
-		@media (min-width: @mobile + 1) {
-			padding-top: 5.8125em; /* 93/16 */
-		}
+		flex: 2 0;
 	}
 
 	.tickets-flow {
-		display: none;
 		padding-left: 7.5em; /* 120/16 */
 
 		@media (max-width: @mobile) {
@@ -945,8 +943,6 @@ header {
 
 				@media (max-width: @mobile) {
 					margin-left: .5rem;
-					position: absolute;
-					top: 3.5rem;
 				}
 			}
 
@@ -977,14 +973,14 @@ header {
 		}
 
 		.leg {
-			width: 50%;
+			width: 33.333333333%;
 			float: left;
 			height: 0;
-			border: 1px solid @orange;
+			border: 1px solid @sky;
 			box-sizing: border-box;
 
 			&.active {
-				border-color: @chocolate;
+				border-color: @navy;
 			}
 		}
 
@@ -1000,8 +996,8 @@ header {
 				position: relative;
 				height: 15px;
 				width: 15px;
-				border: 2px solid @orange;
-				background: @orange;
+				border: 2px solid @sky;
+				background: @sky;
 				transform: translateY(-50%);
 				border-radius: 100%;
 				z-index: 999;
@@ -1017,19 +1013,19 @@ header {
 					font-weight: 700;
 					font-size: 0.75em; /* 12/16 */
 					text-transform: uppercase;
-					color: @orange;
+					color: @sky;
 				}
 
 				&.active,
 				&.complete {
-					border-color: @chocolate;
+					border-color: @navy;
 				}
 
 				&.complete {
-					background: @chocolate;
+					background: @navy;
 
 					span {
-						color: @chocolate;
+						color: @navy;
 					}
 
 					&:after {
@@ -1082,69 +1078,36 @@ header {
 		}
 
 		.quantity-controls {
-			justify-content: space-around;
-			align-items: center;
 			padding: 1.3em 0;
-			text-align: center;
-			user-select: none;
 
-			.quantity {
-				margin: 0 0.625em; /* 10/16 */
-				user-select: none;
-				font-size: 2.5em; /* 40/16 */
-			}
+			.ticket {
+				justify-content: space-between;
+				align-items: center;
+				margin-bottom: 1em;
 
-			.minus,
-			.plus {
-				box-sizing: border-box;
-				text-align: center;
-				width: 2.5em; /* 40/16 */
-				height: 2.5em; /* 40/16 */
-				vertical-align: bottom;
-				user-select: none;
-
-				span {
-					display: inline-block;
-					width: 2.5rem; /* 40/16 */
-					height: 2.5rem; /* 40/16 */
-					cursor: pointer;
-					user-select: none;
-					color: @navy;
+				.ticket-name {
 					font-weight: 700;
-					font-size: 2.5em;
-					transition: color 200ms;
 				}
 
-				&:hover {
-					span {
-						color: lighten(@navy, 10%);
-					}
-				}
-
-				&:active {
-					span {
-						color: lighten(@navy, 20%);
-					}
-				}
-
-				&.disabled {
-					span {
-						cursor: default;
-						color: fade(@navy, 30%);
-					}
-
-					&:hover,
-					&:active {
-						span {
-							color: fade(@navy, 30%);
-						}
-					}
+				.select-wrap {
+					flex: 0 1 4em;
 				}
 			}
 		}
 
 		+ .step-footer {
 			text-align: center;
+		}
+	}
+
+	#confirm-quantity {
+		&:disabled {
+			background-color: @sky;
+			cursor: no-drop;
+
+			&:active {
+				box-shadow: none;
+			}
 		}
 	}
 
@@ -1157,6 +1120,60 @@ header {
 			text-transform: uppercase;
 			color: @black;
 		}
+	}
+
+	fieldset[name="marketing-opt-in"] {
+		margin-bottom: 1em;
+
+		label, input {
+			display: inline;
+		}
+	}
+
+	// Apple pay
+	.apple-pay {
+		display: none;
+
+		p {
+			text-align: center;
+		}
+	}
+
+	#apple-pay-payment-option {
+		// Style this wrapper and not the button - will be shown if Apple Pay is supported
+		max-width: 300px;
+		margin: 1em auto 0;
+
+		@media (max-width: @mobile) {
+			max-width: 200px;
+			text-align: center;
+		}
+	}
+
+	@supports (-webkit-appearance: -apple-pay-button) {
+	    .apple-pay-button {
+	        display: block;
+	        -webkit-appearance: -apple-pay-button;
+			-apple-pay-button-type: check-out;
+			-apple-pay-button-style: black;
+			height: 2.5em; /* 40/16 */
+	    }
+	}
+	@supports not (-webkit-appearance: -apple-pay-button) {
+	    .apple-pay-button {
+	        display: block;
+	        background-size: 100% 60%;
+	        background-repeat: no-repeat;
+	        background-position: 50% 50%;
+	        border-radius: 5px;
+	        padding: 0px;
+	        box-sizing: border-box;
+	        min-width: 200px;
+	        height: 2.5em;
+	        max-height: 64px;
+			background-image: -webkit-named-image(apple-pay-logo-white);
+	        background-color: black;
+	    }
 	}
 
 	fieldset[name="expiration"] {
@@ -1351,7 +1368,7 @@ header {
 
 	&.braintree-hosted-fields-invalid {
 		position: relative;
-		border-color: @chocolate;
+		border-color: @sky;
 
 		&:after {
 			content: '!';
@@ -1366,7 +1383,7 @@ header {
 			line-height: 20px;
 			border-radius: 100%;
 			color: @white;
-			background: @chocolate;
+			background: @sky;
 		}
 	}
 }
