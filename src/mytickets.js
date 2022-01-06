@@ -58,7 +58,12 @@ if(transactionToken) {
 
 			// FIXME: This isn't ideal, but works with our system
 			// This only works with "Guest #" suffixes added to guest names.
-			tickets.sort((a, b) => a.lastName > b.lastName ? 1 : -1);
+			tickets.sort((a, b) => {
+				if(a.eventDate > b.eventDate) return 1;
+				if(a.eventDate < b.eventDate) return -1;
+
+				return a.lastName > b.lastName ? 1 : -1;
+			});
 
 			const { confirmationId, firstName, lastName, eventName, eventDate } = tickets[0],
 				eventDateObj = new Date(eventDate);
@@ -96,11 +101,12 @@ if(transactionToken) {
 				</p>
 				<div class="tickets swiper-container">
 					<div class="swiper-wrapper">
-						${tickets.map(({ qrCode }, i) => (`
+						${tickets.map(({ qrCode, eventName }, i) => (`
 							<div class="ticket swiper-slide">
 								<div class="img-wrap">
 									<img src="${qrCode}" />
 								</div>
+								<p>${eventName}</p>
 								<p>${i + 1}/${tickets.length}</p>
 							</div>
 						`)).join('\n')}
