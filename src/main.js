@@ -425,7 +425,7 @@ function purchaseFlowInit({hostedFieldsInstance, applePayInstance}) {
 		quantityControls.innerHTML = quantitiesHTML.join('\n');
 
 		// Set the quantities if at least one event has ticket sales turned on, otherwise jump ship
-		if(Object.values(events).some(ev => ev.salesOn)) {
+		if(Object.values(events).some(ev => ev.salesOn) && quantitiesHTML.length) {
 			updateCartQuantities();
 
 			// Bind the quantity listener
