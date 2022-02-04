@@ -46,6 +46,7 @@ module.exports = (env = {}, argv) => {
 		},
 		devServer: {
 			watchFiles: ['src/*.html'],
+			port: 8081,
 			https: env.https
 				? {
 					key: fs.readFileSync('../server.key'),
