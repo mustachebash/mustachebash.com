@@ -96,17 +96,17 @@ if(transactionToken) {
 					<!-- <a class="wallet" href="#"><img src="./img/apple-wallet.svg" /></a> -->
 				</p>
 				<p class="disclaimer">
-					This is event is 21+ only. All guests must have a valid ID and ticket at the door. Do not share your tickets with
-					anyone you do not trust. If you have any additional questions, please <a href="mailto:contact@mustachebash.com">email us</a>.
+					This is event is 21+ only, no re-entry. All guests must have a valid ID and ticket at the door. Do not share your tickets with
+					anyone you do not trust. If you have any additional questions, please <a href="/#faq" target="_blank">visit our FAQs</a>.
 				</p>
 				<div class="tickets swiper-container">
 					<div class="swiper-wrapper">
-						${tickets.map(({ qrCode, eventName }, i) => (`
+						${tickets.map(({ qrCode, eventName, vip }, i) => (`
 							<div class="ticket swiper-slide">
 								<div class="img-wrap">
 									<img src="${qrCode}" />
 								</div>
-								<p>${eventName}</p>
+								<p>${eventName}${vip ? ' &#128378;' : ''}</p>
 								<p>${i + 1}/${tickets.length}</p>
 							</div>
 						`)).join('\n')}
