@@ -436,7 +436,7 @@ function purchaseFlowInit({hostedFieldsInstance, applePayInstance}) {
 			document.querySelector('.tickets-flow').innerHTML = `
 				<div class="sales-off">
 					<h5>
-						Tickets are currently not available for&nbsp;sale - check back soon!
+						Tickets are currently sold out<br/>see you next year!
 					</h5>
 				</div>`;
 
