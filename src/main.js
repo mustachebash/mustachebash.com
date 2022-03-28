@@ -161,15 +161,17 @@ try {
 	logError(e);
 }
 
+// Requires tickets section
 // Never allow this form to submit
-document.forms['payment-info'].addEventListener('submit', e => {
-	e.preventDefault();
-});
+// document.forms['payment-info'].addEventListener('submit', e => {
+// 	e.preventDefault();
+// });
 
+// Requires tickets section
 // Never allow this form to submit
-document.forms['personal-info'].addEventListener('submit', e => {
-	e.preventDefault();
-});
+// document.forms['personal-info'].addEventListener('submit', e => {
+// 	e.preventDefault();
+// });
 
 // Never allow this form to submit
 let submittingNewsletter = false;
@@ -924,7 +926,8 @@ if(!promoId) {
 
 			throw e;
 		})
-		.then(braintreeInit)
+		// Tickets section is gone because sales are over
+		// .then(braintreeInit)
 		.catch(e => {
 			// If anything errors, we need to show a message in the tickets section
 			// eslint-disable-next-line max-len
@@ -932,7 +935,7 @@ if(!promoId) {
 
 			logError(e);
 		});
-} else {
+} else if(window.justDontDoThisBecauseSalesAreOver) {
 	// Fetch the initial settings and products
 	fetch(`${API_HOST}/v1/promos/${promoId}`)
 		.then(response => {
