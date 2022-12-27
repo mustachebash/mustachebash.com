@@ -321,7 +321,7 @@ header {
 		font-family: @brandon;
 		font-weight: 900;
 		font-size: 1.375em; /* 22/16 */
-		color: @white;
+		color: fade(@white, 50%);
 		text-transform: uppercase;
 		margin: 0;
 		margin-bottom: .5em;
@@ -330,7 +330,7 @@ header {
 		text-align: center;
 
 		@media (min-width: @tablet + 1) {
-			color: @white;
+			color: fade(@white, 50%);
 		}
 
 		@media (max-width: @mobile) {
@@ -341,6 +341,10 @@ header {
 
 		&.next-line {
 			margin: 0;
+		}
+
+		.white {
+			color: @white;
 		}
 	}
 
