@@ -4,7 +4,6 @@ import 'swiper/less/navigation';
 import 'swiper/less/pagination';
 import 'main.less';
 
-import url from 'url';
 import client from 'braintree-web/client';
 import hostedFields from 'braintree-web/hosted-fields';
 import applePay from 'braintree-web/apple-pay';
@@ -902,7 +901,7 @@ function braintreeInit() {
 		});
 }
 
-const { promo: promoId } = url.parse(location.href, true).query;
+const promoId = new URLSearchParams(location.search).get('promo');
 
 if(!promoId) {
 	// Fetch the initial settings and products
