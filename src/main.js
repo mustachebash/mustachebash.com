@@ -162,15 +162,15 @@ try {
 
 // Requires tickets section
 // Never allow this form to submit
-// document.forms['payment-info'].addEventListener('submit', e => {
-// 	e.preventDefault();
-// });
+document.forms['payment-info'].addEventListener('submit', e => {
+	e.preventDefault();
+});
 
 // Requires tickets section
 // Never allow this form to submit
-// document.forms['personal-info'].addEventListener('submit', e => {
-// 	e.preventDefault();
-// });
+document.forms['personal-info'].addEventListener('submit', e => {
+	e.preventDefault();
+});
 
 // Never allow this form to submit
 let submittingNewsletter = false;
@@ -395,23 +395,23 @@ function purchaseFlowInit({hostedFieldsInstance, applePayInstance}) {
 	if(!promo) {
 		for(const id of pageSettings.ticketsOrder) {
 			if(!products[id]) continue;
-			const { name, description, price, status, eventId } = products[id],
+			const { name, price, status, eventId, vip } = products[id],
 				classes = [];
 
 			if(status !== 'active' || !Object.values(events).some(ev => ev.salesOn) || !events[eventId].currentTicket) classes.push('disabled');
 			if(status === 'archived') classes.push('sold-out');
 
-			ticketsListHTML.push(`<h6 class="${classes.join(' ')}" data-product-id="${id}">${name} $${price}<sup>${description}</sup></h6>`);
+			ticketsListHTML.push(`<h6 class="${classes.join(' ')}" data-product-id="${id}">${name} $${price}</h6>`);
 
-			if(status === 'active' && events[eventId].salesOn && events[eventId].currentTicket === id) {
+			if(status === 'active' && events[eventId].salesOn && (events[eventId].currentTicket === id || vip)) {
 				// The regex check is janky, but we don't want to pre-populate afterparty ticket quantities
 				quantitiesHTML.push(`
 					<div class="ticket flex-row flex-row-mobile">
 						<div class="ticket-name"><span>${name}</span></div>
 						<div class="select-wrap">
 							<select name="${id}-quantity">
-								<option ${/afterparty/i.test(events[eventId].name) ? 'selected' : ''} value="0">0</option>
-								<option ${!/afterparty/i.test(events[eventId].name) ? 'selected' : ''} value="1">1</option>
+								<option ${/afterparty/i.test(events[eventId].name) || vip ? 'selected' : ''} value="0">0</option>
+								<option ${!/afterparty/i.test(events[eventId].name) && !vip ? 'selected' : ''} value="1">1</option>
 								<option value="2">2</option>
 								<option value="3">3</option>
 								<option value="4">4</option>
@@ -437,7 +437,7 @@ function purchaseFlowInit({hostedFieldsInstance, applePayInstance}) {
 			document.querySelector('.tickets-flow').innerHTML = `
 				<div class="sales-off">
 					<h5>
-						Tickets are currently sold out<br/>see you next year!
+						Tickets are currently not on sale!
 					</h5>
 				</div>`;
 
@@ -925,8 +925,7 @@ if(!promoId) {
 
 			throw e;
 		})
-		// Tickets section is gone because sales are over
-		// .then(braintreeInit)
+		.then(braintreeInit)
 		.catch(e => {
 			// If anything errors, we need to show a message in the tickets section
 			// eslint-disable-next-line max-len
@@ -934,7 +933,7 @@ if(!promoId) {
 
 			logError(e);
 		});
-} else if(window.justDontDoThisBecauseSalesAreOver) {
+} else {
 	// Fetch the initial settings and products
 	fetch(`${API_HOST}/v1/promos/${promoId}`)
 		.then(response => {

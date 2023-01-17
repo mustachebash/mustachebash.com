@@ -5,7 +5,7 @@
 
 	<title>The Mustache Bash</title>
 
-	<meta property="og:title" content="13th Annual Mustache Bash">
+	<meta property="og:title" content="14th Annual Mustache Bash">
 	<meta property="og:description" content="March 25th - A party, a reunion, an excuse to take pride in the dirty fuzz you fertilize above your upper lip. Whatever you call it, let it be known: The Mustache Bash is back.">
 	<meta property="og:url" content="https://mustachebash.com">
 	<meta property="og:image" content="https://mustachebash.com/img/fro-man-navy.png">
@@ -39,7 +39,35 @@
 			"image": [
 				"https://mustachebash.com/img/Gallery_Desktop_2022_8.fa498089587992c580ff.jpg"
 			],
+			"offers": {
+ 				"@type": "Offer",
+ 				"url": "https://mustachebash.com/#tickets",
+ 				"price": "109",
+ 				"priceCurrency": "USD",
+ 				"availability": "https://schema.org/InStock",
+ 				"validFrom": "2023-01-20T09:00-08:00"
+ 			},
 			"performer": [
+				{
+					"@type": "PerformingGroup",
+					"name": "Lee Fields"
+				},
+				{
+					"@type": "PerformingGroup",
+					"name": "Yung Bae"
+				},
+				{
+					"@type": "PerformingGroup",
+					"name": "Flamingosis"
+				},
+				{
+					"@type": "PerformingGroup",
+					"name": "Blu DeTiger (DJ Set)"
+				},
+				{
+					"@type": "PerformingGroup",
+					"name": "Bombargo"
+				},
 				{
 					"@type": "PerformingGroup",
 					"name": "Peanut Butter Wolf"
@@ -50,7 +78,35 @@
 				},
 				{
 					"@type": "PerformingGroup",
+					"name": "The B Sections"
+				},
+				{
+					"@type": "PerformingGroup",
 					"name": "Discotoshi"
+				},
+				{
+					"@type": "PerformingGroup",
+					"name": "Abby Normal"
+				},
+				{
+					"@type": "PerformingGroup",
+					"name": "DJ Dials"
+				},
+				{
+					"@type": "PerformingGroup",
+					"name": "Starfari"
+				},
+				{
+					"@type": "PerformingGroup",
+					"name": "HE2SHE"
+				},
+				{
+					"@type": "PerformingGroup",
+					"name": "Voss & Things"
+				},
+				{
+					"@type": "PerformingGroup",
+					"name": "Combover"
 				}
 			],
 			"organizer": {
@@ -114,14 +170,14 @@
 				</div>
 				<nav>
 					<ul>
-						<li><a href="#lineup">Lineup</a></li>
+						<li><a href="#lineup">Music</a></li>
 						<li><a href="#venue">Venue</a></li>
 						<li><a href="#tradition">Tradition</a></li>
 						<li><a href="#gallery">Gallery</a></li>
-						<!-- <li><a href="#afterparty">Afterparty</a></li> -->
- 						<li><a href="#tickets">Tickets</a></li>
+						<li><a href="#afterparty">Afterparty</a></li>
+						<li><a href="#faq">FAQ</a></li>
+ 						<li class="tickets-nav"><a href="#tickets">Buy Tickets</a></li>
 						<!-- <li><a href="#shop">Shop</a></li> -->
-						<li><a href="#faq">Info</a></li>
 						<li class="social">
 							<a href="https://www.facebook.com/MustacheBashSD/" target="_blank">
 								<svg class="facebook-icon social-icon" aria-labelledby="simpleicons-facebook-icon" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title id="simpleicons-facebook-icon">Facebook icon</title><path d="M22.676 0H1.324C.593 0 0 .593 0 1.324v21.352C0 23.408.593 24 1.324 24h11.494v-9.294H9.689v-3.621h3.129V8.41c0-3.099 1.894-4.785 4.659-4.785 1.325 0 2.464.097 2.796.141v3.24h-1.921c-1.5 0-1.792.721-1.792 1.771v2.311h3.584l-.465 3.63H16.56V24h6.115c.733 0 1.325-.592 1.325-1.324V1.324C24 .593 23.408 0 22.676 0"/></svg>
@@ -142,13 +198,14 @@
 		<div class="container-1230">
 			<div class="graphics">
 				<picture>
-					<source media="(min-width: 680px)" srcset="./img/hero.png">
-					<source srcset="./img/hero-mobile.png">
-					<img src="./img/hero.png" alt="Mustache Bash 2023 - March 25th, 2023">
+					<source media="(min-width: 680px)" srcset="./img/hero.jpg">
+					<source srcset="./img/hero-mobile.jpg">
+					<img src="./img/hero.jpg" alt="Mustache Bash 2023 - March 25th, 2023">
 				</picture>
 			</div>
 			<div class="cta">
-				<!-- <a href="https://www.instagram.com/themustachebash/" target="_blank" id="hero-cta">@themustachebash</a> -->
+				<a href="#tickets" id="hero-cta">Buy Tickets</a>
+				<p>Saturday, March 25th</p>
 			</div>
 		</div>
 	</section>
@@ -156,31 +213,40 @@
 	<section id="tagline">
 		<h3>
 			<!-- non-breaking space for mobile -->
-			Family. Freedom. Fun. The Funk. Welcome&nbsp;to&nbsp;the&nbsp;Mustache&nbsp;Bash.
+			Family. Freedom. Fun.<br>The Funk. Welcome to the&nbsp;Mustache&nbsp;Bash.
 		</h3>
 		<h3 class="next-line">
-			The Funkiest Disco Day on Earth Returns <span class="white">Saturday, March 25, 2023!</span>
+			The Funkiest Disco Day on&nbsp;Earth.
 		</h3>
 	</section>
 
 	<section id="video">
 		<div class="container-1230">
+			<div class="intro-image img-wrap">
+				<a href="https://youtu.be/ntvfGG5yMhk" target="_blank">
+					<picture>
+						<source media="(min-width: 680px)" srcset="./img/video-cover.jpg">
+						<img src="./img/video-cover.jpg" alt="Mustache Bash Video">
+					</picture>
+				</a>
+			</div>
+		</div>
+	</section>
+
+	<section id="intro">
+		<div class="container-1230">
 			<div class="flex-row">
-				<div class="video-text">
+				<div class="intro-text">
 					<h4>Enter an Otherworldly<br>Phenomenon of Funk</h4>
 					<p>
-						<!-- non-breaking space for mobile -->
-						Live music from legendary funk and disco artists immerses us in an era when love was free and soul reigned supreme. Bell-bottomed booties shake beneath glittering disco balls. Mustaches glow in the golden sun. Disco dosed dance moves break free and we boogie. We bust out. We bash. Whether reuniting with old friends or bonding with new ones, it all feels like family. So ladies, bust out your boas and feather your hair. Men, manicure those ‘mos. We’ve got business to tend&nbsp;to.
+						Climb aboard the love train for a fantastic voyage back through time to the era when funk and disco married and made babies. Bell-bottomed booties shake beneath glittering disco balls as we roll back the clock. Mustaches glimmer in the golden sun. Disco-endowed dance moves break free and we boogie. We bust out. We Bash. Whether reuniting with old friends or bonding with new ones, it's all one big funky family. So ladies, lace up your knee-highs and feather your hair. Men, pick those fros and manicure those 'mos. The Bash is back!
 					</p>
 				</div>
-				<div class="video-image img-wrap">
-					<a href="https://youtu.be/ntvfGG5yMhk" target="_blank">
-						<picture>
-							<source media="(min-width: 680px)" srcset="./img/video-cover.jpg">
-							<source srcset="./img/video-cover-mobile.jpg">
-							<img src="./img/video-cover.jpg" alt="Mustache Bash Video">
-						</picture>
-					</a>
+				<div class="intro-image img-wrap">
+					<picture>
+						<source media="(min-width: 680px)" srcset="./img/intro.jpg">
+						<img src="./img/intro.jpg" alt="Funk Intro">
+					</picture>
 				</div>
 			</div>
 		</div>
@@ -200,22 +266,305 @@
 					<input type="email" name="newsletter-email" placeholder="Enter your email" maxlength="75">
 				</fieldset>
 				<fieldset name="newsletter-submit">
-					<button id="newsletter-submit">Sign Up</button>
+					<button id="newsletter-submit" class="yellow rounded">Sign Up</button>
 				</fieldset>
 			</form>
 			<h5 id="newsletter-success">You've successfully signed up!</h5>
  		</div>
  	</section>
 
+	<section id="lineup">
+ 		<div class="container-1230">
+ 			<div class="img-wrap lineup-image">
+ 				<picture>
+ 					<source media="(min-width: 680px)" srcset="./img/lineup.jpg">
+ 					<img src="./img/lineup.jpg" alt="Mustache Bash Lineup">
+ 				</picture>
+ 			</div>
+
+ 			<h4 class="lineup-header">Featuring 4 Stages With Live Performances By:</h4>
+
+ 			<div class="bands">
+ 				<div class="flex-row">
+ 					<div class="band" id="lee-fields">
+ 						<div class="img-wrap"><img src="./img/band-lee-fields.jpg" alt="Lee Fields"></div>
+ 						<h4>Lee Fields</h4>
+ 						<p>
+ 							Lee Fields is arguably the greatest soul singer alive today. In an age when the shelf life of an artist largely depends on posturing and trends, he has proven to be an unassailable force of nature. His prolific, decade-spanning career continues to reign supreme on the modern soul scene.
+ 						</p>
+ 						<div class="icons-row">
+ 							<a class="link-icon" href="https://open.spotify.com/artist/3MAzDpqE01xyUmzNsc0Ee0" target="_blank"><img src="./img/icons/spotify.svg" alt="Spotify"></a>
+ 							<a class="link-icon" href="https://www.instagram.com/mrleefields/?hl=en" target="_blank"><img src="./img/icons/instagram.svg" alt="Instagram"></a>
+ 							<a class="link-icon" href="https://www.youtube.com/channel/UCHpBOdDgNkQK2HK22WMffqw" target="_blank"><img src="./img/icons/youtube.svg" alt="YouTube"></a>
+ 							<a class="link-icon" href="https://www.leefieldsandtheexpressions.com" target="_blank"><img src="./img/icons/www.svg" alt="Website"></a>
+ 						</div>
+ 					</div>
+ 					<div class="band" id="yung-bae">
+ 						<div class="img-wrap"><img src="./img/band-yung-bae.jpg" alt="Yung Bae"></div>
+ 						<h4>Yung Bae</h4>
+ 						<p>
+ 							Yung Bae heralds the rise of Future Funk, stewarding the sub-genre from the underground into a cult-like phenomena. With a sound that spans between funk, smooth jazz, old school hip-hop, and Studio 54 disco – Yung Bae guides us through a parallel universe of funkier times.
+ 						</p>
+ 						<div class="icons-row">
+ 							<a class="link-icon" href="https://open.spotify.com/artist/30FDJPN3RtwJZ20g5YGCRX" target="_blank"><img src="./img/icons/spotify.svg" alt="Spotify"></a>
+ 							<a class="link-icon" href="https://www.instagram.com/yungbae/" target="_blank"><img src="./img/icons/instagram.svg" alt="Instagram"></a>
+ 							<a class="link-icon" href="https://www.youtube.com/channel/UCF59Dz0lOtIhI43TwX6NR3Q" target="_blank"><img src="./img/icons/youtube.svg" alt="YouTube"></a>
+ 						</div>
+ 					</div>
+ 				</div>
+
+ 				<div class="flex-row">
+ 					<div class="band" id="flamingosis">
+ 						<div class="img-wrap"><img src="./img/band-flamingosis.jpg" alt="Flamingosis"></div>
+ 						<h4>Flamingosis</h4>
+ 						<p>
+ 							Flamingosis splices together old school soul, wild funk, and D.I.Y. electronic with a radiant message meant for any moment. Collaborating with an all-star cast of musicians on his most recent release, Flamingosis satisfies the sonic palette with Brazilian bounce, tropical house flavor, and chilled beats that redefine funk.
+ 						</p>
+ 						<div class="icons-row">
+ 							<a class="link-icon" href="https://open.spotify.com/artist/75cW8FFekyCjj0mfZM1Gfb" target="_blank"><img src="./img/icons/spotify.svg" alt="Spotify"></a>
+ 							<a class="link-icon" href="https://www.instagram.com/flamingosis/" target="_blank"><img src="./img/icons/instagram.svg" alt="Instagram"></a>
+ 							<a class="link-icon" href="https://www.youtube.com/channel/UCv2swbKUFrmVUeW1Xyp5vEg" target="_blank"><img src="./img/icons/youtube.svg" alt="YouTube"></a>
+ 							<a class="link-icon" href="http://www.flamingosis.com" target="_blank"><img src="./img/icons/www.svg" alt="Website"></a>
+ 						</div>
+ 					</div>
+
+ 					<div class="band" id="blue-detiger">
+ 						<div class="img-wrap"><img src="./img/band-blu-detiger.jpg" alt="Blu DeTiger (DJ Set)"></div>
+ 						<h4>Blu DeTiger (DJ Set)</h4>
+ 						<p>
+ 							Bass prodigy and burgeoning pop icon Blu DeTiger took the stage at CBGB when she was only seven. By 17, she was a staple in the city's creative scene. While playing in a multitude of bands, she also distinguished herself as a disco-dishin' DJ who slaps a live bass during her sets.
+ 						</p>
+ 						<div class="icons-row">
+ 							<a class="link-icon" href="https://open.spotify.com/artist/5NyCIBCeU080ynEj33S4hC" target="_blank"><img src="./img/icons/spotify.svg" alt="Spotify"></a>
+ 							<a class="link-icon" href="https://www.instagram.com/bludetiger/" target="_blank"><img src="./img/icons/instagram.svg" alt="Instagram"></a>
+ 							<a class="link-icon" href="https://www.youtube.com/channel/UCsvWmnNTLqrNF26vFBgJsKQ" target="_blank"><img src="./img/icons/youtube.svg" alt="YouTube"></a>
+ 							<a class="link-icon" href="https://www.bludetiger.com" target="_blank"><img src="./img/icons/www.svg" alt="Website"></a>
+ 						</div>
+ 					</div>
+ 				</div>
+
+ 				<div class="flex-row">
+ 					<div class="band" id="bombargo">
+ 						<div class="img-wrap"><img src="./img/band-bombargo.jpg" alt="Bombargo"></div>
+ 						<h4>Bombargo</h4>
+ 						<p>
+ 							Bombargo is a Canadian-based band that drops a vibrant splash of soul over their distinctive 'vintage-pop' sound. Well known for bringing unrivaled energy to the stage with sing-along anthems, double-brother harmonies, and a powerful message these boys bring one helluva live show.
+ 						</p>
+ 						<div class="icons-row">
+ 							<a class="link-icon" href="https://open.spotify.com/artist/5gcuakqbbCNnx9fBZWCFfW" target="_blank"><img src="./img/icons/spotify.svg" alt="Spotify"></a>
+ 							<a class="link-icon" href="https://www.instagram.com/bombargo/" target="_blank"><img src="./img/icons/instagram.svg" alt="Instagram"></a>
+ 							<a class="link-icon" href="https://www.youtube.com/channel/UCmL53Wp6xZdtwV4wJTXTBGQ" target="_blank"><img src="./img/icons/youtube.svg" alt="YouTube"></a>
+ 							<a class="link-icon" href="https://www.bombargo.com" target="_blank"><img src="./img/icons/www.svg" alt="Website"></a>
+ 						</div>
+ 					</div>
+
+ 					<div class="band" id="peanut-butter-wolf">
+ 						<div class="img-wrap"><img src="./img/band-peanut-butter-wolf.jpg" alt="Peanut Butter Wolf"></div>
+ 						<h4>Peanut Butter Wolf</h4>
+ 						<p>
+ 							Founder of star-spewing independent label Stones Throw Records, Peanut Butter Wolf, is an industry OG. Known for spinning bottomless crates of definitive funk vinyls, raw hip hop beats and genres beyond, PBW's themed sets span decades and genres for a high-energy dance party that will leave your soles smoking.
+ 						</p>
+ 						<div class="icons-row">
+ 							<a class="link-icon" href="https://open.spotify.com/artist/3KjYnDT3cEQ8ngiCLTCIl9" target="_blank"><img src="./img/icons/spotify.svg" alt="Spotify"></a>
+ 							<a class="link-icon" href="https://www.instagram.com/pntbtrwlf" target="_blank"><img src="./img/icons/instagram.svg" alt="Instagram"></a>
+ 							<a class="link-icon" href="https://youtu.be/D1lACddLGro" target="_blank"><img src="./img/icons/youtube.svg" alt="YouTube"></a>
+ 							<a class="link-icon" href="https://www.stonesthrow.com/artist/pbwolf" target="_blank"><img src="./img/icons/www.svg" alt="Website"></a>
+ 						</div>
+ 					</div>
+ 				</div>
+
+ 				<div class="flex-row">
+ 					<div class="band" id="lineup-family-band">
+ 						<div class="img-wrap"><img src="./img/band-family-band.jpg" alt="The Mustache Bash Family Band"></div>
+ 						<h4>The Mustache Bash Family Band</h4>
+ 						<p>
+ 							A collaboration of funk-lovin' friends comes together once a year to take us for a smooth ride into the best of bygone eras, with classic dance covers sure to have you shakin' your groove thang. This funky bunch always brings that serpentine fire you best believe will bring down the brick house.
+ 						</p>
+ 					</div>
+
+ 					<div class="band" id="b-sections">
+ 						<div class="img-wrap"><img src="./img/band-b-sections.jpg" alt="The B Sections"></div>
+ 						<h4>The B Sections</h4>
+ 						<p>
+ 							A 5-person collective of funk jam enthusiasts assembled from the weekly open jam at Winston's in Ocean Beach – The B Sections seek refuge in the pocket, a place where their high-caliber musical instincts and shared goal of spreading the funky gospel becomes perfectly aligned. Guaranteed to yield funky side-effects.
+ 						</p>
+ 						<div class="icons-row">
+ 							<a class="link-icon" href="https://open.spotify.com/artist/0GIxkAqVqXsBTEbuHQeAib" target="_blank"><img src="./img/icons/spotify.svg" alt="Spotify"></a>
+ 							<a class="link-icon" href="https://www.instagram.com/thebsections/" target="_blank"><img src="./img/icons/instagram.svg" alt="Instagram"></a>
+ 							<a class="link-icon" href="https://www.youtube.com/@thebsections4081" target="_blank"><img src="./img/icons/youtube.svg" alt="YouTube"></a>
+ 							<a class="link-icon" href="https://www.thebsections.com" target="_blank"><img src="./img/icons/www.svg" alt="Website"></a>
+ 						</div>
+ 					</div>
+ 				</div>
+
+ 				<div class="flex-row">
+ 					<div class="band" id="discotoshi">
+ 						<div class="img-wrap"><img src="./img/band-discotoshi.jpg" alt="Discotoshi"></div>
+ 						<h4>Discotoshi</h4>
+ 						<p>
+ 							This dude might just be the "dilly dilly" of disco. A veteran Basher classically trained in the funkadelic arts, Discotoshi honed his groove hanging with DJs like Rufus Du Sol and Detroit Swindle. He's a cutty crate-digger with a knack for pairing progressive electronic with authentic disco and a healthy dose of live instrumentation.
+ 						</p>
+ 						<div class="icons-row">
+ 							<a class="link-icon" href="https://soundcloud.com/discotoshi" target="_blank"><img src="./img/icons/spotify.svg" alt="Spotify"></a>
+ 							<a class="link-icon" href="https://www.instagram.com/discotoshi/" target="_blank"><img src="./img/icons/instagram.svg" alt="Instagram"></a>
+ 						</div>
+ 					</div>
+
+ 					<div class="band" id="abby-normal">
+ 						<div class="img-wrap"><img src="./img/band-abby-normal.jpg" alt="Abby Normal"></div>
+ 						<h4>Abby Normal</h4>
+ 						<p>
+ 							Bash godmother Abby Normal has graced the Bash's dancefloor with her all-vinyl, all-genre, all-time turntable set for four years running, and she's back to do it again. This woman drips so much swag, we had to give her an entire stage to contain it. Heed her steeze and be forever funkified.
+ 						</p>
+ 						<div class="icons-row">
+ 							<a class="link-icon" href="https://www.instagram.com/abbbynorrmal/" target="_blank"><img src="./img/icons/instagram.svg" alt="Instagram"></a>
+ 						</div>
+ 					</div>
+ 				</div>
+
+ 				<div class="flex-row">
+ 					<div class="band" id="djdials">
+ 						<div class="img-wrap"><img src="./img/band-djdials.jpg" alt="DJ Dials"></div>
+ 						<h4>DJ Dials</h4>
+ 						<p>
+ 							Long time DJ and producer, DJ Dials and the current live music scene are one in the same. With an improvisational approach that feeds off crowd energy, his love for good music and great people gives him everything he needs to deliver disco-drenched sets that challenge a crowd to have as much fun as he has doing it.
+ 						</p>
+ 						<div class="icons-row">
+ 							<a class="link-icon" href="https://soundcloud.com/rivaldials" target="_blank"><img src="./img/icons/spotify.svg" alt="Spotify"></a>
+ 							<a class="link-icon" href="https://www.instagram.com/djdialspresents/" target="_blank"><img src="./img/icons/instagram.svg" alt="Instagram"></a>
+ 						</div>
+ 					</div>
+
+ 					<div class="band" id="starfari">
+ 						<div class="img-wrap"><img src="./img/band-starfari.jpg" alt="Starfari"></div>
+ 						<h4>Starfari</h4>
+ 						<p>
+ 							For more than a decade and half, Starfari has been on his musical journey which is settling on a unique blend of popping disco beats infused with psychedelic exurban samples. As a new member of The Bash Family, his innaugural Mustache Bash performance are sure to get things kicking off right on the Fire Stage.
+ 						</p>
+ 						<div class="icons-row">
+ 							<a class="link-icon" href="https://open.spotify.com/artist/7hUDSTu4Rh2lAgnb4qKLEh" target="_blank"><img src="./img/icons/spotify.svg" alt="Spotify"></a>
+ 							<a class="link-icon" href="https://www.instagram.com/starfarimusic/" target="_blank"><img src="./img/icons/instagram.svg" alt="Instagram"></a>
+ 							<a class="link-icon" href="https://www.youtube.com/channel/UCGjKYX3fkdaJqQHZdov7DeQ" target="_blank"><img src="./img/icons/youtube.svg" alt="YouTube"></a>
+ 							<a class="link-icon" href="https://www.starfari.com" target="_blank"><img src="./img/icons/www.svg" alt="Website"></a>
+ 						</div>
+ 					</div>
+ 				</div>
+
+ 				<div class="flex-row">
+ 					<div class="band" id="he2she">
+ 						<div class="img-wrap"><img src="./img/band-he2she.jpg" alt="He2She"></div>
+ 						<h4>He2She</h4>
+ 						<p>
+ 							Mix the funky styles of two OG Bash DJs into one kaleidoscopic concoction, and disco dynamite ignites. This duo of disco dynamos was born at the Bash in 2016, and they've been honing their Bash-focused set over the years to create a performance tailor-made for the funkiest disco party on earth.
+ 						</p>
+ 					</div>
+
+ 					<div class="band" id="voss-things">
+ 						<div class="img-wrap"><img src="./img/band-voss-things.jpg" alt="Voss & Things"></div>
+ 						<h4>Voss &amp; Things</h4>
+ 						<p>
+ 							Sparked by a chance encounter on the San Diego dancefloor, VOSS &amp; THINGS are here to make you feel and make you dance. The duo removes the static from the scene – layering live vocals atop eclectic track selections with unparalleled electricity and infectious presence.
+ 						</p>
+ 					</div>
+ 				</div>
+
+ 				<div class="flex-row">
+ 					<div class="band" id="combover">
+ 						<div class="img-wrap"><img src="./img/band-combover.jpg" alt="Combover"></div>
+ 						<h4>Combover</h4>
+ 						<p>
+ 							A funky underground phenom hailing from The Bay up north, this disco-endowed music producer draws inspiration from his groovy granddad's record collection. A smooth operator behind the wheels of steel, Combover earthquaking amalgam of funk, disco, house and breaks laces up a vibe so funky, it'll make you wanna slap yo mama!
+ 						</p>
+ 					</div>
+ 				</div>
+ 			</div>
+ 		</div>
+ 	</section>
+
+ 	<section id="set-times">
+  		<div class="container-1230">
+  			<h3>Set Times</h3>
+  			<div class="flex-row">
+  				<div class="water-stage">
+  					<h4>Water Stage</h4>
+  					<dl>
+ 						<dt>Lee Fields</dt>
+ 						<dd>8:45 pm</dd>
+
+ 						<dt>Bombargo</dt>
+ 						<dd>6:50pm</dd>
+
+ 						<dt>The Mustache Bash Family Band</dt>
+ 						<dd>4:50 pm</dd>
+
+ 						<dt>The B Sections</dt>
+ 						<dd>3:00 pm</dd>
+  					</dl>
+  				</div>
+  				<div class="fire-stage">
+  					<h4>Fire Stage</h4>
+  					<dl>
+ 						<dt>Yung Bae</dt>
+ 						<dd>9:15pm</dd>
+
+ 						<dt>Flamingosis</dt>
+ 						<dd>7:35pm</dd>
+
+ 						<dt>Blu DeTiger (DJ Set)</dt>
+ 						<dd>6:00 pm</dd>
+
+ 						<dt>Peanut Butter Wolf</dt>
+ 						<dd>4:30 pm</dd>
+
+ 						<dt>Starfari</dt>
+ 						<dd>3:00 pm</dd>
+  					</dl>
+  				</div>
+  				<div class="wind-stage">
+  					<h4>Wind Stage</h4>
+  					<dl>
+ 						<dt>Discotoshi</dt>
+ 						<dd>8:05 pm</dd>
+
+ 						<dt>Abby Normal</dt>
+ 						<dd>6:15 pm</dd>
+
+ 						<dt>DJ Dials</dt>
+ 						<dd>4:15 pm</dd>
+  					</dl>
+  				</div>
+  				<div class="earth-stage">
+  					<h4>Earth Stage</h4>
+  					<dl>
+ 						<dt>TBD</dt>
+ 						<dd>8:30pm</dd>
+
+ 						<dt>Voss &amp; Things</dt>
+ 						<dd>7:00pm</dd>
+
+ 						<dt>Combover</dt>
+ 						<dd>5:30 pm</dd>
+
+ 						<dt>He2She</dt>
+ 						<dd>4:00 pm</dd>
+
+ 						<dt>Rusty Midway B2B Max Heegard</dt>
+ 						<dd>2:00 pm</dd>
+  					</dl>
+  				</div>
+  			</div>
+  		</div>
+  	</section>
+
 	<section id="venue">
 		<div class="container-1230">
 			<div class="flex-row">
-				<div class="img-wrap venue-image"><img src="./img/venue.png" alt="Port Pavilion Broadway Pier"></div>
+				<div class="img-wrap venue-image"><img src="./img/venue.jpg" alt="Port Pavilion Broadway Pier"> <img id="venue-arrow" src="./img/venue-arrow.png"></div>
 				<div class="venue-description">
 					<h3>Venue</h3>
-					<h4>Port Pavilion on Broadway Pier</h4>
+					<h4>The Port Pavilion on Broadway Pier</h4>
 					<p>
-						A Basher’s beauty calls for the funkiest of backdrops. For an experience tailor-made to showcase your funk flags flying, The Mustache Bash returns to the Port Pavilion in Downtown San Diego. A special venue featuring indoor and outdoor staging, a 100-foot bar, food vendors and installments from local artists suspended above San Diego Bay, Bashers boogie down above the water to the light show of San Diego’s glowing cityscape. It’s a damn pretty place to party.
+						For an unrivaled arena to showcase of your sexiest '70s self, The Mustache Bash returns to Downtown San Diego's most stunning waterfront venue—the Port Pavilion on Broadway Pier. Suspended above the San Diego Bay, this one-of-a-kind venue features indoor and outdoor staging, a 100-foot bar, food vendors galore and installments from local artists. Bashers will boogie down on the water to a psychedelic light show amid the backdrop of San Diego's glowing cityscape. There's truly no prettier place to party.
 					</p>
 					<a class="ghost-button" target="_blank" href="https://goo.gl/maps/xmahP3vn3Gp">Get Directions</a>
 				</div>
@@ -228,15 +577,15 @@
 			<div class="flex-row">
 				<div class="tradition-description">
 					<h3>Tradition</h3>
-					<h4>15 Years of Funkin', <br>and It's Only Just Begun</h4>
+					<h4>16 Years of Funkin', <br>and It's Only Just Begun</h4>
 					<p>
-						It began with no venue, no stages, no artists or investors; just a group of best buds with a funky vision and a backyard. That vision became a house party where five dollars at the door bought you a bottomless cup, an iPod pumped throwbacks through a makeshift speaker, the living room lit up with disco dance moves, and a family of funky, ‘70s souls came to fruition. Mustaches were mandatory back then. Dudes and dames alike came clad in show-stopping ‘70s outfits. And by the time the cops arrived to shut us down, a legendary holiday was born.
+						It began with no venue, no stages, no artists or investors; just a group of best buds with a funky vision and a backyard. That vision became a house party where five dollars at the door bought you a bottomless cup, an iPod pumped throwbacks through a makeshift speaker, the living room lit up with disco dance moves, and a family of funky, '70s souls came to fruition. Mustaches were mandatory back then. Dudes and dames alike came clad in show-stopping '70s outfits. And by the time the cops arrived to shut us down, a legendary holiday was born.
 					</p>
 					<p>
-						15 years later, The Mustache Bash has grown into SoCal’s definitive funk-fest, a special day each year when friends get together to set their dancin’ spirits asail and fly their funk flags undeniably high.
+						16 years later, The Mustache Bash has grown into SoCal's definitive funk-fest, a special day each year when friends get together to set their dancin' spirits asail and fly their funk flags undeniably high.
 					</p>
 				</div>
-				<div class="tradition-image img-wrap"><img src="./img/tradition.png" alt="Mustache Bash Tradition"></div>
+				<div class="tradition-image img-wrap"><img src="./img/tradition.jpg" alt="Mustache Bash Tradition"></div>
 			</div>
 		</div>
 	</section>
@@ -248,18 +597,222 @@
 	    <div class="swiper-button-prev swiper-button-white"></div>
 	</section>
 
+	<section id="roller-disco">
+		<div class="container-1230">
+			<div class="flex-row">
+				<div class="roller-disco-image img-wrap"><img src="./img/roller-disco.jpg" alt="Roller Disco"></div>
+				<div class="roller-disco-description">
+					<h3>Roller Disco</h3>
+					<h4>Rollin' With the Homies</h4>
+					<p>
+						Just as it was in the '70s, roller-disco was all the craze at last year's Bash. So, we're brining it back for another round! Lace up some complementary skates and come spin your wheels to tunes from underground savants like Combover, Voss &amp; Things, HE2SHE and more - a classy and Bashy lineup guaranteed to keep the fever burnin' hot!
+					</p>
+				</div>
+			</div>
+		</div>
+	</section>
+
 	<section id="family-band">
 		<div class="container-1230">
 			<div class="flex-row">
-				<div class="family-band-image img-wrap"><img src="./img/family-band.png" alt="Mustache Bash Family Band"></div>
 				<div class="family-band-description">
 					<h3>We Are Family</h3>
 					<!-- non-breaking space for mobile -->
 					<h4>The Mustache Bash Family&nbsp;Band</h4>
 					<p>
-						Like a great mustache, an unforgettable funk band is cultivated through a lifetime of love and a whole lotta soul. Finely groomed into its funkadelic fruition as a perennial favorite at the Mustache Bash, our Family Band is musicianship at its finest, electric at its funkiest and 'Stache Bash to its core. The all-star squad of local musicians and dancers takes the classics and pedestals them on goldfish platforms with a chemistry only found in that special place and time on the pier. Prepare for an unprecedented showing from the tribute band that sets precedent for modern '70s swag.
+						Like a great mustache, an unforgettable funk band is cultivated through a lifetime of love and a whole lotta soul. Finely groomed into its funkadelic fruition as a perennial favorite at the Mustache Bash, our Family Band is musicianship at its finest, electric at its funkiest, and 'Stache Bash to its core. The all-star squad of local musicians and dancers takes the classics and pedestals them on goldfish platforms with a chemistry only found in that special place and time on the pier. Be sure to stretch before the set—this perennial Basher favorite will have you rump shakin' and cupcakin' for every song!
 					</p>
 				</div>
+				<div class="family-band-image img-wrap"><img src="./img/family-band.jpg" alt="Mustache Bash Family Band"></div>
+			</div>
+		</div>
+	</section>
+
+	<section id="preparty">
+ 		<div class="container-1230">
+ 			<div class="flex-row">
+ 				<div class="preparty-image img-wrap"><img src="./img/preparty.jpg" alt="Preparty"></div>
+ 				<div class="preparty-description">
+ 					<h3>The&nbsp;Preparty</h3>
+ 					<h4>Get Things Started Off Right</h4>
+ 					<p>
+ 						Back in the early days, when the Bash was just a humble house party, the Mustache Bash Family Band was born and bread in a funky little jam den known as Winstons OB. Winstons was the incubator—the iconic live music venue where we watched the Fam Band's legendary members grow into the unstoppable forces they are today. This year, we're headed back to Winstons for the first-ever official Bash Pre Party—a '60s-themed shindig with live jams hosted by Bash veteran, Ru Ramo, and other friends of the Fam Band. We're kickin' it old school for this one, so throw on some tie-dye come down to Winston's OB Friday night for the Mustache Bash warmup celebration!
+ 					</p>
+ 					<!-- <div class="cta">
+ 						<a href="#tickets" id="preparty-cta">Get Tickets</a>
+ 					</div> -->
+ 				</div>
+ 			</div>
+ 		</div>
+ 	</section>
+
+	<section id="afterparty">
+ 		<div class="container-1230">
+ 			<div class="flex-row">
+ 				<div class="afterparty-description">
+ 					<h3>The&nbsp;Afterparty</h3>
+ 					<h4>Disco for Dessert</h4>
+ 					<p>
+ 						The Bash is too much mojo to be bottled into a single day, so naturally, a buck wild afterparty is in order! To keep the party pumping all night, we're teaming up with Same Same But Different Festival for the second year running to host the official Bash Afterparty at Spin Nightclub. Soak in the grooves as Spin transforms into a disco wonderland with multiple stages featuring exclusive sets from Flamingosis and a super secret headliner (trust us on this one!), along with live funk and DJ performances in the infamous "Funk Den."" Tack on an afterparty pass at checkout – just $35 bones to Bash the night away!
+ 					</p>
+ 					<div class="cta">
+ 						<a href="#tickets" id="afterparty-cta">Get Tickets</a>
+ 					</div>
+ 					<div class="sponsors img-wrap"><img src="./img/afterparty-sponsors.png" alt="Afterparty Sponsors"></div>
+ 				</div>
+ 				<div class="afterparty-image img-wrap"><img src="./img/afterparty.jpg" alt="Afterparty"></div>
+ 			</div>
+ 		</div>
+ 	</section>
+
+ 	<section id="vip-experience">
+ 		<div class="container-1230">
+ 			<div class="flex-row">
+ 				<div class="vip-image img-wrap"><img src="./img/vip.jpg" alt="VIP"></div>
+ 				<div class="vip-description">
+ 					<h3>VIP Experience</h3>
+ 					<h4>Upgrade Your Ticket</h4>
+ 					<p>
+ 						Like a great mustache, an unforgettable funk band is cultivated through a lifetime of love and a whole lotta soul. Finely groomed into its funkadelic fruition as a perennial favorite at the Mustache Bash, our Family Band is musicianship at its finest, electric at its funkiest and 'Stache Bash to its core. The all-star squad of local musicians and dancers takes the classics and pedestals them on goldfish platforms with a chemistry only found in that special place and time on the pier. Prepare for an unprecedented showing from the tribute band that sets precedent for modern '70s swag.
+ 					</p>
+ 				</div>
+ 			</div>
+ 		</div>
+ 	</section>
+
+ 	<section id="tickets">
+		<div class="container-1230">
+			<div class="flex-row">
+				<div class="tickets-description">
+					<h3>Tickets</h3>
+					<h4>Get 'Em While The Gettin' is Good</h4>
+					<p>
+						Ticket prices will increase incrementally as fewer become available and demand increases. Capacity is limited and tickets will sell out early! In other words: don’t snooze on getting your Bash tickets – FOMO ain't no fun. If you're 21+ and ready to funk, we have a pass for you. All sales are final, but don't worry, you won't want to miss this anyway.
+					</p>
+					<div class="flex-row flex-row-mobile">
+						<div class="prices" id="tickets-list">
+ 						</div>
+						<div class="img-wrap ticket-image"><img src="./img/ticket.jpg"></div>
+					</div>
+				</div>
+				<div class="tickets-flow">
+ 					<div class="progress">
+ 						<div class="leg"></div>
+ 						<div class="leg"></div>
+ 						<div class="leg"></div>
+ 						<div class="flex-row flex-row-mobile ticks">
+ 							<div class="active"><span>Tickets</span></div>
+ 							<div><span>Info</span></div>
+ 							<div><span>Payment</span></div>
+ 							<div><span>Review</span></div>
+ 						</div>
+ 					</div>
+ 					<div class="steps">
+ 						<div class="step active">
+ 							<div class="quantity-selector">
+								<h6>Quantity</h6>
+ 								<div class="quantity-controls">
+ 								</div>
+ 							</div>
+ 							<div class="step-footer">
+ 								<button id="confirm-quantity">Next</button>
+ 							</div>
+ 						</div>
+ 						<div class="step">
+ 							<form method="post" action="/" name="personal-info">
+ 								<h6>Enter Your Info</h6>
+ 								<fieldset name="name">
+ 									<label data-error-message="Please enter your first and last name">Full Name</label>
+ 									<input type="text" name="name" placeholder="Purchaser's Name" maxlength="45">
+ 								</fieldset>
+ 								<fieldset name="email">
+ 									<label data-error-message="Please enter your email">Email</label>
+ 									<input type="email" name="email" placeholder="Enter your email for confirmation" maxlength="100">
+ 								</fieldset>
+ 								<fieldset name="marketing-opt-in">
+ 									<input id="marketing-opt-in-checkbox" type="checkbox" name="marketing-opt-in">
+ 									<label for="marketing-opt-in-checkbox">Send me all Bash and partner news</label>
+ 								</fieldset>
+ 							</form>
+ 							<div class="flex-row flex-row-mobile step-footer">
+ 								<button id="enter-personal-info">Next</button>
+ 								<a href="#" id="back-to-quantity">Back to Previous</a>
+ 							</div>
+ 						</div>
+ 						<div class="step">
+ 							<form method="post" action="/" name="payment-info">
+								<h6>Enter Your Payment Info</h6>
+ 								<fieldset name="payment-info">
+ 									<label>Credit Card Number</label>
+ 									<div id="card-number"></div>
+ 								</fieldset>
+ 								<div class="flex-row flex-row-mobile">
+ 									<fieldset name="expiration">
+ 										<label>Expiration Date</label>
+ 										<div id="expiration"></div>
+ 									</fieldset>
+ 									<fieldset name="cvv">
+ 										<label>CVV <span title="The 3 or 4 digit code on the back of your card">i</span></label>
+ 										<div id="cvv"></div>
+ 									</fieldset>
+ 								</div>
+ 							</form>
+ 							<div class="flex-row flex-row-mobile step-footer">
+ 								<button id="enter-payment-info">Next</button>
+ 								<a href="#" id="back-to-personal">Back to Previous</a>
+ 							</div>
+ 							<div class="apple-pay">
+ 								<p>- or -</p>
+ 								<div id="apple-pay-payment-option"><div class="apple-pay-button apple-pay-button-white"></div></div>
+ 							</div>
+ 						</div>
+ 						<div class="step">
+ 							<div class="review-order">
+ 								<h6>Review and Purchase</h6>
+ 								<p class="intro">
+ 									Please review your payment details and order summary. ALL SALES ARE FINAL!
+ 								</p>
+ 								<div class="flex-row summary">
+ 									<div class="reservation-details">
+ 										<strong>Reservation Details</strong>
+ 										<p>
+ 											<span class="reservation-details-name"></span><br>
+ 											<span class="reservation-details-email"></span>
+ 										</p>
+ 									</div>
+ 									<div class="order-summary">
+ 										<strong>Order Summary</strong>
+ 										<dl>
+
+ 										</dl>
+ 									</div>
+ 								</div>
+ 							</div>
+ 							<div class="flex-row flex-row-mobile step-footer">
+ 								<button id="confirm-order">Purchase</button>
+ 								<a href="#" id="back-to-payment">Back to Previous</a>
+ 								<p id="grand-total" class="total">Total $<span>0</span></p>
+ 							</div>
+ 						</div>
+ 						<div class="step">
+ 							<div class="order-confirmation">
+ 								<h6>
+ 									Congratulations!<br>
+									<!-- non-breaking space for mobile -->
+ 									You're Coming to the&nbsp;Bash!
+ 								</h6>
+ 								<p class="confirmation-number">Confirmation: <span></span></p>
+ 								<p class="tickets-link"><a href="#" rel="nofollow" target="_blank">View Tickets</a></p>
+ 								<p>
+ 									Thank you for your purchase. A confirmation email has been sent to the address you provided (be sure you check your spam!). Bring your tickets and a valid photo ID for each guest at the door. Now grow out those staches and get yourselves some funky threads. We’ll be seeing you March 25th, 2023 for yet another amazing Bash!
+ 								</p>
+								<p class="confirmation-footer">
+									Don't forget to check out our <a href="#faq">FAQ</a> before coming! Email <a href="mailto:contact@mustachebash.com">contact@mustachebash.com</a> for all other questions.
+								</p>
+ 							</div>
+ 						</div>
+ 					</div>
+ 				</div>
 			</div>
 		</div>
 	</section>
@@ -306,7 +859,7 @@
 					</div>
 					<div class="faq">
 						<h5>Can I Smoke or Vape at the Bash?</h5>
-						<p>The Port Pavilion is 100% smoke-free venue, and with that, the Bash is a NON-SMOKING event. No cigarettes, e-cigs, or vapes please. </p>
+						<p>The Port Pavilion is 100% smoke-free venue, and with that, the Bash is a NON-SMOKING event. No cigarettes, e-cigs, or vapes please.</p>
 					</div>
 					<div class="faq">
 						<h5>Can I Bring a Professional Camera?</h5>
@@ -324,7 +877,7 @@
 					</div>
 					<div class="faq">
 						<h5>How Dressed Up Should I Get?</h5>
-						<p>It's tradition to go all out! Don’t be the only goof without a '70s get-up. A complimentary coatcheck is available, so get weird with your best digs!</p>
+						<p>It's tradition to go all out! Don't be the only goof without a '70s get-up. A complimentary coatcheck is available, so get weird with your best digs!</p>
 					</div>
 					<div class="faq">
 						<h5>How Should I Get There &amp; Back?</h5>
@@ -349,6 +902,13 @@
 		</div>
 	</section>
 
+	<section id="partners">
+		<div class="container-1230">
+ 			<h5>Special Thanks to Our Sponsors!</h5>
+ 			<div class="img-wrap partner-image"><img src="./img/partners.png"></div>
+ 		</div>
+	</section>
+
 	<footer>
 		<div id="froman">
 			<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 255.26 239.78"><defs><style>.svg-froman{fill:#273852;}</style></defs><title>froman</title><path class="svg-froman" d="M4188.33,463.61c-.57,7.95-5.64,1.5-5.64,1.5-4.36-6.05-11.17-9.3-17-11a3.14,3.14,0,0,1-.18.37c-.68,1.26-1.83,1-3,1.25-1.61.3-1.33.4-2.41,1.61a8.49,8.49,0,0,1-11,0c-1.07-1.21-.8-1.31-2.41-1.61-1.13-.22-2.28,0-3-1.25a3.14,3.14,0,0,1-.18-.37c-5.82,1.74-12.63,5-17,11,0,0-5.08,6.45-5.65-1.5,0,0-5.77,7.26,0,11.3s22.6,0,22.6,0,10.49-3.35,11.07-7c.57,3.69,11.06,7,11.06,7s16.84,4,22.6,0S4188.33,463.61,4188.33,463.61Z" transform="translate(-4026.07 -236.93)"/><polygon class="svg-froman" points="179.42 190.42 179.42 190.41 179.42 190.42 179.42 190.42"/><path class="svg-froman" d="M4216.19,398.55c-13.29-2.06-34.61,0-34.61,0a76.25,76.25,0,0,0-14.58,3c-7.73,2.43-12.3,2.36-12.3,2.36h-.08s-4.56.07-12.29-2.36a76.4,76.4,0,0,0-14.58-3s-21.29-1.91-34.61,0l.5,8.61.82,0c.53.05,3,.29,3.91,3.86s3,10.9,3,10.9,1.93,7.95,8.33,10.6,10.4,3,18.48,2.45c9.62-.67,13.77-6.49,13.77-6.49a57.47,57.47,0,0,0,8.32-14.88,4.26,4.26,0,0,1,4.34-3.24h.08a4.26,4.26,0,0,1,4.34,3.24,57.33,57.33,0,0,0,8.33,14.88s5.34,6.27,13.77,6.69c8.08.41,12,.16,18.48-2.65a13.65,13.65,0,0,0,5.87-5.23h0A20.3,20.3,0,0,0,4208,422s2.1-7.33,3-10.9a4.81,4.81,0,0,1,3.91-3.86l2.36-8.44S4216.46,398.59,4216.19,398.55Z" transform="translate(-4026.07 -236.93)"/><path class="svg-froman" d="M4201.62,381.42c4.43,1.05,7.58,9.28,12,10.34,9.67-18.26-5.54-43.84,14.54-63.11-12.27-5.56-14.91-.32-38.74.68-3.35,4.59-5.68,13.4-2.75,22.24,5.78-4,10.91-2,15.56-4.72-3.58-1-2.11-7.9,2.1-5.58,5.55,11.07-12.9,6.35-17.5,11.83.9,10-.88,11.15-2.47,16.58,6.91,1.66,10.73,9.6,15.57,10.75,4.89-2.3,6.8-11.21,4.38-17.22-2.06.29-8.14,2.11-5-4.21C4209.63,355.92,4207.19,377.74,4201.62,381.42Z" transform="translate(-4026.07 -236.93)"/><path class="svg-froman" d="M4183.7,350.29c-2.76-2.76-5.26-1.69-9.11-2.92,15.51-.56,4.61-2.38,13.49-18.32a34.53,34.53,0,0,0-26.9.58c-15.48,7.85-16.71,21-23,29.62,16.64-3.75,22.82,5.88,44.58,10C4185.55,366.16,4187.69,354.57,4183.7,350.29Zm-19.55-10.87c-3.93,7.12-2.8,11.3-1.44,15.45,1.82-.28,2.94-3.93,5.77,1.35-14.14,12.42-8.45-31.15,2.12-18.34C4169.62,342.25,4165,341.44,4164.15,339.42Z" transform="translate(-4026.07 -236.93)"/><path class="svg-froman" d="M4255.38,395.86c5.69.17,1.5,8.36-2.77,2.73-7.87-11.78,10.79-40.43,21.58-41.22-16-2.68-16.06-15.19-19.94-16.56-14.46,15.71,1.42,52.49-39.79,78.69,5,1.79-6.28,12.52-8.47,17.05,26.33,1,48.83-23.51,32.33-21.21-4.54-.07,3.39-9.89,6.64-1.16,3.45,10.58-20.8,24.32-39.5,23.49-11.26,17.5,5.76,18.29,10.53,22.65,24.72-24.19,62-51.2,65.17-101.72C4262.5,353,4244.43,394.75,4255.38,395.86Z" transform="translate(-4026.07 -236.93)"/><path class="svg-froman" d="M4253.25,340.14c-6.08-11.79-15.15-11-23.9-11-24.86,24.28,9.27,45.13-2.53,62.59-3.82-12.46,2-7.15,1.54-10.26-.19-7-8.51-19.35-9.69-33-2,10.51,2.08,33.37-3.93,43.65,6.66,2.74-7.39,23.76-.73,26.5,48-34.39,8.68-49.21,17.8-71.55,2-3,3.41-2.43,5-1.75,7.53,4.86-.94,7-3.25,10.13-3.64,6.72,8.63,21.6,5.2,34.75C4246.08,375.46,4244.73,347.73,4253.25,340.14Z" transform="translate(-4026.07 -236.93)"/><path class="svg-froman" d="M4163.65,242.49c-7.29-3.79-13.46-5.56-19.38-5.56-5.65,0-10.63,1.56-16.41,3.36a114.8,114.8,0,0,1-16.36,4.16c1.26,18.33,15.9,34.47,23.77,43.15,1.76,1.94,3.18,3.5,4.14,4.72a33.24,33.24,0,0,1,7-10.36c1.89-2.1,3.54-3.92,4.14-6.06h0c-2.46,0-6.2-3.5-6.51-6.95-.39-4.25,4.44-5.78,7.36-6.31l.16,0,0,.16c3.53,12.32-.39,16.64-4.55,21.22-2.44,2.68-5,5.46-6.29,10,1.21,1.83,2.62,3.8,4.12,5.88,5,7,11.2,15.6,16.24,27.87,3.36-1.5,8.35-3.21,17.07-3,.8-.83,1.16-2.44,1-4.68-.32-6.19-4.41-16.57-9-20.36-2.72,3.48-4.87,5.25-6.39,5.25a1.7,1.7,0,0,1-1.27-.56c-1-1-1.36-3.31-1.2-7.05v-.06l0-.05a5.51,5.51,0,0,1,4.18-2.14c3.33,0,7.16,3.41,10.51,9.35,3.88,6.89,6.42,16.43,4.1,20.75a37.24,37.24,0,0,1,4.16,1,24.32,24.32,0,0,0,7.27,1.27,22.28,22.28,0,0,0,3.64-.31c.63-13.84-7.14-26.42-15.37-39.73C4171.11,273.39,4162.12,258.86,4163.65,242.49Z" transform="translate(-4026.07 -236.93)"/><path class="svg-froman" d="M4211.53,306.64h0c-5.47,0-11.59-5.15-16.78-14.14-5.34-9.25-9.13-22.34-5.63-28.39,1.29-2.24,3.46-3.25,6.42-3a13.87,13.87,0,0,1,10.26,5.75,11.58,11.58,0,0,1,1.14,10.29l0,.17-.18-.06c-7.43-2.68-7.21-6-7-8.63.16-2.41.29-4.31-5.11-5.2h-.27a3.88,3.88,0,0,0-3.53,1.92,10,10,0,0,0-1.12,5.17c0,5.93,2.67,14.37,6.8,21.49,4.64,8,10.09,12.56,15,12.56,2.83,0,5.49-1.5,7.89-4.48,3.93-4.88,2.78-8.45,1-13.86-2.09-6.48-5-15.36-1-31.87-11.89-9.84-21.36-14.23-30.68-14.23a51.9,51.9,0,0,0-11.17,1.55,51.52,51.52,0,0,1-11.11,1.54h-.48c-2.32,14.82,6.16,28.31,15.13,42.59,8.18,13,16.63,26.45,16.13,41,3.64-.26,7-.82,10.17-1.36a64.91,64.91,0,0,1,10.67-1.22,22.26,22.26,0,0,1,10.65,2.51c1.63-6,.67-18.16-5.28-31.05C4220.21,303,4216.23,306.64,4211.53,306.64Z" transform="translate(-4026.07 -236.93)"/><path class="svg-froman" d="M4280.23,343a89.84,89.84,0,0,1-1.39-14.47c-1.15-1.17-3.43-1.87-6.13-1.87a8.84,8.84,0,0,0-4.17.8c-1.27.88-1.89,1.58-2,2.21s.45,1.29,1.13,2.08a8.9,8.9,0,0,1,2.56,7.55l0,.17h-.17c-2.25-.19-4.89-1.13-5.34-6.82,0-3.28,1.29-7.16,7.43-7.16a16.75,16.75,0,0,1,2.06.13c-.43-.25-.93-.5-1.48-.77-4.21-2.12-11.26-5.65-7.14-17.69l0-.15.16,0c1.13.23,3.34,3.9,3.16,5.69a1.07,1.07,0,0,1-1.15,1,4.46,4.46,0,0,1-1.73-.49c-2.05,7.1,7.17,10.63,11.61,12.33.61.23,1.11.42,1.5.59a58.11,58.11,0,0,0-1.23-15.13c-1.66-7.55-5.74-17.66-15.76-23-8.71,12.65-6.88,19.94-4.94,27.66,1.69,6.69,3.43,13.61-2,24.33a15.11,15.11,0,0,1,3.63,4.87c2.77,4.94,6.21,11.08,22.11,12.27C4281.77,353.06,4281.05,348.39,4280.23,343Z" transform="translate(-4026.07 -236.93)"/><path class="svg-froman" d="M4255.93,316.41c-1.83-7.46-3.73-15.17,4.76-29.31-.13-.17-.34-.52-.78-1.25-2.46-4.06-9.92-16.4-17.69-17.05a20.38,20.38,0,0,0-4.11,21.52c1,2.31,2.28,3.74,3.42,3.74a1.46,1.46,0,0,0,1.05-.48,3.75,3.75,0,0,1,2.38-1.34c.81,0,1.36.68,1.36,1.69a2.73,2.73,0,0,1-2.77,2.8l-.47,0c-3.54-.87-6.16-4.27-7.19-9.33-1.28-6.28.11-15,5.18-19a5.79,5.79,0,0,1-.85-1c-1.49-1.91-4.57-5.88-18.93-11.88-5.25,15.06-1,26.54,3.48,38.69,3.73,10.1,7.59,20.55,5.52,33.26a6.38,6.38,0,0,0,2.19.34h0c4.49,0,12.23-3.38,14.14-8.67,1.24-3.44-.28-7.07-4.41-10.5a1.89,1.89,0,0,0-1-.42c-.46,0-.65.49-.9,1.24s-.49,1.49-1.24,1.49a3.15,3.15,0,0,1-1.83-1,1.82,1.82,0,0,1-.46-2.05,3.56,3.56,0,0,1,3.2-1.79,3.22,3.22,0,0,1,1.46.32c6.39,4.47,7.17,8.75,6.7,11.56-.72,4.27-4.8,8.14-10.53,10,7.17.58,12.69,4.15,16.43,10.61l0,.06C4259,328.88,4257.51,322.82,4255.93,316.41Z" transform="translate(-4026.07 -236.93)"/><path class="svg-froman" d="M4096.64,434.13c-6.11,0-16.06-3.39-28.77-19.52-8-10.15-13.31-20.76-13.31-23.33a.93.93,0,0,1,.11-.5c.21-.36.71-.29,1.45.33,5.69,3.87,8.46,6.61,8.68,8.61a3.16,3.16,0,0,1-1.18,2.55c-.67.72-1.2,1.28-.71,2.2a86.26,86.26,0,0,0,13.9,17.56c7.64,7.22,15,10.6,21.92,10-4.6-25.05-22.15-38.37-39.14-51.25-14.41-10.93-28-21.27-33.05-38-2.42,13.24,4.47,37,22.59,57.66l-.25.25c-.12-.1-12.54-10.45-21-30.66-.7,16,.58,27.84,8.77,40.75,7.92,12.48,22.5,26.29,50.3,47.63-2.24-14-14.69-30.84-31.14-42.11-.74-.18-1,.56-1.35,1.37s-.63,1.61-1.44,1.61c-1,0-2.62-1.47-5.14-4.76-1.23-1.71-1.66-2.85-1.33-3.49a1.09,1.09,0,0,1,1.07-.5c3.25,0,12.73,6,21.67,14.84,14.72,14.6,18.83,27.55,20,34.32a9.08,9.08,0,0,1,3.38-2.84c4.2-2.57,9.95-6.09,6.43-22.91A16.22,16.22,0,0,1,4096.64,434.13Z" transform="translate(-4026.07 -236.93)"/><path class="svg-froman" d="M4076.85,351.62c-13.47-10.67-30.22-23.95-39-45.9-4.69,6.34-5.34,11.29-5.91,15.67-.38,2.83-.73,5.51-2.18,8.1,2.94,11.29,15.51,17.2,27.66,22.91,14.6,6.86,28.38,13.35,23.66,28.4l-.07.24-.2-.14c-4.46-3.09-6.41-5-6.51-6.46-.06-.91.59-1.52,1.29-2.15,1.12-1,2.4-2.22.89-5.16-4.36-5.91-12.38-9.71-20.88-13.72-11.41-5.4-23.2-11-26.88-22.33-3.55,21.27,13.41,34.14,31.35,47.76,13.25,10.05,26.94,20.45,34,35-.82-13.43,0-22.79,6.29-33.06C4099.37,369.48,4088.93,361.2,4076.85,351.62Z" transform="translate(-4026.07 -236.93)"/><path class="svg-froman" d="M4084.79,319.59c-9.93-1.76-18.51-3.28-22.6-11.19a8.37,8.37,0,0,1-.26-5.95,5.16,5.16,0,0,1,.84-1.39,6.41,6.41,0,0,1,2.49-1.76,8.59,8.59,0,0,1,1.61-.48l.12,0,.06.11c.61,1,1.17,1.88,1.69,2.75l0,.05a12,12,0,0,1,.3,1.61,20.09,20.09,0,0,1-1.22,8.87c3,3,8.48,3.93,15.44,5.13,9.43,1.63,21,3.64,32.22,11.6-6.22-6.44-11.51-11.26-16.21-15.54-10.65-9.7-18.33-16.7-27.31-33.62-.64-1.21-1.29-2.47-1.93-3.75s-1.25-2.53-2-4.06l0,0-.34-.73-.18-.38c-.12-.25-.24-.5-.35-.75l-.09.14-.05.1c-.23.42-.46.83-.7,1.23l-.17.3c-.26.45-.52.88-.76,1.27-.13.21-.26.4-.38.6l-.12.18c-.36.56-.73,1.1-1.09,1.63l0,0-.58.81c-.24.32-.48.64-.73.95l-.08.11-.33.41c-.23.28-.45.56-.68.83l-.48.58-.68.76c-.14.15-.28.31-.43.46s-.46.49-.71.74l-.78.76-.08.09-.15.14c-.55.52-1.12,1-1.75,1.58l-.14.12-.83.7-.28.23-.49.4-.7.56-1,.74-.45.35-1.12.88h0l-.26.2-.37.29c-.53.42-1.09.88-1.71,1.4l-.18.15-.48.41c-.31.27-.62.56-.93.85-3.76,3.55-6.15,7.57-8,13.43,5.54,13,11.8,21.73,19.14,26.68,7,4.7,13.89,5.33,19.75,5.33,2.18,0,4.35-.1,6.44-.2s4.05-.19,6-.19c6.84,0,13.94,1.08,19.52,8.91l.16.22-.27.06a48.23,48.23,0,0,1-9,1.21c-2.06,0-3.3-.39-3.8-1.18-.63-1,.05-2.41.65-3.66.45-.92.87-1.8.64-2.25a.74.74,0,0,0-.57-.35h-.05l0,0c-.58-.56-2-.81-4.69-.81-1.62,0-3.58.1-5.67.19-2.57.12-5.5.26-8.48.26-8.33,0-14.3-1.12-18.64-3.5,3.9,4.4,9.78,9,16,13.85,12.44,9.74,25.29,19.8,25.3,30.44,10.07-10.27,16.22-12.31,22.15-14.28a39.22,39.22,0,0,0,11-5.09C4122,326.19,4101.38,322.53,4084.79,319.59Z" transform="translate(-4026.07 -236.93)"/><path class="svg-froman" d="M4142,312.65a105,105,0,0,1-15-9.84c-13.83-11.44-20.18-19.05-18.9-22.62.53-1.47,2.35-2.21,5.42-2.21l.94,0h.07l.05.05c1.74,1.8,2.5,3.13,2.39,4.2s-.95,1.6-1.77,2.17-1.55,1.07-1.66,1.92.41,1.91,1.57,3.29c11.53,12.45,21.59,18.31,29.68,23a79.27,79.27,0,0,1,10.63,6.91c-8.56-15.46-17.11-25.48-24.67-34.34-10.58-12.4-18.94-22.2-21.55-40.73a86.46,86.46,0,0,0-11.49,1.39c-.94.18-1.87.38-2.85.62-1.19.29-2.36.6-3.47.94-.64.2-1.31.42-2.06.69-1.23.43-2.41.91-3.49,1.4-.67.3-1.26.58-1.79.86l-.59.31c-.59.32-1.17.65-1.75,1l-.62.39-.12.08-.23.14c-.34.23-.68.46-1,.72l-.32.23-.14.1c-.09.07-.19.13-.27.2l-.46.35c-.36.29-.74.59-1.12.92s-.77.69-1.12,1h0l-.15-.1.12.13c-.32.3-.63.62-.93.94s-.45.46-.67.7l-.19.23-.15.17-.83,1-.12.16-.08.1c-.2.25-.39.49-.57.74l-.14.2c-.34.47-.68,1-1,1.52l-.08.12-.11.17c-.15.24-.3.49-.46.77l-.23.41c-.19.34-.37.68-.55,1s-.29.55-.43.83-.3.64-.44,1c-.07.14-.12.27-.18.4-.15.33-.28.64-.41.94l-.21.51s0,0,0,0,0,0,0,0a104.47,104.47,0,0,0,4.26,9.57,97.26,97.26,0,0,0,8,13.14c7.37,10.16,15.58,17.47,23.53,24.53,9.11,8.1,17.73,15.77,23.3,26.54-9.53-33.1-14-41.08-21.53-46.63a3.82,3.82,0,0,0-2.27-1c-1.15,0-1.95,1-2.72,2s-1.54,1.95-2.65,1.95h0c-1.25,0-2.7-1.26-4.58-4l-.07-.1.07-.1c1.85-2.62,4-3.95,6.53-3.95,6.9,0,15.51,10.8,20.94,26.26,2.18,6.22,3.71,11.24,5.06,15.66,2.68,8.78,4.79,15.73,10.3,26.67,1.94-2.12,3.3-5,4.87-8.41,3.13-6.76,7-15.16,18-21.63C4156.87,321.2,4150,317.23,4142,312.65Z" transform="translate(-4026.07 -236.93)"/></svg>
@@ -359,8 +919,10 @@
 				<li><a href="#venue">Venue</a></li>
 				<li><a href="#tradition">Tradition</a></li>
 				<li><a href="#gallery">Gallery</a></li>
+				<li><a href="#afterparty">Afterparty</a></li>
+				<li><a href="#family-band">Family Band</a></li>
  				<li><a href="#tickets">Tickets</a></li>
-				<li><a href="#faq">Info</a></li>
+				<li><a href="#faq">FAQ</a></li>
 			</ul>
 		</nav>
 		<aside class="social">
@@ -377,7 +939,7 @@
 			All Sales are Final
 		</p>
 		<p id="copyright">
-			&copy;2011-2022 Mustache Bash. All Rights Reserved.
+			&copy;2011-2023 Mustache Bash. All Rights Reserved.
 		</p>
 	</footer>
 
