@@ -325,7 +325,12 @@ header {
 	padding-bottom: 2em;
 
 	.tagline {
-		@media (max-width: @mobile) {
+		@media (max-width: 390px) {
+			margin: 0 auto 1em;
+			width: 270px;
+		}
+
+		@media (min-width: 400px) and (max-width: @mobile) {
 			padding: 0 3em;
 			margin-bottom: 3em;
 		}
@@ -546,6 +551,12 @@ header {
  		margin: 0;
  		padding: 0;
  		text-transform: uppercase;
+
+ 		@media (max-width: @mobile) {
+ 			&.rusty {
+	 			text-shadow: @white 1px 1px;
+	 		}
+ 		}
  	}
 
  	dt {

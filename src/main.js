@@ -108,6 +108,8 @@ function importGallery(r) {
 	return r.keys().reduce((obj, cur) => (obj[cur.replace('./img/gallery/', '')] = r(cur), obj), {});
 }
 const galleryImages = importGallery(require.context('./img/gallery', false, /^\..+\.jpg$/));
+// For some reason the 'slideNextTransitionEnd' event fires on page load, so use this flag to avoid firing GA events unless someone truly clicks through
+let firstSlideTransitionEnded = false;
 try {
 	const gallerySize = window.innerWidth > 768 ? 'Desktop' : 'Mobile',
 		slidesHtml = Object.keys(galleryImages).filter(key => (new RegExp(gallerySize)).test(key)).map(image => {
@@ -138,12 +140,14 @@ try {
 		},
 		on: {
 			slideNextTransitionEnd: () => {
-				if(typeof window.gtag === 'function') {
+				if(typeof window.gtag === 'function' && firstSlideTransitionEnded) {
 					window.gtag('event', 'click', {
 						event_category: 'gallery',
 						event_label: 'Next Slide'
 					});
 				}
+
+				if(!firstSlideTransitionEnded) firstSlideTransitionEnded = true;
 			},
 			slidePrevTransitionEnd: () => {
 				if(typeof window.gtag === 'function') {
@@ -434,10 +438,11 @@ function purchaseFlowInit({hostedFieldsInstance, applePayInstance}) {
 				updateCartQuantities();
 			});
 		} else {
+			document.querySelector('.ticket-image').style.display = 'none';
 			document.querySelector('.tickets-flow').innerHTML = `
 				<div class="sales-off">
 					<h5>
-						Tickets are currently not on sale!
+						Tickets on sale Friday 1/20/23, 9am!
 					</h5>
 				</div>`;
 
