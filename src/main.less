@@ -159,6 +159,16 @@ header {
 			text-transform: uppercase;
 			color: @off-white;
 		}
+
+		.tickets-nav {
+			background: @yellow;
+			padding: .5em 1.5em;
+			border-radius: 400px;
+
+			a {
+				color: @black;
+			}
+		}
 	}
 
 	#menu-icon {
@@ -226,7 +236,7 @@ header {
 }
 
 #hero {
-	background: @blue;
+	background: @gray;
 	box-sizing: border-box;
 
 	.container-1230 {
@@ -263,8 +273,9 @@ header {
 		@media (min-width: @tablet + 1) {
 			position: absolute;
 			width: 13.125em; /* 210/16 */
-			right: 20em; /* 480/16 */
-			bottom: 2.25em;
+			right: 32em; /* 480/16 */
+			bottom: 10.45em;
+			transform: rotate(5.5deg);
 		}
 
 		a {
@@ -283,6 +294,10 @@ header {
 			@media (max-width: @mobile) {
 				background: @yellow;
 	 			text-align: center;
+			}
+
+			@media (min-width: @mobile) {
+				display: none;
 			}
 		}
 
@@ -305,61 +320,46 @@ header {
 	}
 }
 
-#tagline {
+#tagline-video {
 	background-color: @gray;
-	padding: 1em 5em; /* 35/16 */
+	padding-bottom: 2em;
 
-	@media (min-width: @tablet + 1) {
-		padding: 2em 0; /* 50/16 */
-	}
-
-	h3 {
-		font-weight: 900;
-		font-size: 1.375em; /* 22/16 */
-		color: @black;
-		text-transform: uppercase;
-		margin: 0;
-		margin-bottom: .5em;
-		padding: 0;
-		line-height: 1em;
-
-		@media (min-width: @tablet + 1) {
-			color: fade(@white, 50%);
-		}
-
+	.tagline {
 		@media (max-width: @mobile) {
-			font-size: 2.5em;
-			margin-bottom: 0;
-			line-height: 1em;
-			text-align: left;
+			padding: 0 3em;
+			margin-bottom: 3em;
 		}
 
-		&.next-line {
+		h3 {
+			font-weight: 900;
+			color: @black;
+			text-transform: uppercase;
 			margin: 0;
+			padding: 0;
+			line-height: 1em;
+
+			@media (max-width: @mobile) {
+				font-size: 2.5em;
+				margin-bottom: 0;
+				line-height: 1em;
+			}
+
+			&.next-line {
+				margin: 0;
+			}
+
+			.white {
+				color: @white;
+			}
 		}
 
-		.white {
-			color: @white;
+		.underline {
+			border-bottom: 3px solid @off-white;
 		}
 	}
 
-	.underline {
-		border-bottom: 3px solid @off-white;
-	}
-}
+	.video {
 
-#video {
-	overflow: hidden;
-	background-color: @gray;
-	padding: 2.25em 0;
-
-	@media (min-width: @tablet + 1) {
-		padding: 6.25em 0; /* 100/16 */
-	}
-
-	.video-image {
-		flex: 7 1;
-		margin: 0 -2em;
 	}
 }
 
@@ -369,7 +369,7 @@ header {
 	padding-top: 2.25em;
 
 	@media (min-width: @tablet + 1) {
-		padding: 6.25em 0; /* 100/16 */
+		padding-top: 1em;
 	}
 
 	.intro-text {
@@ -377,6 +377,7 @@ header {
 
 		@media (min-width: @tablet + 1) {
 			margin-right: 2em;
+			margin-top: 7em;
 		}
 
 		h4 {
@@ -499,8 +500,8 @@ header {
 
 #set-times {
  	background: url('./img/set-times.jpg') @white no-repeat;
- 	background-position: center;
- 	background-size: 1200px auto;
+ 	background-position: bottom center;
+ 	background-size: cover;
  	padding: 6.25em 0; /* 100/16 */
 
  	@media (max-width: @mobile) {
@@ -574,9 +575,8 @@ header {
  		margin-bottom: 1em;
 
  		@media (min-width: @mobile) {
- 			flex: 0 0 50%;
+ 			flex: 0 0 25%;
  			box-sizing: border-box;
- 			padding: 0 3em;
 
  			h4 {
  				margin-top: 0;
@@ -610,10 +610,6 @@ header {
 	.venue-image {
 		position: relative;
 		padding: 2em 0 3em;
-
-		img {
-			height: 515px;
-		}
 	}
 
 	#venue-arrow {
@@ -705,7 +701,7 @@ header {
 		justify-content: flex-end;
 		align-items: flex-end;
 		flex: 7 1;
-		margin: 3em 0 1.5em;
+		margin: 3em 0 -20em;
 
 		@media (max-width: @mobile) {
 			margin-bottom: -10em;
@@ -799,7 +795,9 @@ header {
 		}
 
 		@media (min-width: @tablet + 1) {
-			margin: 2em 0 -18em;
+			margin: 2em 0;
+			margin-left: -@container-padding;
+			margin-right: 3em;
 		}
 	}
 }
@@ -831,7 +829,7 @@ header {
 	}
 
 	.family-band-image {
-		flex: 6 1;
+		flex: 4 1;
 		margin-bottom: 2em;
 
 		img {
@@ -839,7 +837,8 @@ header {
 		}
 
 		@media (min-width: @tablet + 1) {
-			margin: 2em 0 -18em;
+			margin: 2em 0;
+			margin-left: 4em;
 		}
 	}
 }
@@ -908,7 +907,7 @@ header {
 	}
 
 	.preparty-image {
-		flex: 5 1;
+		flex: 3 1;
 		margin-bottom: 2em;
 
 		img {
@@ -921,6 +920,7 @@ header {
 
 		@media (min-width: @tablet + 1) {
 			margin: 2em 0;
+			margin-right: 3em;
 		}
 	}
 }
@@ -993,17 +993,41 @@ header {
 		}
 	}
 
+	.sponsors {
+		position: relative;
+
+		img {
+			margin: 0;
+		}
+
+		.spin-logo {
+			position: absolute;
+			right: -110px;
+			bottom: -44px;
+
+			@media (max-width: @mobile) {
+	 			text-align: center;
+	 			left: 0;
+	 			right: initial;
+	 			bottom: initial;
+	 			top: 75px;
+	 			width: 100px;
+			}
+		}
+	}
+
 	.afterparty-image {
 		flex: 5 1;
 		margin-bottom: 2em;
-			margin-right: -@container-padding;
+		margin-right: -@container-padding;
 
 		img {
 			margin: 0;
 		}
 
 		@media (min-width: @tablet + 1) {
-			margin: 2em 0;
+			margin: 0;
+			margin-right: -@container-padding;
 		}
 	}
 }
@@ -1055,10 +1079,6 @@ header {
 
 		@media (max-width: @mobile) {
 			order: 2;
-		}
-
-		@media (min-width: @tablet + 1) {
-			margin: 2em 0;
 		}
 	}
 }
@@ -1658,6 +1678,7 @@ header {
 }
 
 #newsletter {
+	display: none;
 	padding-top: 2em;
 	background: url('./img/newsletter.jpg') @white no-repeat;
 	background-size: cover;

@@ -90,7 +90,7 @@ document.querySelectorAll('nav, #hero-cta, #afterparty-cta').forEach(el => el.ad
 // Track video link clicks
 // Track hero CTA clicks
 if(typeof window.gtag === 'function') {
-	document.querySelector('#video a').addEventListener('click', () => {
+	document.querySelector('.video a').addEventListener('click', () => {
 		window.gtag('event', 'click', {
 			event_category: 'CTA',
 			event_label: 'Video Link'
