@@ -4,7 +4,6 @@ import 'swiper/less/navigation';
 import 'swiper/less/pagination';
 import 'main.less';
 
-import url from 'url';
 import client from 'braintree-web/client';
 import hostedFields from 'braintree-web/hosted-fields';
 import applePay from 'braintree-web/apple-pay';
@@ -91,7 +90,7 @@ document.querySelectorAll('nav, #hero-cta, #afterparty-cta').forEach(el => el.ad
 // Track video link clicks
 // Track hero CTA clicks
 if(typeof window.gtag === 'function') {
-	document.querySelector('#video a').addEventListener('click', () => {
+	document.querySelector('.video a').addEventListener('click', () => {
 		window.gtag('event', 'click', {
 			event_category: 'CTA',
 			event_label: 'Video Link'
@@ -109,6 +108,8 @@ function importGallery(r) {
 	return r.keys().reduce((obj, cur) => (obj[cur.replace('./img/gallery/', '')] = r(cur), obj), {});
 }
 const galleryImages = importGallery(require.context('./img/gallery', false, /^\..+\.jpg$/));
+// For some reason the 'slideNextTransitionEnd' event fires on page load, so use this flag to avoid firing GA events unless someone truly clicks through
+let firstSlideTransitionEnded = false;
 try {
 	const gallerySize = window.innerWidth > 768 ? 'Desktop' : 'Mobile',
 		slidesHtml = Object.keys(galleryImages).filter(key => (new RegExp(gallerySize)).test(key)).map(image => {
@@ -139,12 +140,14 @@ try {
 		},
 		on: {
 			slideNextTransitionEnd: () => {
-				if(typeof window.gtag === 'function') {
+				if(typeof window.gtag === 'function' && firstSlideTransitionEnded) {
 					window.gtag('event', 'click', {
 						event_category: 'gallery',
 						event_label: 'Next Slide'
 					});
 				}
+
+				if(!firstSlideTransitionEnded) firstSlideTransitionEnded = true;
 			},
 			slidePrevTransitionEnd: () => {
 				if(typeof window.gtag === 'function') {
@@ -163,15 +166,15 @@ try {
 
 // Requires tickets section
 // Never allow this form to submit
-// document.forms['payment-info'].addEventListener('submit', e => {
-// 	e.preventDefault();
-// });
+document.forms['payment-info'].addEventListener('submit', e => {
+	e.preventDefault();
+});
 
 // Requires tickets section
 // Never allow this form to submit
-// document.forms['personal-info'].addEventListener('submit', e => {
-// 	e.preventDefault();
-// });
+document.forms['personal-info'].addEventListener('submit', e => {
+	e.preventDefault();
+});
 
 // Never allow this form to submit
 let submittingNewsletter = false;
@@ -396,23 +399,23 @@ function purchaseFlowInit({hostedFieldsInstance, applePayInstance}) {
 	if(!promo) {
 		for(const id of pageSettings.ticketsOrder) {
 			if(!products[id]) continue;
-			const { name, description, price, status, eventId } = products[id],
+			const { name, price, status, eventId, vip } = products[id],
 				classes = [];
 
 			if(status !== 'active' || !Object.values(events).some(ev => ev.salesOn) || !events[eventId].currentTicket) classes.push('disabled');
 			if(status === 'archived') classes.push('sold-out');
 
-			ticketsListHTML.push(`<h6 class="${classes.join(' ')}" data-product-id="${id}">${name} $${price}<sup>${description}</sup></h6>`);
+			ticketsListHTML.push(`<h6 class="${classes.join(' ')}" data-product-id="${id}">${name} $${price}</h6>`);
 
-			if(status === 'active' && events[eventId].salesOn && events[eventId].currentTicket === id) {
+			if(status === 'active' && events[eventId].salesOn && (events[eventId].currentTicket === id || vip)) {
 				// The regex check is janky, but we don't want to pre-populate afterparty ticket quantities
 				quantitiesHTML.push(`
 					<div class="ticket flex-row flex-row-mobile">
 						<div class="ticket-name"><span>${name}</span></div>
 						<div class="select-wrap">
 							<select name="${id}-quantity">
-								<option ${/afterparty/i.test(events[eventId].name) ? 'selected' : ''} value="0">0</option>
-								<option ${!/afterparty/i.test(events[eventId].name) ? 'selected' : ''} value="1">1</option>
+								<option ${/afterparty/i.test(events[eventId].name) || vip ? 'selected' : ''} value="0">0</option>
+								<option ${!/afterparty/i.test(events[eventId].name) && !vip ? 'selected' : ''} value="1">1</option>
 								<option value="2">2</option>
 								<option value="3">3</option>
 								<option value="4">4</option>
@@ -435,10 +438,11 @@ function purchaseFlowInit({hostedFieldsInstance, applePayInstance}) {
 				updateCartQuantities();
 			});
 		} else {
+			document.querySelector('.ticket-image').style.display = 'none';
 			document.querySelector('.tickets-flow').innerHTML = `
 				<div class="sales-off">
 					<h5>
-						Tickets are currently sold out<br/>see you next year!
+						Tickets on sale Friday 1/20/23, 9am!
 					</h5>
 				</div>`;
 
@@ -902,7 +906,7 @@ function braintreeInit() {
 		});
 }
 
-const { promo: promoId } = url.parse(location.href, true).query;
+const promoId = new URLSearchParams(location.search).get('promo');
 
 if(!promoId) {
 	// Fetch the initial settings and products
@@ -926,8 +930,7 @@ if(!promoId) {
 
 			throw e;
 		})
-		// Tickets section is gone because sales are over
-		// .then(braintreeInit)
+		.then(braintreeInit)
 		.catch(e => {
 			// If anything errors, we need to show a message in the tickets section
 			// eslint-disable-next-line max-len
@@ -935,7 +938,7 @@ if(!promoId) {
 
 			logError(e);
 		});
-} else if(window.justDontDoThisBecauseSalesAreOver) {
+} else {
 	// Fetch the initial settings and products
 	fetch(`${API_HOST}/v1/promos/${promoId}`)
 		.then(response => {

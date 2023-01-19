@@ -5,15 +5,19 @@
 @black : #303032;
 @white : #ffffff;
 @off-white: #f7f1df;
-@gray: #e3e3e3;
-@chocolate : #8e664f;
+@gray: #e4e7e9;
+@slate: #231917;
+@brown: #302922;
+@yellow: #f3e339;
+@navy : #072039;
+
+@chocolate: #112233;
 @caramel : #af7644;
 @clay : #9c6456;
 @burgundy : #602a34;
 @orange : #e68149;
 @sky: #818ed9;
 @blue : #5472ea;
-@navy : #0e2245;
 @cream : #efd188;
 
 // Typography
@@ -33,18 +37,19 @@
 body {
 	font: 16px @proxima;
 	-webkit-font-smoothing: antialiased;
-	color: @navy;
+	color: @black;
 	// This stops the insanity regarding an entire div getting highlighted when adding tickets
 	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
 h3 {
-	font-family: @brandon;
+	font-family: @league;
 	font-weight: 900;
 	font-size: 3.75em; /* 60/16 */
 	letter-spacing: -1px;
 	margin: 0 0 0.5em;
 	text-transform: uppercase;
+	color: #000;
 
 	@media (max-width: @mobile) {
 		font-size: 2.5em; /* 40/16 */
@@ -71,7 +76,6 @@ h5 {
 	font-size: 1.375em; /* 22/16 */
 	font-weight: 400;
 	letter-spacing: 1px;
-	color: @sky;
 	margin: 0;
 	text-transform: uppercase;
 }
@@ -186,7 +190,7 @@ fieldset {
 }
 
 ::placeholder {
-	color: fade(@navy, 50%);
+	color: fade(@black, 50%);
 }
 
 label {
@@ -200,7 +204,7 @@ label {
 
 button {
 	-webkit-appearance: none;
-	background: @navy;
+	background: @brown;
 	border: none;
 	color: @white;
 	font-family: @proxima;
@@ -213,11 +217,28 @@ button {
 	cursor: pointer;
 	transition: background-color 200ms;
 
+	&.yellow {
+		background: @yellow;
+		color: @black;
+
+		&:hover {
+			background-color: lighten(@yellow, 10%);
+		}
+
+		&:active {
+			box-shadow: inset 0 0 6px 0 darken(@yellow, 10%);
+		}
+	}
+
+	&.rounded {
+		border-radius: 400px;
+	}
+
 	&:hover {
-		background-color: lighten(@navy, 10%);
+		background-color: lighten(@brown, 10%);
 	}
 
 	&:active {
-		box-shadow: inset 0 0 6px 0 darken(@navy, 10%);
+		box-shadow: inset 0 0 6px 0 darken(@brown, 10%);
 	}
 }

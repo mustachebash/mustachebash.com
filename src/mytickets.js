@@ -2,7 +2,6 @@ import 'normalize.css';
 import 'swiper/less';
 import 'mytickets.less';
 
-import url from 'url';
 import Swiper from 'swiper';
 
 function logError({ lineno, colno, message, filename, stack, name }) {
@@ -31,7 +30,7 @@ window.addEventListener('error', e => {
 	logError({ lineno, colno, message, filename, stack, name });
 });
 
-const { t: transactionToken } = url.parse(location.href, true).query,
+const transactionToken = new URLSearchParams(location.search).get('t'),
 	handleError = e => {
 		// If anything errors, we need to show a message in the tickets section
 		document.querySelector('main').innerHTML = `

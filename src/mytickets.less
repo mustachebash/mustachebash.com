@@ -1,7 +1,7 @@
 @import 'base.less';
 
 body {
-	background-color: @sky;
+	// background-color: @off-white;
 }
 
 .img-wrap {
@@ -66,7 +66,7 @@ header {
 	height: 5.625em; /* 90/16 */
 	padding-top: 1.25em; /* 20/16 */
 	box-sizing: border-box;
-	background: @navy;
+	background: @slate;
 	z-index: 9999;
 
 	@media (max-width: @mobile) {
@@ -87,13 +87,9 @@ header {
 	}
 }
 
-h1 {
-	color: @blue;
-}
-
 h2 {
 	margin: 0;
-	color: @white;
+	color: @slate;
 }
 
 h2 + h2 {
@@ -107,7 +103,7 @@ h4 {
 
 .disclaimer {
 	a {
-		color: @white;
+		color: @brown;
 		font-weight: 700;
 		text-decoration: underline;
 	}
@@ -120,7 +116,7 @@ h4 {
 
 	.download {
 		display: inline-block;
-		background: @navy;
+		background: @brown;
 		padding: 0.5em 2em;
 		text-transform: uppercase;
 		font-family: @proxima;
@@ -160,14 +156,14 @@ h4 {
 .tickets {
 	position: relative;
 	padding: 1em 0 2em;
-	--swiper-navigation-color: @blue;
-	--swiper-pagination-color: @blue;
+	--swiper-navigation-color: @brown;
+	--swiper-pagination-color: @brown;
 
 	.swiper-pagination-fraction {
 		bottom: 0;
 		font-weight: 700;
 		font-size: 1.125em; /* 18/16 */
-		color: @white;
+		color: @brown;
 	}
 
 	@media (max-width: @mobile) {
