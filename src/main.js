@@ -612,23 +612,23 @@ function purchaseFlowInit({hostedFieldsInstance, applePayInstance}) {
 	} else if(promo.type === 'single-use') {
 		cart.push({
 			productId: promo.product.id,
-			quantity: 1
+			quantity: promo.quantity
 		});
 
 		const steps = document.querySelector('.steps'),
 			promoInfo = document.createElement('h5');
 
-		promoInfo.innerHTML = `Promo Ticket: ${promo.product.name} - $${promo.price}`;
+		promoInfo.innerHTML = `Promo Ticket: ${promo.product.name} - $${promo.price}/ea (${promo.quantity} qty)`;
 
 		steps.parentNode.insertBefore(promoInfo, steps);
 
-		const subtotal = promo.price,
+		const subtotal = promo.price * promo.quantity,
 			orderSummaryList = document.querySelector('.order-summary dl');
 
 		document.querySelector('#grand-total span').innerText = subtotal;
 
 		orderSummaryList.innerHTML = `
-			<dt>${promo.product.name} (<span class="quantity">1</span>)</dt>
+			<dt>${promo.product.name} (<span class="quantity">${promo.quantity}</span>)</dt>
 			<dd>$<span class="subtotal">${subtotal}</span></dd>
 		`;
 
