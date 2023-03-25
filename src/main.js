@@ -442,7 +442,7 @@ function purchaseFlowInit({hostedFieldsInstance, applePayInstance}) {
 			document.querySelector('.tickets-flow').innerHTML = `
 				<div class="sales-off">
 					<h5>
-						Tickets on sale Friday 1/20/23, 9am!
+						See you at the Bash!
 					</h5>
 				</div>`;
 
