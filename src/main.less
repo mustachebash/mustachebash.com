@@ -726,41 +726,9 @@ header {
 	user-select: none;
 	position: relative;
 
-	&:before {
-		display: block;
-		content: '';
-		margin-top: 78.1333%;
-
-		@media (min-width: @tablet) {
-			margin-top: 35.7145%;
-		}
-	}
-
-	@media (max-width: @mobile) {
-		.swiper-button-next,
-		.swiper-button-prev {
-			display: none;
-		}
-	}
-
-	.swiper-wrapper {
-		position: absolute;
-		top: 0;
-		left: 0;
-	}
-
-	.swiper-slide {
-		background: @slate;
-		height: 100%;
-		width: 100%;
-
+	.cover-wrapper {
 		img {
-			width: 100%;
-			height: 100%;
-			transform: translate(-50%, -50%);
-			position: absolute;
-			left: 50%;
-			top: 50%;
+			max-width: 100%;
 		}
 	}
 }

@@ -39,14 +39,6 @@
 			"image": [
 				"https://mustachebash.com/img/Gallery_Desktop_2022_8.fa498089587992c580ff.jpg"
 			],
-			"offers": {
- 				"@type": "Offer",
- 				"url": "https://mustachebash.com/#tickets",
- 				"price": "109",
- 				"priceCurrency": "USD",
- 				"availability": "https://schema.org/InStock",
- 				"validFrom": "2023-01-20T09:00-08:00"
- 			},
 			"performer": [
 				{
 					"@type": "PerformingGroup",
@@ -171,10 +163,9 @@
 						<li><a href="#lineup">Music</a></li>
 						<li><a href="#venue">Venue</a></li>
 						<li><a href="#tradition">Tradition</a></li>
-						<li><a href="#gallery">Gallery</a></li>
-						<li><a href="#afterparty">Afterparty</a></li>
+						<li><a href="/gallery">Gallery</a></li>
 						<li><a href="#faq">FAQ</a></li>
- 						<li class="tickets-nav"><a href="#">Sold Out!</a></li>
+ 						<!-- <li class="tickets-nav"><a href="#">Sold Out!</a></li> -->
 						<!-- <li><a href="#shop">Shop</a></li> -->
 						<li class="social">
 							<a href="https://www.facebook.com/MustacheBashSD/" target="_blank">
@@ -202,8 +193,7 @@
 				</picture>
 			</div>
 			<div class="cta">
-				<a href="#" id="hero-cta">Sold Out!</a>
-				<p>Saturday, March 25th</p>
+				<p>See you next year!</p>
 			</div>
 		</div>
 	</section>
@@ -482,81 +472,6 @@
  		</div>
  	</section>
 
- 	<section id="set-times">
-  		<div class="container-1230">
-  			<h3>Set Times</h3>
-  			<div class="flex-row">
-  				<div class="water-stage">
-  					<h4>Water Stage</h4>
-  					<dl>
- 						<dt>Lee Fields</dt>
- 						<dd>8:45 pm</dd>
-
- 						<dt>Bombargo</dt>
- 						<dd>6:50pm</dd>
-
- 						<dt>Bash Family Band</dt>
- 						<dd>4:50 pm</dd>
-
- 						<dt>The B Sections</dt>
- 						<dd>3:00 pm</dd>
-  					</dl>
-  				</div>
-  				<div class="fire-stage">
-  					<h4>Fire Stage</h4>
-  					<dl>
- 						<dt>Yung Bae</dt>
- 						<dd>8:30pm</dd>
-
- 						<dt>Flamingosis</dt>
- 						<dd>7:00pm</dd>
-
- 						<dt>Blu DeTiger (DJ Set)</dt>
- 						<dd>5:30 pm</dd>
-
- 						<dt>Peanut Butter Wolf</dt>
- 						<dd>4:00 pm</dd>
-
- 						<dt>Starfari</dt>
- 						<dd>2:00 pm</dd>
-  					</dl>
-  				</div>
-  				<div class="wind-stage">
-  					<h4>Wind Stage</h4>
-  					<dl>
- 						<dt>Abby Normal</dt>
- 						<dd>8:05 pm</dd>
-
- 						<dt>Discotoshi</dt>
- 						<dd>6:15 pm</dd>
-
- 						<dt>DJ Dials</dt>
- 						<dd>4:15 pm</dd>
-  					</dl>
-  				</div>
-  				<div class="earth-stage">
-  					<h4>Earth Stage</h4>
-  					<dl>
- 						<dt>Wesley</dt>
- 						<dd>8:30pm</dd>
-
- 						<dt>Voss &amp; Things</dt>
- 						<dd>7:00pm</dd>
-
- 						<dt>Combover</dt>
- 						<dd>5:30 pm</dd>
-
- 						<dt>He2She</dt>
- 						<dd>4:00 pm</dd>
-
- 						<dt class="rusty">Rusty Midway B2B Max Heegard</dt>
- 						<dd class="rusty">2:00 pm</dd>
-  					</dl>
-  				</div>
-  			</div>
-  		</div>
-  	</section>
-
 	<section id="venue">
 		<div class="container-1230">
 			<div class="flex-row">
@@ -591,25 +506,15 @@
 		</div>
 	</section>
 
-	<section id="gallery" class="swiper">
-		<div class="swiper-wrapper"></div>
-	    <div class="swiper-pagination swiper-pagination-white"></div>
-	    <div class="swiper-button-next swiper-button-white"></div>
-	    <div class="swiper-button-prev swiper-button-white"></div>
-	</section>
-
-	<section id="roller-disco">
-		<div class="container-1230">
-			<div class="flex-row">
-				<div class="roller-disco-image img-wrap"><img src="./img/roller-disco.jpg" alt="Roller Disco"></div>
-				<div class="roller-disco-description">
-					<h3>Roller Disco</h3>
-					<h4>Rollin' With the Homies</h4>
-					<p>
-						Just as it was in the '70s, roller-disco was all the craze at last year's Bash. So, we're brining it back for another round! Lace up some complementary skates and come spin your wheels to tunes from underground savants like Combover, Voss &amp; Things, HE2SHE and more - a classy and Bashy lineup guaranteed to keep the fever burnin' hot!
-					</p>
-				</div>
-			</div>
+	<section id="gallery">
+		<div class="cover-wrapper">
+			<a href="/gallery">
+				<picture>
+					<source media="(min-width: 680px)" srcset="./img/gallery-cover-desktop.jpg">
+					<source srcset="./img/gallery-cover-mobile.jpg">
+					<img src="./img/gallery-cover-desktop.jpg" alt="Gallery">
+				</picture>
+			</a>
 		</div>
 	</section>
 
@@ -625,192 +530,6 @@
 					</p>
 				</div>
 				<div class="family-band-image img-wrap"><img src="./img/family-band.jpg" alt="Mustache Bash Family Band"></div>
-			</div>
-		</div>
-	</section>
-
-	<section id="preparty">
- 		<div class="container-1230">
- 			<div class="flex-row">
- 				<div class="preparty-image img-wrap"><img src="./img/preparty.jpg" alt="Preparty"></div>
- 				<div class="preparty-description">
- 					<h3>The&nbsp;Preparty</h3>
- 					<h4>Get Things Started Off Right</h4>
- 					<p>
- 						Back in the early days, when the Bash was just a humble house party, the Mustache Bash Family Band was born and bread in a funky little jam den known as Winstons OB. Winstons was the incubator—the iconic live music venue where we watched the Fam Band's legendary members grow into the unstoppable forces they are today. This year, we're headed back to Winstons for the first-ever official Bash Pre Party—a '60s-themed shindig with live jams hosted by Bash veteran, Russell Ramo, and other friends of the Fam Band. We're kickin' it old school for this one, so throw on some tie-dye come down to Winston's OB Friday night for the Mustache Bash warmup celebration!
- 					</p>
- 					<div class="cta">
- 						<a href="https://holdmyticket.com/event/408908?utm_source=mustachebash" target="_blank" id="preparty-cta">Get Tickets</a>
- 					</div>
- 				</div>
- 			</div>
- 		</div>
- 	</section>
-
-	<section id="afterparty">
- 		<div class="container-1230">
- 			<div class="flex-row">
- 				<div class="afterparty-description">
- 					<h3>The&nbsp;Afterparty</h3>
- 					<h4>Disco for Dessert</h4>
- 					<p>
- 						The Bash is too much mojo to be bottled into a single day, so naturally, a buck wild afterparty is in order! To keep the party pumping all night, we're teaming up with Same Same But Different Festival for the second year running to host the official Bash Afterparty at Spin Nightclub. Soak in the grooves as Spin transforms into a disco wonderland with multiple stages featuring exclusive sets from Flamingosis and Neil Frances, along with live funk and DJ performances in the infamous "Funk Den."
- 					</p>
- 					<div class="sponsors img-wrap"><img src="./img/afterparty-sponsors.png" alt="Afterparty Sponsors"><img class="spin-logo" src="./img/afterparty-spin.png" alt="Spin Nightclub"></div>
- 				</div>
- 				<div class="afterparty-image img-wrap"><img src="./img/afterparty.jpg" alt="Afterparty"></div>
- 			</div>
- 		</div>
- 	</section>
-
- 	<section id="vip-experience">
- 		<div class="container-1230">
- 			<div class="flex-row">
- 				<div class="vip-image img-wrap"><img src="./img/vip.jpg" alt="VIP"></div>
- 				<div class="vip-description">
- 					<h3>VIP Experience</h3>
- 					<h4>Upgrade Your Ticket</h4>
- 					<p>
- 						If you've ever Bashed, you know it's one big VIP experience—just getting through the gates makes you a VIP! But this year, at the request of our funky family, we're introducing the first-ever Bash VIP Experience for the funkiest among funky specimens—kinda like the Jimi Hendrix Experience, but with less acid. This groovy little hall pass gets you access our private Studio 54 lounge, a massive VIP bar with super special cocktails, extra bathrooms, viewing decks in front of Fire stage, and the opportunity to let your funk flags fly unhinged in premium company. There's only a handful of these bad mamajamas available—get em while the gettin's good!
- 					</p>
- 				</div>
- 			</div>
- 		</div>
- 	</section>
-
- 	<section id="tickets">
-		<div class="container-1230">
-			<div class="flex-row">
-				<div class="tickets-description">
-					<h3>Tickets</h3>
-					<h4>Get 'Em While The Gettin' is Good</h4>
-					<p>
-						Ticket prices will increase incrementally as fewer become available and demand increases. Capacity is limited and tickets will sell out early! In other words: don't snooze on getting your Bash tickets – FOMO ain't no fun. If you're 21+ and ready to funk, we have a pass for you. All sales are final, but don't worry, you won't want to miss this anyway.
-					</p>
-					<div class="flex-row flex-row-mobile">
-						<div class="prices" id="tickets-list">
- 						</div>
-						<div class="img-wrap ticket-image"><img src="./img/ticket.jpg"></div>
-					</div>
-				</div>
-				<div class="tickets-flow">
- 					<div class="progress">
- 						<div class="leg"></div>
- 						<div class="leg"></div>
- 						<div class="leg"></div>
- 						<div class="flex-row flex-row-mobile ticks">
- 							<div class="active"><span>Tickets</span></div>
- 							<div><span>Info</span></div>
- 							<div><span>Payment</span></div>
- 							<div><span>Review</span></div>
- 						</div>
- 					</div>
- 					<div class="steps">
- 						<div class="step active">
- 							<div class="quantity-selector">
-								<h6>Quantity</h6>
- 								<div class="quantity-controls">
- 								</div>
- 							</div>
- 							<div class="step-footer">
- 								<button id="confirm-quantity">Next</button>
- 							</div>
- 						</div>
- 						<div class="step">
- 							<form method="post" action="/" name="personal-info">
- 								<h6>Enter Your Info</h6>
- 								<fieldset name="name">
- 									<label data-error-message="Please enter your first and last name">Full Name</label>
- 									<input type="text" name="name" placeholder="Purchaser's Name" maxlength="45">
- 								</fieldset>
- 								<fieldset name="email">
- 									<label data-error-message="Please enter your email">Email</label>
- 									<input type="email" name="email" placeholder="Enter your email for confirmation" maxlength="100">
- 								</fieldset>
- 								<fieldset name="marketing-opt-in">
- 									<input id="marketing-opt-in-checkbox" type="checkbox" name="marketing-opt-in">
- 									<label for="marketing-opt-in-checkbox">Send me all Bash and partner news</label>
- 								</fieldset>
- 							</form>
- 							<div class="flex-row flex-row-mobile step-footer">
- 								<button id="enter-personal-info">Next</button>
- 								<a href="#" id="back-to-quantity">Back to Previous</a>
- 							</div>
- 						</div>
- 						<div class="step">
- 							<form method="post" action="/" name="payment-info">
-								<h6>Enter Your Payment Info</h6>
- 								<fieldset name="payment-info">
- 									<label>Credit Card Number</label>
- 									<div id="card-number"></div>
- 								</fieldset>
- 								<div class="flex-row flex-row-mobile">
- 									<fieldset name="expiration">
- 										<label>Expiration Date</label>
- 										<div id="expiration"></div>
- 									</fieldset>
- 									<fieldset name="cvv">
- 										<label>CVV <span title="The 3 or 4 digit code on the back of your card">i</span></label>
- 										<div id="cvv"></div>
- 									</fieldset>
- 								</div>
- 							</form>
- 							<div class="flex-row flex-row-mobile step-footer">
- 								<button id="enter-payment-info">Next</button>
- 								<a href="#" id="back-to-personal">Back to Previous</a>
- 							</div>
- 							<div class="apple-pay">
- 								<p>- or -</p>
- 								<div id="apple-pay-payment-option"><div class="apple-pay-button apple-pay-button-white"></div></div>
- 							</div>
- 						</div>
- 						<div class="step">
- 							<div class="review-order">
- 								<h6>Review and Purchase</h6>
- 								<p class="intro">
- 									Please review your payment details and order summary. ALL SALES ARE FINAL!
- 								</p>
- 								<div class="flex-row summary">
- 									<div class="reservation-details">
- 										<strong>Reservation Details</strong>
- 										<p>
- 											<span class="reservation-details-name"></span><br>
- 											<span class="reservation-details-email"></span>
- 										</p>
- 									</div>
- 									<div class="order-summary">
- 										<strong>Order Summary</strong>
- 										<dl>
-
- 										</dl>
- 									</div>
- 								</div>
- 							</div>
- 							<div class="flex-row flex-row-mobile step-footer">
- 								<button id="confirm-order">Purchase</button>
- 								<a href="#" id="back-to-payment">Back to Previous</a>
- 								<p id="grand-total" class="total">Total $<span>0</span></p>
- 							</div>
- 						</div>
- 						<div class="step">
- 							<div class="order-confirmation">
- 								<h6>
- 									Congratulations!<br>
-									<!-- non-breaking space for mobile -->
- 									You're Coming to the&nbsp;Bash!
- 								</h6>
- 								<p class="confirmation-number">Confirmation: <span></span></p>
- 								<p class="tickets-link"><a href="#" rel="nofollow" target="_blank">View Tickets</a></p>
- 								<p>
- 									Thank you for your purchase. A confirmation email has been sent to the address you provided (be sure you check your spam!). Bring your tickets and a valid photo ID for each guest at the door. Now grow out those staches and get yourselves some funky threads. We'll be seeing you March 25th, 2023 for yet another amazing Bash!
- 								</p>
-								<p class="confirmation-footer">
-									Don't forget to check out our <a href="#faq">FAQ</a> before coming! Email <a href="mailto:contact@mustachebash.com">contact@mustachebash.com</a> for all other questions.
-								</p>
- 							</div>
- 						</div>
- 					</div>
- 				</div>
 			</div>
 		</div>
 	</section>
@@ -913,13 +632,10 @@
 		</div>
 		<nav>
 			<ul>
-				<li><a href="#lineup">Lineup</a></li>
 				<li><a href="#venue">Venue</a></li>
 				<li><a href="#tradition">Tradition</a></li>
-				<li><a href="#gallery">Gallery</a></li>
-				<li><a href="#afterparty">Afterparty</a></li>
+				<li><a href="/gallery">Gallery</a></li>
 				<li><a href="#family-band">Family Band</a></li>
- 				<li><a href="#tickets">Tickets</a></li>
 				<li><a href="#faq">FAQ</a></li>
 			</ul>
 		</nav>

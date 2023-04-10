@@ -1,13 +1,9 @@
 import 'normalize.css';
-import 'swiper/less';
-import 'swiper/less/navigation';
-import 'swiper/less/pagination';
 import 'main.less';
 
 import client from 'braintree-web/client';
 import hostedFields from 'braintree-web/hosted-fields';
 import applePay from 'braintree-web/apple-pay';
-import Swiper, { Navigation, Pagination, Lazy } from 'swiper';
 
 function logError({ lineno, colno, message, filename, stack, name }) {
 	fetch(API_HOST + '/v1/errors', {
@@ -102,67 +98,6 @@ if(typeof window.gtag === 'function') {
 document.querySelector('#menu-icon').addEventListener('click', e => {
 	e.currentTarget.classList.toggle('open');
 });
-
-// Gallery
-function importGallery(r) {
-	return r.keys().reduce((obj, cur) => (obj[cur.replace('./img/gallery/', '')] = r(cur), obj), {});
-}
-const galleryImages = importGallery(require.context('./img/gallery', false, /^\..+\.jpg$/));
-// For some reason the 'slideNextTransitionEnd' event fires on page load, so use this flag to avoid firing GA events unless someone truly clicks through
-let firstSlideTransitionEnded = false;
-try {
-	const gallerySize = window.innerWidth > 768 ? 'Desktop' : 'Mobile',
-		slidesHtml = Object.keys(galleryImages).filter(key => (new RegExp(gallerySize)).test(key)).map(image => {
-			return `
-				<div class="swiper-slide">
-					<img data-src="${galleryImages[image]}" class="swiper-lazy" />
-					<div class="swiper-lazy-preloader swiper-lazy-preloader-white"></div>
-				</div>
-			`;
-		});
-
-	document.querySelector('.swiper-wrapper').innerHTML = slidesHtml.join('\n');
-
-	// eslint-disable-next-line no-unused-vars
-	const gallerySwiper = new Swiper(document.querySelector('#gallery'), {
-		preloadImages: false,
-		lazy: {
-			loadPrevNext: true
-		},
-		modules: [Navigation, Pagination, Lazy],
-		loop: true,
-		pagination: {
-			el: '.swiper-pagination'
-		},
-		navigation: {
-			nextEl: '.swiper-button-next',
-			prevEl: '.swiper-button-prev'
-		},
-		on: {
-			slideNextTransitionEnd: () => {
-				if(typeof window.gtag === 'function' && firstSlideTransitionEnded) {
-					window.gtag('event', 'click', {
-						event_category: 'gallery',
-						event_label: 'Next Slide'
-					});
-				}
-
-				if(!firstSlideTransitionEnded) firstSlideTransitionEnded = true;
-			},
-			slidePrevTransitionEnd: () => {
-				if(typeof window.gtag === 'function') {
-					window.gtag('event', 'click', {
-						event_category: 'gallery',
-						event_label: 'Previous Slide'
-					});
-				}
-			}
-		}
-	});
-} catch(e) {
-	console.error('Gallery failed to load', e);
-	logError(e);
-}
 
 // Requires tickets section
 // Never allow this form to submit
