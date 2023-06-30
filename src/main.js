@@ -865,7 +865,7 @@ if(!promoId) {
 
 			throw e;
 		})
-		// .then(braintreeInit)
+		.then(() => false && braintreeInit)
 		.catch(e => {
 			// If anything errors, we need to show a message in the tickets section
 			// eslint-disable-next-line max-len
@@ -888,7 +888,7 @@ if(!promoId) {
 		})
 		.then(response => response.json())
 		.then(responseJson => promo = responseJson)
-		// .then(braintreeInit)
+		.then(() => false && braintreeInit)
 		.catch(e => {
 			let promoMessage;
 			switch(e.status) {
