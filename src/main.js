@@ -101,15 +101,15 @@ document.querySelector('#menu-icon').addEventListener('click', e => {
 
 // Requires tickets section
 // Never allow this form to submit
-document.forms['payment-info'].addEventListener('submit', e => {
-	e.preventDefault();
-});
+// document.forms['payment-info'].addEventListener('submit', e => {
+// 	e.preventDefault();
+// });
 
 // Requires tickets section
 // Never allow this form to submit
-document.forms['personal-info'].addEventListener('submit', e => {
-	e.preventDefault();
-});
+// document.forms['personal-info'].addEventListener('submit', e => {
+// 	e.preventDefault();
+// });
 
 // Never allow this form to submit
 let submittingNewsletter = false;
@@ -865,7 +865,7 @@ if(!promoId) {
 
 			throw e;
 		})
-		.then(braintreeInit)
+		.then(() => false && braintreeInit)
 		.catch(e => {
 			// If anything errors, we need to show a message in the tickets section
 			// eslint-disable-next-line max-len
@@ -888,7 +888,7 @@ if(!promoId) {
 		})
 		.then(response => response.json())
 		.then(responseJson => promo = responseJson)
-		.then(braintreeInit)
+		.then(() => false && braintreeInit)
 		.catch(e => {
 			let promoMessage;
 			switch(e.status) {
