@@ -17,9 +17,8 @@ module.exports = (env = {}, argv) => {
 			mytickets: ['whatwg-fetch', './src/mytickets.js'],
 			gallery: ['whatwg-fetch', './src/gallery.js'],
 			privacyPolicy: './src/privacy-policy.less',
-			videoLander: './src/video-lander.js',
-			lineupLander: './src/lineup-lander.js',
-			presellLander: './src/presell-lander.js'
+			sanDiego: './src/san-diego.js',
+			sanFrancisco: './src/san-francisco.js'
 		},
 		htmlMinifyOptions = {
 			collapseWhitespace: true,
@@ -61,7 +60,8 @@ module.exports = (env = {}, argv) => {
 					{from: /^\/privacy-policy\/?$/, to: '/privacy-policy.html'},
 					{from: /^\/mytickets\/?$/, to: '/mytickets.html'},
 					{from: /^\/gallery\/?$/, to: '/gallery.html'},
-					{from: /^\/v\/?$/, to: '/video-lander.html'}
+					{from: /^\/san-diego\/?$/, to: '/san-diego.html'},
+					{from: /^\/san-francisco\/?$/, to: '/san-francisco.html'}
 				]
 			}
 		},
@@ -155,23 +155,16 @@ module.exports = (env = {}, argv) => {
 			}),
 			new HtmlWebpackPlugin({
 				inject: 'head',
-				chunks: ['videoLander'],
-				filename: 'video-lander.html',
-				template: 'src/video-lander.html',
+				chunks: ['sanDiego'],
+				filename: 'san-diego.html',
+				template: 'src/san-diego.html',
 				minify: htmlMinifyOptions
 			}),
 			new HtmlWebpackPlugin({
 				inject: 'head',
-				chunks: ['lineupLander'],
-				filename: 'lineup-lander.html',
-				template: 'src/lineup-lander.html',
-				minify: htmlMinifyOptions
-			}),
-			new HtmlWebpackPlugin({
-				inject: 'head',
-				chunks: ['presellLander'],
-				filename: 'presell-lander.html',
-				template: 'src/presell-lander.html',
+				chunks: ['sanFrancisco'],
+				filename: 'san-francisco.html',
+				template: 'src/san-francisco.html',
 				minify: htmlMinifyOptions
 			}),
 			new MiniCssExtractPlugin({
