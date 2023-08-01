@@ -8,10 +8,8 @@ body {
 	}
 }
 
-@media (max-width: @mobile) {
-	p {
-		font-size: 0.875em; /* 14/16 */
-	}
+p {
+	font-size: 18px;
 }
 
 @container-padding: 1.875em;
@@ -325,6 +323,8 @@ header {
 	padding-bottom: 2em;
 
 	.tagline {
+		flex: 3 1;
+
 		@media (max-width: 390px) {
 			margin: 0 auto 1em;
 			width: 270px;
@@ -335,14 +335,19 @@ header {
 			margin-bottom: 3em;
 		}
 
+		@media (min-width: @tablet + 1) {
+			padding-top: 3em;
+		}
+
 		h3 {
-			font-weight: 900;
+			font-weight: 500;
+			font-size: 3.75rem;
 			color: @black;
 			text-transform: uppercase;
 			margin: 0;
 			padding: 0;
 			line-height: 1em;
-			letter-spacing: -2px;
+			letter-spacing: -0.5px;
 
 			@media (max-width: @mobile) {
 				font-size: 2.5em;
@@ -353,19 +358,29 @@ header {
 			&.next-line {
 				margin: 0;
 			}
-
-			.white {
-				color: @white;
-			}
-		}
-
-		.underline {
-			border-bottom: 3px solid @off-white;
 		}
 	}
 
 	.video {
+		flex: 5 1;
 
+		p {
+			font-size: 24px;
+			letter-spacing: 1px;
+			position: relative;
+			font-family: @league;
+			text-align: center;
+			text-transform: uppercase;
+			color: #f00;
+
+			span {
+				position: relative;
+				display: inline-block;
+				font-size: 50px;
+				line-height: 24px;
+				top: 9px;
+			}
+		}
 	}
 }
 
@@ -448,6 +463,10 @@ header {
 		box-sizing: border-box;
 		flex: 1 1 50%;
 		margin-bottom: 3em;
+
+		p {
+			font-size: 14px;
+		}
 
 		@media (max-width: @mobile) {
 			h4 {

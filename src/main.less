@@ -8,10 +8,8 @@ body {
 	}
 }
 
-@media (max-width: @mobile) {
-	p {
-		font-size: 0.875em; /* 14/16 */
-	}
+p {
+	font-size: 18px;
 }
 
 @container-padding: 1.875em;
@@ -264,6 +262,8 @@ header {
 	padding-bottom: 2em;
 
 	.tagline {
+		flex: 3 1;
+
 		@media (max-width: 390px) {
 			margin: 0 auto 1em;
 			width: 270px;
@@ -274,14 +274,19 @@ header {
 			margin-bottom: 3em;
 		}
 
+		@media (min-width: @tablet + 1) {
+			padding-top: 3em;
+		}
+
 		h3 {
-			font-weight: 900;
+			font-weight: 500;
+			font-size: 3.75rem;
 			color: @black;
 			text-transform: uppercase;
 			margin: 0;
 			padding: 0;
 			line-height: 1em;
-			letter-spacing: -2px;
+			letter-spacing: -0.5px;
 
 			@media (max-width: @mobile) {
 				font-size: 2.5em;
@@ -292,19 +297,29 @@ header {
 			&.next-line {
 				margin: 0;
 			}
-
-			.white {
-				color: @white;
-			}
-		}
-
-		.underline {
-			border-bottom: 3px solid @off-white;
 		}
 	}
 
 	.video {
+		flex: 5 1;
 
+		p {
+			font-size: 24px;
+			letter-spacing: 1px;
+			position: relative;
+			font-family: @league;
+			text-align: center;
+			text-transform: uppercase;
+			color: #f00;
+
+			span {
+				position: relative;
+				display: inline-block;
+				font-size: 50px;
+				line-height: 24px;
+				top: 9px;
+			}
+		}
 	}
 }
 
@@ -317,16 +332,12 @@ header {
 
 		@media (min-width: @tablet + 1) {
 			margin-left: 7em;
-			margin-top: 7em;
+			margin-top: 2em;
 		}
 
 		h4 {
 			color: @white;
 			line-height: 1em;
-
-			@media (max-width: @tablet) {
-				text-align: center;
-			}
 		}
 
 		p {
@@ -335,11 +346,9 @@ header {
 
 			@media (max-width: @tablet) {
 				margin-top: 0;
-				text-align: center;
 			}
 
 			@media (max-width: @mobile) {
-				font-size: 0.875em; /* 14/16 */
 				margin-bottom: 2.125rem;
 			}
 		}
@@ -359,12 +368,25 @@ header {
 	overflow: hidden;
 
 	h3 {
+		position: relative;
 		color: @black;
 		margin-bottom: 0;
 
 		@media (min-width: @tablet + 1) {
 			font-size: 6.25rem;
 			font-weight: 500;
+		}
+
+		img {
+			position: absolute;
+			width: 300px;
+			top: -50px;
+			left: -40px;
+			transform: rotate(-10deg);
+
+			@media (max-width: @tablet) {
+				display: none;
+			}
 		}
 	}
 
@@ -440,10 +462,6 @@ header {
 		align-items: flex-end;
 		flex: 7 1;
 		margin: 3em 0;
-
-		@media (max-width: @mobile) {
-			margin-bottom: -10em;
-		}
 	}
 }
 
@@ -515,6 +533,7 @@ header {
 
 				@media (max-width: @mobile) {
 		 			text-align: center;
+		 			margin-bottom: 1em;
 				}
 
 				&:first-child {
@@ -572,7 +591,7 @@ header {
 
 	.tradition-description {
 		flex: 5 1;
-		padding: 3.25em 2em 0 0; /* 100/16 */
+		padding: 2.25em 2em 0 0; /* 100/16 */
 
 		@media (max-width: @mobile) {
 			padding: 2em 0 0;
@@ -593,7 +612,7 @@ header {
 		margin-right: -@container-padding;
 
 		@media (max-width: @mobile) {
-			margin-bottom: -10em;
+			margin-top: 3em;
 		}
 	}
 }
