@@ -15,6 +15,7 @@ module.exports = (env = {}, argv) => {
 		entry = {
 			main: ['whatwg-fetch', './src/main.js'],
 			mytickets: ['whatwg-fetch', './src/mytickets.js'],
+			info: ['whatwg-fetch', './src/info.js'],
 			gallery: ['whatwg-fetch', './src/gallery.js'],
 			privacyPolicy: './src/privacy-policy.less',
 			sanDiego: './src/san-diego.js',
@@ -59,6 +60,7 @@ module.exports = (env = {}, argv) => {
 					{from: /^\/$/, to: '/index.html'},
 					{from: /^\/privacy-policy\/?$/, to: '/privacy-policy.html'},
 					{from: /^\/mytickets\/?$/, to: '/mytickets.html'},
+					{from: /^\/info\/?$/, to: '/info.html'},
 					{from: /^\/gallery\/?$/, to: '/gallery.html'},
 					{from: /^\/san-diego\/?$/, to: '/san-diego.html'},
 					{from: /^\/san-francisco\/?$/, to: '/san-francisco.html'}
@@ -137,6 +139,13 @@ module.exports = (env = {}, argv) => {
 				chunks: ['mytickets'],
 				filename: 'mytickets.html',
 				template: 'src/mytickets.html',
+				minify: htmlMinifyOptions
+			}),
+			new HtmlWebpackPlugin({
+				inject: 'head',
+				chunks: ['info'],
+				filename: 'info.html',
+				template: 'src/info.html',
 				minify: htmlMinifyOptions
 			}),
 			new HtmlWebpackPlugin({
