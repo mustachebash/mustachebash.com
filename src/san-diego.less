@@ -8,10 +8,8 @@ body {
 	}
 }
 
-@media (max-width: @mobile) {
-	p {
-		font-size: 0.875em; /* 14/16 */
-	}
+p {
+	font-size: 18px;
 }
 
 @container-padding: 1.875em;
@@ -325,6 +323,8 @@ header {
 	padding-bottom: 2em;
 
 	.tagline {
+		flex: 3 1;
+
 		@media (max-width: 390px) {
 			margin: 0 auto 1em;
 			width: 270px;
@@ -335,14 +335,19 @@ header {
 			margin-bottom: 3em;
 		}
 
+		@media (min-width: @tablet + 1) {
+			padding-top: 3em;
+		}
+
 		h3 {
-			font-weight: 900;
+			font-weight: 500;
+			font-size: 3.75rem;
 			color: @black;
 			text-transform: uppercase;
 			margin: 0;
 			padding: 0;
 			line-height: 1em;
-			letter-spacing: -2px;
+			letter-spacing: -0.5px;
 
 			@media (max-width: @mobile) {
 				font-size: 2.5em;
@@ -353,41 +358,46 @@ header {
 			&.next-line {
 				margin: 0;
 			}
-
-			.white {
-				color: @white;
-			}
-		}
-
-		.underline {
-			border-bottom: 3px solid @off-white;
 		}
 	}
 
 	.video {
+		flex: 5 1;
 
+		p {
+			font-size: 24px;
+			letter-spacing: 1px;
+			position: relative;
+			font-family: @league;
+			text-align: center;
+			text-transform: uppercase;
+			color: #f00;
+
+			span {
+				position: relative;
+				display: inline-block;
+				font-size: 50px;
+				line-height: 24px;
+				top: 9px;
+			}
+		}
 	}
 }
 
 #intro {
 	overflow: hidden;
-	background-color: @white;
-	padding-top: 2.25em;
-
-	@media (min-width: @tablet + 1) {
-		padding-top: 1em;
-	}
+	background-color: #000;
 
 	.intro-text {
 		flex: 3 1;
 
 		@media (min-width: @tablet + 1) {
-			margin-right: 2em;
+			margin-left: 7em;
 			margin-top: 7em;
 		}
 
 		h4 {
-			color: @navy;
+			color: @white;
 			line-height: 1em;
 
 			@media (max-width: @tablet) {
@@ -396,6 +406,7 @@ header {
 		}
 
 		p {
+			color: @white;
 			font-size: 1.125em; /* 18/16 */
 
 			@media (max-width: @tablet) {
@@ -411,7 +422,7 @@ header {
 	}
 
 	.intro-image {
-		flex: 7 1;
+		flex: 4 1;
 		margin: 0 -2em;
 	}
 }
@@ -452,6 +463,10 @@ header {
 		box-sizing: border-box;
 		flex: 1 1 50%;
 		margin-bottom: 3em;
+
+		p {
+			font-size: 14px;
+		}
 
 		@media (max-width: @mobile) {
 			h4 {
@@ -496,100 +511,6 @@ header {
 			}
 		}
 	}
-}
-
-#set-times {
- 	background: url('./img/set-times.jpg') @white no-repeat;
- 	background-position: bottom center;
- 	background-size: cover;
- 	padding: 6.25em 0; /* 100/16 */
-
- 	@media (max-width: @mobile) {
- 		padding: 2em 0;
-	 	background-position: right -12em top;
-		background-size: auto 100%;
- 	}
-
- 	@media (min-width: @tablet + 1) {
- 		.family-band {
- 			br {
- 				display: none;
- 			}
- 		}
- 	}
-
- 	h3 {
- 		text-align: center;
- 		margin-bottom: .25em;
-
- 		@media (max-width: @mobile) {
- 			text-align: left;
- 			margin-bottom: 0;
- 		}
- 	}
-
-	h4 {
-		color: @black;
-
-		@media (max-width: @mobile) {
-			font-size: 1.4375em; /* 23/16 */
-		}
-	}
-
- 	.flex-row {
- 		justify-content: center;
- 	}
-
- 	dl,
- 	dt,
- 	dd {
- 		margin: 0;
- 		padding: 0;
- 		text-transform: uppercase;
-
- 		@media (max-width: @mobile) {
- 			&.rusty {
-	 			text-shadow: @white 1px 1px;
-	 		}
- 		}
- 	}
-
- 	dt {
- 		font-size: 1.375em; /* 22/16 */
- 		font-weight: 900;
- 		font-family: @brandon;
- 		line-height: 1em;
-
-		@media (max-width: @mobile) {
-			font-size: 1.0625em; /* 17/16 */
-		}
- 	}
-
- 	dd {
- 		font-size: 1em; /* 16/16 */
- 		margin-bottom: 1em;
-
-		@media (max-width: @mobile) {
-			font-size: 0.75em; /* 12/16 */
-		}
- 	}
-
- 	.water-stage,
- 	.fire-stage,
- 	.wind-stage,
- 	.earth-stage {
- 		margin-bottom: 1em;
-
- 		@media (min-width: @mobile) {
- 			flex: 0 0 25%;
- 			box-sizing: border-box;
-
- 			h4 {
- 				margin-top: 0;
- 				margin-bottom: 1em;
- 			}
- 		}
- 	}
 }
 
 #venue {
@@ -770,600 +691,6 @@ header {
 	}
 }
 
-#tickets {
-	background: @white;
-
-	h3 {
-		margin-bottom: 0;
-	}
-
-	h4 {
-		margin-top: 0;
-	}
-
-	p {
-		&.total {
-			text-align: right;
-			text-transform: uppercase;
-			font-weight: 900;
-		}
-	}
-
-	.sales-off {
-		padding-top: 2em;
-
-		@media (min-width: @tablet + 1) {
-			padding-top: 13em;
-		}
-
-		h5 {
-			text-align: center;
-
-			@media (min-width: @tablet + 1) {
-				padding: 0 3em;
-			}
-		}
-	}
-
-	.tickets-description,
-	.tickets-flow,
-	.prices,
-	.ticket-image {
-		box-sizing: border-box;
-		flex: 1 0 50%;
-	}
-
-	.tickets-description {
-		padding: 6.25em 5em 6.25em 0;
-		margin-bottom: -2em;
-
-		@media (min-width: @mobile + 1) {
-			margin-bottom: 3em;
-		}
-
-		h6 {
-			position: relative;
-			font-family: @brandon;
-			font-weight: 900;
-			font-size: 1.375em; /* 22/16 */
-			margin: 0;
-			margin-bottom: .25em;
-			text-transform: uppercase;
-			color: @black;
-			white-space: nowrap;
-
-			sup {
-				position: absolute;
-				top: 0;
-				left: 0;
-				color: @black;
-				font-size: 0.625rem; /* 10/16 */
-			}
-
-			&.disabled {
-				color: fade(@black, 30%);
-
-				sup {
-					display: none;
-				}
-			}
-
-			&.sold-out {
-				text-decoration: line-through;
-
-				&:after {
-					content: 'Sold out!';
-					display: inline-block;
-					position: relative;
-					white-space: nowrap;
-					text-decoration: none;
-					color: @yellow;
-					margin: 0;
-					font-size: 0.625rem; /* 10/16 */
-					left: -2em;
-					top: -5px;
-					transform: rotate(25deg);
-				}
-			}
-		}
-
-		@media (max-width: @mobile) {
-			padding: 2em 0;
-
-			h6 {
-				font-size: 1.125em; /* 18/16 */
-			}
-
-			.prices {
-				padding-top: 1em;
-				flex: 3 0;
-			}
-		}
-	}
-
-	.ticket-image {
-		flex: 2 0;
-	}
-
-	.tickets-flow {
-		padding-left: 7.5em; /* 120/16 */
-
-		@media (max-width: @mobile) {
-			padding-left: 0;
-			padding-bottom: 3.5em;
-		}
-
-		.step-footer {
-			position: relative;
-			padding-top: .5em;
-
-			button {
-				flex: 0 0 10.625em; /* 170/16 */
-			}
-
-			a {
-				display: block;
-				margin: 1rem 0 0 1.5rem;
-				text-align: center;
-				text-transform: uppercase;
-				font-weight: 700;
-				font-size: 0.75em; /* 12/16 */
-				color: @navy;
-
-				&:before {
-					content: '';
-					display: inline-block;
-					margin-right: .5rem;
-					width: 0;
-					height: 0;
-					border: 4px solid transparent;
-					border-right-color: @navy;
-				}
-
-				@media (max-width: @mobile) {
-					margin-left: .5rem;
-				}
-			}
-
-			p {
-				flex: 1 1;
-				color: @navy;
-				text-align: right;
-				margin: .75rem 0 0;
-			}
-		}
-
-		.step {
-			display: none;
-
-			&.active {
-				display: block;
-			}
-		}
-	}
-
-	.progress {
-		margin: 4em auto 3.5em;
-		height: 0;
-		width: 80%;
-
-		@media (max-width: @mobile) {
-			margin: 3em auto 2em;
-		}
-
-		.leg {
-			width: 33.333333333%;
-			float: left;
-			height: 0;
-			border: 1px solid @yellow;
-			box-sizing: border-box;
-
-			&.active {
-				border-color: @navy;
-			}
-		}
-
-		.ticks {
-			justify-content: space-between;
-			margin: 0 -1px;
-
-			// This fixes a weird Chrome layout glitch
-			width: 101%;
-			height: 0;
-
-			div {
-				position: relative;
-				height: 15px;
-				width: 15px;
-				border: 2px solid @yellow;
-				background: @yellow;
-				transform: translateY(-50%);
-				border-radius: 100%;
-				z-index: 999;
-
-				span {
-					display: block;
-					white-space: nowrap;
-					position: absolute;
-					bottom: 150%;
-					left: 50%;
-					transform: translateX(-50%);
-					font-family: @proxima;
-					font-weight: 700;
-					font-size: 0.75em; /* 12/16 */
-					text-transform: uppercase;
-					color: @brown;
-				}
-
-				&.active,
-				&.complete {
-					border-color: @brown;
-				}
-
-				&.complete {
-					background: @brown;
-
-					span {
-						color: @brown;
-					}
-
-					&:after {
-						content: '';
-						display: block;
-						position: absolute;
-						left: 4px;
-						top: 0;
-						width: 3px;
-						height: 7px;
-						border: 2px solid transparent;
-						border-right-color: @off-white;
-						border-bottom-color: @off-white;
-						transform: rotate(45deg);
-					}
-				}
-			}
-		}
-	}
-
-	.quantity-selector {
-		padding-top: 5.5em;
-		margin-bottom: 2em;
-		-webkit-user-select: none;
-		user-select: none;
-
-		@media (max-width: @mobile) {
-			padding-top: 3em;
-		}
-
-		h6 {
-			flex: 3 0;
-			font-family: @brandon;
-			font-weight: 900;
-			font-size: 1.375em; /* 22/16 */
-			text-align: center;
-			margin: 0;
-			text-transform: uppercase;
-			color: @black;
-			line-height: 1em;
-
-			@media (max-width: @mobile) {
-				font-size: 1.125em; /* 18/16 */
-				flex: 2 0;
-			}
-
-			@media (max-width: @android) {
-				flex: 1 1;
-			}
-		}
-
-		.quantity-controls {
-			padding: 1.3em 0;
-
-			.ticket {
-				justify-content: space-between;
-				align-items: center;
-				margin-bottom: 1em;
-
-				.ticket-name {
-					font-weight: 700;
-				}
-
-				.select-wrap {
-					flex: 0 1 4em;
-				}
-			}
-		}
-
-		+ .step-footer {
-			text-align: center;
-		}
-	}
-
-	#confirm-quantity {
-		&:disabled {
-			background-color: @sky;
-			cursor: no-drop;
-
-			&:active {
-				box-shadow: none;
-			}
-		}
-	}
-
-	form {
-		h6 {
-			font-family: @brandon;
-			font-weight: 900;
-			font-size: 1.375em; /* 22/16 */
-			margin: 0 0 0.75em;
-			text-transform: uppercase;
-			color: @black;
-		}
-	}
-
-	fieldset[name="marketing-opt-in"] {
-		margin-bottom: 1em;
-
-		label, input {
-			display: inline;
-		}
-	}
-
-	// Apple pay
-	.apple-pay {
-		display: none;
-
-		p {
-			text-align: center;
-		}
-	}
-
-	#apple-pay-payment-option {
-		// Style this wrapper and not the button - will be shown if Apple Pay is supported
-		max-width: 300px;
-		margin: 1em auto 0;
-
-		@media (max-width: @mobile) {
-			max-width: 200px;
-			text-align: center;
-		}
-	}
-
-	@supports (-webkit-appearance: -apple-pay-button) {
-	    .apple-pay-button {
-	        display: block;
-	        -webkit-appearance: -apple-pay-button;
-			-apple-pay-button-type: check-out;
-			-apple-pay-button-style: black;
-			height: 2.5em; /* 40/16 */
-	    }
-	}
-	@supports not (-webkit-appearance: -apple-pay-button) {
-	    .apple-pay-button {
-	        display: block;
-	        background-size: 100% 60%;
-	        background-repeat: no-repeat;
-	        background-position: 50% 50%;
-	        border-radius: 5px;
-	        padding: 0px;
-	        box-sizing: border-box;
-	        min-width: 200px;
-	        height: 2.5em;
-	        max-height: 64px;
-			background-image: -webkit-named-image(apple-pay-logo-white);
-	        background-color: black;
-	    }
-	}
-
-	fieldset[name="expiration"] {
-		flex: 2 1;
-		margin-right: 2em;
-	}
-
-	fieldset[name="cvv"] {
-		flex: 1 1;
-
-		label {
-			position: relative;
-
-			span {
-				display: block;
-				position: absolute;
-				top: 0;
-				right: 0;
-				font-family: Times, serif;
-				font-style: italic;
-				font-size: 10px;
-				text-transform: none;
-				border-radius: 100%;
-				background: @brown;
-				color: @off-white;
-				height: 13px;
-				width: 13px;
-				text-align: center;
-				cursor: help;
-
-				&:after {
-					content: attr(title);
-					position: absolute;
-					bottom: 100%;
-					right: 0;
-					display: block;
-					font-family: @proxima;
-					font-size: 12px;
-					font-style: normal;
-					padding: .125em .5em;
-					border-radius: 3px;
-					pointer-events: none;
-					white-space: nowrap;
-					background: @brown;
-					color: @off-white;
-					opacity: 0;
-					transition: opacity 200ms;
-				}
-
-				&:hover {
-					&:after {
-						opacity: 1;
-					}
-				}
-			}
-		}
-	}
-
-	.review-order {
-		h6 {
-			font-family: @brandon;
-			font-weight: 900;
-			font-size: 1.375em; /* 22/16 */
-			margin: 0 0 0.75em;
-			text-transform: uppercase;
-			color: @brown;
-		}
-
-		p {
-			color: @brown;
-
-			&.intro {
-				border-top: 1px solid @brown;
-				border-bottom: 1px solid @brown;
-				padding: 1em 0;
-				margin-bottom: 1.5em;
-			}
-		}
-
-		.summary {
-			border-bottom: 1px solid @brown;
-			padding-bottom: 1.5em;
-			margin-bottom: 2em;
-		}
-
-		.reservation-details,
-		.order-summary {
-			flex: 1 0 50%;
-			box-sizing: border-box;
-
-			strong {
-				text-transform: uppercase;
-				font-size: 0.75em; /* 12/16 */
-			}
-		}
-
-		dl {
-			margin: 0;
-			padding: 1em 0 0;
-		}
-
-		dt,
-		dd {
-			margin: 0;
-			padding: 0;
-		}
-
-		dt {
-			float: left;
-			clear: left;
-		}
-
-		dd {
-			float: right;
-			clear: right;
-			text-align: right;
-			font-weight: 700;
-		}
-	}
-
-	.order-confirmation {
-		background: @gray;
-		padding: 1em;
-		border: 2px dashed @brown;
-		margin-bottom: 2em;
-
-		h6 {
-			font-family: @brandon;
-			font-weight: 900;
-			font-size: 1.375em; /* 22/16 */
-			margin: 0 0 0.75em;
-			text-transform: uppercase;
-
-			@media (max-width: @mobile) {
-				line-height: 1.125em;
-			}
-		}
-
-		p {
-			&.confirmation-number {
-				text-transform: uppercase;
-				font-weight: 700;
-
-				span {
-					color: @brown;
-				}
-			}
-
-			&.tickets-link {
-				margin: 2em 0;
-
-				@media (max-width: @mobile) {
-					text-align: center;
-				}
-
-				a {
-					background-color: @brown;
-					text-transform: uppercase;
-					font-weight: 700;
-					color: @white;
-					padding: .5em 2em;
-				}
-			}
-
-			&.confirmation-footer {
-				margin-top: 3em;
-				color: fade(@black, 70%);
-				font-size: 12px;
-				text-align: center;
-				line-height: 1.5em;
-			}
-		}
-	}
-}
-
-#card-number,
-#expiration,
-#cvv {
-	margin-bottom: 1em;
-	border: 1px solid @navy;
-	transition: box-shadow 200ms;
-	height: 2.1875em; /* 35/16 */
-	padding: 0 1em;
-	box-sizing: border-box;
-
-	&.braintree-hosted-fields-focused {
-		box-shadow: 0 0 4px 1px fade(@navy, 30%);
-	}
-
-	&.braintree-hosted-fields-invalid {
-		position: relative;
-		border-color: @brown;
-
-		&:after {
-			content: '!';
-			display: block;
-			position: absolute;
-			right: 0.75em;
-			top: 50%;
-			transform: translateY(-50%);
-			text-align: center;
-			width: 20px;
-			height: 20px;
-			line-height: 20px;
-			border-radius: 100%;
-			color: @white;
-			background: @brown;
-		}
-	}
-}
-
 #newsletter {
 	padding-top: 2em;
 	background: url('./img/newsletter.jpg') @white no-repeat;
@@ -1420,108 +747,6 @@ header {
 		input[type="text"],
 		input[type="email"] {
 			border-color: @white;
-		}
-	}
-}
-
-#faq {
-	padding: 6.25em 0; /* 100/16 */
-	background-color: @brown;
-
-	@media (max-width: @mobile) {
-		padding: 2em 0;
-	}
-
-	h3 {
-		text-align: center;
-		color: @off-white;
-
-		@media (max-width: @mobile) {
-			text-align: left;
-		}
-	}
-
-	h5 {
-		color: @yellow;
-		letter-spacing: 2px;
-
-		@media (max-width: 375px) {
-			font-size: 1.25em;
-		}
-	}
-
-	p {
-		color: @off-white;
-		margin-top: 0;
-	}
-
-	.faq-column {
-		flex: 1 0;
-		margin-right: 2em;
-
-		&:last-child {
-			margin-right: 0;
-		}
-
-		@media (max-width: @mobile) {
-			margin: 0;
-		}
-	}
-
-	.faq {
-		margin-bottom: 1.875em; /* 30/16 */
-
-		a {
-			color: @yellow;
-		}
-	}
-
-	#additional-questions {
-		margin-top: 2em;
-
-		h5 {
-			color: @off-white;
-			text-align: center;
-		}
-
-		a {
-			color: @yellow;
-			font-weight: 700;
-		}
-
-		p {
-			text-align: center;
-			color: @off-white;
-		}
-
-		@media (max-width: @mobile) {
-			h5,
-			p {
-				text-align: left;
-			}
-
-			h5 {
-				margin-bottom: .5em;
-			}
-		}
-	}
-}
-
-#partners {
-	background-color: @gray;
-	padding: 6.25em 0; /* 100/16 */
-
-	h5 {
-		color: @black;
-		text-align: center;
-	}
-
-	@media (max-width: @mobile) {
-		padding: 2em 0;
-
-		h5 {
-			font-size: 1.25em; /* 20/16 */
-			margin-bottom: 2em;
 		}
 	}
 }

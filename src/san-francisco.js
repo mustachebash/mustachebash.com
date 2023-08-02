@@ -293,7 +293,8 @@ function purchaseFlowInit({hostedFieldsInstance, applePayInstance}) {
 	if(!promo) {
 		for(const id of pageSettings.ticketsOrder) {
 			if(!products[id]) continue;
-			const { name, price, status, eventId, vip } = products[id],
+			const { name, price, status, eventId, quantity = null, sold = 0 } = products[id],
+				remaining = quantity && quantity - sold,
 				classes = [];
 
 			if(status !== 'active' || !Object.values(events).some(ev => ev.salesOn) || !events[eventId].currentTicket) classes.push('disabled');
@@ -301,18 +302,17 @@ function purchaseFlowInit({hostedFieldsInstance, applePayInstance}) {
 
 			ticketsListHTML.push(`<h6 class="${classes.join(' ')}" data-product-id="${id}">${name} $${price}</h6>`);
 
-			if(status === 'active' && events[eventId].salesOn && (events[eventId].currentTicket === id || vip)) {
-				// The regex check is janky, but we don't want to pre-populate afterparty ticket quantities
+			if(status === 'active' && events[eventId].salesOn) {
 				quantitiesHTML.push(`
 					<div class="ticket flex-row flex-row-mobile">
 						<div class="ticket-name"><span>${name}</span></div>
 						<div class="select-wrap">
 							<select name="${id}-quantity">
-								<option ${/afterparty/i.test(events[eventId].name) || vip ? 'selected' : ''} value="0">0</option>
-								<option ${!/afterparty/i.test(events[eventId].name) && !vip ? 'selected' : ''} value="1">1</option>
-								<option value="2">2</option>
-								<option value="3">3</option>
-								<option value="4">4</option>
+								<option ${events[eventId].currentTicket !== id ? 'selected' : ''} value="0">0</option>
+								<option ${events[eventId].currentTicket === id ? 'selected' : ''} value="1">1</option>
+								${remaining === null || remaining >= 2 ? '<option value="2">2</option>' : ''}
+								${remaining === null || remaining >= 3 ? '<option value="3">3</option>' : ''}
+								${remaining === null || remaining >= 4 ? '<option value="4">4</option>' : ''}
 							</select>
 						</div>
 					</div>
@@ -336,7 +336,7 @@ function purchaseFlowInit({hostedFieldsInstance, applePayInstance}) {
 			document.querySelector('.tickets-flow').innerHTML = `
 				<div class="sales-off">
 					<h5>
-						Tickets on sale Friday 1/20/23, 9am!
+						Tickets on sale Tuesday 8/1/23, 9am!
 					</h5>
 				</div>`;
 

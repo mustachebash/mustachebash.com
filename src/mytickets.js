@@ -96,7 +96,7 @@ if(transactionToken) {
 				</p>
 				<p class="disclaimer">
 					This is event is 21+ only, no re-entry. All guests must have a valid ID and ticket at the door. Do not share your tickets with
-					anyone you do not trust. If you have any additional questions, please <a href="/#faq" target="_blank">visit our FAQs</a>.
+					anyone you do not trust. <!-- If you have any additional questions, please <a href="/info" target="_blank">visit our FAQs</a>.-->
 				</p>
 				<div class="tickets swiper-container">
 					<div class="swiper-wrapper">
