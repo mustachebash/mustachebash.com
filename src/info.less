@@ -257,375 +257,83 @@ header {
 	}
 }
 
-#tagline-video {
-	background-color: @gray;
-	padding-bottom: 2em;
-
-	.tagline {
-		flex: 3 1;
-
-		@media (max-width: 390px) {
-			margin: 0 auto 1em;
-			width: 270px;
-		}
-
-		@media (min-width: 400px) and (max-width: @mobile) {
-			padding: 0 3em;
-			margin-bottom: 3em;
-		}
-
-		@media (min-width: @tablet + 1) {
-			padding-top: 3em;
-		}
-
-		h3 {
-			font-weight: 500;
-			font-size: 3.75rem;
-			color: @black;
-			text-transform: uppercase;
-			margin: 0;
-			padding: 0;
-			line-height: 1em;
-			letter-spacing: -0.5px;
-
-			@media (max-width: @mobile) {
-				font-size: 2.5em;
-				margin-bottom: 0;
-				line-height: 1em;
-			}
-
-			&.next-line {
-				margin: 0;
-			}
-		}
-	}
-
-	.video {
-		flex: 5 1;
-
-		p {
-			font-size: 24px;
-			letter-spacing: 1px;
-			position: relative;
-			font-family: @league;
-			text-align: center;
-			text-transform: uppercase;
-			color: #f00;
-
-			span {
-				position: relative;
-				display: inline-block;
-				font-size: 50px;
-				line-height: 24px;
-				top: 9px;
-			}
-		}
-	}
-}
-
 #intro {
 	overflow: hidden;
-	background-color: #000;
+	background-color: @gray;
 
 	.intro-text {
-		flex: 3 1;
-
-		@media (min-width: @tablet + 1) {
-			margin-left: 7em;
-			margin-top: 7em;
+		h4 {
+			color: @black;
+			line-height: 1em;
+			text-align: center;
 		}
+
+		p {
+			color: @black;
+			font-size: 1.125em; /* 18/16 */
+			text-align: center;
+			max-width: 900px;
+			margin: 0 auto 2em;
+		}
+	}
+}
+
+#faqs {
+	background: @black;
+	padding-top: 6em;
+	padding-bottom: 2em;
+
+	h3,
+	h4,
+	p,
+	dt,
+	dd {
+		color: @white;
+	}
+
+	.faq-header {
+		margin-bottom: 4rem;
+
+		h3,
+		h4 {
+			text-align: center;
+			margin-top: 0;
+			margin-bottom: 0;
+		}
+	}
+
+	.faq-section {
+		margin-bottom: 4em;
 
 		h4 {
+			text-align: left;
+			color: @yellow;
+		}
+
+		a {
 			color: @white;
-			line-height: 1em;
-
-			@media (max-width: @tablet) {
-				text-align: center;
-			}
+			text-decoration: underline;
 		}
 
-		p {
-			color: @white;
-			font-size: 1.125em; /* 18/16 */
-
-			@media (max-width: @tablet) {
-				margin-top: 0;
-				text-align: center;
-			}
-
-			@media (max-width: @mobile) {
-				font-size: 0.875em; /* 14/16 */
-				margin-bottom: 2.125rem;
-			}
-		}
-	}
-
-	.intro-image {
-		flex: 4 1;
-		margin: 0 -2em;
-	}
-}
-
-#lineup {
-	.lineup-image {
-		margin: 0 -@container-padding;
-		margin-bottom: 6.25em; /* 100/16 */
-
-		@media (max-width: @mobile) {
-			margin-bottom: 2em;
-		}
-	}
-
-	.lineup-header {
-		text-align: center;
-		margin-bottom: 2em;
-
-		@media (max-width: @mobile) {
-			font-size: 1em;
-			margin-bottom: 0.5em;
-		}
-	}
-
-	.flex-row {
-		justify-content: space-between;
-
-		@media (max-width: @mobile) {
-			display: block;
-		}
-	}
-
-	.bands {
-		margin-bottom: 3em;
-	}
-
-	.band {
-		box-sizing: border-box;
-		flex: 1 1 50%;
-		margin-bottom: 3em;
-
-		p {
-			font-size: 14px;
-		}
-
-		@media (max-width: @mobile) {
-			h4 {
-				font-size: 1.5625em; /* 25/16 */
-				margin: 0.7i5rem 0;
-			}
-
-			p {
-				margin-bottom: 1rem;
-			}
-		}
-
-		.img-wrap > img {
-			width: 100%;
-		}
-
-		.icons-row {
-			display: flex;
-			align-items: center;
-			justify-content: flex-start;
-		}
-
-		.link-icon {
-			display: block;
-			flex: 1 0 auto;
-			max-width: 2.5rem;
-			margin-right: 1em;
-
-			img {
-				display: block;
-				max-width: 100%;
-			}
-		}
-
-		@media (min-width: @mobile) {
-			&:first-child {
-				margin-right: 1em;
-			}
-
-			&:last-child {
-				margin-left: 1em;
-			}
-		}
-	}
-}
-
-#venue {
-	background-color: @white;
-
-	h3 {
-		margin-bottom: 0;
-	}
-
-	h4 {
-		margin-top: 0;
-	}
-
-	p {
-		margin-bottom: 2em;
-	}
-
-	.venue-image,
-	.venue-description {
-		flex: 1 0 50%;
-		box-sizing: border-box;
-	}
-
-	.venue-image {
-		position: relative;
-		padding: 2em 0 3em;
-	}
-
-	#venue-arrow {
-		position: absolute;
-		top: -30px;
-		right: 0;
-		width: 200px;
-	}
-
-	.venue-description {
-		padding: 6.25em 0 0 4.375em; /* 70/16 */
-	}
-
-	.ghost-button {
-		color: @black;
-		border-color: @black;
-		border-radius: 400px;
-
-		&:hover {
-			background: transparent;
-			color: @slate;
-			box-shadow: inset 0 0 12px -1px @gray;
-		}
-	}
-
-	@media (max-width: @mobile) {
-		.venue-description {
-			order: 1;
-			padding: 2em 0 0;
-		}
-
-		.venue-image {
-			order: 2;
-
-			img {
-				height: auto;
-				max-width: 100%;
-			}
-		}
-	}
-}
-
-#tradition {
-	background-color: @gray;
-	overflow: hidden;
-
-	h3 {
-		color: @navy;
-		margin-bottom: 0;
-	}
-
-	h4 {
-		margin-top: 0;
-		color: @navy;
-		letter-spacing: 1.5px;
-
-		@media (min-width: @tablet + 1) {
-			br {
-				display: none;
-			}
-		}
-	}
-
-	p {
-		color: @black;
-	}
-
-	.tradition-description,
-	.tradition-image {
-		box-sizing: border-box;
-	}
-
-	.tradition-description {
-		flex: 5 1;
-		padding: 6.25em 2em 0 0; /* 100/16 */
-
-		@media (max-width: @mobile) {
-			padding: 2em 0 0;
-
-			p:last-child {
-				margin-bottom: 0;
-			}
-		}
-	}
-
-	.tradition-image {
-		display: flex;
-		flex-direction: column;
-		justify-content: flex-end;
-		align-items: flex-end;
-		flex: 7 1;
-		margin: 3em 0 -20em;
-
-		@media (max-width: @mobile) {
-			margin-bottom: -10em;
-		}
-	}
-}
-
-#gallery {
-	-webkit-user-select: none;
-	user-select: none;
-	position: relative;
-
-	.cover-wrapper {
-		text-align: center;
-
-		img {
-			max-width: 100%;
-		}
-	}
-}
-
-#family-band {
-	background-color: @white;
-	overflow: hidden;
-
-	h3 {
-		margin-bottom: 0;
-	}
-
-	h4 {
-		margin-top: 0;
-	}
-
-	.family-band-image,
-	.family-band-description {
-		box-sizing: border-box;
-	}
-
-	.family-band-description {
-		flex: 4 1;
-		margin-top: 5em;
-
-		@media (max-width: @mobile) {
-			margin-top: 2em;
-		}
-	}
-
-	.family-band-image {
-		flex: 4 1;
-		margin-bottom: 2em;
-
-		img {
+		dl {
 			margin: 0;
 		}
 
-		@media (min-width: @tablet + 1) {
-			margin: 2em 0;
-			margin-left: 4em;
+		dt {
+			font-family: @league;
+			font-size: 26px;
+			letter-spacing: 1px;
+			margin-top: 1.5em;
+			font-weight: 500;
+
+			&:before {
+				content: "– ";
+			}
+		}
+
+		dd {
+			font-size: 14px;
+			margin: 1em 0;
 		}
 	}
 }
