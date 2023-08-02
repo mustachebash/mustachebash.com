@@ -31,7 +31,7 @@ window.addEventListener('error', e => {
 // TODO: Make this less janky
 let scrollAnimationReqId;
 document.querySelectorAll('nav').forEach(el => el.addEventListener('click', e => {
-	if(e.target.hash) {
+	if(e.target.hash && e.target.pathname === location.pathname) {
 		e.preventDefault();
 
 		// Track hero CTA clicks
