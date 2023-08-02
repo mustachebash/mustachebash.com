@@ -70,6 +70,7 @@ if(transactionToken) {
 			// Gets a UTC time, hardcode the PDT offset
 			eventDateObj.setUTCHours(eventDateObj.getUTCHours() - 8);
 
+			// eslint-disable-next-line no-unused-vars
 			const dateString = eventDateObj.toLocaleDateString('en-US', {
 					weekday: 'long',
 					year: 'numeric',
@@ -80,7 +81,7 @@ if(transactionToken) {
 				eventHour = eventDateObj.getUTCHours() > 12 ? eventDateObj.getUTCHours() - 12 : eventDateObj.getUTCHours(),
 				eventMinutes = `${eventDateObj.getUTCMinutes() < 10 ? `0${eventDateObj.getUTCMinutes()}` : eventDateObj.getUTCMinutes()}`,
 				eventPeriod = eventDateObj.getUTCHours() >= 12 ? 'pm' : 'am',
-				// eslint-disable-next-line max-len
+				// eslint-disable-next-line
 				timeString = `${eventHour}:${eventMinutes}${eventPeriod}`;
 
 			const ticketsHTML = `
@@ -88,14 +89,13 @@ if(transactionToken) {
 				<h2>Order #${confirmationId}</h2>
 				<h2>Purchased by ${firstName} ${lastName}</h2>
 				<h4>${eventName}</h4>
-				<h4>${dateString}</h4>
-				<h4>Doors at ${timeString}</h4>
+				<h4>September 15-16th, 2023</h4>
 				<p class="download-wallet">
 					<a class="download" href="${API_HOST}/v1/mytickets/pdf?t=${transactionToken}">Download PDF</a>
 					<!-- <a class="wallet" href="#"><img src="./img/apple-wallet.svg" /></a> -->
 				</p>
 				<p class="disclaimer">
-					This is event is 21+ only, no re-entry. All guests must have a valid ID and ticket at the door. Do not share your tickets with
+					This is event is 21+ only. All guests must have a valid ID and ticket at the door. Do not share your tickets with
 					anyone you do not trust. <!-- If you have any additional questions, please <a href="/info" target="_blank">visit our FAQs</a>.-->
 				</p>
 				<div class="tickets swiper-container">
