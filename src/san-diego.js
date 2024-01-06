@@ -815,7 +815,7 @@ document.forms.newsletter.addEventListener('submit', e => {
 // 		.then(braintreeInit)
 // 		.catch(e => {
 // 			// If anything errors, we need to show a message in the tickets section
-// 			// eslint-disable-next-line max-len
+// eslint-disable-next-line max-len
 // 			document.querySelector('.tickets-flow').innerHTML = '<h5 style="padding-top: 5em; color: #602a34; text-align: center">Something seems to be broken,<br>please refresh the page and try again</h5>';
 
 // 			logError(e);
