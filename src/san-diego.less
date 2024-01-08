@@ -127,6 +127,54 @@ header {
 		}
 	}
 
+	.date-callout {
+		margin-left: 1em;
+		padding-top: .25em;
+
+		p {
+			font-family: @brandon;
+			font-size: .8em;
+			font-weight: 700;
+			letter-spacing: 2px;
+			text-align: left;
+			line-height: 1em;
+			text-transform: uppercase;
+			color: @blue;
+			margin: 0;
+			margin-bottom: 0.4em;
+
+			&:last-child {
+				margin-bottom: 0;
+			}
+		}
+
+		@media (max-width: @tablet) {
+			display: none;
+		}
+	}
+
+	.tickets-nav-mobile {
+		display: none;
+		position: absolute;
+		left: 140px;
+		top: 3px;
+		background: @yellow;
+		padding: .5em 1em;
+		border-radius: 400px;
+
+		@media (max-width: @mobile) {
+			display: block;
+		}
+
+		text-transform: uppercase;
+		font-family: @brandon;
+		font-size: 16px;
+		font-weight: 700;
+		letter-spacing: 2px;
+		text-align: center;
+		color: @black;
+	}
+
 	nav {
 		flex: 1 0;
 		overflow: hidden;
@@ -163,10 +211,6 @@ header {
 			background: @yellow;
 			padding: .5em 1.5em;
 			border-radius: 400px;
-
-			a {
-				color: @black;
-			}
 		}
 	}
 

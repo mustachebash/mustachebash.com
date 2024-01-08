@@ -129,6 +129,32 @@ header {
 		}
 	}
 
+	.date-callout {
+		margin-left: 1em;
+		padding-top: .25em;
+
+		p {
+			font-family: @brandon;
+			font-size: .8em;
+			font-weight: 700;
+			letter-spacing: 2px;
+			text-align: left;
+			line-height: 1em;
+			text-transform: uppercase;
+			color: @blue;
+			margin: 0;
+			margin-bottom: 0.4em;
+
+			&:last-child {
+				margin-bottom: 0;
+			}
+		}
+
+		@media (max-width: @tablet) {
+			display: none;
+		}
+	}
+
 	nav {
 		flex: 1 0;
 		overflow: hidden;
@@ -290,7 +316,7 @@ header {
 		visibility: hidden;
 		text-align: center;
 
-		@media (min-width: @mobile + 1) {
+		@media (min-width: (@mobile + 1)) {
 			margin: 0 auto -1.25em;
 		}
 	}
@@ -454,7 +480,7 @@ footer {
 		visibility: hidden;
 		text-align: center;
 
-		@media (min-width: @mobile + 1) {
+		@media (min-width: (@mobile + 1)) {
 			margin: 0 auto -1.25em;
 		}
 	}
