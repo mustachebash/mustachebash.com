@@ -178,7 +178,7 @@
 					<p>In San Diego</p>
 					<p>March 23, 2024</p>
 				</div>
-				<div class="tickets-nav-mobile">TICKETS SOON</div>
+				<div class="tickets-nav-mobile"><a href="#tickets">GET TICKETS</a></div>
 				<div id="menu-icon">
 					<div></div>
 					<div></div>
@@ -188,11 +188,10 @@
 					<ul>
 						<li><a href="/san-diego">San Diego</a></li>
 						<li><a href="/san-francisco">San Francisco</a></li>
-						<!-- <li><a href="/#tradition">Tradition</a></li> -->
+						<li><a href="/#tradition">Tradition</a></li>
 						<li><a href="/gallery">Gallery</a></li>
 						<li><a href="/info">Info</a></li>
-						<!-- <li><a href="#shop">Shop</a></li> -->
- 						<li class="tickets-nav">TICKETS SOON</li>
+ 						<li class="tickets-nav"><a href="#tickets">GET TICKETS</a></li>
 						<li class="social">
 							<a href="https://www.facebook.com/MustacheBashSD/" target="_blank">
 								<svg class="facebook-icon social-icon" aria-labelledby="simpleicons-facebook-icon" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title id="simpleicons-facebook-icon">Facebook icon</title><path d="M22.676 0H1.324C.593 0 0 .593 0 1.324v21.352C0 23.408.593 24 1.324 24h11.494v-9.294H9.689v-3.621h3.129V8.41c0-3.099 1.894-4.785 4.659-4.785 1.325 0 2.464.097 2.796.141v3.24h-1.921c-1.5 0-1.792.721-1.792 1.771v2.311h3.584l-.465 3.63H16.56V24h6.115c.733 0 1.325-.592 1.325-1.324V1.324C24 .593 23.408 0 22.676 0"/></svg>
@@ -577,6 +576,143 @@
 					</p>
 					<a class="ghost-button" target="_blank" href="https://goo.gl/maps/xmahP3vn3Gp">Get Directions</a>
 				</div>
+			</div>
+		</div>
+	</section>
+
+	<section id="tickets">
+		<div class="container-1230">
+			<div class="flex-row">
+				<div class="tickets-description">
+					<h3>Tickets</h3>
+					<h4>Get 'Em While The Gettin' is Good</h4>
+					<p>
+						Tickets are valid for entry on both days. Hotel booking is for two nights (Friday and Saturday) and <strong>does not include event passes</strong>. If you're 21+ and ready to funk, we have a pass for you. All sales are final, but don't worry, you won't want to miss this.
+					</p>
+					<div class="flex-row flex-row-mobile">
+						<div class="prices" id="tickets-list">
+ 						</div>
+						<div class="img-wrap ticket-image"><img src="./img/ticket.jpg"></div>
+					</div>
+				</div>
+				<div class="tickets-flow">
+ 					<div class="progress">
+ 						<div class="leg"></div>
+ 						<div class="leg"></div>
+ 						<div class="leg"></div>
+ 						<div class="flex-row flex-row-mobile ticks">
+ 							<div class="active"><span>Tickets</span></div>
+ 							<div><span>Info</span></div>
+ 							<div><span>Payment</span></div>
+ 							<div><span>Review</span></div>
+ 						</div>
+ 					</div>
+ 					<div class="steps">
+ 						<div class="step active">
+ 							<div class="quantity-selector">
+								<h6>Quantity</h6>
+ 								<div class="quantity-controls">
+ 								</div>
+ 							</div>
+ 							<div class="step-footer">
+ 								<button id="confirm-quantity">Next</button>
+ 							</div>
+ 						</div>
+ 						<div class="step">
+ 							<form method="post" action="/" name="personal-info">
+ 								<h6>Enter Your Info</h6>
+ 								<fieldset name="name">
+ 									<label data-error-message="Please enter your first and last name">Full Name</label>
+ 									<input type="text" name="name" placeholder="Purchaser's Name" maxlength="45">
+ 								</fieldset>
+ 								<fieldset name="email">
+ 									<label data-error-message="Please enter your email">Email</label>
+ 									<input type="email" name="email" placeholder="Enter your email for confirmation" maxlength="100">
+ 								</fieldset>
+ 								<fieldset name="marketing-opt-in">
+ 									<input id="marketing-opt-in-checkbox" type="checkbox" name="marketing-opt-in">
+ 									<label for="marketing-opt-in-checkbox">Send me all Bash and partner news</label>
+ 								</fieldset>
+ 							</form>
+ 							<div class="flex-row flex-row-mobile step-footer">
+ 								<button id="enter-personal-info">Next</button>
+ 								<a href="#" id="back-to-quantity">Back to Previous</a>
+ 							</div>
+ 						</div>
+ 						<div class="step">
+ 							<form method="post" action="/" name="payment-info">
+								<h6>Enter Your Payment Info</h6>
+ 								<fieldset name="payment-info">
+ 									<label>Credit Card Number</label>
+ 									<div id="card-number"></div>
+ 								</fieldset>
+ 								<div class="flex-row flex-row-mobile">
+ 									<fieldset name="expiration">
+ 										<label>Expiration Date</label>
+ 										<div id="expiration"></div>
+ 									</fieldset>
+ 									<fieldset name="cvv">
+ 										<label>CVV <span title="The 3 or 4 digit code on the back of your card">i</span></label>
+ 										<div id="cvv"></div>
+ 									</fieldset>
+ 								</div>
+ 							</form>
+ 							<div class="flex-row flex-row-mobile step-footer">
+ 								<button id="enter-payment-info">Next</button>
+ 								<a href="#" id="back-to-personal">Back to Previous</a>
+ 							</div>
+ 							<div class="apple-pay">
+ 								<p>- or -</p>
+ 								<div id="apple-pay-payment-option"><div class="apple-pay-button apple-pay-button-white"></div></div>
+ 							</div>
+ 						</div>
+ 						<div class="step">
+ 							<div class="review-order">
+ 								<h6>Review and Purchase</h6>
+ 								<p class="intro">
+ 									Please review your payment details and order summary. ALL SALES ARE FINAL!
+ 								</p>
+ 								<div class="flex-row summary">
+ 									<div class="reservation-details">
+ 										<strong>Reservation Details</strong>
+ 										<p>
+ 											<span class="reservation-details-name"></span><br>
+ 											<span class="reservation-details-email"></span>
+ 										</p>
+ 									</div>
+ 									<div class="order-summary">
+ 										<strong>Order Summary</strong>
+ 										<dl>
+
+ 										</dl>
+ 									</div>
+ 								</div>
+ 							</div>
+ 							<div class="flex-row flex-row-mobile step-footer">
+ 								<button id="confirm-order">Purchase</button>
+ 								<a href="#" id="back-to-payment">Back to Previous</a>
+ 								<p id="grand-total" class="total">Total $<span>0</span></p>
+ 							</div>
+ 						</div>
+ 						<div class="step">
+ 							<div class="order-confirmation">
+ 								<h6>
+ 									Congratulations!<br>
+									<!-- non-breaking space for mobile -->
+ 									You're Coming to the&nbsp;Bash!
+ 								</h6>
+ 								<p class="confirmation-number">Confirmation: <span></span></p>
+ 								<p class="tickets-link"><a href="#" rel="nofollow" target="_blank">View Tickets</a></p>
+ 								<p>
+ 									Thank you for your purchase. A confirmation email has been sent to the address you provided (be sure you check your spam!). Bring your tickets (available at link above and also linked in the email) and a valid photo ID for each guest at the door. Now grow out those staches and get yourselves some funky threads. We'll be seeing you Sept 15 &amp; 16th, 2023 for yet another amazing Bash!
+ 								</p>
+								<p class="confirmation-footer">
+									Don't forget to check out our <a href="/info">FAQ</a> before coming! Email <a href="mailto:contact@mustachebash.com">contact@mustachebash.com</a> for all other questions.
+								</p>
+ 							</div>
+ 						</div>
+ 					</div>
+ 				</div>
 			</div>
 		</div>
 	</section>
