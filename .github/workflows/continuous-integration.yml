@@ -45,3 +45,7 @@ jobs:
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
+
+      - name: Test nginx
+        run: |
+          docker run --rm ${{ steps.meta.outputs.tags }} nginx -t
