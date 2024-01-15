@@ -6,8 +6,7 @@ const fs = require('fs'),
 	MiniCssExtractPlugin = require('mini-css-extract-plugin'),
 	CssMinimizerPlugin = require('css-minimizer-webpack-plugin'),
 	HtmlWebpackPlugin = require('html-webpack-plugin'),
-	HTMLInlineCSSWebpackPlugin = require('html-inline-css-webpack-plugin').default,
-	ImageMinimizerPlugin = require('image-minimizer-webpack-plugin');
+	HTMLInlineCSSWebpackPlugin = require('html-inline-css-webpack-plugin').default;
 
 module.exports = (env = {}, argv) => {
 	const devMode = argv.mode !== 'production',
@@ -94,6 +93,16 @@ module.exports = (env = {}, argv) => {
 					include: [/img/],
 					type: 'asset/resource'
 				},
+				// We need special absolute URL handling for OpenGraph images
+				{
+					test: /\.(png|jpg)$/,
+					include: [/opengraph-img/],
+					type: 'asset/resource',
+					generator: {
+						publicPath: 'https://mustachebash.com/',
+						filename: 'opengraph-img/[name].[hash][ext][query]'
+					}
+				},
 				{
 					test: /\.html$/,
 					use: [{
@@ -110,19 +119,7 @@ module.exports = (env = {}, argv) => {
 				new CssMinimizerPlugin({
 					minimizerOptions: { preset: ['default', { discardComments: { removeAll: true } }] }
 				}),
-				new TerserPlugin({extractComments: false, terserOptions: {format: {comments: false}}}),
-				new ImageMinimizerPlugin({
-					minimizer: {
-						implementation: ImageMinimizerPlugin.imageminMinify,
-						options: {
-							plugins: [
-								['jpegtran', { progressive: false }],
-								['optipng', { optimizationLevel: 3 }],
-								['svgo', {}]
-							]
-						}
-					}
-				})
+				new TerserPlugin({extractComments: false, terserOptions: {format: {comments: false}}})
 			]
 		},
 		plugins: [
