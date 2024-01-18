@@ -103,7 +103,7 @@ if(orderToken) {
 						${tickets.map(({ qrCode, eventName, admissionTier }, i) => (`
 							<div class="ticket swiper-slide">
 								<div class="img-wrap ${!qrCode ? 'outline' : ''}">
-									${qrCode ? `<img src="${qrCode}" />` : '<h5>Your Tickets will be available here<br>closer to the event</h5>'}
+									${qrCode ? `<img src="${qrCode}" />` : '<h5>Your Tickets will be shown here<br>closer to the event</h5>'}
 								</div>
 								<p>${eventName}${admissionTier === 'vip' ? ' &#128378;' : ''}</p>
 								<p>${i + 1}/${tickets.length}</p>
