@@ -30,7 +30,7 @@ window.addEventListener('error', e => {
 	logError({ lineno, colno, message, filename, stack, name });
 });
 
-const transactionToken = new URLSearchParams(location.search).get('t'),
+const orderToken = new URLSearchParams(location.search).get('t'),
 	handleError = e => {
 		// If anything errors, we need to show a message in the tickets section
 		document.querySelector('main').innerHTML = `
@@ -43,28 +43,29 @@ const transactionToken = new URLSearchParams(location.search).get('t'),
 		logError(e);
 	};
 
-if(transactionToken) {
+if(orderToken) {
 	// Fetch the initial settings and products
-	fetch(`${API_HOST}/v1/mytickets?t=${transactionToken}`)
+	fetch(`${API_HOST}/v1/mytickets?t=${orderToken}`)
 		.then(response => {
 			if(!response.ok) throw new Error('Tickets not loaded');
 
 			return response;
 		})
 		.then(response => response.json())
-		.then(tickets => {
+		.then(({customer, order, tickets}) => {
 			if(!tickets.length) throw new Error('No tickets returned');
 
-			// FIXME: This isn't ideal, but works with our system
-			// This only works with "Guest #" suffixes added to guest names.
+			// UUID alpha sorting should be sufficiently deterministic
 			tickets.sort((a, b) => {
 				if(a.eventDate > b.eventDate) return 1;
 				if(a.eventDate < b.eventDate) return -1;
 
-				return a.lastName > b.lastName ? 1 : -1;
+				return a.id > b.id ? 1 : -1;
 			});
 
-			const { confirmationId, firstName, lastName, eventName, eventDate } = tickets[0],
+			const { firstName, lastName, email } = customer,
+				{ eventName, eventDate } = tickets[0],
+				confirmationId = order.id.slice(0, 8),
 				eventDateObj = new Date(eventDate);
 
 			// Gets a UTC time, hardcode the PDT offset
@@ -87,25 +88,24 @@ if(transactionToken) {
 			const ticketsHTML = `
 				<h1>Your tickets</h1>
 				<h2>Order #${confirmationId}</h2>
-				<h2>Purchased by ${firstName} ${lastName}</h2>
+				<h2>Purchased by ${firstName} ${lastName} - ${email}</h2>
 				<h4>${eventName}</h4>
-				<h4>September 15-16th, 2023</h4>
+				<h4>${dateString}</h4>
 				<p class="download-wallet">
-					<a class="download" href="${API_HOST}/v1/mytickets/pdf?t=${transactionToken}">Download PDF</a>
 					<!-- <a class="wallet" href="#"><img src="./img/apple-wallet.svg" /></a> -->
 				</p>
 				<p class="disclaimer">
-					This is event is 21+ only. All guests must have a valid ID and ticket at the door. Do not share your tickets with
-					anyone you do not trust. <!-- If you have any additional questions, please <a href="/info" target="_blank">visit our FAQs</a>.-->
+					This is event is 21+ only. All guests must have a valid ID and ticket to check in. Do not share your tickets or this link
+					with anyone. <!-- If you have any additional questions, please <a href="/info" target="_blank">visit our FAQs</a>.-->
 				</p>
 				<div class="tickets swiper-container">
 					<div class="swiper-wrapper">
-						${tickets.map(({ qrCode, eventName, vip }, i) => (`
+						${tickets.map(({ qrCode, eventName, admissionTier }, i) => (`
 							<div class="ticket swiper-slide">
-								<div class="img-wrap">
-									<img src="${qrCode}" />
+								<div class="img-wrap ${!qrCode ? 'outline' : ''}">
+									${qrCode ? `<img src="${qrCode}" />` : '<h5>Your Tickets will be available here<br>closer to the event</h5>'}
 								</div>
-								<p>${eventName}${vip ? ' &#128378;' : ''}</p>
+								<p>${eventName}${admissionTier === 'vip' ? ' &#128378;' : ''}</p>
 								<p>${i + 1}/${tickets.length}</p>
 							</div>
 						`)).join('\n')}
