@@ -8,6 +8,7 @@ import applePay from 'braintree-web/apple-pay';
 import { format } from 'date-fns';
 
 const EVENT_2024_ID = '45fdbc90-19a1-4a5c-ac69-345afceb5d39';
+const EVENT_2024_AFTERPARTY_ID = '998dedab-1eff-42f8-b8c0-7f3de541e979';
 
 function logError({ lineno, colno, message, filename, stack, name }) {
 	fetch(API_HOST + '/v1/errors', {
@@ -263,7 +264,7 @@ function completePurchase(nonce) {
 
 			return Promise.all([response.headers, response.json()]);
 		})
-		.then(([ headers, { confirmationId, token } ]) => {
+		.then(([ headers, { confirmationId, orderId, token } ]) => {
 			window.requestAnimationFrame(() => {
 				// In case Apple Pay takes us here
 				document.querySelectorAll('.step')[2].classList.remove('active');
@@ -271,6 +272,7 @@ function completePurchase(nonce) {
 				document.querySelectorAll('.step')[4].classList.add('active');
 
 				document.querySelector('.confirmation-number span').innerText = `#${confirmationId}`;
+				document.querySelector('.order-number span').innerText = `#${orderId.slice(0, 8)}`;
 				document.querySelector('.tickets-link a').href = `/mytickets?t=${token}`;
 
 				const tick = document.querySelectorAll('.ticks > div')[3];
@@ -330,7 +332,8 @@ function completePurchase(nonce) {
 function purchaseFlowInit({hostedFieldsInstance, applePayInstance}) {
 	const ticketsList = document.querySelector('#tickets-list'),
 		quantitiesHTML = [],
-		ticketsListHTML = [];
+		ticketsListHTML = [],
+		now = (new Date()).toISOString();
 
 	if(!promo) {
 		for(const id of Object.values(events).flatMap(({meta}) => meta.ticketsOrder)) {
@@ -339,12 +342,18 @@ function purchaseFlowInit({hostedFieldsInstance, applePayInstance}) {
 				isVip = admissionTier === 'vip',
 				classes = [];
 
-			if(status !== 'active' || !Object.values(events).some(ev => ev.salesEnabled) || !events[eventId].meta.currentTicket) classes.push('disabled');
+			if(
+				status !== 'active' ||
+				!Object.values(events).some(ev => ev.salesEnabled) ||
+				!events[eventId].meta.currentTicket ||
+				now < events[eventId].openingSales
+			) classes.push('disabled');
+
 			if(status === 'archived') classes.push('sold-out');
 
-			ticketsListHTML.push(`<h6 class="${classes.join(' ')}" data-product-id="${id}">${name} $${price}</h6>`);
+			ticketsListHTML.push(`<h6 class="${classes.join(' ')}" data-product-id="${id}">${name} - $${price}</h6>`);
 
-			if(status === 'active' && events[eventId].salesEnabled && (events[eventId].meta.currentTicket === id || isVip)) {
+			if(status === 'active' && events[eventId].salesEnabled && (events[eventId].meta.currentTicket === id || isVip) && now > events[eventId].openingSales) {
 				// The regex check is janky, but we don't want to pre-populate afterparty ticket quantities
 				quantitiesHTML.push(`
 					<div class="ticket flex-row flex-row-mobile">
@@ -372,7 +381,7 @@ function purchaseFlowInit({hostedFieldsInstance, applePayInstance}) {
 		}, '2040-12-31T00:00:00.000Z');
 
 		// If we aren't on sale yet
-		if((new Date()).toISOString() < earliestOpeningSalesDate) {
+		if(now < earliestOpeningSalesDate) {
 			document.querySelector('.ticket-image').style.display = 'none';
 			document.querySelector('.tickets-flow').innerHTML = `
 				<div class="sales-off">
@@ -863,17 +872,26 @@ const promoId = new URLSearchParams(location.search).get('promo');
 
 if(!promoId) {
 	// Fetch the initial settings and products
-	fetch(API_HOST + `/v1/event-settings/${EVENT_2024_ID}`)
-		.then(response => {
-			if(!response.ok) throw new Error('Settings not loaded');
+	Promise.all([
+		fetch(API_HOST + `/v1/event-settings/${EVENT_2024_ID}`)
+			.then(response => {
+				if(!response.ok) throw new Error('Settings not loaded');
 
-			return response;
-		})
-		.then(response => response.json())
-		.then(({ products: siteProducts, ...ev }) => {
+				return response;
+			})
+			.then(response => response.json()),
+		fetch(API_HOST + `/v1/event-settings/${EVENT_2024_AFTERPARTY_ID}`)
+			.then(response => {
+				if(!response.ok) throw new Error('Afterparty Settings not loaded');
+
+				return response;
+			})
+			.then(response => response.json())
+	])
+		.then(evs => evs.forEach(({ products: siteProducts, ...ev }) => {
 			siteProducts.forEach(p => products[p.id] = p);
 			events[ev.id] = ev;
-		})
+		}))
 		.catch(e => {
 			console.error('Settings Error', e);
 

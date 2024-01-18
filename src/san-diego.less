@@ -625,7 +625,9 @@ header {
 }
 
 #venue {
-	background-color: @white;
+	background-color: #e1e5e8;
+	padding-top: 4.5em;
+	padding-bottom: 7em;
 
 	h3 {
 		margin-bottom: 0;
@@ -650,15 +652,8 @@ header {
 		padding: 2em 0 3em;
 	}
 
-	#venue-arrow {
-		position: absolute;
-		top: -30px;
-		right: 0;
-		width: 200px;
-	}
-
 	.venue-description {
-		padding: 1.25em 0 0 4.375em;
+		padding: 1.25em 4.375em 0 0;
 	}
 
 	.ghost-button {
@@ -674,12 +669,185 @@ header {
 	}
 
 	@media (max-width: @mobile) {
+		padding: 0;
+
 		.venue-description {
 			order: 1;
 			padding: 2em 0 0;
 		}
 
 		.venue-image {
+			order: 2;
+
+			img {
+				height: auto;
+				max-width: 100%;
+			}
+		}
+	}
+}
+
+#afterparty {
+	background: @black;
+	padding: 5.5em 0;
+	overflow: hidden;
+
+	.afterparty-description {
+		flex: 3 1;
+
+
+		@media (min-width: (@tablet + 1)) {
+			margin-right: 7em;
+		}
+
+		h3 {
+			color: @white;
+			margin-bottom: 0;
+			margin-top: 0;
+			line-height: 1em;
+		}
+
+		h4 {
+			color: @white;
+			margin-top: 0;
+		}
+
+		p {
+			color: @white;
+			font-size: 1em;
+			margin-bottom: 3em;
+		}
+
+		.ghost-button {
+			width: 14.5em;
+			color: @white;
+			border-color: @white;
+			border-radius: 400px;
+
+			&:hover {
+				background: transparent;
+				color: @white;
+				box-shadow: inset 0 0 12px -1px @gray;
+			}
+
+			@media (max-width: @tablet) {
+				display: inline-block;
+				margin-bottom: 3em;
+			}
+		}
+	}
+
+	.afterparty-image {
+		flex: 4 1;
+		margin: 0 -2em;
+
+		@media (min-width: (@tablet + 1)) {
+			margin: -6.25em -2em -6.25em;
+		}
+	}
+
+	.sticker {
+		position: absolute;
+		bottom: -70px;
+		left: 350px;
+
+		@media (max-width: 1230px) {
+			display: none;
+		}
+	}
+
+	@media (max-width: @mobile) {
+		padding: 0;
+
+		.afterparty-description {
+			order: 1;
+			padding: 2em 0 0;
+		}
+
+		.afterparty-image {
+			order: 2;
+
+			img {
+				height: auto;
+				max-width: 100%;
+			}
+		}
+	}
+}
+
+#vip {
+	background: #e1e5e8;
+	padding: 5.5em 0 4.75em;
+	overflow: hidden;
+
+	.vip-description {
+		flex: 3 1;
+
+
+		@media (min-width: (@tablet + 1)) {
+			margin-right: 7em;
+		}
+
+		h3 {
+			color: @black;
+			margin-top: 0;
+			margin-bottom: 0;
+			line-height: 1em;
+		}
+
+		h4 {
+			color: @black;
+			margin-top: 0;
+		}
+
+		p {
+			color: @black;
+			font-size: 1em;
+			margin-bottom: 1em;
+
+			&.vip-includes {
+				text-transform: uppercase;
+				line-height: 1.1em;
+			}
+		}
+
+		.ghost-button {
+			width: 14.5em;
+			color: @black;
+			border-color: @black;
+			border-radius: 400px;
+
+			&:hover {
+				background: transparent;
+				color: @black;
+				box-shadow: inset 0 0 12px -1px @gray;
+			}
+
+			@media (max-width: @tablet) {
+				display: inline-block;
+				margin-bottom: 3em;
+			}
+		}
+	}
+
+	.vip-image {
+		flex: 4 1;
+		margin: 0 -2em;
+
+		@media (min-width: (@tablet + 1)) {
+			margin: -6.25em -2em -6.25em;
+		}
+	}
+
+	@media (max-width: @mobile) {
+		padding: 0;
+
+		.vip-description {
+			order: 1;
+			padding: 2em 0 0;
+		}
+
+		.vip-image {
 			order: 2;
 
 			img {
@@ -1214,9 +1382,11 @@ header {
 		}
 
 		p {
-			&.confirmation-number {
+			&.confirmation-number,
+			&.order-number {
 				text-transform: uppercase;
 				font-weight: 700;
+				margin: 0;
 
 				span {
 					color: @black;
@@ -1231,11 +1401,14 @@ header {
 				}
 
 				a {
-					background-color: @navy;
+					border-radius: 400px;
+					background-color: @yellow;
 					text-transform: uppercase;
 					font-weight: 700;
-					color: @white;
+					color: @black;
 					padding: .5em 2em;
+					border: 1px solid @black;
+
 				}
 			}
 
@@ -1245,6 +1418,10 @@ header {
 				font-size: 12px;
 				text-align: center;
 				line-height: 1.5em;
+
+				a {
+					text-decoration: underline;
+				}
 			}
 		}
 	}
@@ -1296,6 +1473,9 @@ header {
 
 		img {
 			max-width: 100%;
+			border: none;
+			margin: 0;
+			padding: 0;
 		}
 	}
 }

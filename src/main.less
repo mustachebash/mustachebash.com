@@ -195,6 +195,28 @@ header {
 		}
 	}
 
+	.tickets-nav-mobile {
+		display: none;
+		position: absolute;
+		left: 140px;
+		top: 3px;
+		background: @yellow;
+		padding: .5em 1em;
+		border-radius: 400px;
+
+		@media (max-width: @mobile) {
+			display: block;
+		}
+
+		text-transform: uppercase;
+		font-family: @brandon;
+		font-size: 16px;
+		font-weight: 700;
+		letter-spacing: 2px;
+		text-align: center;
+		color: @black;
+	}
+
 	#menu-icon {
 		position: absolute;
 		width: 30px;

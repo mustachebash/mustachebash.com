@@ -95,8 +95,8 @@ if(orderToken) {
 					<!-- <a class="wallet" href="#"><img src="./img/apple-wallet.svg" /></a> -->
 				</p>
 				<p class="disclaimer">
-					This is event is 21+ only. All guests must have a valid ID and ticket at the door. Do not share your tickets or this link
-					anyone. <!-- If you have any additional questions, please <a href="/info" target="_blank">visit our FAQs</a>.-->
+					This is event is 21+ only. All guests must have a valid ID and ticket to check in. Do not share your tickets or this link
+					with anyone. <!-- If you have any additional questions, please <a href="/info" target="_blank">visit our FAQs</a>.-->
 				</p>
 				<div class="tickets swiper-container">
 					<div class="swiper-wrapper">
