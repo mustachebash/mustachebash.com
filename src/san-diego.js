@@ -524,8 +524,14 @@ function purchaseFlowInit({hostedFieldsInstance, applePayInstance}) {
 						.catch(e => {
 							appleSession.completePayment(window.ApplePaySession.STATUS_FAILURE);
 
-							// eslint-disable-next-line
-							alert('Order Failed, please check your payment details and try again');
+							if(e.status !== 410) {
+								// eslint-disable-next-line
+								alert('Order Failed, please check your payment details and try again');
+							} else {
+								// eslint-disable-next-line
+								alert('One or more items has sold out! Refresh to pick a different option');
+								window.location.reload();
+							}
 
 							console.error('Payment Error', e);
 						});
@@ -574,23 +580,23 @@ function purchaseFlowInit({hostedFieldsInstance, applePayInstance}) {
 	} else if(promo.type === 'single-use') {
 		cart.push({
 			productId: promo.product.id,
-			quantity: promo.quantity
+			quantity: 1
 		});
 
 		const steps = document.querySelector('.steps'),
 			promoInfo = document.createElement('h5');
 
-		promoInfo.innerHTML = `Promo Ticket: ${promo.product.name} - $${promo.price}/ea (${promo.quantity} qty)`;
+		promoInfo.innerHTML = `Promo Ticket: ${promo.product.name} - $${promo.price}/ea (1 qty)`;
 
 		steps.parentNode.insertBefore(promoInfo, steps);
 
-		const subtotal = promo.price * promo.quantity,
+		const subtotal = promo.price,
 			orderSummaryList = document.querySelector('.order-summary dl');
 
 		document.querySelector('#grand-total span').innerText = subtotal;
 
 		orderSummaryList.innerHTML = `
-			<dt>${promo.product.name} (<span class="quantity">${promo.quantity}</span>)</dt>
+			<dt>${promo.product.name} (<span class="quantity">1</span>)</dt>
 			<dd>$<span class="subtotal">${subtotal}</span></dd>
 		`;
 
@@ -782,8 +788,14 @@ function purchaseFlowInit({hostedFieldsInstance, applePayInstance}) {
 				document.querySelector('#confirm-order').disabled = false;
 				document.querySelector('#back-to-payment').style.display = '';
 
-				// eslint-disable-next-line
-				alert('Order Failed, please check your payment details and try again');
+				if(e.status !== 410) {
+					// eslint-disable-next-line
+					alert('Order Failed, please check your payment details and try again');
+				} else {
+					// eslint-disable-next-line
+					alert('One or more items has sold out! Refresh to pick a different option');
+					window.location.reload();
+				}
 
 				console.error('Payment Error', e);
 			});
@@ -868,46 +880,11 @@ function braintreeInit() {
 		});
 }
 
-const promoId = new URLSearchParams(location.search).get('promo');
+function setPromo() {
+	const promoId = new URLSearchParams(location.search).get('promo');
 
-if(!promoId) {
 	// Fetch the initial settings and products
-	Promise.all([
-		fetch(API_HOST + `/v1/event-settings/${EVENT_2024_ID}`)
-			.then(response => {
-				if(!response.ok) throw new Error('Settings not loaded');
-
-				return response;
-			})
-			.then(response => response.json()),
-		fetch(API_HOST + `/v1/event-settings/${EVENT_2024_AFTERPARTY_ID}`)
-			.then(response => {
-				if(!response.ok) throw new Error('Afterparty Settings not loaded');
-
-				return response;
-			})
-			.then(response => response.json())
-	])
-		.then(evs => evs.forEach(({ products: siteProducts, ...ev }) => {
-			siteProducts.forEach(p => products[p.id] = p);
-			events[ev.id] = ev;
-		}))
-		.catch(e => {
-			console.error('Settings Error', e);
-
-			throw e;
-		})
-		.then(braintreeInit)
-		.catch(e => {
-			// If anything errors, we need to show a message in the tickets section
-			// eslint-disable-next-line max-len
-			document.querySelector('.tickets-flow').innerHTML = '<h5 style="padding-top: 5em; color: #602a34; text-align: center">Something seems to be broken,<br>please refresh the page and try again</h5>';
-
-			logError(e);
-		});
-} else {
-	// Fetch the initial settings and products
-	fetch(`${API_HOST}/v1/promos/${promoId}`)
+	return !!promoId && fetch(`${API_HOST}/v1/promos/${promoId}`)
 		.then(response => {
 			if(!response.ok) {
 				const err = new Error('Promo Error');
@@ -920,7 +897,6 @@ if(!promoId) {
 		})
 		.then(response => response.json())
 		.then(responseJson => promo = responseJson)
-		.then(braintreeInit)
 		.catch(e => {
 			let promoMessage;
 			switch(e.status) {
@@ -940,3 +916,39 @@ if(!promoId) {
 			document.querySelector('.tickets-flow').innerHTML = `<h5 style="padding-top: 5em; color: #e66a40; text-align: center">${promoMessage}</h5>`;
 		});
 }
+
+// Fetch the initial settings and products
+Promise.all([
+	fetch(API_HOST + `/v1/event-settings/${EVENT_2024_ID}`)
+		.then(response => {
+			if(!response.ok) throw new Error('Settings not loaded');
+
+			return response;
+		})
+		.then(response => response.json()),
+	fetch(API_HOST + `/v1/event-settings/${EVENT_2024_AFTERPARTY_ID}`)
+		.then(response => {
+			if(!response.ok) throw new Error('Afterparty Settings not loaded');
+
+			return response;
+		})
+		.then(response => response.json())
+])
+	.then(evs => evs.forEach(({ products: siteProducts, ...ev }) => {
+		siteProducts.forEach(p => products[p.id] = p);
+		events[ev.id] = ev;
+	}))
+	.then(setPromo)
+	.catch(e => {
+		console.error('Settings Error', e);
+
+		throw e;
+	})
+	.then(braintreeInit)
+	.catch(e => {
+		// If anything errors, we need to show a message in the tickets section
+		// eslint-disable-next-line max-len
+		document.querySelector('.tickets-flow').innerHTML = '<h5 style="padding-top: 5em; color: #602a34; text-align: center">Something seems to be broken,<br>please refresh the page and try again</h5>';
+
+		logError(e);
+	});

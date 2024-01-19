@@ -95,7 +95,7 @@ if(orderToken) {
 					<!-- <a class="wallet" href="#"><img src="./img/apple-wallet.svg" /></a> -->
 				</p>
 				<p class="disclaimer">
-					This is event is 21+ only. All guests must have a valid ID and ticket to check in. Do not share your tickets or this link
+					This is event is 21+ only. All guests must have a valid ID and ticket to check in. Do not share this link
 					with anyone. <!-- If you have any additional questions, please <a href="/info" target="_blank">visit our FAQs</a>.-->
 				</p>
 				<div class="tickets swiper-container">
@@ -103,7 +103,7 @@ if(orderToken) {
 						${tickets.map(({ qrCode, eventName, admissionTier }, i) => (`
 							<div class="ticket swiper-slide">
 								<div class="img-wrap ${!qrCode ? 'outline' : ''}">
-									${qrCode ? `<img src="${qrCode}" />` : '<h5>Your Tickets will be available here<br>closer to the event</h5>'}
+									${qrCode ? `<img src="${qrCode}" />` : '<h5>Your Tickets will be shown here<br>closer to the event</h5>'}
 								</div>
 								<p>${eventName}${admissionTier === 'vip' ? ' &#128378;' : ''}</p>
 								<p>${i + 1}/${tickets.length}</p>
