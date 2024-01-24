@@ -79,6 +79,7 @@ header {
 	box-sizing: border-box;
 	background: @slate;
 	z-index: 9999;
+	margin-bottom: 1.5em;
 
 	@media (max-width: @mobile) {
 		padding-top: 1.0625em; /* 17/16 */
@@ -107,12 +108,21 @@ h2 + h2 {
 	margin-bottom: 1em;
 }
 
+h3 {
+	margin-top: .2em;
+	margin-bottom: 0;
+	line-height: 1em;
+}
+
 h4 {
 	margin: 0;
 	line-height: 1;
 }
 
-.disclaimer {
+.disclaimer,
+.instructions {
+	font-size: 12px;
+
 	a {
 		color: @brown;
 		font-weight: 700;
@@ -188,6 +198,61 @@ h4 {
 
 .ticket {
 	text-align: center;
+}
+
+.tickets-list {
+	padding: 2em 0;
+	background: @brown;
+
+	.event-group {
+		margin-bottom: 4em;
+	}
+
+	.event-info {
+		h3,
+		h4,
+		h5,
+		p {
+			color: @white;
+		}
+	}
+
+	ul {
+		padding: 0;
+		margin: 0;
+		list-style: none;
+
+		li {
+			background: @white;
+			padding: 1em;
+			border-radius: 3px;
+			margin-bottom: 1em;
+		}
+	}
+
+	.info {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+
+		p {
+			font-size: 12px;
+			margin: 0.1em 0;
+		}
+
+		.ticket-number {
+			flex: 0 1 75px;
+		}
+
+		.ticket-tier {
+			flex: 1 1;
+		}
+
+		.ticket-ids {
+			align-self: flex-end;
+			text-align: right;
+		}
+	}
 }
 
 footer {
