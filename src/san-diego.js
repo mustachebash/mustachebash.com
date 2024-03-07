@@ -239,6 +239,7 @@ function updateCartQuantities() {
 	updateSubtotals();
 }
 
+const targetGuestId = (new URLSearchParams(location.search).get('targetGuestId')) ?? undefined;
 function completePurchase(nonce) {
 	return fetch(API_HOST + '/v1/orders', {
 		method: 'POST',
@@ -249,7 +250,8 @@ function completePurchase(nonce) {
 			paymentMethodNonce: nonce,
 			customer,
 			cart,
-			promoId: promo && promo.id
+			promoId: promo && promo.id,
+			targetGuestId
 		})
 	})
 		.then(response => {
@@ -273,7 +275,14 @@ function completePurchase(nonce) {
 
 				document.querySelector('.confirmation-number span').innerText = `#${confirmationId}`;
 				document.querySelector('.order-number span').innerText = `#${orderId.slice(0, 8)}`;
-				document.querySelector('.tickets-link a').href = `/mytickets?t=${token}`;
+
+				if(targetGuestId) {
+					document.querySelector('.tickets-link a').style.display = 'none';
+					// eslint-disable-next-line max-len
+					document.querySelector('.confirmation-message').innerText = 'Thanks for purchasing a VIP upgrade! Your tickets have been upgraded. Use the link sent in your original purchase to access your tickets.';
+				} else {
+					document.querySelector('.tickets-link a').href = `/mytickets?t=${token}`;
+				}
 
 				const tick = document.querySelectorAll('.ticks > div')[3];
 				tick.classList.remove('active');
