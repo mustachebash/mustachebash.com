@@ -144,10 +144,11 @@ if(orderToken) {
 							eventsOrder.flatMap(orderedEventId => tickets
 								.filter(({ eventId }) => eventId === orderedEventId)
 								.sort(ticketSort)
-								.map(({ id, admissionTier }, i, arr) => (`
+								.map(({ id, admissionTier, status }, i, arr) => (`
 								<div class="ticket swiper-slide">
 									<div class="img-wrap ${!ticketQRCodesById[id] ? 'outline' : ''}">
 										${ticketQRCodesById[id] ? `<img src="${ticketQRCodesById[id]}" />` : '<h5>Your Tickets will be shown here<br>closer to the event</h5>'}
+										${ticketQRCodesById[id] && status === 'checked_in' ? `<div class="checked-in"><span>Checked In</span></div>` : ''}
 									</div>
 									<p>${eventsById[orderedEventId].name}${admissionTier === 'vip' ? ' &#128378;' : ''}</p>
 									<p>${i + 1}/${arr.length}</p>
@@ -176,12 +177,12 @@ if(orderToken) {
 									${[...eventTickets]
 										.sort(ticketSort)
 										.map((ticket, i) => {
-											const { id, orderId, admissionTier } = ticket,
+											const { id, orderId, admissionTier, status, checkInTime } = ticket,
 												ticketId = id.slice(0, 8),
 												confirmationId = orderId.slice(0, 8);
 
 											return `
-												<li class="${admissionTier === 'vip' ? 'vip-tier' : 'general-tier'}">
+												<li class="${admissionTier === 'vip' ? 'vip-tier' : 'general-tier'} ${status === 'checked_in' ? 'checked-in' : ''}">
 													<div class="info">
 														<div class="ticket-number">
 															<h2>#${i + 1}</h2>
@@ -197,6 +198,7 @@ if(orderToken) {
 														<div class="ticket-ids">
 															<p>Ticket #${ticketId}</p>
 															<p>Confirmation #${confirmationId}</p>
+															${status === 'checked_in' ? `<p>Checked In: ${(new Date(checkInTime)).toLocaleTimeString('en-US', {hour: 'numeric', minute: 'numeric', hour12: true})}</p>` : ''}
 														</div>
 													</div>
 												</li>
