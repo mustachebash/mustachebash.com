@@ -153,7 +153,7 @@ if(orderToken) {
 									<p>${eventsById[orderedEventId].name}${admissionTier === 'vip' ? ' &#128378;' : ''}</p>
 									<p>${i + 1}/${arr.length}</p>
 								</div>
-							`)).join('\n'))}
+							`)).join('\n')).join('\n')}
 						</div>
 						<div class="swiper-pagination"></div>
 						<div class="swiper-button-next"></div>
