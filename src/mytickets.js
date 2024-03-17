@@ -3,6 +3,7 @@ import 'swiper/less';
 import 'mytickets.less';
 
 import Swiper from 'swiper';
+import qrcode from 'qrcode';
 
 function logError({ lineno, colno, message, filename, stack, name }) {
 	fetch(API_HOST + '/v1/errors', {
@@ -43,6 +44,14 @@ const orderToken = new URLSearchParams(location.search).get('t'),
 		logError(e);
 	};
 
+function ticketSort(a, b) {
+	// Rank by tier first
+	if(a.admissionTier === 'vip' && b.admissionTier !== 'vip') return -1;
+	if(a.admissionTier !== 'vip' && b.admissionTier === 'vip') return 1;
+
+	return a.id > b.id ? 1 : -1;
+}
+
 if(orderToken) {
 	// Fetch the initial settings and products
 	fetch(`${API_HOST}/v1/mytickets?t=${orderToken}`)
@@ -52,9 +61,30 @@ if(orderToken) {
 			return response;
 		})
 		.then(response => response.json())
-		.then(({customer, tickets}) => {
+		.then(async ({customer, tickets}) => {
 			if(!tickets.length) throw new Error('No tickets returned');
 
+			const ticketQRCodes = await Promise.all(tickets.map(async ({ id, qrPayload }) => {
+				if(!qrPayload) return {id, qrImg: null};
+
+				try {
+					const qrImg = await qrcode.toDataURL(qrPayload, { scale: 8, errorCorrectionLevel: 'M' });
+
+					return {id, qrImg};
+				} catch(e) {
+					console.error('QR code generation failed', e);
+					return {id, qrImg: null};
+				}
+			}));
+
+			const ticketQRCodesById = ticketQRCodes.reduce((acc, {id, qrImg}) => {
+				acc[id] = qrImg;
+				return acc;
+			}, {});
+
+			return {customer, tickets, ticketQRCodesById};
+		})
+		.then(({customer, tickets, ticketQRCodesById}) => {
 			const eventsById = {};
 
 			tickets.forEach(ticket => {
@@ -78,13 +108,17 @@ if(orderToken) {
 						id: eventId,
 						name: eventName,
 						dateString,
-						timeString,
-						tickets: []
+						timeString
 					};
 				}
-
-				eventsById[eventId].tickets.push(ticket);
 			});
+
+			const eventsOrder = Object.values(eventsById).sort((a, b) => {
+				const aDate = new Date(a.eventDate),
+					bDate = new Date(b.eventDate);
+
+				return aDate - bDate;
+			}).map(event => event.id);
 
 			// TODO: loop the tickets for QR codes, but display each guest as a row and tier below
 			const { firstName, lastName, email } = customer;
@@ -106,15 +140,19 @@ if(orderToken) {
 					</p>
 					<div class="tickets swiper-container">
 						<div class="swiper-wrapper">
-							${tickets.map(({ qrCode, eventName, admissionTier }, i) => (`
+							${/* eslint-disable indent*/
+							eventsOrder.flatMap(orderedEventId => tickets
+								.filter(({ eventId }) => eventId === orderedEventId)
+								.sort(ticketSort)
+								.map(({ id, admissionTier }, i, arr) => (`
 								<div class="ticket swiper-slide">
-									<div class="img-wrap ${!qrCode ? 'outline' : ''}">
-										${qrCode ? `<img src="${qrCode}" />` : '<h5>Your Tickets will be shown here<br>closer to the event</h5>'}
+									<div class="img-wrap ${!ticketQRCodesById[id] ? 'outline' : ''}">
+										${ticketQRCodesById[id] ? `<img src="${ticketQRCodesById[id]}" />` : '<h5>Your Tickets will be shown here<br>closer to the event</h5>'}
 									</div>
-									<p>${eventName}${admissionTier === 'vip' ? ' &#128378;' : ''}</p>
-									<p>${i + 1}/${tickets.length}</p>
+									<p>${eventsById[orderedEventId].name}${admissionTier === 'vip' ? ' &#128378;' : ''}</p>
+									<p>${i + 1}/${arr.length}</p>
 								</div>
-							`)).join('\n')}
+							`)).join('\n'))}
 						</div>
 						<div class="swiper-pagination"></div>
 						<div class="swiper-button-next"></div>
@@ -124,51 +162,50 @@ if(orderToken) {
 				<div class="tickets-list">
 					<div class="container-1230">
 						${/* eslint-disable indent*/
-						Object.values(eventsById).map(({ name: eventName, dateString, timeString, tickets: eventTickets }) => `
-							<div class="event-group">
-								<div class="event-info">
-									<h4>${eventName}</h4>
-									<p>${dateString} at ${timeString}</p>
+						eventsOrder.map((orderedEventId) => {
+							const { name: eventName, dateString, timeString } = eventsById[orderedEventId],
+								eventTickets = tickets.filter(({ eventId }) => eventId === orderedEventId);
+
+							return `
+								<div class="event-group">
+									<div class="event-info">
+										<h4>${eventName}</h4>
+										<p>${dateString} at ${timeString}</p>
+									</div>
+									<ul>
+									${[...eventTickets]
+										.sort(ticketSort)
+										.map((ticket, i) => {
+											const { id, orderId, admissionTier } = ticket,
+												ticketId = id.slice(0, 8),
+												confirmationId = orderId.slice(0, 8);
+
+											return `
+												<li class="${admissionTier === 'vip' ? 'vip-tier' : 'general-tier'}">
+													<div class="info">
+														<div class="ticket-number">
+															<h2>#${i + 1}</h2>
+														</div>
+														<div class="ticket-tier">
+															<h5>${admissionTier === 'vip'
+																	? 'VIP &#128378;'
+																	: window.innerWidth > 420
+																		? 'General Admission'
+																		: 'GA'
+															}</h5>
+														</div>
+														<div class="ticket-ids">
+															<p>Ticket #${ticketId}</p>
+															<p>Confirmation #${confirmationId}</p>
+														</div>
+													</div>
+												</li>
+											`;
+										}).join('\n')}
+									</ul>
 								</div>
-								<ul>
-								${[...eventTickets]
-									.sort((a, b) =>  {
-										// Rank by tier first
-										if(a.admissionTier === 'vip' && b.admissionTier !== 'vip') return -1;
-										if(a.admissionTier !== 'vip' && b.admissionTier === 'vip') return 1;
-
-										return a.id > b.id ? 1 : -1;
-									})
-									.map((ticket, i) => {
-										const { id, orderId, admissionTier } = ticket,
-											ticketId = id.slice(0, 8),
-											confirmationId = orderId.slice(0, 8);
-
-										return `
-											<li class="${admissionTier === 'vip' ? 'vip-tier' : 'general-tier'}">
-												<div class="info">
-													<div class="ticket-number">
-														<h2>#${i + 1}</h2>
-													</div>
-													<div class="ticket-tier">
-														<h5>${admissionTier === 'vip'
-																? 'VIP &#128378;'
-																: window.innerWidth > 420
-																	? 'General Admission'
-																	: 'GA'
-														}</h5>
-													</div>
-													<div class="ticket-ids">
-														<p>Ticket #${ticketId}</p>
-														<p>Confirmation #${confirmationId}</p>
-													</div>
-												</div>
-											</li>
-										`;
-							/* eslint-enable */}).join('\n')}
-								</ul>
-							</div>
-						`).join('\n')}
+							`;
+						/* eslint-enable */}).join('\n')}
 					</div>
 				</div>
 			`;
