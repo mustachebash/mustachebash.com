@@ -42,6 +42,7 @@
 		"mini-css-extract-plugin": "^2.7.2",
 		"normalize.css": "^8.0.1",
 		"npm-check-updates": "^16.6.2",
+		"qrcode": "^1.5.3",
 		"style-loader": "^3.3.1",
 		"swiper": "^8.4.5",
 		"terser-webpack-plugin": "^5.3.6",
@@ -49,8 +50,5 @@
 		"webpack-cli": "^5.0.1",
 		"webpack-dev-server": "^4.11.1",
 		"whatwg-fetch": "^3.6.2"
-	},
-	"dependencies": {
-		"qrcode": "^1.5.3"
 	}
 }
