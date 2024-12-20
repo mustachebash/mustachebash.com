@@ -45,6 +45,8 @@ module.exports = (env = {}, argv) => {
 			assetModuleFilename: 'img/[name].[hash][ext][query]'
 		},
 		devServer: {
+			allowedHosts: 'all',
+			host: '0.0.0.0',
 			watchFiles: ['src/*.html'],
 			port: 8081,
 			https: env.https
@@ -182,7 +184,7 @@ module.exports = (env = {}, argv) => {
 				}
 			}),
 			new webpack.DefinePlugin({
-				API_HOST: JSON.stringify(devMode ? 'https://localhost:5000' : 'https://api.mustachebash.com'),
+				API_HOST: JSON.stringify(devMode ? 'https://localhost:8888' : 'https://api.mustachebash.com'),
 				BRAINTREE_TOKEN: JSON.stringify(devMode ? 'sandbox_qsrxjzth_ht835xhgsgwsz2hn' : 'production_z4qm4zqx_t7bcxj3vjz92bxr2')
 			})
 		]
