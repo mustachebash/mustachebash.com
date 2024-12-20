@@ -45,6 +45,8 @@ module.exports = (env = {}, argv) => {
 			assetModuleFilename: 'img/[name].[hash][ext][query]'
 		},
 		devServer: {
+			allowedHosts: 'all',
+			host: '0.0.0.0',
 			watchFiles: ['src/*.html'],
 			port: 8081,
 			https: env.https
