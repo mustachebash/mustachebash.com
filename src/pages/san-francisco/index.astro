@@ -1,0 +1,306 @@
+---
+import Layout from '@/layouts/Layout.astro';
+
+import PageContainer from '@/components/PageContainer.astro';
+import NewsletterSignup from '@/components/NewsletterSignup.astro';
+
+import opengraphImg from './_img/opengraph-image.jpg';
+import jsonLD from './_jsonLD.json';
+
+import heroImg from './_img/hero.jpg';
+import heroImgMobile from './_img/hero-mobile.jpg';
+import videoCoverImg from '@/img/video-cover.jpg';
+import introImg from './_img/intro.jpg';
+import lineupImg from './_img/lineup.jpg';
+import lineupImgMobile from './_img/lineup-mobile.jpg';
+
+import galleryCoverImg from '@/img/gallery-cover-desktop.jpg';
+import galleryCoverImgMobile from '@/img/gallery-cover-mobile.jpg';
+import ResponsiveImage from '@/components/ResponsiveImage.astro';
+---
+
+<Layout
+	title="The Mustache Bash"
+	openGraphImage={opengraphImg}
+	openGraphTitle="San Francisco Mustache Bash"
+	openGraphDescription="A party, a reunion, an excuse to take pride in the dirty fuzz you fertilize above your upper lip. Whatever you call it, let it be known: The Mustache Bash is calling."
+	jsonLD={jsonLD}
+>
+	<section id="hero">
+		<PageContainer>
+			<div class="graphics">
+				<picture>
+					<source media="(min-width: 680px)" srcset={heroImg.src}>
+					<source srcset={heroImgMobile.src}>
+					<img src={heroImg.src} alt="Mustache Bash 2025 - TBD">
+				</picture>
+			</div>
+		</PageContainer>
+	</section>
+
+	<section id="tagline-video">
+		<PageContainer>
+			<div class="flex-row">
+				<div class="tagline">
+					<h3>
+						Bringing the Disco to Frisco With a Funk Fest Made for the Bay.
+					</h3>
+					<h3 class="next-line">
+						Funk Out With Your Junk&nbsp;Out, SF.
+					</h3>
+				</div>
+				<div class="video img-wrap">
+					<a href="https://youtu.be/dAb-nCPd2rQ" target="_blank">
+						<picture>
+							<source media="(min-width: 680px)" srcset={videoCoverImg.src}>
+							<img src={videoCoverImg.src} alt="Mustache Bash Video">
+						</picture>
+						<p>View More on Youtube <span>&#x2023;</span></p>
+					</a>
+				</div>
+			</div>
+		</PageContainer>
+	</section>
+
+	<section id="intro">
+		<PageContainer>
+			<div class="flex-row">
+				<div class="intro-image">
+					<ResponsiveImage src={introImg} alt="San Francisco Intro" />
+				</div>
+
+				<div class="intro-text">
+					<h4>Introducing the First Ever<br> Mustache Bash San&nbsp;Francisco</h4>
+					<p>
+						It's time to funk out with your junk out, Bay Area. Join us as we dress up and throw down at the inaugural San Francisco Mustache Bash, the best '70s party to grace The Bay since the Summer of Love set it all in motion. An immersive, two-day, dress-up dance party where smashing outfits are a must and mustaches are a way of life, the Bash is heating up San Francisco and funkin' till the fog lifts.
+					</p>
+				</div>
+			</div>
+		</PageContainer>
+	</section>
+
+	<section id="lineup">
+ 		<PageContainer>
+ 			<div class="img-wrap lineup-image">
+ 				<picture>
+ 					<source media="(min-width: 680px)" srcset={lineupImg.src}>
+					<source srcset={lineupImgMobile.src}>
+ 					<img src={lineupImg.src}>
+ 				</picture>
+ 			</div>
+ 		</PageContainer>
+ 	</section>
+
+	<section id="gallery">
+		<div class="cover-wrapper">
+			<a href="/gallery">
+				<picture>
+					<source media="(min-width: 680px)" srcset={galleryCoverImg.src}>
+					<source srcset={galleryCoverImgMobile.src}>
+					<img src={galleryCoverImg.src} alt="Gallery">
+				</picture>
+			</a>
+		</div>
+	</section>
+
+	<NewsletterSignup />
+</Layout>
+
+<style>
+	#hero {
+	  background: #dfe3e6;
+	  box-sizing: border-box;
+	}
+	#hero .container-1230 {
+	  position: relative;
+	}
+	@media (max-width: 600px) {
+	  #hero {
+	    background: #dfe3e6;
+	    height: auto;
+	    padding-bottom: 3em;
+	  }
+	}
+	#hero .graphics {
+	  margin-left: -1.875em;
+	  margin-right: -1.875em;
+	}
+	#hero .graphics img,
+	#hero .graphics picture {
+	  max-width: 100%;
+	}
+	#tagline-video {
+	  background-color: #dfe3e6;
+	  padding-bottom: 2em;
+	}
+	#tagline-video .tagline {
+	  flex: 3 1;
+	}
+	@media (max-width: 390px) {
+	  #tagline-video .tagline {
+	    margin: 0 auto 1em;
+	    width: 270px;
+	  }
+	}
+	@media (min-width: 400px) and (max-width: 600px) {
+	  #tagline-video .tagline {
+	    padding: 0 3em;
+	    margin-bottom: 3em;
+	  }
+	}
+	@media (min-width: 770px) {
+	  #tagline-video .tagline {
+	    padding-top: 3em;
+	  }
+	}
+	#tagline-video .tagline h3 {
+	  font-weight: 500;
+	  font-size: 3.75rem;
+	  color: #000000;
+	  text-transform: uppercase;
+	  margin: 0;
+	  padding: 0;
+	  line-height: 1em;
+	  letter-spacing: -0.5px;
+	}
+	@media (max-width: 600px) {
+	  #tagline-video .tagline h3 {
+	    font-size: 2.5em;
+	    margin-bottom: 0;
+	    line-height: 1em;
+	  }
+	}
+	#tagline-video .tagline h3.next-line {
+	  margin: 0;
+	}
+	#tagline-video .video {
+	  flex: 5 1;
+	}
+	#tagline-video .video p {
+	  font-size: 24px;
+	  letter-spacing: 1px;
+	  position: relative;
+	  font-family: 'league-gothic', Helvetica, Arial, sans-serif;
+	  text-align: center;
+	  text-transform: uppercase;
+	  color: #f00;
+	}
+	#tagline-video .video p span {
+	  position: relative;
+	  display: inline-block;
+	  font-size: 50px;
+	  line-height: 24px;
+	  top: 9px;
+	}
+	#intro {
+	  overflow: hidden;
+	  background-color: #000;
+	}
+	#intro .intro-text {
+	  flex: 3 1;
+	}
+	@media (min-width: 770px) {
+	  #intro .intro-text {
+	    margin-left: 7em;
+	    margin-top: 7em;
+	  }
+	}
+	#intro .intro-text h4 {
+	  color: #ffffff;
+	  line-height: 1em;
+	}
+	@media (max-width: 769px) {
+	  #intro .intro-text h4 {
+	    text-align: center;
+	  }
+	}
+	#intro .intro-text p {
+	  color: #ffffff;
+	  font-size: 1.125em;
+	  /* 18/16 */
+	}
+	@media (max-width: 769px) {
+	  #intro .intro-text p {
+	    margin-top: 0;
+	    text-align: center;
+	  }
+	}
+	@media (max-width: 600px) {
+	  #intro .intro-text p {
+	    margin-bottom: 2.125rem;
+	  }
+	}
+	#intro .intro-text p .white {
+	  color: #ffffff;
+	  font-weight: 700;
+	}
+	@media (max-width: 769px) {
+	  #intro .intro-text .follow-button {
+	    text-align: center;
+	    margin-bottom: 2em;
+	  }
+	}
+	#intro .intro-text .ghost-button {
+	  width: 14.5em;
+	  color: #ffffff;
+	  border-color: #ffffff;
+	  border-radius: 400px;
+	}
+	#intro .intro-text .ghost-button:hover {
+	  background: transparent;
+	  color: #ffffff;
+	  box-shadow: inset 0 0 12px -1px #dfe3e6;
+	}
+	@media (max-width: 769px) {
+	  #intro .intro-text .ghost-button {
+	    display: inline-block;
+	  }
+	}
+	#intro .intro-image {
+	  flex: 4 1;
+	  margin: 0 -2em;
+	}
+	#lineup .lineup-image {
+	  margin: 0 -1.875em;
+	  margin-bottom: 6.25em;
+	  /* 100/16 */
+	}
+	@media (max-width: 600px) {
+	  #lineup .lineup-image {
+	    margin-bottom: 2em;
+	  }
+	}
+	#lineup .lineup-header {
+	  text-align: center;
+	  margin-bottom: 2em;
+	}
+	@media (max-width: 600px) {
+	  #lineup .lineup-header {
+	    font-size: 1em;
+	    margin-bottom: 0.5em;
+	  }
+	}
+	#lineup .flex-row {
+	  justify-content: space-between;
+	}
+	@media (max-width: 600px) {
+	  #lineup .flex-row {
+	    display: block;
+	  }
+	}
+	#gallery {
+	  -webkit-user-select: none;
+	  user-select: none;
+	  position: relative;
+	}
+	#gallery .cover-wrapper {
+	  text-align: center;
+	}
+	#gallery .cover-wrapper img {
+	  max-width: 100%;
+	  border: none;
+	  margin: 0;
+	  padding: 0;
+	}
+
+</style>

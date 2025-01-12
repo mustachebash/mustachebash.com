@@ -1,0 +1,19 @@
+---
+type Props = {
+	children: any;
+}
+---
+
+<div class="container">
+	<slot />
+</div>
+<style>
+	.container {
+	  position: relative;
+	  max-width: 1230px;
+	  box-sizing: border-box;
+	  padding: 0 1.875em;
+	  /* 30/16 */
+	  margin: 0 auto;
+	}
+</style>
