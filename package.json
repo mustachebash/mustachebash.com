@@ -12,7 +12,7 @@
 		"astro": "astro",
 		"check:updates": "ncu",
 		"update:deps": "ncu -u",
-		"test": "tsc --noEmit && eslint src"
+		"test": "astro check && tsc --noEmit"
 	},
 	"browserslist": [
 		"last 1 version",
@@ -24,16 +24,16 @@
 		"braintree-web": "^3.88.6",
 		"date-fns": "^4.1.0",
 		"normalize.css": "^8.0.1",
-		"qrcode": "^1.5.3",
+		"qrcode": "^1.5.4",
 		"swiper": "^8.4.5"
 	},
 	"devDependencies": {
 		"@astrojs/check": "^0.9.4",
 		"@types/gtag.js": "^0.0.20",
 		"astro": "^5.1.1",
-		"eslint": "^8.32.0",
-		"npm-check-updates": "^16.6.2",
+		"eslint": "^9.18.0",
+		"npm-check-updates": "^17.1.13",
 		"prettier": "^3.4.2",
-		"typescript": "^5.7.2"
+		"typescript": "^5.7.3"
 	}
 }
