@@ -1,0 +1,74 @@
+---
+import Layout from '@/layouts/Layout.astro';
+
+import PageContainer from '@/components/PageContainer.astro';
+import NewsletterSignup from '@/components/NewsletterSignup.astro';
+
+import opengraphImg from './_img/opengraph-image.jpg';
+import { Image } from 'astro:assets';
+
+const imageFiles = await Astro.glob('./_gallery-images/*');
+---
+
+<Layout
+	title="The Mustache Bash"
+	openGraphImage={opengraphImg}
+	openGraphTitle="Mustache Bash Photo Gallery"
+	openGraphDescription="Funky fresh and hot off the press - find your friends in the official Mustache Bash photo gallery"
+>
+	<section id="gallery">
+		<PageContainer>
+			<h3>2023 San Diego Mustache Bash Photo Gallery</h3>
+			<p class="credits">
+				Photos by:
+				<a href="https://www.instagram.com/helloatlasmedia/" target="_blank">Atlas Media</a>,
+				<a href="https://www.instagram.com/joeytaylorphotography/" target="_blank">Joey Taylor</a>,
+				<a href="https://www.instagram.com/kellijohnson_/" target="_blank">Kelli Johnson</a>,
+				<a href="https://www.instagram.com/kodak.kid/" target="_blank">Killian Page</a>,
+				<a href="https://www.instagram.com/kursza/" target="_blank">Kurza</a> / <a href="https://www.instagram.com/danilolewis/" target="_blank">Danilo Lewis</a>
+			</p>
+		</PageContainer>
+
+		<div class="gallery-wrapper">
+			{
+			    imageFiles.map((img) => (
+			    	<div class="gallery-item">
+				      <Image
+				        src={img.default}
+				        layout="full-width"
+				        alt="Mustache Bash Photo"
+				      />
+				    </div>
+			    ))
+			  }
+		</div>
+	</section>
+
+	<NewsletterSignup />
+</Layout>
+
+<style>
+	#gallery {
+		user-select: none;
+	}
+	.credits {
+		font-size: 12px;
+	}
+	.credits a {
+		color: #5472ea;
+	}
+	.gallery-wrapper {
+		position: relative;
+		max-width: 1230px;
+		box-sizing: border-box;
+		margin: 0 auto;
+	}
+	@media (min-width: 600px) {
+		.gallery-wrapper {
+			padding: 0 1em; /* 30/16 */
+		}
+	}
+	.gallery-item img {
+		max-width: 100%;
+	}
+</style>

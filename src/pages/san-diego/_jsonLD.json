@@ -1,0 +1,111 @@
+{
+	"@context": "http://schema.org",
+	"@type": "Event",
+	"name": "The Mustache Bash",
+	"startDate": "2024-03-23T14:00-07:00",
+	"endDate": "2024-03-23T23:00-07:00",
+	"eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+	"eventStatus": "https://schema.org/EventScheduled",
+	"description": "Family. Freedom. Fun. The Funk. Welcome to The Mustache Bash. The Funkiest Disco Day on Earth.",
+	"typicalAgeRange" : "21+",
+	"location": {
+		"@type": "Place",
+		"name": "The Port Pavilion on Broadway Pier",
+		"address": {
+			"@type": "PostalAddress",
+			"streetAddress": "1000 N Harbor Dr",
+			"addressLocality": "San Diego",
+			"postalCode": "92101",
+			"addressRegion": "CA",
+			"addressCountry": "US"
+		}
+	},
+	"image": [
+		"https://mustachebash.com/img/Gallery_Desktop_2022_8.fa498089587992c580ff.jpg"
+	],
+	"offers": [{
+			"@type": "Offer",
+			"url": "https://mustachebash.com/san-diego#tickets",
+			"price": "159",
+			"name": "General Admission",
+			"priceCurrency": "USD",
+			"availability": "https://schema.org/LimitedAvailability",
+			"validFrom": "2024-01-20T09:00-08:00",
+			"validThrough": "2024-03-23T23:00-07:00"
+		}],
+	"performer": [
+		{
+			"@type": "PerformingGroup",
+			"name": "Franc Moody"
+		},
+		{
+			"@type": "PerformingGroup",
+			"name": "Moodymann"
+		},
+		{
+			"@type": "PerformingGroup",
+			"name": "High Fade"
+		},
+		{
+			"@type": "PerformingGroup",
+			"name": "Young Franco"
+		},
+		{
+			"@type": "PerformingGroup",
+			"name": "Natasha Diggs"
+		},
+		{
+			"@type": "PerformingGroup",
+			"name": "The Mustache Bash Family Band"
+		},
+		{
+			"@type": "PerformingGroup",
+			"name": "Never Dull"
+		},
+		{
+			"@type": "PerformingGroup",
+			"name": "The B Sections"
+		},
+		{
+			"@type": "PerformingGroup",
+			"name": "3kelves b2b Dylan C. Greene"
+		},
+		{
+			"@type": "PerformingGroup",
+			"name": "Discotoshi"
+		},
+		{
+			"@type": "PerformingGroup",
+			"name": "DJ Dials"
+		},
+		{
+			"@type": "PerformingGroup",
+			"name": "Abby Normal"
+		},
+		{
+			"@type": "PerformingGroup",
+			"name": "Groovewell"
+		},
+		{
+			"@type": "PerformingGroup",
+			"name": "He2She"
+		},
+		{
+			"@type": "PerformingGroup",
+			"name": "Voss & Things"
+		},
+		{
+			"@type": "PerformingGroup",
+			"name": "DJ M3"
+		},
+		{
+			"@type": "PerformingGroup",
+			"name": "Cool Sexy DJ"
+		}
+	],
+	"organizer": {
+		"@type": "Organization",
+		"name": "The Mustache Bash",
+		"url": "https://mustachebash.com"
+	}
+}

@@ -1,0 +1,172 @@
+---
+import PageContainer from './PageContainer.astro';
+---
+
+<section class="newsletter">
+	<PageContainer>
+		<!-- non-breaking space for mobile -->
+		<h4>Get all the bash updates to&nbsp;your&nbsp;inbox</h4>
+		<form method="post" action="/" name="newsletter" class="flex-row">
+			<fieldset name="newsletter-name">
+				<label data-error-message="Please enter your first and last name">Full Name</label>
+				<input type="text" name="newsletter-name" placeholder="Your Name" maxlength="75">
+			</fieldset>
+			<fieldset name="newsletter-email">
+				<label data-error-message="Please enter your email">Email</label>
+				<input type="email" name="newsletter-email" placeholder="Enter your email" maxlength="75">
+			</fieldset>
+			<fieldset name="newsletter-submit">
+				<button id="newsletter-submit" class="yellow rounded">Sign Up</button>
+			</fieldset>
+		</form>
+		<h5 class="newsletter-success">You've successfully signed up!</h5>
+	</PageContainer>
+</section>
+<style>
+	.newsletter {
+	  padding-top: 2em;
+	  background: url('../img/newsletter.jpg') #ffffff no-repeat;
+	  background-size: cover;
+	  background-position: center center;
+	}
+	.newsletter h3 {
+	  color: #ffffff;
+	  text-align: center;
+	  line-height: 1.1em;
+	}
+	.newsletter h4 {
+	  color: #ffffff;
+	  text-align: center;
+	}
+	.newsletter .newsletter-success {
+	  max-width: 48.125rem;
+	  /* 770/16 */
+	  margin: 1em auto 0;
+	  visibility: hidden;
+	  text-align: center;
+	}
+	@media (min-width: 601px) {
+	  .newsletter .newsletter-success {
+	    margin: 0 auto -1.25em;
+	  }
+	}
+	.newsletter form[name="newsletter"] {
+	  max-width: 48.125em;
+	  /* 770/16 */
+	  margin: 0 auto;
+	}
+	.newsletter form[name="newsletter"] fieldset {
+	  flex: 1 0 auto;
+	  margin: 0 0.3125em;
+	  /* 5/16 */
+	}
+	.newsletter form[name="newsletter"] fieldset[name="newsletter-submit"] {
+	  margin-top: 0.85em;
+	}
+	.newsletter form[name="newsletter"] fieldset[name="newsletter-submit"] button {
+	  width: 100%;
+	}
+	.newsletter form[name="newsletter"] label {
+	  color: #ffffff;
+	}
+	.newsletter form[name="newsletter"] input[type="text"],
+	.newsletter form[name="newsletter"] input[type="email"] {
+	  color: #ffffff;
+	  border-color: #ffffff;
+	}
+</style>
+<script>
+	import { API_HOST } from 'astro:env/client';
+
+	// Never allow this form to submit
+	const newsletterForm = document.querySelector('form[name="newsletter"]') as HTMLFormElement;
+	let submittingNewsletter = false;
+	newsletterForm.addEventListener('submit', e => {
+		e.preventDefault();
+
+		const subscriber: {
+			email?: string;
+			firstName?: string;
+			lastName?: string;
+		} = {};
+
+		// Let's get ridiculous so we can check
+		let nameValid = false,
+			emailValid = false;
+
+		const fullName = (document.querySelector('input[name="newsletter-name"]') as HTMLInputElement).value,
+			email = (document.querySelector('input[name="newsletter-email"]') as HTMLInputElement).value;
+
+		// Not much name validation - your bad if you put in a fake name for a guest list
+		if(!fullName || fullName.trim().split(' ').length < 2) {
+			// redundant here, but done for explicitness
+			nameValid = false;
+			document.querySelector('fieldset[name="newsletter-name"]')?.classList.add('invalid');
+		} else {
+			nameValid = true;
+			document.querySelector('fieldset[name="newsletter-name"]')?.classList.remove('invalid');
+		}
+
+		// There's no such thing as a simple email validator - but again, your bad if you put in a shit email for confirmation
+		if(!email || !/^\S+@\S+\.\S{2,}$/.test(email.trim())) {
+			emailValid = false;
+			document.querySelector('fieldset[name="newsletter-email"]')?.classList.add('invalid');
+		} else {
+			emailValid = true;
+			document.querySelector('fieldset[name="newsletter-email"]')?.classList.remove('invalid');
+		}
+
+		if(nameValid && emailValid) {
+			subscriber.email = email.trim();
+			subscriber.firstName = fullName.trim().split(' ')[0] ?? '';
+			subscriber.lastName = fullName.trim().split(' ').slice(1).join(' ');
+
+			// Cool it, cowboy
+			if(submittingNewsletter) return;
+
+			submittingNewsletter = true;
+			const previousButtonText = (document.querySelector('#newsletter-submit') as HTMLButtonElement).innerText;
+			(document.querySelector('#newsletter-submit') as HTMLButtonElement).innerText = 'Signing Up...';
+			(document.querySelector('#newsletter-submit') as HTMLButtonElement).disabled = true;
+
+			fetch(API_HOST + '/v1/sites/mustachebash.com/mailing-list', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify(subscriber)
+			})
+				.then(response => {
+					// Check for HTTP error statuses, throw errors to skip processing response body
+					if(response.status >= 400) {
+						const err: Error & {status?: number} = new Error(response.statusText);
+
+						err.status = response.status;
+
+						throw err;
+					}
+
+					// This 204's on success
+					return;
+				})
+				.then(() => {
+					window.requestAnimationFrame(() => {
+						(document.querySelector('input[name="newsletter-email"]') as HTMLInputElement).value = '';
+						(document.querySelector('input[name="newsletter-name"]') as HTMLInputElement).value = '';
+						(document.querySelector('#newsletter-success') as HTMLElement).style.visibility = 'visible';
+					});
+				})
+				.catch(e => {
+					// eslint-disable-next-line
+					alert('Sign Up Failed, please check your subscriber details and try again');
+
+					console.error('Newsletter Error', e);
+				})
+				.finally(() => {
+					submittingNewsletter = false;
+					(document.querySelector('#newsletter-submit') as HTMLButtonElement).innerText = previousButtonText;
+					(document.querySelector('#newsletter-submit') as HTMLButtonElement).disabled = false;
+				});
+		}
+	});
+</script>

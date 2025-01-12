@@ -1,7 +1,11 @@
 dist/
-templates/
+secrets/*
+!secrets/.gitkeep
+
+# generated types
+.astro/
+
 node_modules/
-stats.json
 
 # OS generated files #
 ######################

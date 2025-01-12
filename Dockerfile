@@ -1,5 +1,5 @@
 # build
-FROM node:20.10-alpine AS build
+FROM node:23.6-alpine3.20 AS build
 RUN mkdir -p /build
 WORKDIR /build
 
@@ -10,7 +10,7 @@ ADD . /build
 RUN npm run build
 
 # release
-FROM nginx:1.23.2-alpine AS release
+FROM nginx:1.27.3-alpine AS release
 # Replace the default config
 ADD mustachebash.conf /etc/nginx/conf.d/default.conf
 COPY apple-developer-merchantid-domain-association /etc/nginx/apple-developer-merchantid-domain-association

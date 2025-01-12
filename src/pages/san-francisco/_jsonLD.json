@@ -1,0 +1,84 @@
+{
+	"@context": "http://schema.org",
+	"@type": "Event",
+	"name": "The Mustache Bash",
+	"startDate": "2023-09-15T14:00-07:00",
+	"endDate": "2023-09-16T23:00-07:00",
+	"eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+	"eventStatus": "https://schema.org/EventScheduled",
+	"description": "Family. Freedom. Fun. The Funk. The Mustache Bash expands to San Francisco!",
+	"location": {
+		"@type": "Place",
+		"name": "Phoenix Hotel",
+		"address": {
+			"@type": "PostalAddress",
+			"streetAddress": "601 Eddy St",
+			"addressLocality": "San Francisco",
+			"postalCode": "94109",
+			"addressRegion": "CA",
+			"addressCountry": "US"
+		}
+	},
+	"image": [
+		"https://mustachebash.com/img/sf/lineup.jpg"
+	],
+	"offers": {
+			"@type": "Offer",
+			"url": "https://mustachebash.com/#tickets",
+			"price": "69",
+			"priceCurrency": "USD",
+			"availability": "https://schema.org/SoldOut",
+			"validFrom": "2023-08-01T09:00-08:00"
+		},
+	"performer": [
+		{
+			"@type": "PerformingGroup",
+			"name": "Paco Versailles"
+		},
+		{
+			"@type": "PerformingGroup",
+			"name": "Dam Swindle"
+		},
+		{
+			"@type": "PerformingGroup",
+			"name": "Crazy P"
+		},
+		{
+			"@type": "PerformingGroup",
+			"name": "Bombargo"
+		},
+		{
+			"@type": "PerformingGroup",
+			"name": "The Mustache Bash Family Band"
+		},
+		{
+			"@type": "PerformingGroup",
+			"name": "Abby Normal"
+		},
+		{
+			"@type": "PerformingGroup",
+			"name": "Discotoshi"
+		},
+		{
+			"@type": "PerformingGroup",
+			"name": "HE2SHE"
+		},
+		{
+			"@type": "PerformingGroup",
+			"name": "Combover"
+		},
+		{
+			"@type": "PerformingGroup",
+			"name": "Moto Tembo"
+		},
+		{
+			"@type": "PerformingGroup",
+			"name": "Cool Sexy DJ"
+		}
+	],
+	"organizer": {
+		"@type": "Organization",
+		"name": "The Mustache Bash",
+		"url": "https://mustachebash.com"
+	}
+}
