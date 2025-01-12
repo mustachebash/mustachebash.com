@@ -1,9 +1,13 @@
 import { defineConfig, envField } from 'astro/config';
 
-const key = fs.readFileSync('./secrets/localhost-key.pem'),
+let key, cert;
+try {
+	key = fs.readFileSync('./secrets/localhost-key.pem');
 	cert = fs.readFileSync('./secrets/localhost-cert.pem');
-// const key = false,
-// 	cert = false;
+} catch(e) {
+	console.log('[WARN] HTTPS is not configured');
+	// https not configured
+}
 
 // https://astro.build/config
 export default defineConfig({
