@@ -16,6 +16,7 @@ import videoCoverImg from '@/img/video-cover.jpg';
 import introImg from './_img/intro.jpg';
 import lineupImg from './_img/lineup.jpg';
 import lineupImgMobile from './_img/lineup-mobile.jpg';
+import venueImg from './_img/venue.jpg';
 
 import galleryCoverImg from '@/img/gallery-cover-desktop.jpg';
 import galleryCoverImgMobile from '@/img/gallery-cover-mobile.jpg';
@@ -99,6 +100,94 @@ import ResponsiveImage from '@/components/ResponsiveImage.astro';
  			<Bands bands={bandsData}/>
  		</PageContainer>
  	</section>
+
+ 	<section id="set-times">
+  		<PageContainer>
+  			<h3>Set Times</h3>
+  			<div class="flex-row">
+  				<div class="water-stage">
+  					<h4>Water Stage</h4>
+  					<dl>
+ 						<dt>Chromeo</dt>
+ 						<dd>8:45 pm</dd>
+
+ 						<dt>Supertaste</dt>
+ 						<dd>6:30pm</dd>
+
+ 						<dt>Mustache Bash<br>Family Band</dt>
+ 						<dd>4:30 pm</dd>
+
+ 						<dt>Futuresexuals</dt>
+ 						<dd>2:30 pm</dd>
+  					</dl>
+  				</div>
+  				<div class="fire-stage">
+  					<h4>Fire Stage</h4>
+  					<dl>
+ 						<dt>Derrick Does Disco</dt>
+ 						<dd>8:30pm</dd>
+
+ 						<dt>Breakbot</dt>
+ 						<dd>7:00pm</dd>
+
+ 						<dt>Classixx</dt>
+ 						<dd>5:30 pm</dd>
+
+ 						<dt>Flying Mojito Bros.</dt>
+ 						<dd>4:00 pm</dd>
+
+ 						<dt>Max Heegard</dt>
+ 						<dd>2:00 pm</dd>
+  					</dl>
+  				</div>
+  				<div class="wind-stage">
+  					<h4>Wind Stage</h4>
+  					<dl>
+ 						<dt>3Skelves B2b<br>Dylan C. Greene</dt>
+ 						<dd>7:45 pm</dd>
+
+ 						<dt>Discotoshi b2b Starfari</dt>
+ 						<dd>5:45 pm</dd>
+
+ 						<dt>HE2SHE</dt>
+ 						<dd>3:45 pm</dd>
+  					</dl>
+  				</div>
+  				<div class="earth-stage">
+  					<h4>Earth Stage</h4>
+  					<dl>
+ 						<dt>Abby Normal</dt>
+ 						<dd>7:30pm</dd>
+
+ 						<dt>DJ KOCO aka SHIMOKITA</dt>
+ 						<dd>6:00pm</dd>
+
+ 						<dt>DJ Dials</dt>
+ 						<dd>4:30 pm</dd>
+
+ 						<dt>Combover</dt>
+ 						<dd>3:00 pm</dd>
+  					</dl>
+  				</div>
+  			</div>
+  		</PageContainer>
+  	</section>
+
+  	<section id="venue">
+		<PageContainer>
+			<div class="flex-row">
+				<div class="venue-description">
+					<h3>Venue</h3>
+					<h4>Mariner's Point Park</h4>
+					<p>
+						Sand, sailboats and a psychedelic sunset. Other than that, expect the same beautiful Bash as usual. Studio 54-style disco? Yup. Free-for-all roller rink? Double yup. Bottomless bars, four stages, live funk bands, disco DJs and thousands of funky souls spirited in their '70s best? You funkin' betcha! It's that same ole boogie by the bay, baby, only this time, a slightly different bay. And the best part—our friends won't be stuck outside missing all the fun.
+					</p>
+					<a class="ghost-button" target="_blank" href="https://maps.app.goo.gl/g4kgUmC7oFbi4kRu9">Get Directions</a>
+				</div>
+				<div class="venue-image"><ResponsiveImage src={venueImg} alt="Mariner's Point Park" /></div>
+			</div>
+		</PageContainer>
+	</section>
 
 	<section id="gallery">
 		<div class="cover-wrapper">
@@ -295,6 +384,153 @@ import ResponsiveImage from '@/components/ResponsiveImage.astro';
 	@media (max-width: 600px) {
 	  #lineup .flex-row {
 	    display: block;
+	  }
+	}
+	#set-times {
+	  background: url('./_img/set-times.jpg') #ffffff no-repeat;
+	  background-position: bottom center;
+	  background-size: cover;
+	  padding: 6.25em 0 20em;
+	  /* 100/16 */
+	}
+	@media (max-width: 600px) {
+	  #set-times {
+	  	background-image: url('./_img/set-times-mobile.jpg');
+	    padding: 2em 0 10em;
+	  }
+	}
+	@media (min-width: 770px) {
+	  #set-times .family-band br {
+	    display: none;
+	  }
+	}
+	#set-times h3 {
+	  color: #ffffff;
+	  text-align: center;
+	  margin-bottom: 0.25em;
+	}
+	@media (max-width: 600px) {
+	  #set-times h3 {
+	    text-align: left;
+	    margin-bottom: 0;
+	  }
+	}
+	#set-times h4 {
+	  color: #ffffff;
+	}
+	@media (max-width: 600px) {
+	  #set-times h4 {
+	    font-size: 1.4375em;
+	    /* 23/16 */
+	  }
+	}
+	#set-times .flex-row {
+	  justify-content: center;
+	}
+	#set-times dl,
+	#set-times dt,
+	#set-times dd {
+	  margin: 0;
+	  padding: 0;
+	  text-transform: uppercase;
+	  color: #ffffff;
+	}
+	#set-times dt {
+	  font-size: 1.375em;
+	  /* 22/16 */
+	  font-weight: 900;
+	  font-family: 'brandon-grotesque', Helvetica, Arial, sans-serif;
+	  line-height: 1em;
+	}
+	@media (max-width: 600px) {
+	  #set-times dt {
+	    font-size: 1.0625em;
+	    /* 17/16 */
+	  }
+	}
+	#set-times dd {
+	  font-size: 1em;
+	  /* 16/16 */
+	  margin-bottom: 1em;
+	}
+	@media (max-width: 600px) {
+	  #set-times dd {
+	    font-size: 0.75em;
+	    /* 12/16 */
+	  }
+	}
+	#set-times .water-stage,
+	#set-times .fire-stage,
+	#set-times .wind-stage,
+	#set-times .earth-stage {
+	  margin-bottom: 1em;
+	}
+	@media (min-width: 600px) {
+	  #set-times .water-stage,
+	  #set-times .fire-stage,
+	  #set-times .wind-stage,
+	  #set-times .earth-stage {
+	    flex: 0 0 25%;
+	    box-sizing: border-box;
+	  }
+	  #set-times .water-stage h4,
+	  #set-times .fire-stage h4,
+	  #set-times .wind-stage h4,
+	  #set-times .earth-stage h4 {
+	    margin-top: 0;
+	    margin-bottom: 1em;
+	  }
+	}
+	#venue {
+	  background-color: #ffffff;
+	  padding-top: 4.5em;
+	  padding-bottom: 7em;
+	}
+	#venue h3 {
+	  margin-bottom: 0;
+	}
+	#venue h4 {
+	  margin-top: 0;
+	}
+	#venue p {
+	  margin-bottom: 2em;
+	}
+	#venue .venue-image,
+	#venue .venue-description {
+	  flex: 1 0 50%;
+	  box-sizing: border-box;
+	}
+	#venue .venue-image {
+	  position: relative;
+	  padding: 2em 0 3em;
+	}
+	#venue .venue-description {
+	  padding: 1.25em 4.375em 0 0;
+	}
+	#venue .ghost-button {
+	  color: #000000;
+	  border-color: #000000;
+	  border-radius: 400px;
+	}
+	#venue .ghost-button:hover {
+	  background: transparent;
+	  color: #231917;
+	  box-shadow: inset 0 0 12px -1px #dfe3e6;
+	}
+	@media (max-width: 600px) {
+	  #venue {
+	    padding: 0;
+	  }
+	  #venue .venue-description {
+	    order: 1;
+	    padding: 2em 0 0;
+	  }
+	  #venue .venue-image {
+	    order: 2;
+	  }
+	  #venue .venue-image img {
+	    height: auto;
+	    max-width: 100%;
 	  }
 	}
 	#gallery {
