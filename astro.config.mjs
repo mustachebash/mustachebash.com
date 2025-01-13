@@ -21,7 +21,8 @@ export default defineConfig({
 	},
 	env: {
 		schema: {
-			API_HOST: envField.string({context: 'client', access: 'public'})
+			API_HOST: envField.string({context: 'client', access: 'public'}),
+			BRAINTREE_TOKEN: envField.string({context: 'client', access: 'public'})
 		}
 	},
 	...(key && cert && {

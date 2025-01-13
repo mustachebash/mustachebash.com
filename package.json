@@ -29,6 +29,8 @@
 	},
 	"devDependencies": {
 		"@astrojs/check": "^0.9.4",
+		"@types/braintree-web": "^3.96.16",
+		"@types/facebook-pixel": "^0.0.31",
 		"@types/gtag.js": "^0.0.20",
 		"astro": "^5.1.1",
 		"eslint": "^9.18.0",
