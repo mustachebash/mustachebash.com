@@ -136,7 +136,7 @@ function completePurchase(nonce: string) {
 					// eslint-disable-next-line max-len
 					document.querySelector<HTMLParagraphElement>('.confirmation-message')!.innerText = 'Thanks for purchasing a VIP upgrade! Your tickets have been upgraded. Use the link sent in your original purchase to access your tickets.';
 				} else {
-					document.querySelector<HTMLAnchorElement>('.tickets-link a')!.href = `/mytickets?t=${token}`;
+					document.querySelector<HTMLAnchorElement>('.tickets-link a')!.href = `/my-tickets?t=${token}`;
 				}
 
 				const tick = document.querySelectorAll<HTMLDivElement>('.ticks > div')[3];
