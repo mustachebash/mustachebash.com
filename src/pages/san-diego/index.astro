@@ -94,12 +94,24 @@ import ResponsiveImage from '@/components/ResponsiveImage.astro';
  					<img src={lineupImg.src}>
  				</picture>
  			</div>
-
- 			<h4 class="lineup-header">Featuring 4 stages with live performances by:</h4>
-
- 			<Bands bands={bandsData}/>
- 		</PageContainer>
+	 	</PageContainer>
  	</section>
+
+ 	<section id="venue">
+		<PageContainer>
+			<div class="flex-row">
+				<div class="venue-description">
+					<h3>Venue</h3>
+					<h4>Mariner's Point Park</h4>
+					<p>
+						Sand, sailboats and a psychedelic sunset. Other than that, expect the same beautiful Bash as usual. Studio 54-style disco? Yup. Free-for-all roller rink? Double yup. Bottomless bars, four stages, live funk bands, disco DJs and thousands of funky souls spirited in their '70s best? You funkin' betcha! It's that same ole boogie by the bay, baby, only this time, a slightly different bay. And the best part—our friends won't be stuck outside missing all the fun.
+					</p>
+					<a class="ghost-button" target="_blank" href="https://maps.app.goo.gl/g4kgUmC7oFbi4kRu9">Get Directions</a>
+				</div>
+				<div class="venue-image"><ResponsiveImage src={venueImg} alt="Mariner's Point Park" /></div>
+			</div>
+		</PageContainer>
+	</section>
 
  	<section id="set-times">
   		<PageContainer>
@@ -173,21 +185,13 @@ import ResponsiveImage from '@/components/ResponsiveImage.astro';
   		</PageContainer>
   	</section>
 
-  	<section id="venue">
-		<PageContainer>
-			<div class="flex-row">
-				<div class="venue-description">
-					<h3>Venue</h3>
-					<h4>Mariner's Point Park</h4>
-					<p>
-						Sand, sailboats and a psychedelic sunset. Other than that, expect the same beautiful Bash as usual. Studio 54-style disco? Yup. Free-for-all roller rink? Double yup. Bottomless bars, four stages, live funk bands, disco DJs and thousands of funky souls spirited in their '70s best? You funkin' betcha! It's that same ole boogie by the bay, baby, only this time, a slightly different bay. And the best part—our friends won't be stuck outside missing all the fun.
-					</p>
-					<a class="ghost-button" target="_blank" href="https://maps.app.goo.gl/g4kgUmC7oFbi4kRu9">Get Directions</a>
-				</div>
-				<div class="venue-image"><ResponsiveImage src={venueImg} alt="Mariner's Point Park" /></div>
-			</div>
-		</PageContainer>
-	</section>
+  	<section id="lineup-bands">
+ 		<PageContainer>
+ 			<h4 class="lineup-header">Featuring 4 stages with live performances by:</h4>
+
+ 			<Bands bands={bandsData}/>
+ 		</PageContainer>
+ 	</section>
 
 	<section id="gallery">
 		<div class="cover-wrapper">
@@ -360,29 +364,27 @@ import ResponsiveImage from '@/components/ResponsiveImage.astro';
 	}
 	#lineup .lineup-image {
 	  margin: 0 -1.875em;
-	  margin-bottom: 6.25em;
-	  /* 100/16 */
 	}
 	@media (max-width: 600px) {
 	  #lineup .lineup-image {
 	    margin-bottom: 2em;
 	  }
 	}
-	#lineup .lineup-header {
+	#lineup-bands .lineup-header {
 	  text-align: center;
 	  margin-bottom: 2em;
 	}
 	@media (max-width: 600px) {
-	  #lineup .lineup-header {
+	  #lineup-bands .lineup-header {
 	    font-size: 1em;
 	    margin-bottom: 0.5em;
 	  }
 	}
-	#lineup .flex-row {
+	#lineup-bands .flex-row {
 	  justify-content: space-between;
 	}
 	@media (max-width: 600px) {
-	  #lineup .flex-row {
+	  #lineup-bands .flex-row {
 	    display: block;
 	  }
 	}

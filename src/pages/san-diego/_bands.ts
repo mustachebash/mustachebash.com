@@ -121,8 +121,8 @@ const bands: Band[] = [
 		}
 	},
 	{
-		name: 'Discotoshi',
-		description: "Modern music has no classification for Discotoshi, a funk-loving Bash staple with sound inspired by artists ranging from Prince, to Sly Stalone to Stevie Wonder. This dashing dill-boy wears a lot of hats, and while he moonlights as a resident DJ, he's also one of the Bash's founders. He spends the off-season diggin deep in the crates to find selects you only wish you'd heard before, layering classic samples and transforming the decks into world-class instruments of funk.",
+		name: 'Discotoshi b2b Starfari',
+		description: "Modern music has no classification for Discotoshi, a funk-loving Bash staple with sound inspired by artists ranging from Prince, to Sly Stalone to Stevie Wonder. Catch this Bash-born talent swapping tracks with one of San Francisco’s funkiest feel-good selectors—Starfari—and you can save the psychedelics for later; their enlightened B2B set will leave you seeing stars. Both artists with a penchant for layering undiscovered disco remixes with classic samples and infectious bass, this DJ cypher is liable to transform the decks into flying saucers and abduct a crowd right off the dance floor (beware of the probes)!",
 		img: discotoshiImg,
 		links: {
 			spotify: 'https://soundcloud.com/discotoshi',
