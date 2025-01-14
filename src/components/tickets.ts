@@ -1,12 +1,12 @@
 import client from 'braintree-web/client';
-import hostedFields from 'braintree-web/hosted-fields';
-import applePay from 'braintree-web/apple-pay';
+import hostedFields, { type HostedFields } from 'braintree-web/hosted-fields';
+import applePay, { ApplePaySession, type ApplePay } from 'braintree-web/apple-pay';
 import { API_HOST, BRAINTREE_TOKEN } from 'astro:env/client';
 
 import { format } from 'date-fns';
 
-const EVENT_2024_ID = '45fdbc90-19a1-4a5c-ac69-345afceb5d39';
-const EVENT_2024_AFTERPARTY_ID = '998dedab-1eff-42f8-b8c0-7f3de541e979';
+const EVENT_2025_ID = '0fe92cbb-a22c-4b25-993e-773ca016a5f1';
+const EVENT_2025_AFTERPARTY_ID = 'f8b7a188-f9c7-48eb-bcb8-35462d76bb01';
 
 function logError({ lineno, colno, message, filename, stack, name }: { lineno: number, colno: number, message: string, filename: string, stack: string, name: string }) {
 	fetch(API_HOST + '/v1/errors', {
@@ -44,13 +44,13 @@ let cart: Record<string, any>[] = [],
 
 // Requires tickets section
 // Never allow this form to submit
-document.forms['payment-info'].addEventListener('submit', e => {
+((document.forms as any)['payment-info'] as HTMLFormElement).addEventListener('submit', e => {
 	e.preventDefault();
 });
 
 // Requires tickets section
 // Never allow this form to submit
-document.forms['personal-info'].addEventListener('submit', e => {
+((document.forms as any)['personal-info'] as HTMLFormElement).addEventListener('submit', e => {
 	e.preventDefault();
 });
 
@@ -139,9 +139,9 @@ function completePurchase(nonce: string) {
 					document.querySelector<HTMLAnchorElement>('.tickets-link a')!.href = `/mytickets?t=${token}`;
 				}
 
-				const tick = document.querySelectorAll('.ticks > div')[3];
-				tick.classList.remove('active');
-				tick.classList.add('complete');
+				const tick = document.querySelectorAll<HTMLDivElement>('.ticks > div')[3];
+				tick!.classList.remove('active');
+				tick!.classList.add('complete');
 			});
 
 			if(typeof window.gtag === 'function') {
@@ -193,8 +193,8 @@ function completePurchase(nonce: string) {
 		});
 }
 
-function purchaseFlowInit({hostedFieldsInstance, applePayInstance}) {
-	const ticketsList = document.querySelector('#tickets-list'),
+function purchaseFlowInit({hostedFieldsInstance, applePayInstance}: {hostedFieldsInstance: HostedFields, applePayInstance: ApplePay | null}) {
+	const ticketsList = document.querySelector<HTMLDivElement>('#tickets-list') as HTMLDivElement,
 		quantitiesHTML = [],
 		ticketsListHTML = [],
 		now = (new Date()).toISOString();
@@ -246,8 +246,8 @@ function purchaseFlowInit({hostedFieldsInstance, applePayInstance}) {
 
 		// If we aren't on sale yet
 		if(now < earliestOpeningSalesDate) {
-			document.querySelector('.ticket-image').style.display = 'none';
-			document.querySelector('.tickets-flow').innerHTML = `
+			document.querySelector<HTMLDivElement>('.ticket-image')!.style.display = 'none';
+			document.querySelector<HTMLDivElement>('.tickets-flow')!.innerHTML = `
 				<div class="sales-off">
 					<h5>
 						Tickets on sale ${format(earliestOpeningSalesDate, 'cccc M/d/yy, haaa')}!
@@ -264,8 +264,8 @@ function purchaseFlowInit({hostedFieldsInstance, applePayInstance}) {
 				updateCartQuantities();
 			});
 		} else {
-			document.querySelector('.ticket-image').style.display = 'none';
-			document.querySelector('.tickets-flow').innerHTML = `
+			document.querySelector<HTMLDivElement>('.ticket-image')!.style.display = 'none';
+			document.querySelector<HTMLDivElement>('.tickets-flow')!.innerHTML = `
 				<div class="sales-off">
 					<h5>
 						Tickets are not currently available
@@ -278,8 +278,8 @@ function purchaseFlowInit({hostedFieldsInstance, applePayInstance}) {
 		// Set up Apple Pay listeners
 		if(applePayInstance) {
 			// Show the Apple Pay button and acceptance mark
-			document.querySelector('.apple-pay').style.display = 'block';
-			document.querySelector('.apple-pay-button').addEventListener('click', () => {
+			document.querySelector<HTMLDivElement>('.apple-pay')!.style.display = 'block';
+			document.querySelector<HTMLDivElement>('.apple-pay-button')!.addEventListener('click', () => {
 				window.gtag('event', 'click', {
 					event_category: 'CTA',
 					event_label: 'Apple Pay'
@@ -287,11 +287,11 @@ function purchaseFlowInit({hostedFieldsInstance, applePayInstance}) {
 
 				// "Advance" the UI
 				window.requestAnimationFrame(() => {
-					const ticks = document.querySelectorAll('.ticks > div');
-					ticks[2].classList.remove('active');
-					ticks[2].classList.add('complete');
-					ticks[3].classList.add('active');
-					document.querySelectorAll('.leg')[2].classList.add('active');
+					const ticks = document.querySelectorAll<HTMLDivElement>('.ticks > div');
+					ticks[2]!.classList.remove('active');
+					ticks[2]!.classList.add('complete');
+					ticks[3]!.classList.add('active');
+					document.querySelectorAll<HTMLDivElement>('.leg')[2]!.classList.add('active');
 				});
 
 				// This is kinda funky, but people are basically getting to the "review" step here
@@ -315,12 +315,12 @@ function purchaseFlowInit({hostedFieldsInstance, applePayInstance}) {
 				const paymentRequest = applePayInstance.createPaymentRequest({
 						total: {
 							label: 'Total (All sales final)',
-							amount: cart.reduce((tot, cur) => tot + (cur.quantity * products[cur.productId].price), 0)
+							amount: String(cart.reduce((tot, cur) => tot + (cur.quantity * products[cur.productId].price), 0))
 						},
 						lineItems: cart.map(i => ({
 							label: `${products[i.productId].name} (${i.quantity} qty)`,
 							type: 'final',
-							amount: products[i.productId].price * i.quantity
+							amount: String(products[i.productId].price * i.quantity)
 						})),
 						billingContact: {
 							emailAddress: customer.email,
@@ -335,7 +335,7 @@ function purchaseFlowInit({hostedFieldsInstance, applePayInstance}) {
 						}],
 						requiredBillingContactFields: ['email']
 					}),
-					appleSession = new window.ApplePaySession(3, paymentRequest);
+					appleSession = new (window as any).ApplePaySession(3, paymentRequest) as ApplePaySession;
 
 				appleSession.onvalidatemerchant = event => {
 					applePayInstance.performValidation({validationURL: event.validationURL, displayName: 'Mustache Bash'})
@@ -346,11 +346,11 @@ function purchaseFlowInit({hostedFieldsInstance, applePayInstance}) {
 
 							// Revert the UI
 							window.requestAnimationFrame(() => {
-								const ticks = document.querySelectorAll('.ticks > div');
-								ticks[2].classList.add('active');
-								ticks[2].classList.remove('complete');
-								ticks[3].classList.remove('active');
-								document.querySelectorAll('.leg')[2].classList.remove('active');
+								const ticks = document.querySelectorAll<HTMLDivElement>('.ticks > div');
+								ticks[2]!.classList.add('active');
+								ticks[2]!.classList.remove('complete');
+								ticks[3]!.classList.remove('active');
+								document.querySelectorAll('.leg')[2]!.classList.remove('active');
 							});
 						});
 				};
@@ -384,9 +384,9 @@ function purchaseFlowInit({hostedFieldsInstance, applePayInstance}) {
 							return payload.nonce;
 						})
 						.then(completePurchase)
-						.then(() => appleSession.completePayment(window.ApplePaySession.STATUS_SUCCESS))
+						.then(() => appleSession.completePayment((window as any).ApplePaySession.STATUS_SUCCESS))
 						.catch(e => {
-							appleSession.completePayment(window.ApplePaySession.STATUS_FAILURE);
+							appleSession.completePayment((window as any).ApplePaySession.STATUS_FAILURE);
 
 							if(e.status !== 410) {
 								// eslint-disable-next-line
@@ -407,20 +407,20 @@ function purchaseFlowInit({hostedFieldsInstance, applePayInstance}) {
 
 		// Ticket Flow with a precarious dependency on DOM order
 		// Step 1
-		document.querySelector('#confirm-quantity').addEventListener('click', () => {
+		document.querySelector<HTMLButtonElement>('#confirm-quantity')!.addEventListener('click', () => {
 			// Make sure there's items in the cart to purchase
 			const valid = cart.length;
 
 			if(valid) {
 				window.requestAnimationFrame(() => {
-					document.querySelectorAll('.step')[0].classList.remove('active');
-					document.querySelectorAll('.step')[1].classList.add('active');
+					document.querySelectorAll<HTMLDivElement>('.step')[0]!.classList.remove('active');
+					document.querySelectorAll<HTMLDivElement>('.step')[1]!.classList.add('active');
 
-					const ticks = document.querySelectorAll('.ticks > div');
-					ticks[0].classList.remove('active');
-					ticks[0].classList.add('complete');
-					ticks[1].classList.add('active');
-					document.querySelectorAll('.leg')[0].classList.add('active');
+					const ticks = document.querySelectorAll<HTMLDivElement>('.ticks > div');
+					ticks[0]!.classList.remove('active');
+					ticks[0]!.classList.add('complete');
+					ticks[1]!.classList.add('active');
+					document.querySelectorAll<HTMLDivElement>('.leg')[0]!.classList.add('active');
 				});
 
 				if(typeof window.gtag === 'function') {
@@ -447,17 +447,17 @@ function purchaseFlowInit({hostedFieldsInstance, applePayInstance}) {
 			quantity: promo.productQuantity
 		});
 
-		const steps = document.querySelector('.steps'),
+		const steps = document.querySelector<HTMLDivElement>('.steps') as HTMLDivElement,
 			promoInfo = document.createElement('h5');
 
 		promoInfo.innerHTML = `Promo Ticket: ${promo.product.name} - $${promo.price}/ea (${promo.productQuantity} qty)`;
 
-		steps.parentNode.insertBefore(promoInfo, steps);
+		steps.parentNode!.insertBefore(promoInfo, steps);
 
 		const subtotal = promo.price * promo.productQuantity,
-			orderSummaryList = document.querySelector('.order-summary dl');
+			orderSummaryList = document.querySelector<HTMLDListElement>('.order-summary dl') as HTMLDListElement;
 
-		document.querySelector('#grand-total span').innerText = subtotal;
+		document.querySelector<HTMLSpanElement>('#grand-total span')!.innerText = String(subtotal);
 
 		orderSummaryList.innerHTML = `
 			<dt>${promo.product.name} (<span class="quantity">${promo.productQuantity}</span>)</dt>
@@ -465,63 +465,63 @@ function purchaseFlowInit({hostedFieldsInstance, applePayInstance}) {
 		`;
 
 		window.requestAnimationFrame(() => {
-			document.querySelectorAll('.step')[0].classList.remove('active');
-			document.querySelectorAll('.step')[1].classList.add('active');
+			document.querySelectorAll<HTMLDivElement>('.step')[0]!.classList.remove('active');
+			document.querySelectorAll<HTMLDivElement>('.step')[1]!.classList.add('active');
 
-			const ticks = document.querySelectorAll('.ticks > div');
-			ticks[0].classList.remove('active');
-			ticks[0].classList.add('complete');
-			ticks[1].classList.add('active');
-			document.querySelectorAll('.leg')[0].classList.add('active');
+			const ticks = document.querySelectorAll<HTMLDivElement>('.ticks > div');
+			ticks[0]!.classList.remove('active');
+			ticks[0]!.classList.add('complete');
+			ticks[1]!.classList.add('active');
+			document.querySelectorAll<HTMLDivElement>('.leg')[0]!.classList.add('active');
 		});
 	}
 
 	// Step 2
-	document.querySelector('#enter-personal-info').addEventListener('click', () => {
+	document.querySelector<HTMLButtonElement>('#enter-personal-info')!.addEventListener('click', () => {
 		// Let's get ridiculous so we can check
 		let nameValid = false,
 			emailValid = false;
 
-		const fullName = document.querySelector('input[name="name"]').value,
-			email = document.querySelector('input[name="email"]').value;
+		const fullName = document.querySelector<HTMLInputElement>('input[name="name"]')!.value,
+			email = document.querySelector<HTMLInputElement>('input[name="email"]')!.value;
 
 		// Not much name validation - your bad if you put in a fake name for a guest list
 		if(!fullName || fullName.trim().split(' ').length < 2) {
 			// redundant here, but done for explicitness
 			nameValid = false;
-			document.querySelector('fieldset[name="name"]').classList.add('invalid');
+			document.querySelector<HTMLFieldSetElement>('fieldset[name="name"]')!.classList.add('invalid');
 		} else {
 			nameValid = true;
-			document.querySelector('fieldset[name="name"]').classList.remove('invalid');
+			document.querySelector<HTMLFieldSetElement>('fieldset[name="name"]')!.classList.remove('invalid');
 		}
 
 		// There's no such thing as a simple email validator - but again, your bad if you put in a shit email for confirmation
 		if(!email || !/^\S+@\S+\.\S{2,}$/.test(email.trim())) {
 			emailValid = false;
-			document.querySelector('fieldset[name="email"]').classList.add('invalid');
+			document.querySelector<HTMLFieldSetElement>('fieldset[name="email"]')!.classList.add('invalid');
 		} else {
 			emailValid = true;
-			document.querySelector('fieldset[name="email"]').classList.remove('invalid');
+			document.querySelector<HTMLFieldSetElement>('fieldset[name="email"]')!.classList.remove('invalid');
 		}
 
 		if(nameValid && emailValid) {
 			customer.email = email.trim();
 			customer.firstName = fullName.trim().split(' ')[0];
 			customer.lastName = fullName.trim().split(' ').slice(1).join(' ');
-			customer.marketingOptIn = document.querySelector('input[name="marketing-opt-in"]').checked;
+			customer.marketingOptIn = document.querySelector<HTMLInputElement>('input[name="marketing-opt-in"]')!.checked;
 
-			document.querySelector('.reservation-details-name').innerText = fullName.trim();
-			document.querySelector('.reservation-details-email').innerText = email.trim();
+			document.querySelector<HTMLSpanElement>('.reservation-details-name')!.innerText = fullName.trim();
+			document.querySelector<HTMLSpanElement>('.reservation-details-email')!.innerText = email.trim();
 
 			window.requestAnimationFrame(() => {
-				document.querySelectorAll('.step')[1].classList.remove('active');
-				document.querySelectorAll('.step')[2].classList.add('active');
+				document.querySelectorAll<HTMLDivElement>('.step')[1]!.classList.remove('active');
+				document.querySelectorAll<HTMLDivElement>('.step')[2]!.classList.add('active');
 
-				const ticks = document.querySelectorAll('.ticks > div');
-				ticks[1].classList.remove('active');
-				ticks[1].classList.add('complete');
-				ticks[2].classList.add('active');
-				document.querySelectorAll('.leg')[1].classList.add('active');
+				const ticks = document.querySelectorAll<HTMLDivElement>('.ticks > div');
+				ticks[1]!.classList.remove('active');
+				ticks[1]!.classList.add('complete');
+				ticks[2]!.classList.add('active');
+				document.querySelectorAll<HTMLDivElement>('.leg')[1]!.classList.add('active');
 			});
 
 			if(typeof window.gtag === 'function' && !promo) {
@@ -544,25 +544,25 @@ function purchaseFlowInit({hostedFieldsInstance, applePayInstance}) {
 	});
 
 	// Step 3
-	document.querySelector('#enter-payment-info').addEventListener('click', () => {
+	document.querySelector<HTMLButtonElement>('#enter-payment-info')!.addEventListener('click', () => {
 		let paymentValid = false;
 
 		const state = hostedFieldsInstance.getState();
 
 		// Check the braintree fields with this slick copy/paste job they provided
-		paymentValid = Object.keys(state.fields).every(key => state.fields[key].isValid);
+		paymentValid = Object.keys(state.fields).every(key => ((state.fields as any)[key].isValid));
 
 
 		if(paymentValid) {
 			window.requestAnimationFrame(() => {
-				document.querySelectorAll('.step')[2].classList.remove('active');
-				document.querySelectorAll('.step')[3].classList.add('active');
+				document.querySelectorAll<HTMLDivElement>('.step')[2]!.classList.remove('active');
+				document.querySelectorAll<HTMLDivElement>('.step')[3]!.classList.add('active');
 
-				const ticks = document.querySelectorAll('.ticks > div');
-				ticks[2].classList.remove('active');
-				ticks[2].classList.add('complete');
-				ticks[3].classList.add('active');
-				document.querySelectorAll('.leg')[2].classList.add('active');
+				const ticks = document.querySelectorAll<HTMLDivElement>('.ticks > div');
+				ticks[2]!.classList.remove('active');
+				ticks[2]!.classList.add('complete');
+				ticks[3]!.classList.add('active');
+				document.querySelectorAll<HTMLDivElement>('.leg')[2]!.classList.add('active');
 			});
 
 			if(typeof window.gtag === 'function' && !promo) {
@@ -585,47 +585,47 @@ function purchaseFlowInit({hostedFieldsInstance, applePayInstance}) {
 	});
 
 	if(!promo) {
-		document.querySelector('#back-to-quantity').addEventListener('click', e => {
+		document.querySelector<HTMLButtonElement>('#back-to-quantity')!.addEventListener('click', e => {
 			e.preventDefault();
 			window.requestAnimationFrame(() => {
-				document.querySelectorAll('.step')[1].classList.remove('active');
-				document.querySelectorAll('.step')[0].classList.add('active');
+				document.querySelectorAll<HTMLDivElement>('.step')[1]!.classList.remove('active');
+				document.querySelectorAll<HTMLDivElement>('.step')[0]!.classList.add('active');
 
-				const ticks = document.querySelectorAll('.ticks > div');
-				ticks[1].classList.remove('active');
-				ticks[0].classList.remove('complete');
-				ticks[0].classList.add('active');
-				document.querySelectorAll('.leg')[0].classList.remove('active');
+				const ticks = document.querySelectorAll<HTMLDivElement>('.ticks > div');
+				ticks[1]!.classList.remove('active');
+				ticks[0]!.classList.remove('complete');
+				ticks[0]!.classList.add('active');
+				document.querySelectorAll<HTMLDivElement>('.leg')[0]!.classList.remove('active');
 			});
 		});
 	} else {
-		document.querySelector('#back-to-quantity').remove();
+		document.querySelector<HTMLDivElement>('#back-to-quantity')!.remove();
 	}
 
-	document.querySelector('#back-to-personal').addEventListener('click', e => {
+	document.querySelector<HTMLButtonElement>('#back-to-personal')!.addEventListener('click', e => {
 		e.preventDefault();
 		window.requestAnimationFrame(() => {
-			document.querySelectorAll('.step')[2].classList.remove('active');
-			document.querySelectorAll('.step')[1].classList.add('active');
+			document.querySelectorAll<HTMLDivElement>('.step')[2]!.classList.remove('active');
+			document.querySelectorAll<HTMLDivElement>('.step')[1]!.classList.add('active');
 
-			const ticks = document.querySelectorAll('.ticks > div');
-			ticks[2].classList.remove('active');
-			ticks[1].classList.remove('complete');
-			ticks[1].classList.add('active');
-			document.querySelectorAll('.leg')[1].classList.remove('active');
+			const ticks = document.querySelectorAll<HTMLDivElement>('.ticks > div');
+			ticks[2]!.classList.remove('active');
+			ticks[1]!.classList.remove('complete');
+			ticks[1]!.classList.add('active');
+			document.querySelectorAll<HTMLDivElement>('.leg')[1]!.classList.remove('active');
 		});
 	});
 
 	// Step 4
 	let submitting = false;
-	document.querySelector('#confirm-order').addEventListener('click', () => {
+	document.querySelector<HTMLButtonElement>('#confirm-order')!.addEventListener('click', () => {
 		// Cool it, cowboy
 		if(submitting) return;
 
 		submitting = true;
-		document.querySelector('#confirm-order').innerText = 'Processing...';
-		document.querySelector('#confirm-order').disabled = true;
-		document.querySelector('#back-to-payment').style.display = 'none';
+		document.querySelector<HTMLButtonElement>('#confirm-order')!.innerText = 'Processing...';
+		document.querySelector<HTMLButtonElement>('#confirm-order')!.disabled = true;
+		document.querySelector<HTMLAnchorElement>('#back-to-payment')!.style.display = 'none';
 
 		if(typeof window.gtag === 'function' && !promo) {
 			try {
@@ -648,9 +648,9 @@ function purchaseFlowInit({hostedFieldsInstance, applePayInstance}) {
 			.then(({ nonce }) => completePurchase(nonce))
 			.catch(e => {
 				submitting = false;
-				document.querySelector('#confirm-order').innerText = 'Purchase';
-				document.querySelector('#confirm-order').disabled = false;
-				document.querySelector('#back-to-payment').style.display = '';
+				document.querySelector<HTMLButtonElement>('#confirm-order')!.innerText = 'Purchase';
+				document.querySelector<HTMLButtonElement>('#confirm-order')!.disabled = false;
+				document.querySelector<HTMLAnchorElement>('#back-to-payment')!.style.display = '';
 
 				if(e.status !== 410) {
 					// eslint-disable-next-line
@@ -665,20 +665,20 @@ function purchaseFlowInit({hostedFieldsInstance, applePayInstance}) {
 			});
 	});
 
-	document.querySelector('#back-to-payment').addEventListener('click', e => {
+	document.querySelector<HTMLAnchorElement>('#back-to-payment')!.addEventListener('click', e => {
 		// Can't go back now
 		if(submitting) return;
 
 		e.preventDefault();
 		window.requestAnimationFrame(() => {
-			document.querySelectorAll('.step')[3].classList.remove('active');
-			document.querySelectorAll('.step')[2].classList.add('active');
+			document.querySelectorAll<HTMLDivElement>('.step')[3]!.classList.remove('active');
+			document.querySelectorAll<HTMLDivElement>('.step')[2]!.classList.add('active');
 
-			const ticks = document.querySelectorAll('.ticks > div');
-			ticks[3].classList.remove('active');
-			ticks[2].classList.remove('complete');
-			ticks[2].classList.add('active');
-			document.querySelectorAll('.leg')[2].classList.remove('active');
+			const ticks = document.querySelectorAll<HTMLDivElement>('.ticks > div');
+			ticks[3]!.classList.remove('active');
+			ticks[2]!.classList.remove('complete');
+			ticks[2]!.classList.add('active');
+			document.querySelectorAll<HTMLDivElement>('.leg')[2]!.classList.remove('active');
 		});
 	});
 }
@@ -723,14 +723,14 @@ function braintreeInit() {
 			// Apple Pay
 			let applePaySupported = false;
 			try {
-				applePaySupported = window.ApplePaySession && window.ApplePaySession.supportsVersion(3) && window.ApplePaySession.canMakePayments();
+				applePaySupported = (window as any).ApplePaySession && (window as any).ApplePaySession.supportsVersion(3) && (window as any).ApplePaySession.canMakePayments();
 			} catch (e) {
 				// Not supported or errored on attempt to check
 			}
 
-			let applePayPromise = Promise.resolve(null);
+			let applePayPromise: Promise<null | ApplePay> = Promise.resolve(null);
 			if(applePaySupported) {
-				applePayPromise = applePay.create({client: clientInstance}).catch(applePayErr => console.error('Error creating applePayInstance:', applePayErr));
+				applePayPromise = applePay.create({client: clientInstance}).catch(applePayErr => console.error('Error creating applePayInstance:', applePayErr)) as Promise<ApplePay>;
 			}
 
 			return Promise.all([hostedFieldsPromise, applePayPromise]).then(([hostedFieldsInstance, applePayInstance]) => ({hostedFieldsInstance, applePayInstance}));
@@ -751,7 +751,7 @@ function setPromo() {
 	return !!promoId && fetch(`${API_HOST}/v1/promos/${promoId}`)
 		.then(response => {
 			if(!response.ok) {
-				const err = new Error('Promo Error');
+				const err: Error & {status?: number} = new Error('Promo Error');
 
 				err.status = response.status;
 				throw err;
@@ -777,26 +777,49 @@ function setPromo() {
 					break;
 			}
 
-			document.querySelector('.tickets-flow').innerHTML = `<h5 style="padding-top: 5em; color: #e66a40; text-align: center">${promoMessage}</h5>`;
+			document.querySelector<HTMLDivElement>('.tickets-flow')!.innerHTML = `<h5 style="padding-top: 5em; color: #e66a40; text-align: center">${promoMessage}</h5>`;
 		});
 }
 
+type EventSettings = {
+	id: string;
+	name: string;
+	date: string;
+	openingSales: string;
+	salesEnabled: boolean;
+	meta: {
+		ticketsOrder: string[];
+		currentTicket: string;
+	};
+	products: {
+		id: string;
+		name: string;
+		description: string;
+		price: number;
+		status: string;
+		eventId: string;
+		admissionTier: string;
+		meta: {
+			nextTierProductId?: string;
+		};
+	}[];
+};
 // Fetch the initial settings and products
 Promise.all([
-	fetch(API_HOST + `/v1/event-settings/${EVENT_2024_ID}`)
+	fetch(API_HOST + `/v1/event-settings/${EVENT_2025_ID}`)
 		.then(response => {
 			if(!response.ok) throw new Error('Settings not loaded');
 
 			return response;
 		})
-		.then(response => response.json()),
-	fetch(API_HOST + `/v1/event-settings/${EVENT_2024_AFTERPARTY_ID}`)
+		.then(response => (response.json() as Promise<EventSettings>)),
+	fetch(API_HOST + `/v1/event-settings/${EVENT_2025_AFTERPARTY_ID}`)
 		.then(response => {
 			if(!response.ok) throw new Error('Afterparty Settings not loaded');
 
 			return response;
 		})
-		.then(response => response.json())
+		.then(response => (response.json() as Promise<EventSettings>))
 ])
 	.then(evs => evs.forEach(({ products: siteProducts, ...ev }) => {
 		siteProducts.forEach(p => products[p.id] = p);
@@ -812,7 +835,7 @@ Promise.all([
 	.catch(e => {
 		// If anything errors, we need to show a message in the tickets section
 		// eslint-disable-next-line max-len
-		document.querySelector('.tickets-flow').innerHTML = '<h5 style="padding-top: 5em; color: #602a34; text-align: center">Something seems to be broken,<br>please refresh the page and try again</h5>';
+		document.querySelector<HTMLDivElement>('.tickets-flow')!.innerHTML = '<h5 style="padding-top: 5em; color: #602a34; text-align: center">Something seems to be broken,<br>please refresh the page and try again</h5>';
 
 		logError(e);
 	});
