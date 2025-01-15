@@ -2,20 +2,20 @@
 	"@context": "http://schema.org",
 	"@type": "Event",
 	"name": "The Mustache Bash",
-	"startDate": "2024-03-23T14:00-07:00",
-	"endDate": "2024-03-23T23:00-07:00",
+	"startDate": "2025-03-22T14:00-07:00",
+	"endDate": "2025-03-22T23:00-07:00",
 	"eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
 	"eventStatus": "https://schema.org/EventScheduled",
 	"description": "Family. Freedom. Fun. The Funk. Welcome to The Mustache Bash. The Funkiest Disco Day on Earth.",
 	"typicalAgeRange" : "21+",
 	"location": {
 		"@type": "Place",
-		"name": "The Port Pavilion on Broadway Pier",
+		"name": "Mariner's Point Park",
 		"address": {
 			"@type": "PostalAddress",
-			"streetAddress": "1000 N Harbor Dr",
+			"streetAddress": "1215 Mariners Way",
 			"addressLocality": "San Diego",
-			"postalCode": "92101",
+			"postalCode": "92109",
 			"addressRegion": "CA",
 			"addressCountry": "US"
 		}
@@ -30,29 +30,29 @@
 			"name": "General Admission",
 			"priceCurrency": "USD",
 			"availability": "https://schema.org/LimitedAvailability",
-			"validFrom": "2024-01-20T09:00-08:00",
-			"validThrough": "2024-03-23T23:00-07:00"
+			"validFrom": "2025-01-18T09:00-08:00",
+			"validThrough": "2025-03-22T23:00-07:00"
 		}],
 	"performer": [
 		{
 			"@type": "PerformingGroup",
-			"name": "Franc Moody"
+			"name": "Chromeo"
 		},
 		{
 			"@type": "PerformingGroup",
-			"name": "Moodymann"
+			"name": "Breakbot & Irfane"
 		},
 		{
 			"@type": "PerformingGroup",
-			"name": "High Fade"
+			"name": "Derrick Does Disco"
 		},
 		{
 			"@type": "PerformingGroup",
-			"name": "Young Franco"
+			"name": "Classixx"
 		},
 		{
 			"@type": "PerformingGroup",
-			"name": "Natasha Diggs"
+			"name": "DJ KOCO aka SHIMOKITA"
 		},
 		{
 			"@type": "PerformingGroup",
@@ -60,19 +60,11 @@
 		},
 		{
 			"@type": "PerformingGroup",
-			"name": "Never Dull"
+			"name": "Flying Mojito Bros"
 		},
 		{
 			"@type": "PerformingGroup",
-			"name": "The B Sections"
-		},
-		{
-			"@type": "PerformingGroup",
-			"name": "3kelves b2b Dylan C. Greene"
-		},
-		{
-			"@type": "PerformingGroup",
-			"name": "Discotoshi"
+			"name": "Futuresexuals"
 		},
 		{
 			"@type": "PerformingGroup",
@@ -80,27 +72,27 @@
 		},
 		{
 			"@type": "PerformingGroup",
+			"name": "3kelves b2b Dylan C. Greene"
+		},
+		{
+			"@type": "PerformingGroup",
+			"name": "Discotoshi b2b Starfari"
+		},
+		{
+			"@type": "PerformingGroup",
 			"name": "Abby Normal"
 		},
 		{
 			"@type": "PerformingGroup",
-			"name": "Groovewell"
+			"name": "Max Heegard"
+		},
+		{
+			"@type": "PerformingGroup",
+			"name": "Combover"
 		},
 		{
 			"@type": "PerformingGroup",
 			"name": "He2She"
-		},
-		{
-			"@type": "PerformingGroup",
-			"name": "Voss & Things"
-		},
-		{
-			"@type": "PerformingGroup",
-			"name": "DJ M3"
-		},
-		{
-			"@type": "PerformingGroup",
-			"name": "Cool Sexy DJ"
 		}
 	],
 	"organizer": {
