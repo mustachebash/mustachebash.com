@@ -1,0 +1,227 @@
+---
+import 'swiper/css';
+import Layout from '@/layouts/Layout.astro';
+import opengraphImg from './_img/opengraph-image.jpg';
+---
+
+<Layout
+	title="Mustache Bash - Your Tickets"
+	openGraphImage={opengraphImg}
+	openGraphTitle="Mustache Bash Info"
+	openGraphDescription="Do not share this link with anyone."
+	robots="noindex, nofollow"
+>
+	<main></main>
+</Layout>
+
+<style is:global>
+	.img-wrap img {
+		display: block;
+		margin: 0 auto;
+		max-width: 100%;
+	}
+	.title {
+		background: #231917;
+		padding: 1em 2em;
+		text-align: center;
+	}
+	.title svg {
+		width: 100%;
+		max-width: 18.75em;
+	}
+	.container-1230 {
+		position: relative;
+		max-width: 1230px;
+		box-sizing: border-box;
+		padding: 0 1.875em;
+		margin: 0 auto;
+	}
+	@media (max-width: 600px) {
+		.no-mobile {
+			display: none;
+		}
+	}
+	@media (min-width: ) {
+		.mobile-only {
+			display: none;
+		}
+	}
+	.flex-row {
+		display: flex;
+	}
+	@media (max-width: 600px) {
+		.flex-row:not(.flex-row-mobile) {
+			flex-direction: column;
+		}
+	}
+	.img-wrap img {
+		display: block;
+		margin: 0 auto;
+		max-width: 100%;
+	}
+	.img-wrap.outline {
+		margin: 0 auto;
+		height: 200px;
+		width: 200px;
+		box-sizing: border-box;
+		border: 2px dashed #231917;
+		padding: 0.5em;
+		padding-top: 50px;
+		border-radius: 20px;
+	}
+	header {
+		height: 5.625em;
+		padding-top: 1.25em;
+		box-sizing: border-box;
+		background: #231917;
+		z-index: 9999;
+		margin-bottom: 1.5em;
+	}
+	@media (max-width: 600px) {
+		header {
+			padding-top: 1.0625em;
+			height: 4.8125em;
+		}
+	}
+	header .logo {
+		flex: 0 3 7.375em;
+		width: 7.375em;
+	}
+	@media (max-width: 600px) {
+		header .logo {
+			position: relative;
+			top: 4px;
+			width: 5.75em;
+			flex: 0 3 6em;
+		}
+	}
+	h2 {
+		margin: 0;
+		color: #231917;
+	}
+	h2 + h2 {
+		margin-bottom: 1em;
+	}
+	h3 {
+		margin-top: .2em;
+		margin-bottom: 0;
+		line-height: 1em;
+	}
+	h4 {
+		margin: 0;
+		line-height: 1;
+	}
+	.disclaimer, .instructions {
+		font-size: 12px;
+	}
+	.disclaimer a, .instructions a {
+		color: #302922;
+		font-weight: 700;
+		text-decoration: underline;
+	}
+	@media (max-width: 600px) {
+		.download-wallet {
+			text-align: center;
+		}
+	}
+	.download-wallet .download {
+		display: inline-block;
+		background: #302922;
+		padding: 0.5em 2em;
+		text-transform: uppercase;
+		font-family: 'proxima-nova', Helvetica, Arial, sans-serif;;
+		font-weight: 700;
+		font-size: 1.125em;
+		color: #ffffff;
+		letter-spacing: 1px;
+	}
+	@media (max-width: 600px) {
+		.download-wallet .download {
+			margin-bottom: 1em;
+			display: block;
+			box-sizing: border-box;
+		}
+	}
+	.download-wallet .wallet {
+		display: inline-block;
+		position: relative;
+		top: 14px;
+		margin-left: 1em;
+	}
+	.download-wallet .wallet img {
+		height: 40px;
+	}
+	@media (max-width: 600px) {
+		.download-wallet .wallet {
+			margin-left: 0;
+			top: 0;
+		}
+		.download-wallet .wallet img {
+			height: 50px;
+		}
+	}
+	.tickets {
+		position: relative;
+		padding: 1em 0 2em;
+		overflow: hidden;
+		--swiper-navigation-color: #302922;
+		--swiper-pagination-color: #302922;
+	}
+	.tickets .swiper-pagination-fraction {
+		bottom: 0;
+		font-weight: 700;
+		font-size: 1.125em;
+		color: #302922;
+	}
+	@media (max-width: 600px) {
+		.tickets .swiper-button-next, .tickets .swiper-button-prev {
+			display: none;
+		}
+	}
+	.ticket {
+		text-align: center;
+	}
+	.tickets-list {
+		padding: 2em 0;
+		background: #302922;
+	}
+	.tickets-list .event-group {
+		margin-bottom: 4em;
+	}
+	.tickets-list .event-info h3, .tickets-list .event-info h4, .tickets-list .event-info h5, .tickets-list .event-info p {
+		color: #ffffff;
+	}
+	.tickets-list ul {
+		padding: 0;
+		margin: 0;
+		list-style: none;
+	}
+	.tickets-list ul li {
+		background: #ffffff;
+		padding: 1em;
+		border-radius: 3px;
+		margin-bottom: 1em;
+	}
+	.tickets-list .info {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+	}
+	.tickets-list .info p {
+		font-size: 12px;
+		margin: 0.1em 0;
+	}
+	.tickets-list .info .ticket-number {
+		flex: 0 1 75px;
+	}
+	.tickets-list .info .ticket-tier {
+		flex: 1 1;
+	}
+	.tickets-list .info .ticket-ids {
+		align-self: flex-end;
+		text-align: right;
+	}
+</style>
+<script>
+	import './_index.ts';
+</script>

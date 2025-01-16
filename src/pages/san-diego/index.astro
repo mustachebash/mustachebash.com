@@ -5,6 +5,7 @@ import PageContainer from '@/components/PageContainer.astro';
 import NewsletterSignup from '@/components/NewsletterSignup.astro';
 
 import Bands from '@/components/Bands.astro';
+import Tickets from '@/components/Tickets.astro';
 import bandsData from './_bands';
 
 import opengraphImg from './_img/opengraph-image.jpg';
@@ -17,6 +18,9 @@ import introImg from './_img/intro.jpg';
 import lineupImg from './_img/lineup.jpg';
 import lineupImgMobile from './_img/lineup-mobile.jpg';
 import venueImg from './_img/venue.jpg';
+import prepartyImg from './_img/preparty.jpg';
+import afterpartyImg from './_img/afterparty.jpg';
+import vipImg from './_img/vip.jpg';
 
 import galleryCoverImg from '@/img/gallery-cover-desktop.jpg';
 import galleryCoverImgMobile from '@/img/gallery-cover-mobile.jpg';
@@ -145,7 +149,7 @@ import ResponsiveImage from '@/components/ResponsiveImage.astro';
  						<dt>Classixx</dt>
  						<dd>5:30 pm</dd>
 
- 						<dt>Flying Mojito Bros.</dt>
+ 						<dt>Flying Mojito Bros</dt>
  						<dd>4:00 pm</dd>
 
  						<dt>Max Heegard</dt>
@@ -192,6 +196,68 @@ import ResponsiveImage from '@/components/ResponsiveImage.astro';
  			<Bands bands={bandsData}/>
  		</PageContainer>
  	</section>
+
+	<section id="preparty">
+		<PageContainer>
+			<div class="flex-row">
+				<div class="preparty-description">
+					<h3>Preparty</h3>
+					<h4>Good Night John Boy</h4>
+					<p>
+						To wet your whistle on Bash Eve, we’re heading to the hottest new disco joint in town—Good Night John Boy—for the Mustache Bash preparty on Friday night. Think Studio 54 meets your grandparents funky ‘70s basement, right in the heart of the Gaslamp Quarter, with all the vibes to kick Bash weekend off right. There’s even a light-up dancefloor to warm up those boogie shoes before the big day.
+					</p>
+					<p>
+						8:00PM–Late. $20 tickets. Lineup coming soon!
+					</p>
+					<a class="ghost-button" href="#tickets">Get Tickets</a>
+				</div>
+				<div class="preparty-image"><ResponsiveImage src={prepartyImg} alt="Preparty: Good Night John Boy"></div>
+			</div>
+		</PageContainer>
+	</section>
+
+	<section id="afterparty">
+		<PageContainer>
+			<div class="flex-row">
+				<div class="afterparty-description">
+					<h3>Afterparty</h3>
+					<h4>Disco for Dessert</h4>
+					<p>
+						The Bash is too much mojo to bottle into a single day, so naturally, a buck wild afterparty is in store! To keep the party blasting off all night, we’re hosting the official Bash Afterparty at Mavericks Beach Club in PB. Smolder in the grooves as Mavericks transforms into a disco dreamland with 3 rooms of tunes. Tack on an afterparty pass at checkout – just $45 bones to light up the dance floor and Bash the night away. Full lineup coming soon!
+					</p>
+					<a class="ghost-button" href="#tickets">Get Tickets</a>
+				</div>
+				<div class="afterparty-image"><ResponsiveImage src={afterpartyImg} alt="Afterparty: Mavericks"></div>
+			</div>
+		</PageContainer>
+	</section>
+
+	<section id="vip">
+		<PageContainer>
+			<div class="flex-row">
+				<div class="vip-description">
+					<h3>VIP Experience</h3>
+					<h4>Upgrade Your Ticket</h4>
+					<p>
+						If you've ever Bashed, you know it's one big VIP experience—just getting through the gates makes you a VIP! But back again by popular demand, we present the Bash VIP experience for the funkiest among funky specimens—kinda like the Jimi Hendrix Experience, but with less acid. There's only a handful of these bad mamajamas available so get 'em while the gettin's good! VIP Tickets includes:
+					</p>
+					<p class="vip-includes">
+						Afterparty Ticket<br>
+						Private VIP Lounge<br>
+						Private VIP Viewing Deck<br>
+						Front row Main Stage Access<br>
+						Separate VIP Entrance<br>
+						Private VIP Bar(s)<br>
+						Extra Restrooms<br>
+					</p>
+					<a class="ghost-button" href="#tickets">Get Tickets</a>
+				</div>
+				<div class="vip-image"><ResponsiveImage src={vipImg} alt="VIP Tickets"></div>
+			</div>
+		</PageContainer>
+	</section>
+
+	<Tickets />
 
 	<section id="gallery">
 		<div class="cover-wrapper">
@@ -531,6 +597,220 @@ import ResponsiveImage from '@/components/ResponsiveImage.astro';
 	    order: 2;
 	  }
 	  #venue .venue-image img {
+	    height: auto;
+	    max-width: 100%;
+	  }
+	}
+	#preparty {
+	  background: #e1e5e8;
+	  padding: 5.5em 0 4.75em;
+	  overflow: hidden;
+	}
+	#preparty .preparty-description {
+	  flex: 3 1;
+	}
+	@media (min-width: 770px) {
+	  #preparty .preparty-description {
+	    margin-right: 7em;
+	  }
+	}
+	#preparty .preparty-description h3 {
+	  color: #000000;
+	  margin-top: 0;
+	  margin-bottom: 0;
+	  line-height: 1em;
+	}
+	#preparty .preparty-description h4 {
+	  color: #000000;
+	  margin-top: 0;
+	}
+	#preparty .preparty-description p {
+	  color: #000000;
+	  font-size: 1em;
+	  margin-bottom: 1em;
+	}
+	#preparty .preparty-description .ghost-button {
+	  width: 14.5em;
+	  color: #000000;
+	  border-color: #000000;
+	  border-radius: 400px;
+	}
+	#preparty .preparty-description .ghost-button:hover {
+	  background: transparent;
+	  color: #000000;
+	  box-shadow: inset 0 0 12px -1px #dfe3e6;
+	}
+	@media (max-width: 769px) {
+	  #preparty .preparty-description .ghost-button {
+	    display: inline-block;
+	    margin-bottom: 3em;
+	  }
+	}
+	#preparty .preparty-image {
+	  flex: 4 1;
+	  margin: 0 -2em;
+	}
+	@media (min-width: 770px) {
+	  #preparty .preparty-image {
+	    margin: -6.25em -2em -6.25em;
+	  }
+	}
+	@media (max-width: 600px) {
+	  #preparty {
+	    padding: 0;
+	  }
+	  #preparty .preparty-description {
+	    order: 1;
+	    padding: 2em 0 0;
+	  }
+	  #preparty .preparty-image {
+	    order: 2;
+	  }
+	  #preparty .preparty-image img {
+	    height: auto;
+	    max-width: 100%;
+	  }
+	}
+	#afterparty {
+	  background: #000000;
+	  padding: 5.5em 0;
+	  overflow: hidden;
+	}
+	#afterparty .afterparty-description {
+	  flex: 3 1;
+	}
+	@media (min-width: 770px) {
+	  #afterparty .afterparty-description {
+	    margin-right: 7em;
+	  }
+	}
+	#afterparty .afterparty-description h3 {
+	  color: #ffffff;
+	  margin-bottom: 0;
+	  margin-top: 0;
+	  line-height: 1em;
+	}
+	#afterparty .afterparty-description h4 {
+	  color: #ffffff;
+	  margin-top: 0;
+	}
+	#afterparty .afterparty-description p {
+	  color: #ffffff;
+	  font-size: 1em;
+	  margin-bottom: 3em;
+	}
+	#afterparty .afterparty-description .ghost-button {
+	  width: 14.5em;
+	  color: #ffffff;
+	  border-color: #ffffff;
+	  border-radius: 400px;
+	}
+	#afterparty .afterparty-description .ghost-button:hover {
+	  background: transparent;
+	  color: #ffffff;
+	  box-shadow: inset 0 0 12px -1px #dfe3e6;
+	}
+	@media (max-width: 769px) {
+	  #afterparty .afterparty-description .ghost-button {
+	    display: inline-block;
+	    margin-bottom: 3em;
+	  }
+	}
+	#afterparty .afterparty-image {
+	  flex: 4 1;
+	  margin: 0 -2em;
+	}
+	@media (min-width: 770px) {
+	  #afterparty .afterparty-image {
+	    margin: -6.25em -2em -6.25em;
+	  }
+	}
+	@media (max-width: 600px) {
+	  #afterparty {
+	    padding: 0;
+	  }
+	  #afterparty .afterparty-description {
+	    order: 1;
+	    padding: 2em 0 0;
+	  }
+	  #afterparty .afterparty-image {
+	    order: 2;
+	  }
+	  #afterparty .afterparty-image img {
+	    height: auto;
+	    max-width: 100%;
+	  }
+	}
+	#vip {
+	  background: #e1e5e8;
+	  padding: 5.5em 0 3.75em;
+	  overflow: hidden;
+	}
+	#vip .vip-description {
+	  flex: 3 1;
+	}
+	@media (min-width: 770px) {
+	  #vip .vip-description {
+	    margin-right: 7em;
+	  }
+	}
+	#vip .vip-description h3 {
+	  color: #000000;
+	  margin-top: 0;
+	  margin-bottom: 0;
+	  line-height: 1em;
+	}
+	#vip .vip-description h4 {
+	  color: #000000;
+	  margin-top: 0;
+	}
+	#vip .vip-description p {
+	  color: #000000;
+	  font-size: 1em;
+	  margin-bottom: 1em;
+	}
+	#vip .vip-description p.vip-includes {
+	  text-transform: uppercase;
+	  line-height: 1.1em;
+	}
+	#vip .vip-description .ghost-button {
+	  width: 14.5em;
+	  color: #000000;
+	  border-color: #000000;
+	  border-radius: 400px;
+	}
+	#vip .vip-description .ghost-button:hover {
+	  background: transparent;
+	  color: #000000;
+	  box-shadow: inset 0 0 12px -1px #dfe3e6;
+	}
+	@media (max-width: 769px) {
+	  #vip .vip-description .ghost-button {
+	    display: inline-block;
+	    margin-bottom: 3em;
+	  }
+	}
+	#vip .vip-image {
+	  flex: 4 1;
+	  margin: 0 -2em;
+	}
+	@media (min-width: 770px) {
+	  #vip .vip-image {
+	    margin: -6.25em -2em -6.25em;
+	  }
+	}
+	@media (max-width: 600px) {
+	  #vip {
+	    padding: 0;
+	  }
+	  #vip .vip-description {
+	    order: 1;
+	    padding: 2em 0 0;
+	  }
+	  #vip .vip-image {
+	    order: 2;
+	  }
+	  #vip .vip-image img {
 	    height: auto;
 	    max-width: 100%;
 	  }

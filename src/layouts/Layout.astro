@@ -10,9 +10,10 @@ interface Props {
 	openGraphDescription?: string;
 	openGraphImage?: ImageMetadata;
 	jsonLD?: Record<string, unknown>;
+	robots?: string;
 }
 
-const { title, openGraphTitle, openGraphDescription, openGraphImage, jsonLD } = Astro.props;
+const { title, openGraphTitle, openGraphDescription, openGraphImage, jsonLD, robots } = Astro.props;
 
 // This allows us to use an absolute URL but still process and hash the image name
 const ogImageURL = openGraphImage ? new URL(openGraphImage.src, Astro.site).href : '';
@@ -35,6 +36,7 @@ const ogImageURL = openGraphImage ? new URL(openGraphImage.src, Astro.site).href
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="keywords" content="stache bash, mustache bash, san diego mustache bash, 1970s">
 	<meta name="description" content="A party, a reunion, an excuse to take pride in the dirty fuzz you fertilize above your upper lip. Whatever you call it, let it be known: The Mustache Bash is calling.">
+	{robots && <meta name="robots" content={robots} />}
 
 	{/* https://frodeflaten.com/posts/adding-structured-data-to-blog-posts-using-astro/ */}
 	{jsonLD && <script is:inline type="application/ld+json" set:html={JSON.stringify(jsonLD)} />}
@@ -88,7 +90,7 @@ const ogImageURL = openGraphImage ? new URL(openGraphImage.src, Astro.site).href
 					<p>In San Diego</p>
 					<p>March 22, 2025</p>
 				</div>
-				<div class="tickets-nav-mobile"><a href="/san-diego">TICKETS SOON</a></div>
+				<div class="tickets-nav-mobile"><a href="/san-diego#tickets">GET TICKETS</a></div>
 				<div id="menu-icon">
 					<div></div>
 					<div></div>
@@ -101,7 +103,7 @@ const ogImageURL = openGraphImage ? new URL(openGraphImage.src, Astro.site).href
 						<li><a href="/#tradition">Tradition</a></li>
 						<li><a href="/gallery">Gallery</a></li>
 						<li><a href="/info">Info</a></li>
- 						<li class="tickets-nav"><a href="/san-diego">TICKETS SOON</a></li>
+ 						<li class="tickets-nav"><a href="/san-diego#tickets">GET TICKETS</a></li>
 						<!-- <li><a href="#shop">Shop</a></li> -->
 						<li class="social">
 							<a href="https://www.facebook.com/MustacheBashSD/" target="_blank">
@@ -148,7 +150,7 @@ const ogImageURL = openGraphImage ? new URL(openGraphImage.src, Astro.site).href
 			All Sales are Final
 		</p>
 		<p id="copyright">
-			&copy;2011-2024 Mustache Bash. All Rights Reserved.
+			&copy;2011-2025 Mustache Bash. All Rights Reserved.
 		</p>
 	</footer>
 
