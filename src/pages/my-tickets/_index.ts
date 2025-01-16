@@ -151,7 +151,7 @@ if(orderToken) {
 		})
 		.then(() => {
 			try {
-				const ticketSwiper = new Swiper(document.querySelector('.tickets'), {
+				const ticketSwiper = new Swiper((document.querySelector('.tickets') as any), {
 					pagination: {
 						el: '.swiper-pagination'
 					},
