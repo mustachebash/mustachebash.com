@@ -27,7 +27,12 @@ export default defineConfig({
 	},
 	vite: {
 		build: {
-			sourcemap: true
+			sourcemap: true,
+			rollupOptions: {
+				output: {
+					sourcemapBaseUrl: 'https://mustachebash.com/assets/'
+				}
+			}
 		},
 	...(key && cert && {
 			server: {

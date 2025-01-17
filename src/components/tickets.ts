@@ -277,8 +277,10 @@ function purchaseFlowInit({hostedFieldsInstance, applePayInstance}: {hostedField
 		}
 
 		// Set up Apple Pay listeners
+		console.log('Immediately before conditional', applePayInstance);
+		console.log('Cast boolean', Boolean(applePayInstance));
+		(window as any).applePayInstance = applePayInstance;
 		if(applePayInstance) {
-			(window as any).applePayInstance = applePayInstance;
 			console.log('Inside conditional setting click listeners');
 			// Show the Apple Pay button and acceptance mark
 			document.querySelector<HTMLDivElement>('.apple-pay')!.style.display = 'block';
