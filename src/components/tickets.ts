@@ -277,15 +277,10 @@ function purchaseFlowInit({hostedFieldsInstance, applePayInstance}: {hostedField
 		}
 
 		// Set up Apple Pay listeners
-		console.log('Immediately before conditional', applePayInstance);
-		console.log('Cast boolean', Boolean(applePayInstance));
-		(window as any).applePayInstance = applePayInstance;
 		if(applePayInstance) {
-			console.log('Inside conditional setting click listeners');
 			// Show the Apple Pay button and acceptance mark
 			document.querySelector<HTMLDivElement>('.apple-pay')!.style.display = 'block';
 			document.querySelector<HTMLDivElement>('.apple-pay-button')!.addEventListener('click', () => {
-				console.log('Inside apple pay click listeners');
 				window.gtag('event', 'click', {
 					event_category: 'CTA',
 					event_label: 'Apple Pay'
@@ -409,8 +404,6 @@ function purchaseFlowInit({hostedFieldsInstance, applePayInstance}: {hostedField
 
 				appleSession.begin();
 			});
-
-			console.log('apple pay button', document.querySelector('.apple-pay-button'));
 		}
 
 		// Ticket Flow with a precarious dependency on DOM order
