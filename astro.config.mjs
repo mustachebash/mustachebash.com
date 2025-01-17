@@ -25,14 +25,17 @@ export default defineConfig({
 			BRAINTREE_TOKEN: envField.string({context: 'client', access: 'public'})
 		}
 	},
+	vite: {
+		build: {
+			sourcemap: true
+		},
 	...(key && cert && {
-		vite: {
 			server: {
 				https: {
 					key,
 					cert
 				}
 			}
-		}
-	})
+		})
+	}
 });

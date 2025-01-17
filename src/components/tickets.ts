@@ -200,9 +200,6 @@ function purchaseFlowInit({hostedFieldsInstance, applePayInstance}: {hostedField
 		ticketsListHTML = [],
 		now = (new Date()).toISOString();
 
-	if(applePayInstance === null) console.error('applePayInstance is null', applePayInstance);
-	if(applePayInstance !== null) console.log('applePayInstance is:', applePayInstance);
-
 	if(!promo) {
 		for(const id of Object.values(events).flatMap(({meta}) => meta.ticketsOrder)) {
 			if(!products[id]) continue;
@@ -281,9 +278,12 @@ function purchaseFlowInit({hostedFieldsInstance, applePayInstance}: {hostedField
 
 		// Set up Apple Pay listeners
 		if(applePayInstance) {
+			(window as any).applePayInstance = applePayInstance;
+			console.log('Inside conditional setting click listeners');
 			// Show the Apple Pay button and acceptance mark
 			document.querySelector<HTMLDivElement>('.apple-pay')!.style.display = 'block';
 			document.querySelector<HTMLDivElement>('.apple-pay-button')!.addEventListener('click', () => {
+				console.log('Inside apple pay click listeners');
 				window.gtag('event', 'click', {
 					event_category: 'CTA',
 					event_label: 'Apple Pay'
@@ -407,6 +407,8 @@ function purchaseFlowInit({hostedFieldsInstance, applePayInstance}: {hostedField
 
 				appleSession.begin();
 			});
+
+			console.log('apple pay button', document.querySelector('.apple-pay-button'));
 		}
 
 		// Ticket Flow with a precarious dependency on DOM order
@@ -727,13 +729,7 @@ function braintreeInit() {
 			// Apple Pay
 			let applePaySupported = false;
 			try {
-				console.log('window.ApplePaySession', (window as any).ApplePaySession);
-				console.log('window.ApplePaySession.supportsVersion(3)', (window as any).ApplePaySession.supportsVersion(3));
-				console.log('window.ApplePaySession.canMakePayments()', (window as any).ApplePaySession.canMakePayments());
-
 				applePaySupported = (window as any).ApplePaySession && (window as any).ApplePaySession.supportsVersion(3) && (window as any).ApplePaySession.canMakePayments();
-
-				console.log('applePaySupported', applePaySupported);
 			} catch (e) {
 				console.error('Apple Pay Check Error', e);
 				// Not supported or errored on attempt to check
@@ -742,7 +738,6 @@ function braintreeInit() {
 			let applePayPromise: Promise<null | ApplePay> = Promise.resolve(null);
 			if(applePaySupported) {
 				applePayPromise = applePay.create({client: clientInstance}).catch(applePayErr => console.error('Error creating applePayInstance:', applePayErr)) as Promise<ApplePay>;
-				console.log('applePayPromise', applePayPromise);
 			}
 
 			return Promise.all([hostedFieldsPromise, applePayPromise]).then(([hostedFieldsInstance, applePayInstance]) => ({hostedFieldsInstance, applePayInstance}));
