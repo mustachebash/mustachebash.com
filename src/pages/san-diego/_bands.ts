@@ -18,7 +18,7 @@ import he2SheImg from './_img/bands/he2she.jpg';
 const bands: Band[] = [
 	{
 		name: 'Chromeo',
-		description: "Torchbearers of funk and disco, Montreal natives Dave 1 and P-Thugg turned an inseparable childhood friendship into a global funk phenomenon. Credited for pioneering a genre of electrofunk that permeates airwaves today, this dynamic duo takes fans back in time with analog synth sonics, catchy hooks and iconic visuals in every show. Years in the making, Chromeo will finally bring their signature sound the Bash mainstage! #BashGoals",
+		description: "Torchbearers of funk and disco, Montreal natives Dave 1 and P-Thugg turned an inseparable childhood friendship into a global funk phenomenon. Credited for pioneering a genre of electrofunk that permeates airwaves today, this dynamic duo takes fans back in time with analog synth sonics, catchy hooks and iconic visuals in every show. Years in the making, Chromeo will finally bring their signature sound to the Bash mainstage! #BashGoals",
 		img: chromeoImg,
 		links: {
 			spotify: 'https://open.spotify.com/artist/2mV8aJphiSHYJf43DxL7Gt',

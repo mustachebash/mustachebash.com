@@ -200,6 +200,9 @@ function purchaseFlowInit({hostedFieldsInstance, applePayInstance}: {hostedField
 		ticketsListHTML = [],
 		now = (new Date()).toISOString();
 
+	if(applePayInstance === null) console.error('applePayInstance is null', applePayInstance);
+	if(applePayInstance !== null) console.log('applePayInstance is:', applePayInstance);
+
 	if(!promo) {
 		for(const id of Object.values(events).flatMap(({meta}) => meta.ticketsOrder)) {
 			if(!products[id]) continue;
@@ -724,14 +727,22 @@ function braintreeInit() {
 			// Apple Pay
 			let applePaySupported = false;
 			try {
+				console.log('window.ApplePaySession', (window as any).ApplePaySession);
+				console.log('window.ApplePaySession.supportsVersion(3)', (window as any).ApplePaySession.supportsVersion(3));
+				console.log('window.ApplePaySession.canMakePayments()', (window as any).ApplePaySession.canMakePayments());
+
 				applePaySupported = (window as any).ApplePaySession && (window as any).ApplePaySession.supportsVersion(3) && (window as any).ApplePaySession.canMakePayments();
+
+				console.log('applePaySupported', applePaySupported);
 			} catch (e) {
+				console.error('Apple Pay Check Error', e);
 				// Not supported or errored on attempt to check
 			}
 
 			let applePayPromise: Promise<null | ApplePay> = Promise.resolve(null);
 			if(applePaySupported) {
 				applePayPromise = applePay.create({client: clientInstance}).catch(applePayErr => console.error('Error creating applePayInstance:', applePayErr)) as Promise<ApplePay>;
+				console.log('applePayPromise', applePayPromise);
 			}
 
 			return Promise.all([hostedFieldsPromise, applePayPromise]).then(([hostedFieldsInstance, applePayInstance]) => ({hostedFieldsInstance, applePayInstance}));
