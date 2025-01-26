@@ -145,51 +145,45 @@ function completePurchase(nonce: string) {
 				tick!.classList.add('complete');
 			});
 
-			if(typeof window.gtag === 'function') {
-				try {
-					const total = cart.reduce((tot, cur) => tot + (cur.quantity * products[cur.productId].price), 0),
-						transactionId = headers?.get('Location')?.split('/').pop(),
-						eventData = {
-							transaction_id: transactionId,
-							value: total,
-							currency: 'USD',
-							checkout_step: 5,
-							items: cart.map(i => ({
-								id: i.productId,
-								quantity: i.quantity,
-								name: products[i.productId].name,
-								category: 'Tickets',
-								price: String(products[i.productId].price)
-							}))
-						};
+			const total = cart.reduce((tot, cur) => tot + (cur.quantity * products[cur.productId].price), 0),
+				transactionId = headers?.get('Location')?.split('/').pop();
+			try {
+				window.gtag?.('event', 'purchase', {
+					currency: 'USD',
+					value: total,
+					transaction_id: transactionId,
+					items: cart.map(i => ({
+						item_id: i.productId,
+						item_name: products[i.productId].name,
+						item_category: 'Tickets',
+						item_variant: products[i.productId].admissionTier,
+						price: String(products[i.productId].price),
+						quantity: i.quantity
+					}))
+				});
 
-					window.gtag('event', 'purchase', eventData);
-
-					window.gtag('event', 'conversion', {
-						...eventData,
-						send_to: 'AW-704569520/g7y6CKfiiboBELDB-88C'
-					});
-				} catch(e) {
-					// Don't let gtag break the site
-				}
+				window.gtag?.('event', 'conversion', {
+					send_to: 'AW-704569520/g7y6CKfiiboBELDB-88C',
+					currency: 'USD',
+					value: total,
+					transaction_id: transactionId
+				});
+			} catch(e) {
+				// Don't let gtag break the site
 			}
 
-			if(typeof window.fbq === 'function') {
-				try {
-					const total = cart.reduce((tot, cur) => tot + (cur.quantity * products[cur.productId].price), 0);
-
-					window.fbq('track', 'Purchase', {
-						value: total,
-						currency: 'USD',
-						contents: cart.map(i => ({
-							id: i.productId,
-							quantity: i.quantity,
-							item_price: Number(products[i.productId].price)
-						}))
-					});
-				} catch(e) {
-					// Don't let FB break the site
-				}
+			try {
+				window.fbq('track', 'Purchase', {
+					currency: 'USD',
+					value: total,
+					contents: cart.map(i => ({
+						id: i.productId,
+						quantity: i.quantity,
+						item_price: Number(products[i.productId].price)
+					}))
+				});
+			} catch(e) {
+				// Don't let FB break the site
 			}
 		});
 }
@@ -225,8 +219,8 @@ function purchaseFlowInit({hostedFieldsInstance, applePayInstance}: {hostedField
 						<div class="ticket-name"><span>${name}</span></div>
 						<div class="select-wrap">
 							<select name="${id}-quantity">
-								<option ${/(after|pre)party/i.test(events[eventId].name) || isVip ? 'selected' : ''} value="0">0</option>
-								<option ${!/(after|pre)party/i.test(events[eventId].name) && !isVip ? 'selected' : ''} value="1">1</option>
+								<option selected value="0">0</option>
+								<option value="1">1</option>
 								<option value="2">2</option>
 								<option value="3">3</option>
 								<option value="4">4</option>
@@ -261,7 +255,44 @@ function purchaseFlowInit({hostedFieldsInstance, applePayInstance}: {hostedField
 			updateCartQuantities();
 
 			// Bind the quantity listener
-			quantityControls.addEventListener('change', () => {
+			quantityControls.addEventListener('change', (e) => {
+				try {
+					const el = e.target as HTMLSelectElement;
+					const newQty = Number(el.value);
+					const productId = el.name.replace('-quantity', '');
+					const prevQty = cart.find(i => i.productId === productId)?.quantity || 0;
+					const qtyDiff = newQty - prevQty;
+					if(qtyDiff > 0) {
+						window.gtag?.('event', 'add_to_cart', {
+							currency: 'USD',
+							value: products[productId].price * qtyDiff,
+							items: [{
+								item_id: productId,
+								item_name: products[productId].name,
+								item_category: 'Tickets',
+								item_variant: products[productId].admissionTier,
+								price: products[productId].price,
+								quantity: qtyDiff
+							}]
+						});
+					} else if(qtyDiff < 0) {
+						window.gtag?.('event', 'remove_from_cart', {
+							currency: 'USD',
+							value: Math.abs(products[productId].price * qtyDiff),
+							items: [{
+								item_id: productId,
+								item_name: products[productId].name,
+								item_category: 'Tickets',
+								item_variant: products[productId].admissionTier,
+								price: products[productId].price,
+								quantity: qtyDiff
+							}]
+						});
+					}
+				} catch(e) {
+					// Don't let gtag break the site
+				}
+
 				updateCartQuantities();
 			});
 		} else {
@@ -281,7 +312,7 @@ function purchaseFlowInit({hostedFieldsInstance, applePayInstance}: {hostedField
 			// Show the Apple Pay button and acceptance mark
 			document.querySelector<HTMLDivElement>('.apple-pay')!.style.display = 'block';
 			document.querySelector<HTMLDivElement>('.apple-pay-button')!.addEventListener('click', () => {
-				window.gtag('event', 'click', {
+				window.gtag?.('event', 'click', {
 					event_category: 'CTA',
 					event_label: 'Apple Pay'
 				});
@@ -296,21 +327,21 @@ function purchaseFlowInit({hostedFieldsInstance, applePayInstance}: {hostedField
 				});
 
 				// This is kinda funky, but people are basically getting to the "review" step here
-				if(typeof window.gtag === 'function' && !promo) {
-					try {
-						window.gtag('event', 'checkout_progress', {
-							checkout_step: 3,
-							items: cart.map(i => ({
-								id: i.productId,
-								quantity: i.quantity,
-								name: products[i.productId].name,
-								category: 'Tickets',
-								price: String(products[i.productId].price)
-							}))
-						});
-					} catch(e) {
-						// Don't let gtag break the site
-					}
+				try {
+					window.gtag?.('event', 'view_cart', {
+						currency: 'USD',
+						value: cart.reduce((tot, cur) => tot + (cur.quantity * products[cur.productId].price), 0),
+						items: cart.map(i => ({
+							item_id: i.productId,
+							item_name: products[i.productId].name,
+							item_category: 'Tickets',
+							item_variant: products[i.productId].admissionTier,
+							price: String(products[i.productId].price),
+							quantity: i.quantity
+						}))
+					});
+				} catch(e) {
+					// Don't let gtag break the site
 				}
 
 				const paymentRequest = applePayInstance.createPaymentRequest({
@@ -361,21 +392,22 @@ function purchaseFlowInit({hostedFieldsInstance, applePayInstance}: {hostedField
 						.then(payload => {
 							console.log(JSON.stringify(event.payment));
 
-							if(typeof window.gtag === 'function' && !promo) {
-								try {
-									window.gtag('event', 'checkout_progress', {
-										checkout_step: 4,
-										items: cart.map(i => ({
-											id: i.productId,
-											quantity: i.quantity,
-											name: products[i.productId].name,
-											category: 'Tickets',
-											price: String(products[i.productId].price)
-										}))
-									});
-								} catch(e) {
-									// Don't let gtag break the site
-								}
+							try {
+								window.gtag?.('event', 'add_payment_info', {
+									currency: 'USD',
+									value: cart.reduce((tot, cur) => tot + (cur.quantity * products[cur.productId].price), 0),
+									payment_type: 'Credit Card',
+									items: cart.map(i => ({
+										item_id: i.productId,
+										item_name: products[i.productId].name,
+										item_category: 'Tickets',
+										item_variant: products[i.productId].admissionTier,
+										price: String(products[i.productId].price),
+										quantity: i.quantity
+									}))
+								});
+							} catch(e) {
+								// Don't let gtag break the site
 							}
 
 							// After you have transacted with the payload.nonce,
@@ -424,21 +456,21 @@ function purchaseFlowInit({hostedFieldsInstance, applePayInstance}: {hostedField
 					document.querySelectorAll<HTMLDivElement>('.leg')[0]!.classList.add('active');
 				});
 
-				if(typeof window.gtag === 'function') {
-					try {
-						window.gtag('event', 'begin_checkout', {
-							checkout_step: 1,
-							items: cart.map(i => ({
-								id: i.productId,
-								quantity: i.quantity,
-								name: products[i.productId].name,
-								category: 'Tickets',
-								price: String(products[i.productId].price)
-							}))
-						});
-					} catch(e) {
-						// Don't let gtag break the site
-					}
+				try {
+					window.gtag?.('event', 'begin_checkout', {
+						currency: 'USD',
+						value: cart.reduce((tot, cur) => tot + (cur.quantity * products[cur.productId].price), 0),
+						items: cart.map(i => ({
+							item_id: i.productId,
+							item_name: products[i.productId].name,
+							item_category: 'Tickets',
+							item_variant: products[i.productId].admissionTier,
+							price: String(products[i.productId].price),
+							quantity: i.quantity
+						}))
+					});
+				} catch(e) {
+					// Don't let gtag break the site
 				}
 			}
 		});
@@ -525,22 +557,7 @@ function purchaseFlowInit({hostedFieldsInstance, applePayInstance}: {hostedField
 				document.querySelectorAll<HTMLDivElement>('.leg')[1]!.classList.add('active');
 			});
 
-			if(typeof window.gtag === 'function' && !promo) {
-				try {
-					window.gtag('event', 'checkout_progress', {
-						checkout_step: 2,
-						items: cart.map(i => ({
-							id: i.productId,
-							quantity: i.quantity,
-							name: products[i.productId].name,
-							category: 'Tickets',
-							price: String(products[i.productId].price)
-						}))
-					});
-				} catch(e) {
-					// Don't let gtag break the site
-				}
-			}
+			// TODO: this should be 'generate_lead' in GA4, but we should also submit the contact info to Mailchimp for retargeting if they don't complete checkout
 		}
 	});
 
@@ -559,6 +576,24 @@ function purchaseFlowInit({hostedFieldsInstance, applePayInstance}: {hostedField
 				document.querySelectorAll<HTMLDivElement>('.step')[2]!.classList.remove('active');
 				document.querySelectorAll<HTMLDivElement>('.step')[3]!.classList.add('active');
 
+				// Even though this fires effectively when the user submits payment option, it's in line with the user immediately being shown the cart subtotals
+				try {
+					window.gtag?.('event', 'view_cart', {
+						currency: 'USD',
+						value: cart.reduce((tot, cur) => tot + (cur.quantity * products[cur.productId].price), 0),
+						items: cart.map(i => ({
+							item_id: i.productId,
+							item_name: products[i.productId].name,
+							item_category: 'Tickets',
+							item_variant: products[i.productId].admissionTier,
+							price: String(products[i.productId].price),
+							quantity: i.quantity
+						}))
+					});
+				} catch(e) {
+					// Don't let gtag break the site
+				}
+
 				const ticks = document.querySelectorAll<HTMLDivElement>('.ticks > div');
 				ticks[2]!.classList.remove('active');
 				ticks[2]!.classList.add('complete');
@@ -566,21 +601,22 @@ function purchaseFlowInit({hostedFieldsInstance, applePayInstance}: {hostedField
 				document.querySelectorAll<HTMLDivElement>('.leg')[2]!.classList.add('active');
 			});
 
-			if(typeof window.gtag === 'function' && !promo) {
-				try {
-					window.gtag('event', 'checkout_progress', {
-						checkout_step: 3,
-						items: cart.map(i => ({
-							id: i.productId,
-							quantity: i.quantity,
-							name: products[i.productId].name,
-							category: 'Tickets',
-							price: String(products[i.productId].price)
-						}))
-					});
-				} catch(e) {
-					// Don't let gtag break the site
-				}
+			try {
+				window.gtag?.('event', 'add_payment_info', {
+					currency: 'USD',
+					value: cart.reduce((tot, cur) => tot + (cur.quantity * products[cur.productId].price), 0),
+					payment_type: 'Credit Card',
+					items: cart.map(i => ({
+						item_id: i.productId,
+						item_name: products[i.productId].name,
+						item_category: 'Tickets',
+						item_variant: products[i.productId].admissionTier,
+						price: String(products[i.productId].price),
+						quantity: i.quantity
+					}))
+				});
+			} catch(e) {
+				// Don't let gtag break the site
 			}
 		}
 	});
@@ -628,21 +664,10 @@ function purchaseFlowInit({hostedFieldsInstance, applePayInstance}: {hostedField
 		document.querySelector<HTMLButtonElement>('#confirm-order')!.disabled = true;
 		document.querySelector<HTMLAnchorElement>('#back-to-payment')!.style.display = 'none';
 
-		if(typeof window.gtag === 'function' && !promo) {
-			try {
-				window.gtag('event', 'checkout_progress', {
-					checkout_step: 4,
-					items: cart.map(i => ({
-						id: i.productId,
-						quantity: i.quantity,
-						name: products[i.productId].name,
-						category: 'Tickets',
-						price: String(products[i.productId].price)
-					}))
-				});
-			} catch(e) {
-				// Don't let gtag break the site
-			}
+		try {
+			window.gtag?.('event', 'confirm_cart');
+		} catch(e) {
+			// Don't let gtag break the site
 		}
 
 		hostedFieldsInstance.tokenize({cardholderName: `${customer.firstName} ${customer.lastName}`})
