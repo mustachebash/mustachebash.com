@@ -2,6 +2,7 @@
 import 'swiper/css';
 import Layout from '@/layouts/Layout.astro';
 import opengraphImg from './_img/opengraph-image.jpg';
+import Main from './_components/Main.tsx';
 ---
 
 <Layout
@@ -11,7 +12,7 @@ import opengraphImg from './_img/opengraph-image.jpg';
 	openGraphDescription="Do not share this link with anyone."
 	robots="noindex, nofollow"
 >
-	<main></main>
+	<Main client:only='react' />
 </Layout>
 
 <style is:global>
@@ -222,6 +223,3 @@ import opengraphImg from './_img/opengraph-image.jpg';
 		text-align: right;
 	}
 </style>
-<script>
-	import './_index.ts';
-</script>
