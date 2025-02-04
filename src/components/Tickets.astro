@@ -3,6 +3,13 @@ import PageContainer from '@/components/PageContainer.astro';
 import ResponsiveImage from '@/components/ResponsiveImage.astro';
 
 import ticketImg from './img/ticket.jpg';
+
+interface Props {
+	eventIds: string[];
+}
+
+const { eventIds } = Astro.props;
+console.log(eventIds);
 ---
 
 <section id="tickets">
@@ -32,6 +39,7 @@ import ticketImg from './img/ticket.jpg';
 							<div><span>Review</span></div>
 						</div>
 					</div>
+					<div id="promo-details"></div>
 					<div class="steps">
 						<div class="step active">
 							<div class="quantity-selector">
@@ -216,6 +224,18 @@ import ticketImg from './img/ticket.jpg';
 	#tickets .tickets-description h6.disabled sup {
 	  display: none;
 	}
+	#tickets .tickets-description h6.promo {
+/*	  color: #f3e339;*/
+	}
+	#tickets .tickets-description h6.promo:after {
+	  content: '*';
+	  display: inline-block;
+	  position: absolute;
+	  color: #f3e339;
+	  margin: 0;
+	  font-size: 3rem;
+	  top: -.5em;
+	}
 	#tickets .tickets-description h6.sold-out {
 	  text-decoration: line-through;
 	}
@@ -248,6 +268,11 @@ import ticketImg from './img/ticket.jpg';
 	}
 	#tickets .ticket-image {
 	  flex: 2 0;
+	}
+	#tickets #promo-details h5 {
+		text-align: center;
+/*		color: #f3e339;*/
+		background: #f3e339;
 	}
 	#tickets .tickets-flow {
 	  padding-left: 7.5em;

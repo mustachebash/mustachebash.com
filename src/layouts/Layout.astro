@@ -532,7 +532,7 @@ const ogImageURL = openGraphImage ? new URL(openGraphImage.src, Astro.site).href
 	// Animate Nav links - quick n dirty vanilla style
 	// TODO: Make this less janky
 	let scrollAnimationReqId: number;
-	document.querySelectorAll('nav').forEach(el => el.addEventListener('click', e => {
+	document.querySelectorAll('nav, .tickets-nav-mobile').forEach(el => el.addEventListener('click', e => {
 		if(!(e.target instanceof HTMLAnchorElement)) return;
 
 		if(e.target.hash && e.target.pathname === location.pathname) {

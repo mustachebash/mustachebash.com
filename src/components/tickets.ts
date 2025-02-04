@@ -194,7 +194,46 @@ function purchaseFlowInit({hostedFieldsInstance, applePayInstance}: {hostedField
 		ticketsListHTML = [],
 		now = (new Date()).toISOString();
 
-	if(!promo) {
+	if(promo?.type === 'single-use') {
+		cart.push({
+			productId: promo.product.id,
+			quantity: promo.productQuantity
+		});
+
+		const steps = document.querySelector<HTMLDivElement>('.steps') as HTMLDivElement,
+			promoInfo = document.createElement('h5');
+
+		promoInfo.innerHTML = `Promo Ticket: ${promo.product.name} - $${promo.price}/ea (${promo.productQuantity} qty)`;
+
+		steps.parentNode!.insertBefore(promoInfo, steps);
+
+		const subtotal = promo.price * promo.productQuantity,
+			orderSummaryList = document.querySelector<HTMLDListElement>('.order-summary dl') as HTMLDListElement;
+
+		document.querySelector<HTMLSpanElement>('#grand-total span')!.innerText = String(subtotal);
+
+		orderSummaryList.innerHTML = `
+			<dt>${promo.product.name} (<span class="quantity">${promo.productQuantity}</span>)</dt>
+			<dd>$<span class="subtotal">${subtotal}</span></dd>
+		`;
+
+		window.requestAnimationFrame(() => {
+			document.querySelectorAll<HTMLDivElement>('.step')[0]!.classList.remove('active');
+			document.querySelectorAll<HTMLDivElement>('.step')[1]!.classList.add('active');
+
+			const ticks = document.querySelectorAll<HTMLDivElement>('.ticks > div');
+			ticks[0]!.classList.remove('active');
+			ticks[0]!.classList.add('complete');
+			ticks[1]!.classList.add('active');
+			document.querySelectorAll<HTMLDivElement>('.leg')[0]!.classList.add('active');
+		});
+	} else {
+		if(promo && products[promo.productId]?.status === 'active') {
+			document.querySelector('#promo-details')!.innerHTML = `<h5>$${promo.flatDiscount} off ${products[promo.productId].name} applied (limit 1)</h5>`;
+			// Very janky hack, just overwrite the price on the product
+			products[promo.productId].price = products[promo.productId].price - promo.flatDiscount;
+		}
+
 		for(const id of Object.values(events).flatMap(({meta}) => meta.ticketsOrder)) {
 			if(!products[id]) continue;
 			const { name, price, status, eventId, admissionTier } = products[id],
@@ -209,6 +248,7 @@ function purchaseFlowInit({hostedFieldsInstance, applePayInstance}: {hostedField
 			) classes.push('disabled');
 
 			if(status === 'archived') classes.push('sold-out');
+			if(promo && promo.productId === id) classes.push('promo');
 
 			ticketsListHTML.push(`<h6 class="${classes.join(' ')}" data-product-id="${id}">${name} - $${price}</h6>`);
 
@@ -221,9 +261,11 @@ function purchaseFlowInit({hostedFieldsInstance, applePayInstance}: {hostedField
 							<select name="${id}-quantity">
 								<option selected value="0">0</option>
 								<option value="1">1</option>
-								<option value="2">2</option>
-								<option value="3">3</option>
-								<option value="4">4</option>
+								${!promo || promo.productId !== id
+								? `<option value="2">2</option>
+									<option value="3">3</option>
+									<option value="4">4</option>`
+								: ''}
 							</select>
 						</div>
 					</div>
@@ -473,39 +515,6 @@ function purchaseFlowInit({hostedFieldsInstance, applePayInstance}: {hostedField
 					// Don't let gtag break the site
 				}
 			}
-		});
-	} else if(promo.type === 'single-use') {
-		cart.push({
-			productId: promo.product.id,
-			quantity: promo.productQuantity
-		});
-
-		const steps = document.querySelector<HTMLDivElement>('.steps') as HTMLDivElement,
-			promoInfo = document.createElement('h5');
-
-		promoInfo.innerHTML = `Promo Ticket: ${promo.product.name} - $${promo.price}/ea (${promo.productQuantity} qty)`;
-
-		steps.parentNode!.insertBefore(promoInfo, steps);
-
-		const subtotal = promo.price * promo.productQuantity,
-			orderSummaryList = document.querySelector<HTMLDListElement>('.order-summary dl') as HTMLDListElement;
-
-		document.querySelector<HTMLSpanElement>('#grand-total span')!.innerText = String(subtotal);
-
-		orderSummaryList.innerHTML = `
-			<dt>${promo.product.name} (<span class="quantity">${promo.productQuantity}</span>)</dt>
-			<dd>$<span class="subtotal">${subtotal}</span></dd>
-		`;
-
-		window.requestAnimationFrame(() => {
-			document.querySelectorAll<HTMLDivElement>('.step')[0]!.classList.remove('active');
-			document.querySelectorAll<HTMLDivElement>('.step')[1]!.classList.add('active');
-
-			const ticks = document.querySelectorAll<HTMLDivElement>('.ticks > div');
-			ticks[0]!.classList.remove('active');
-			ticks[0]!.classList.add('complete');
-			ticks[1]!.classList.add('active');
-			document.querySelectorAll<HTMLDivElement>('.leg')[0]!.classList.add('active');
 		});
 	}
 

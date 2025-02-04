@@ -143,7 +143,7 @@ const Main = () => {
 												</div>
 												<div className="ticket-tier">
 													<h5>{admissionTier === 'vip'
-															? 'VIP &#128378;'
+															? <span>VIP &#128378;</span>
 															: window.innerWidth > 420
 																? 'General Admission'
 																: 'GA'
