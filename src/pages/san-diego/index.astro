@@ -21,6 +21,10 @@ import venueImg from './_img/venue.jpg';
 import prepartyImg from './_img/preparty.jpg';
 import afterpartyImg from './_img/afterparty.jpg';
 import vipImg from './_img/vip.jpg';
+import hotelsImg from './_img/hotels.jpg';
+import bahiaImg from './_img/bahia.png';
+import hyattImg from './_img/hyatt.png';
+import danaImg from './_img/dana.png';
 
 import galleryCoverImg from './_img/gallery-cover-desktop.jpg';
 import galleryCoverImgMobile from './_img/gallery-cover-mobile.jpg';
@@ -253,6 +257,33 @@ import ResponsiveImage from '@/components/ResponsiveImage.astro';
 					<a class="ghost-button" href="#tickets">Get Tickets</a>
 				</div>
 				<div class="vip-image"><ResponsiveImage src={vipImg} alt="VIP Tickets"></div>
+			</div>
+		</PageContainer>
+	</section>
+
+	<section id="hotels">
+		<PageContainer>
+			<div class="flex-row">
+				<div class="hotels-description">
+					<h3>Get a Room</h3>
+					<h4>Discounted Hotels Steps from the Bash</h4>
+					<p>
+						...no seriously. The Bash is an all-weekend affair, and with the new beachfront location, even locals won't wanna stray far. To keep everyone comfortable for the weekend, we partnered with Mission Beach's top hotels to offer discounted rooms exclusively for Bashers. Book using the links below:
+					</p>
+					<div class="links-flex">
+						<div><a class="ghost-button" target="_blank" href="https://be.synxis.com/?Hotel=64070&Chain=17551&arrive=2025-03-20&adult=1&promo=STACHE">Book the Bahia</a></div>
+						<div><img src={bahiaImg.src} alt="Bahia"/></div>
+					</div>
+					<div class="links-flex">
+						<div><a class="ghost-button" target="_blank" href="https://res.windsurfercrs.com/ibe/details.aspx?propertyid=17116&nights=2&checkin=03/21/2025&group=MUSTACHEBASH25&lang=en-us&adults=2">Book the Dana</a></div>
+						<div><img src={danaImg.src} alt="Dana"/></div>
+					</div>
+					<div class="links-flex">
+						<div><a class="ghost-button" target="_blank" href="https://www.hyatt.com/en-US/group-booking/SANIS/G-MUST">Book the Hyatt</a></div>
+						<div><img src={hyattImg.src} alt="Hyatt"/></div>
+					</div>
+				</div>
+				<div class="hotels-image"><ResponsiveImage src={hotelsImg} alt="Hotels"></div>
 			</div>
 		</PageContainer>
 	</section>
@@ -815,6 +846,88 @@ import ResponsiveImage from '@/components/ResponsiveImage.astro';
 	    order: 2;
 	  }
 	  #vip .vip-image img {
+	    height: auto;
+	    max-width: 100%;
+	  }
+	}
+	#hotels {
+	  background: #e1e5e8;
+	  padding: 5.5em 0 3.75em;
+	  overflow: hidden;
+	}
+	#hotels .hotels-description {
+	  flex: 3 1;
+	}
+	#hotels .hotels-description .links-flex {
+	  display: flex;
+	  justify-content: space-between;
+	}
+	#hotels .hotels-description .links-flex > div {
+		flex: 1 1 50%;
+		margin-bottom: 1em;
+	}
+	#hotels .hotels-description .links-flex img {
+		max-width: 120px;
+		display: block;
+		margin: 0 auto;
+	}
+	@media (min-width: 770px) {
+	  #hotels .hotels-description {
+	    margin-right: 7em;
+	  }
+	}
+	#hotels .hotels-description h3 {
+	  color: #000000;
+	  margin-top: 0;
+	  margin-bottom: 0;
+	  line-height: 1em;
+	}
+	#hotels .hotels-description h4 {
+	  color: #000000;
+	  margin-top: 0;
+	}
+	#hotels .hotels-description p {
+	  color: #000000;
+	  font-size: 1em;
+	  margin-bottom: 1em;
+	}
+	#hotels .hotels-description .ghost-button {
+	  width: 14.5em;
+	  color: #000000;
+	  border-color: #000000;
+	  border-radius: 400px;
+	}
+	#hotels .hotels-description .ghost-button:hover {
+	  background: transparent;
+	  color: #000000;
+	  box-shadow: inset 0 0 12px -1px #dfe3e6;
+	}
+	#hotels .hotels-image {
+	  flex: 4 1;
+	  margin: 0 -2em;
+	}
+	@media (min-width: 770px) {
+	  #hotels .hotels-image {
+	    margin: -6.25em -2em -6.25em;
+	  }
+	}
+	@media (max-width: 600px) {
+	  #hotels .hotels-description .ghost-button {
+	    max-width: 14.5em;
+	    width: auto;
+	  }
+
+	  #hotels {
+	    padding: 0;
+	  }
+	  #hotels .hotels-description {
+	    order: 1;
+	    padding: 2em 0 0;
+	  }
+	  #hotels .hotels-image {
+	    order: 2;
+	  }
+	  #hotels .hotels-image img {
 	    height: auto;
 	    max-width: 100%;
 	  }
