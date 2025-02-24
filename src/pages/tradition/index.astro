@@ -444,19 +444,61 @@ import bash15Img from './_img/bash-15.jpg';
 
 	.roots-tagline {
 		margin-top: 0;
+		margin-bottom: 2em;
+	}
+
+	.roots-tagline:after {
+		content: '';
+		display: block;
+		height: 4em;
+		top: 2em;
+		background: linear-gradient(to bottom, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0) 100%);
+		margin-bottom: -4em;
+		position: relative;
+		z-index: 300;
 	}
 
 	.event {
 		display: flex;
 	}
 
+	.event:first-child .year,
+	.event:first-child .info {
+		padding-top: 8rem;
+	}
+
 	.year {
+		position: relative;
 		flex: 1 1 50%;
 		border-right: 2px solid #000;
 	}
 
+	.year:after {
+		content: '';
+		display: block;
+		position: absolute;
+		right: -16px;
+		top: 1em;
+		width: 30px;
+		height: 30px;
+		background-image: url('./_img/bullet.png');
+		background-size: cover;
+	}
+
+	.event:first-child .year:after {
+		top: 9rem;
+	}
+
+	@media (max-width: 600px) {
+		.year:after {
+			width: 15px;
+			height: 15px;
+			right: -9px;
+		}
+	}
+
 	.info {
-		flex: 1 1 50%;
+		flex: 1 3 50%;
 		border-left: 2px solid #000;
 		padding-left: 6em;
 		padding-right: 1em;
