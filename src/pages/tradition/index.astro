@@ -1,20 +1,42 @@
 ---
 import Layout from '@/layouts/Layout.astro';
 
+import { Picture } from 'astro:assets';
+
 import PageContainer from '@/components/PageContainer.astro';
 import NewsletterSignup from '@/components/NewsletterSignup.astro';
+import ResponsiveImage from '@/components/ResponsiveImage.astro';
 
 import opengraphImg from './_img/opengraph-image.jpg';
 
 import heroImg from './_img/hero.jpg';
 import heroImgMobile from './_img/hero-mobile.jpg';
+import introImg from './_img/intro.jpg';
+import polaroidsImg from './_img/polaroids.jpg';
+import artistsStickerImg from './_img/artists-sticker.jpg';
+
+import bash1Img from './_img/bash-1.jpg';
+import bash2Img from './_img/bash-2.jpg';
+import bash3Img from './_img/bash-3.jpg';
+import bash4Img from './_img/bash-4.jpg';
+import bash5Img from './_img/bash-5.jpg';
+import bash6Img from './_img/bash-6.jpg';
+import bash7Img from './_img/bash-7.jpg';
+import bash8Img from './_img/bash-8.jpg';
+import bash9Img from './_img/bash-9.jpg';
+import bash10Img from './_img/bash-10.jpg';
+import bash11Img from './_img/bash-11.jpg';
+import bash12Img from './_img/bash-12.jpg';
+import bash13Img from './_img/bash-13.jpg';
+import bash14Img from './_img/bash-14.jpg';
+import bash15Img from './_img/bash-15.jpg';
 ---
 
 <Layout
-	title="Mustache Bash Info"
+	title="Mustache Bash Tradition"
 	openGraphImage={opengraphImg}
-	openGraphTitle="Mustache Bash Info"
-	openGraphDescription="A party, a reunion, an excuse to take pride in the dirty fuzz you fertilize above your upper lip. Whatever you call it, let it be known: The Mustache Bash is calling."
+	openGraphTitle="Mustache Bash Tradition"
+	openGraphDescription="From humble beginnings as an SDSU house party to a celebration of free spirit loved across the land, Stache Bash has been funkin' up the system since 2008."
 >
 	<section id="hero">
 		<PageContainer>
@@ -22,23 +44,274 @@ import heroImgMobile from './_img/hero-mobile.jpg';
 				<picture>
 					<source media="(min-width: 680px)" srcset={heroImg.src}>
 					<source srcset={heroImgMobile.src}>
-					<img src={heroImg.src} alt="Mustache Bash FAQs">
+					<img src={heroImg.src} alt="Mustache Bash Tradition">
 				</picture>
 			</div>
 		</PageContainer>
 	</section>
 
+	<section id="tagline">
+		<PageContainer>
+			<h3>From humble beginnings as an SDSU house party to a celebration of free spirit loved across the land, Stache Bash has been funkin’ up the system since 2008.</h3>
+		</PageContainer>
+	</section>
+
 	<section id="intro">
 		<PageContainer>
-			<div class="intro-text">
-				<h4>Questions? This info Guide should help you out.</h4>
-				<p>
-					Please check the website and FAQ before contacting The Mustache Bash. By doing so you can help limit the amount of mails in the mailbox and raise the reply time for questions which cannot be found on the website.
-				</p>
+			<div class="flex-row">
+				<div class="intro-image">
+					<ResponsiveImage src={introImg} alt="Funky Tradition" />
+				</div>
+
+				<div class="intro-text">
+					<h4>‘70s to the Nines: Dress yo’self to express yo’self.</h4>
+					<p>
+						We don’t just celebrate ‘70s at the Bash—we live it—and that means dressing the part. Stepping into the Bash is like stepping back in time—a place where your game is only as good as your getup. Fellas, that means packing heat above your upper lip. Gals, go for show-stopping ‘70s sex appeal. Whether you’re partial to bellbottoms, afros, goldfish platforms or birthday suits—however you decide to express yourself—GO MASSIVE. It’s a time to Bash, not be bashful. Be the star of the show and shine on, you crazy diamonds.
+					</p>
+				</div>
 			</div>
 		</PageContainer>
 	</section>
 
+	<section id="polaroids">
+		<div class="photo-wrapper">
+			<Picture layout="full-width" src={polaroidsImg} alt="Gallery"/>
+		</div>
+	</section>
+
+	<section id="roots">
+		<PageContainer>
+			<h3 class="roots-headline">Fabled Roots</h3>
+			<h4 class="roots-tagline">The History of The Mustache Bash</h4>
+			<div class="timeline">
+				<div class="event">
+					<div class="year">
+						<h3>2008</h3>
+						<h4>Countryside</h4>
+					</div>
+					<div class="info">
+						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum et dictum tortor. Pellentesque vestibulum, dolor eget eleifend ullamcorper, mi elit sagittis nisi, sed rutrum ante lectus in mauris. Suspendisse potenti. Ut molestie id metus eget ullamcorper. Vestibulum ipsum elit, sagittis eu gravida eget, pharetra nec ante. In libero massa, consequat nec pulvinar eget, lobortis in sapien.</p>
+						<img src={bash1Img.src} alt="2008 Bash"/>
+					</div>
+				</div>
+				<div class="event">
+					<div class="year">
+						<h3>2009</h3>
+						<h4>La Dorna</h4>
+					</div>
+					<div class="info">
+						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum et dictum tortor. Pellentesque vestibulum, dolor eget eleifend ullamcorper, mi elit sagittis nisi, sed rutrum ante lectus in mauris. Suspendisse potenti. Ut molestie id metus eget ullamcorper. Vestibulum ipsum elit, sagittis eu gravida eget, pharetra nec ante. In libero massa, consequat nec pulvinar eget, lobortis in sapien.</p>
+						<img src={bash2Img.src} alt="2009 Bash"/>
+					</div>
+				</div>
+				<div class="event">
+					<div class="year">
+						<h3>2010</h3>
+						<h4>Gresham House</h4>
+					</div>
+					<div class="info">
+						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum et dictum tortor. Pellentesque vestibulum, dolor eget eleifend ullamcorper, mi elit sagittis nisi, sed rutrum ante lectus in mauris. Suspendisse potenti. Ut molestie id metus eget ullamcorper. Vestibulum ipsum elit, sagittis eu gravida eget, pharetra nec ante. In libero massa, consequat nec pulvinar eget, lobortis in sapien.</p>
+						<img src={bash3Img.src} alt="2010 Bash"/>
+					</div>
+				</div>
+				<div class="event">
+					<div class="year">
+						<h3>2011</h3>
+						<h4>Soledad Club</h4>
+					</div>
+					<div class="info">
+						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum et dictum tortor. Pellentesque vestibulum, dolor eget eleifend ullamcorper, mi elit sagittis nisi, sed rutrum ante lectus in mauris. Suspendisse potenti. Ut molestie id metus eget ullamcorper. Vestibulum ipsum elit, sagittis eu gravida eget, pharetra nec ante. In libero massa, consequat nec pulvinar eget, lobortis in sapien.</p>
+						<img src={bash4Img.src} alt="2011 Bash"/>
+					</div>
+				</div>
+				<div class="event">
+					<div class="year">
+						<h3>2012</h3>
+						<h4>Marina Village</h4>
+					</div>
+					<div class="info">
+						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum et dictum tortor. Pellentesque vestibulum, dolor eget eleifend ullamcorper, mi elit sagittis nisi, sed rutrum ante lectus in mauris. Suspendisse potenti. Ut molestie id metus eget ullamcorper. Vestibulum ipsum elit, sagittis eu gravida eget, pharetra nec ante. In libero massa, consequat nec pulvinar eget, lobortis in sapien.</p>
+						<img src={bash5Img.src} alt="2012 Bash"/>
+					</div>
+				</div>
+				<div class="event">
+					<div class="year">
+						<h3>2013</h3>
+						<h4>SD Rowing Club</h4>
+					</div>
+					<div class="info">
+						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum et dictum tortor. Pellentesque vestibulum, dolor eget eleifend ullamcorper, mi elit sagittis nisi, sed rutrum ante lectus in mauris. Suspendisse potenti. Ut molestie id metus eget ullamcorper. Vestibulum ipsum elit, sagittis eu gravida eget, pharetra nec ante. In libero massa, consequat nec pulvinar eget, lobortis in sapien.</p>
+						<img src={bash6Img.src} alt="2013 Bash"/>
+					</div>
+				</div>
+				<div class="event">
+					<div class="year">
+						<h3>2014</h3>
+						<h4>Horton Grand Hotel</h4>
+					</div>
+					<div class="info">
+						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum et dictum tortor. Pellentesque vestibulum, dolor eget eleifend ullamcorper, mi elit sagittis nisi, sed rutrum ante lectus in mauris. Suspendisse potenti. Ut molestie id metus eget ullamcorper. Vestibulum ipsum elit, sagittis eu gravida eget, pharetra nec ante. In libero massa, consequat nec pulvinar eget, lobortis in sapien.</p>
+						<img src={bash7Img.src} alt="20014 Bash"/>
+					</div>
+				</div>
+				<div class="event">
+					<div class="year">
+						<h3>2015</h3>
+						<h4>Broadway Pier</h4>
+					</div>
+					<div class="info">
+						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum et dictum tortor. Pellentesque vestibulum, dolor eget eleifend ullamcorper, mi elit sagittis nisi, sed rutrum ante lectus in mauris. Suspendisse potenti. Ut molestie id metus eget ullamcorper. Vestibulum ipsum elit, sagittis eu gravida eget, pharetra nec ante. In libero massa, consequat nec pulvinar eget, lobortis in sapien.</p>
+						<img src={bash8Img.src} alt="2015 Bash"/>
+					</div>
+				</div>
+				<div class="event">
+					<div class="year">
+						<h3>2016</h3>
+						<h4>Broadway Pier</h4>
+					</div>
+					<div class="info">
+						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum et dictum tortor. Pellentesque vestibulum, dolor eget eleifend ullamcorper, mi elit sagittis nisi, sed rutrum ante lectus in mauris. Suspendisse potenti. Ut molestie id metus eget ullamcorper. Vestibulum ipsum elit, sagittis eu gravida eget, pharetra nec ante. In libero massa, consequat nec pulvinar eget, lobortis in sapien.</p>
+						<img src={bash9Img.src} alt="2016 Bash"/>
+					</div>
+				</div>
+				<div class="event">
+					<div class="year">
+						<h3>2017</h3>
+						<h4>Broadway Pier</h4>
+					</div>
+					<div class="info">
+						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum et dictum tortor. Pellentesque vestibulum, dolor eget eleifend ullamcorper, mi elit sagittis nisi, sed rutrum ante lectus in mauris. Suspendisse potenti. Ut molestie id metus eget ullamcorper. Vestibulum ipsum elit, sagittis eu gravida eget, pharetra nec ante. In libero massa, consequat nec pulvinar eget, lobortis in sapien.</p>
+						<img src={bash10Img.src} alt="2017 Bash"/>
+					</div>
+				</div>
+				<div class="event">
+					<div class="year">
+						<h3>2018</h3>
+						<h4>Broadway Pier</h4>
+					</div>
+					<div class="info">
+						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum et dictum tortor. Pellentesque vestibulum, dolor eget eleifend ullamcorper, mi elit sagittis nisi, sed rutrum ante lectus in mauris. Suspendisse potenti. Ut molestie id metus eget ullamcorper. Vestibulum ipsum elit, sagittis eu gravida eget, pharetra nec ante. In libero massa, consequat nec pulvinar eget, lobortis in sapien.</p>
+						<img src={bash11Img.src} alt="2018 Bash"/>
+					</div>
+				</div>
+				<div class="event">
+					<div class="year">
+						<h3>2019</h3>
+						<h4>Broadway Pier</h4>
+					</div>
+					<div class="info">
+						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum et dictum tortor. Pellentesque vestibulum, dolor eget eleifend ullamcorper, mi elit sagittis nisi, sed rutrum ante lectus in mauris. Suspendisse potenti. Ut molestie id metus eget ullamcorper. Vestibulum ipsum elit, sagittis eu gravida eget, pharetra nec ante. In libero massa, consequat nec pulvinar eget, lobortis in sapien.</p>
+						<img src={bash12Img.src} alt="2019 Bash"/>
+					</div>
+				</div>
+				<div class="event">
+					<div class="year">
+						<h3>2022</h3>
+						<h4>Broadway Pier</h4>
+					</div>
+					<div class="info">
+						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum et dictum tortor. Pellentesque vestibulum, dolor eget eleifend ullamcorper, mi elit sagittis nisi, sed rutrum ante lectus in mauris. Suspendisse potenti. Ut molestie id metus eget ullamcorper. Vestibulum ipsum elit, sagittis eu gravida eget, pharetra nec ante. In libero massa, consequat nec pulvinar eget, lobortis in sapien.</p>
+						<img src={bash13Img.src} alt="2022 Bash"/>
+					</div>
+				</div>
+				<div class="event">
+					<div class="year">
+						<h3>2023</h3>
+						<h4>Broadway Pier</h4>
+					</div>
+					<div class="info">
+						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum et dictum tortor. Pellentesque vestibulum, dolor eget eleifend ullamcorper, mi elit sagittis nisi, sed rutrum ante lectus in mauris. Suspendisse potenti. Ut molestie id metus eget ullamcorper. Vestibulum ipsum elit, sagittis eu gravida eget, pharetra nec ante. In libero massa, consequat nec pulvinar eget, lobortis in sapien.</p>
+						<img src={bash14Img.src} alt="2023 Bash"/>
+					</div>
+				</div>
+				<div class="event">
+					<div class="year">
+						<h3>2024</h3>
+						<h4>Broadway Pier</h4>
+					</div>
+					<div class="info">
+						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum et dictum tortor. Pellentesque vestibulum, dolor eget eleifend ullamcorper, mi elit sagittis nisi, sed rutrum ante lectus in mauris. Suspendisse potenti. Ut molestie id metus eget ullamcorper. Vestibulum ipsum elit, sagittis eu gravida eget, pharetra nec ante. In libero massa, consequat nec pulvinar eget, lobortis in sapien.</p>
+						<img src={bash15Img.src} alt="2024 Bash"/>
+					</div>
+				</div>
+				</div>
+			</div>
+		</PageContainer>
+	</section>
+
+	<section id="past-artists">
+		<PageContainer>
+			<h3>
+				Artists that have played The Bash
+				<img class="artists-sticker" src={artistsStickerImg.src} alt="Alphabetical Order" width="150" height="150"/>
+			</h3>
+			<ul class="artists-list">
+				<li>Abby Normal</li>
+				<li>The B Sections</li>
+				<li>Blu Detiger</li>
+				<li>Bombargo</li>
+				<li>Boomsnap</li>
+				<li>Breakbot & Irfane</li>
+				<li>Chris Diaz</li>
+				<li>Chucky Motion</li>
+				<li>Combover</li>
+				<li>Con Brio</li>
+				<li>Cool Sexy Dj</li>
+				<li>Cory Henry</li>
+				<li>Danny Krivit</li>
+				<li>Derrick Carter</li>
+				<li>Discotoshi</li>
+				<li>Dj Dials</li>
+				<li>Dj M3</li>
+				<li>Dumpstafunk</li>
+				<li>Dylan C. Greene</li>
+				<li>Escort</li>
+				<li>Flamingosis</li>
+				<li>The Floozies</li>
+				<li>Franc Moody</li>
+				<li>Full Blown Stone</li>
+				<li>Greg Wilson</li>
+				<li>The Greyboy Allstars</li>
+				<li>Groove Session</li>
+				<li>Groovewell</li>
+				<li>He2She</li>
+				<li>High Fade</li>
+				<li>Horse Meat Disco</li>
+				<li>Jimbo James</li>
+				<li>Lee Fields</li>
+				<li>Max Heegard</li>
+				<li>Midtown Social</li>
+				<li>Mighty Mouse</li>
+				<li>Moodymann</li>
+				<li>The Motet</li>
+				<li>The Mustache Bash Family Band</li>
+				<li>Natasha Diggs</li>
+				<li>Neal Francis</li>
+				<li>Neil Frances</li>
+				<li>Never Dull</li>
+				<li>Orgone</li>
+				<li>Peanut Butter Wolf</li>
+				<li>Phunkify</li>
+				<li>Pimps Of Joytime</li>
+				<li>The Puscie Jones Review</li>
+				<li>Rambo</li>
+				<li>Razor N Tape</li>
+				<li>The Routine</li>
+				<li>Rusty Midway</li>
+				<li>Simple</li>
+				<li>Starfari</li>
+				<li>Superprince</li>
+				<li>Tuxedo</li>
+				<li>Underdog Edits</li>
+				<li>Voss & Things</li>
+				<li>Yo Mamma'S Big Fat Booty Band</li>
+				<li>Young Franco</li>
+				<li>Yuksek</li>
+				<li>Yung Bae</li>
+				<li>3Kelves</li>
+			</ul>
+		</PageContainer>
+	</section>
 
 	<NewsletterSignup />
 </Layout>
@@ -70,78 +343,183 @@ import heroImgMobile from './_img/hero-mobile.jpg';
 	    max-width:100%
 	}
 
-	#intro {
-	    background-color: #dfe3e6;
-	    overflow:hidden
+	#tagline {
+	  background-color: #dfe3e6;
+	  padding-bottom: 2em;
 	}
 
-	#intro .intro-text h4 {
-	    color: #000;
-	    line-height: 1em;
-	    text-align:center
+	#tagline h3 {
+	  font-weight: 500;
+	  font-size: 4.25rem;
+	  color: #000000;
+	  text-transform: uppercase;
+	  margin: 0;
+	  padding: 0;
+	  line-height: 1.1em;
+	  letter-spacing: -0.5px;
 	}
-
-	#intro .intro-text p {
-	    color: #000;
-	    font-size: 1.125em;
-	    margin: 0 auto 2em;
-	    max-width: 900px;
-	    text-align:center
-	}
-
-	#faqs {
-	    background: #000;
-	    padding-bottom: 2em;
-	    padding-top:6em
-	}
-
-	#faqs dd, #faqs dt, #faqs h3, #faqs h4, #faqs p {
-	    color:#fff
-	}
-
-	#faqs .faq-header {
-	    margin-bottom:4rem
-	}
-
-	#faqs .faq-header h3, #faqs .faq-header h4 {
+	@media (max-width: 600px) {
+	  #tagline h3 {
+	    font-size: 2.5em;
 	    margin-bottom: 0;
+	    line-height: 1em;
+	  }
+	}
+	#tagline h3.next-line {
+	  margin: 0;
+	}
+
+	#intro {
+	  overflow: hidden;
+	  background-color: #000;
+	}
+	#intro .intro-text {
+	  flex: 3 1;
+	}
+	@media (min-width: 770px) {
+	  #intro .intro-text {
+	    margin-left: 7em;
+	    margin-top: 7em;
+	  }
+	}
+	#intro .intro-text h4 {
+	  color: #ffffff;
+	  line-height: 1em;
+	}
+	@media (max-width: 769px) {
+	  #intro .intro-text h4 {
+	    text-align: center;
+	  }
+	}
+	#intro .intro-text p {
+	  color: #ffffff;
+	  font-size: 1.125em;
+	  /* 18/16 */
+	}
+	@media (max-width: 769px) {
+	  #intro .intro-text p {
 	    margin-top: 0;
-	    text-align:center
+	    text-align: center;
+	  }
+	}
+	@media (max-width: 600px) {
+	  #intro .intro-text p {
+	    margin-bottom: 2.125rem;
+	  }
+	}
+	#intro .intro-text p .white {
+	  color: #ffffff;
+	  font-weight: 700;
+	}
+	#intro .intro-image {
+	  flex: 4 1;
+	  margin: 0 -2em;
 	}
 
-	#faqs .faq-section {
-	    margin-bottom:4em
+	#polaroids {
+	  -webkit-user-select: none;
+	  user-select: none;
+	  position: relative;
+	}
+	#polaroids .photo-wrapper {
+	  text-align: center;
+	}
+	#polaroids .photo-wrapper img {
+	  max-width: 100%;
 	}
 
-	#faqs .faq-section h4 {
-	    color: #f3e339;
-	    text-align:left
+	#roots {
+	  padding-top: 2em;
 	}
 
-	#faqs .faq-section a {
-	    color: #fff;
-	    text-decoration:underline
+	.roots-headline,
+	.roots-tagline {
+	  text-align: center;
 	}
 
-	#faqs .faq-section dl {
-	    margin:0
+	.roots-headline {
+		margin-bottom: 0;
+		line-height: 1em;
 	}
 
-	#faqs .faq-section dt {
-	    font-family: league-gothic, Helvetica, Arial, sans-serif;
-	    font-size: 26px;
-	    font-weight: 500;
-	    letter-spacing: 1px;
-	    margin-top:1.5em
+	.roots-tagline {
+		margin-top: 0;
 	}
 
-	#faqs .faq-section dt:before {
-	    content: "– "
+	.event {
+		display: flex;
 	}
 
-	#faqs .faq-section dd {
-	    font-size: 14px;
-	    margin:1em 0
+	.year {
+		flex: 1 1 50%;
+		border-right: 2px solid #000;
 	}
 
+	.info {
+		flex: 1 1 50%;
+		border-left: 2px solid #000;
+		padding-left: 6em;
+		padding-right: 1em;
+		padding-bottom: 6em;
+	}
+
+	@media (max-width: 600px) {
+		.info {
+			padding-left: 2em;
+			padding-right: 0;
+		}
+	}
+
+	.info p {
+		display: none;
+	}
+
+	.info img {
+		max-width: 100%;
+	}
+
+	.year h3 {
+		margin-bottom: 0;
+		line-height: 1em;
+	}
+
+	.year h4 {
+		margin-top: 0;
+	}
+
+	#past-artists {
+		padding-top: 6rem;
+		padding-bottom: 6rem;
+		background-color: #000;
+		color: #fff;
+	}
+
+	#past-artists h3 {
+		position: relative;
+		color: #fff;
+		text-align: center;
+	}
+
+	@media (min-width: 768px) {
+		.artists-sticker {
+			display: block;
+			position: absolute;
+			top: 1.85em;
+			left: 2.25em;
+		}
+	}
+
+	.artists-list {
+		list-style-type: none;
+		padding: 0;
+		margin: 0;
+		text-align: center;
+	}
+
+	.artists-list li {
+		text-transform: uppercase;
+		font-family: 'brandon-grotesque', Helvetica, Arial, sans-serif;
+		font-size: 1.5rem;
+		line-height: 1.1em;
+	}
 </style>
