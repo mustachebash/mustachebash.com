@@ -1,0 +1,76 @@
+.main {
+	padding-top: 2rem;
+}
+
+.dialog {
+	border: none;
+	box-sizing: border-box;
+	max-width: 540px;
+	padding: 2em;
+}
+
+@media (max-width: 768px) {
+	.dialog {
+		max-width: 95%;
+	}
+}
+
+
+.dialog button {
+	margin-right: 1rem;
+}
+
+.dialog ul {
+	list-style-type: none;
+	padding: 0;
+}
+
+.dialog li {
+	display: flex;
+	margin-bottom: 1em;
+}
+
+.dialog input[type="checkbox"] {
+	margin-right: 1rem;
+}
+
+.dialog label {
+	cursor: pointer;
+}
+
+.dialogCta {
+	display: flex;
+}
+
+.labelError {
+	color: red;
+}
+
+.inputError {
+	border: 1px solid red !important;
+}
+
+.upgradeTransfer {
+	margin-bottom: 1rem;
+}
+
+@media (max-width: 768px) {
+	.upgradeTransfer {
+		display: flex;
+	}
+}
+
+.upgradeTransfer button {
+	margin-right: 1rem;
+}
+
+::backdrop {
+	background-image: linear-gradient(
+		45deg,
+		magenta,
+		rebeccapurple,
+		dodgerblue,
+		green
+	);
+	opacity: 0.75;
+}
