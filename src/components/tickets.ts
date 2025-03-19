@@ -796,7 +796,13 @@ function setPromo() {
 			return response;
 		})
 		.then(response => response.json())
-		.then(responseJson => promo = responseJson)
+		.then(responseJson => {
+			if(responseJson.status === 'active') {
+				return promo = responseJson;
+			} else {
+				return false;
+			}
+		})
 		.catch(e => {
 			let promoMessage;
 			switch(e.status) {
