@@ -7,7 +7,6 @@ import { format } from 'date-fns';
 
 const EVENT_2025_ID = '0fe92cbb-a22c-4b25-993e-773ca016a5f1';
 const EVENT_2025_AFTERPARTY_ID = 'f8b7a188-f9c7-48eb-bcb8-35462d76bb01';
-const EVENT_2025_PREPARTY_ID = '533ba437-e2ba-472a-8180-b453dba5bb9f';
 
 function logError({ lineno, colno, message, filename, stack, name }: { lineno: number, colno: number, message: string, filename: string, stack: string, name: string }) {
 	fetch(API_HOST + '/v1/errors', {
@@ -862,13 +861,6 @@ Promise.all([
 			return response;
 		})
 		.then(response => (response.json() as Promise<EventSettings>)),
-	fetch(API_HOST + `/v1/event-settings/${EVENT_2025_PREPARTY_ID}`)
-		.then(response => {
-			if(!response.ok) throw new Error('Preparty Settings not loaded');
-
-			return response;
-		})
-		.then(response => (response.json() as Promise<EventSettings>))
 ])
 	.then(evs => evs.forEach(({ products: siteProducts, ...ev }) => {
 		siteProducts.forEach(p => products[p.id] = p);
