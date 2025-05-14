@@ -1,8 +1,10 @@
 ---
 import PageContainer from './PageContainer.astro';
+
+const { id } = Astro.props;
 ---
 
-<section class="newsletter">
+<section class="newsletter" id={id}>
 	<PageContainer>
 		<!-- non-breaking space for mobile -->
 		<h4>Get all the bash updates to&nbsp;your&nbsp;inbox</h4>
