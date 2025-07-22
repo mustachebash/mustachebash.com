@@ -4,6 +4,9 @@ import Layout from '@/layouts/Layout.astro';
 import PageContainer from '@/components/PageContainer.astro';
 import NewsletterSignup from '@/components/NewsletterSignup.astro';
 
+import Bands from '@/components/Bands.astro';
+import bandsData from './_bands';
+
 import opengraphImg from './_img/opengraph-image.jpg';
 import jsonLD from './_jsonLD.json';
 
@@ -13,6 +16,10 @@ import videoCoverImg from './_img/video-cover.jpg';
 import introImg from './_img/intro.jpg';
 import lineupImg from './_img/lineup.jpg';
 import lineupImgMobile from './_img/lineup-mobile.jpg';
+import venueImg from './_img/venue.jpg';
+import hotel1Img from './_img/hotel-1.jpg';
+import hotel2Img from './_img/hotel-2.jpg';
+import roomImg from './_img/room.jpg';
 
 import galleryCoverImg from './_img/gallery-cover-desktop.jpg';
 import galleryCoverImgMobile from './_img/gallery-cover-mobile.jpg';
@@ -43,10 +50,10 @@ import ResponsiveImage from '@/components/ResponsiveImage.astro';
 			<div class="flex-row">
 				<div class="tagline">
 					<h3>
-						Bringing the Disco to Frisco With a Funk Fest Made for the Bay.
+						Bringing the Disco to Frisco With a 2-Day
 					</h3>
 					<h3 class="next-line">
-						Funk Out With Your Junk&nbsp;Out, SF.
+						'70s Funk Fest At The Famous Phoenix Hotel
 					</h3>
 				</div>
 				<div class="video img-wrap">
@@ -70,9 +77,12 @@ import ResponsiveImage from '@/components/ResponsiveImage.astro';
 				</div>
 
 				<div class="intro-text">
-					<h4>The Itty Bitty City By The Water</h4>
+					<h4>The Funkiest Disco Party Of The 21st Century Brings It Back To The Bay</h4>
 					<p>
-						Dust off your thizzle dance, Bay Area. It's time to grease up the groove train—the Mustache Bash is back!. Join us as we dress up and throw down at Stache Bash SF, the best '70s party to grace The Bay since the Summer of Love set it all in motion. An immersive, two-day, dress-up dance party where smashing outfits are a must and mustaches are a way of life, the Bash is heating up San Francisco and funkin' till the fog lifts.
+						It's time to start sculpting those funk muscles, Bay Area. The Mustache Bash—a force of a '70s shindig that's been building down south for decades—will be back in SF for Round 2 at The Phoenix Hotel this Fall. As tradition goes, we're taking over the whole joint, and packing a lineup so stacked, your heels' gonna dig a hole to China right through the dance floor.
+					</p>
+					<p>
+						The Phoenix may as well shut 'er down after this one, y'all. It's not getting any better.
 					</p>
 				</div>
 			</div>
@@ -90,6 +100,61 @@ import ResponsiveImage from '@/components/ResponsiveImage.astro';
  			</div>
  		</PageContainer>
  	</section>
+
+	<section id="lineup-bands">
+ 		<PageContainer>
+ 			<h4 class="lineup-header">Featuring 4 stages with live performances by:</h4>
+
+ 			<Bands bands={bandsData}/>
+ 		</PageContainer>
+ 	</section>
+
+	<section id="venue">
+		<PageContainer>
+			<div class="flex-row">
+				<div class="venue-description">
+					<h3>Venue</h3>
+					<h4>The Historic Phoenix Hotel</h4>
+					<p>
+						A vintage Palm Springs-style motor court nestled deep in the heart of the Tenderloin, The Phoenix Hotel is an iconic rock n roll oasis caught in time. Its tropical courtyard—ground zero for the upcoming Bash—played home to David Bowie, Madonna, Pearl Jam and Kurt Cobain, to name a few. Courtney Love even skinny dipped in the pool.
+					</p>
+					<p>
+						With all that big-funk energy and one glorious Bash already under its belt, when we heard this year could be the last for The Phoenix, we had to book Round 2. Because, as the hotel's original owner, Chip Conley, once said, “it's one great place to throw a party!” The Bash is here to end it on a high note.
+					</p>
+					<div class="cta">
+						<a class="ghost-button" target="_blank" href="https://www.bunkhousehotels.com/phoenix-hotel">Hotel Website</a>
+						<a class="ghost-button" target="_blank" href="https://goo.gl/maps/hTLsHixvXQgejUp18">Get Directions</a>
+					</div>
+				</div>
+				<div class="venue-image"><ResponsiveImage src={venueImg} alt="Phoenix Hotel" /></div>
+			</div>
+			<div class="flex-row">
+				<div class="hotel img-wrap"><img src={hotel1Img.src} alt="Hotel 1" /></div>
+				<div class="hotel img-wrap"><img src={hotel2Img.src} alt="Hotel 2" /></div>
+			</div>
+		</PageContainer>
+	</section>
+
+	<section id="room">
+		<PageContainer>
+			<div class="flex-row">
+				<div class="room-text">
+					<h3>Get A Room</h3>
+					<h4>Hotel Takeover Friday &amp; Saturday&nbsp;Night</h4>
+					<p>
+						A two-night '70s slumber party with all our funky friends, late summer sunshine, a pool and a Bash at your doorstep!? We did a damn thing and rented out the whole hotel, and with less than 50 rooms at this boutique bungalow, many of which are already spoken for, only a limited supply remains. Don't sleep on this—sleep with&nbsp;the&nbsp;fam!
+					</p>
+					<!-- <a class="ghost-button" href="#tickets">Book a Room</a> -->
+				</div>
+				<div class="room-image img-wrap">
+					<picture>
+						<source media="(min-width: 680px)" srcset={roomImg.src}>
+						<img src={roomImg.src} alt="Funk Intro">
+					</picture>
+				</div>
+			</div>
+		</PageContainer>
+	</section>
 
 	<section id="gallery">
 		<div class="cover-wrapper">
@@ -288,6 +353,162 @@ import ResponsiveImage from '@/components/ResponsiveImage.astro';
 	    display: block;
 	  }
 	}
+	#lineup-bands .lineup-header {
+	  text-align: center;
+	  margin-bottom: 2em;
+	}
+	@media (max-width: 600px) {
+	  #lineup-bands .lineup-header {
+	    font-size: 1em;
+	    margin-bottom: 0.5em;
+	  }
+	}
+	#lineup-bands .flex-row {
+	  justify-content: space-between;
+	}
+	@media (max-width: 600px) {
+	  #lineup-bands .flex-row {
+	    display: block;
+	  }
+	}
+	#venue {
+		background-color: #fff;
+	}
+
+	#venue h3 {
+		margin-bottom: 0;
+	}
+
+	#venue h4 {
+		margin-top: 0;
+	}
+
+	#venue p {
+		margin-bottom: 2em;
+	}
+
+	#venue .venue-image,
+	#venue .venue-description {
+		flex: 1 0 50%;
+		box-sizing: border-box;
+	}
+
+	#venue .venue-image {
+		position: relative;
+		padding: 2em 0 3em;
+	}
+
+	#venue-arrow {
+		position: absolute;
+		top: -30px;
+		right: 0;
+		width: 200px;
+	}
+
+	#venue .venue-description {
+		padding: 6.25em 4em 0 4.375em; /* 70/16 */
+	}
+
+	#venue .ghost-button {
+		display: inline-block;
+		color: #000;
+		border-color: #000;
+		border-radius: 400px;
+		margin-right: 1em;
+		margin-bottom: 1em;
+	}
+
+	#venue .ghost-button:hover {
+		background: transparent;
+		color: #231917;
+		box-shadow: inset 0 0 12px -1px #dfe3e6;
+	}
+
+	.hotel {
+		margin: 2em 1em;
+	}
+
+	@media (max-width: 500px) {
+		#venue .venue-description {
+			order: 1;
+			padding: 2em 0 0;
+		}
+
+		#venue .venue-image {
+			order: 2;
+
+			img {
+				height: auto;
+				max-width: 100%;
+			}
+		}
+	}
+
+	#room {
+		overflow: hidden;
+		background-color: #dfe3e6;
+	}
+	#room .room-text {
+		flex: 3 1;
+	}
+
+	@media (max-width: 768px) {
+		#room .room-text {
+			padding-top: 2em;
+			padding-bottom: 3em;
+		}
+	}
+
+	@media (min-width: 769px) {
+		#room .room-text {
+			margin-right: 7em;
+			margin-top: 5em;
+		}
+	}
+
+	#room .room-text h3 {
+		margin-bottom: 0;
+	}
+
+	@media (min-width: 769px) {
+		#room .room-text h3 {
+			font-size: 6.25rem;
+			font-weight: 500;
+		}
+	}
+
+	#room .room-text h4 {
+		color: #000;
+		line-height: 1em;
+	}
+
+	#room .room-text p {
+		color: #000;
+	}
+
+	@media (max-width: 500px) {
+		#room .room-text p {
+			margin-bottom: 2.125rem;
+		}
+	}
+
+	#room .room-text .ghost-button {
+		color: #000;
+		border-color: #000;
+		border-radius: 400px;
+	}
+
+	#room .room-text .ghost-button:hover {
+		background: transparent;
+		color: #231917;
+		box-shadow: inset 0 0 12px -1px #dfe3e6;
+	}
+
+	#room .room-image {
+		flex: 4 1;
+		margin: 0 -2em;
+	}
+
 	#gallery {
 	  -webkit-user-select: none;
 	  user-select: none;

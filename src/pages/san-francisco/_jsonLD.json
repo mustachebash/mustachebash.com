@@ -25,7 +25,7 @@
 	"offers": {
 			"@type": "Offer",
 			"url": "https://mustachebash.com/#tickets",
-			"price": "69",
+			"price": "89",
 			"priceCurrency": "USD",
 			"availability": "https://schema.org/SoldOut",
 			"validFrom": "2023-08-01T09:00-08:00"
@@ -33,23 +33,39 @@
 	"performer": [
 		{
 			"@type": "PerformingGroup",
-			"name": "Paco Versailles"
+			"name": "Classixx (DJ Set)"
 		},
 		{
 			"@type": "PerformingGroup",
-			"name": "Dam Swindle"
+			"name": "Harvey Sutherland (Live)"
 		},
 		{
 			"@type": "PerformingGroup",
-			"name": "Crazy P"
+			"name": "Supertaste (DJ Set)"
 		},
 		{
 			"@type": "PerformingGroup",
-			"name": "Bombargo"
+			"name": "MNTRA B2B TCHiLT"
 		},
 		{
 			"@type": "PerformingGroup",
-			"name": "The Mustache Bash Family Band"
+			"name": "DJ Dials"
+		},
+		{
+			"@type": "PerformingGroup",
+			"name": "Mae Powell & The Local Honeys"
+		},
+		{
+			"@type": "PerformingGroup",
+			"name": "Bash Family Band Presents Ricky G"
+		},
+		{
+			"@type": "PerformingGroup",
+			"name": "3Kelves B2B Dylan C. Greene"
+		},
+		{
+			"@type": "PerformingGroup",
+			"name": "Starfari"
 		},
 		{
 			"@type": "PerformingGroup",
@@ -57,23 +73,27 @@
 		},
 		{
 			"@type": "PerformingGroup",
+			"name": "Late Riser"
+		},
+		{
+			"@type": "PerformingGroup",
 			"name": "Discotoshi"
 		},
 		{
 			"@type": "PerformingGroup",
-			"name": "HE2SHE"
+			"name": "Max Heegard"
 		},
 		{
 			"@type": "PerformingGroup",
-			"name": "Combover"
+			"name": "He2She"
 		},
 		{
 			"@type": "PerformingGroup",
-			"name": "Moto Tembo"
+			"name": "RUMI"
 		},
 		{
 			"@type": "PerformingGroup",
-			"name": "Cool Sexy DJ"
+			"name": "Peatsbeats"
 		}
 	],
 	"organizer": {
