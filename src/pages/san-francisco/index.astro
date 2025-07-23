@@ -6,6 +6,7 @@ import NewsletterSignup from '@/components/NewsletterSignup.astro';
 
 import Bands from '@/components/Bands.astro';
 import bandsData from './_bands';
+// import Tickets from '@/components/Tickets.astro';
 
 import opengraphImg from './_img/opengraph-image.jpg';
 import jsonLD from './_jsonLD.json';
@@ -39,7 +40,7 @@ import ResponsiveImage from '@/components/ResponsiveImage.astro';
 				<picture>
 					<source media="(min-width: 680px)" srcset={heroImg.src}>
 					<source srcset={heroImgMobile.src}>
-					<img src={heroImg.src} alt="Mustache Bash 2025 - TBD">
+					<img src={heroImg.src} alt="Mustache Bash SF 2025">
 				</picture>
 			</div>
 		</PageContainer>
@@ -53,7 +54,7 @@ import ResponsiveImage from '@/components/ResponsiveImage.astro';
 						Bringing the Disco to Frisco With a 2-Day
 					</h3>
 					<h3 class="next-line">
-						'70s Funk Fest At The Famous Phoenix Hotel
+						'70s Funk Fest At The Famous&nbsp;Phoenix&nbsp;Hotel
 					</h3>
 				</div>
 				<div class="video img-wrap">
@@ -79,10 +80,7 @@ import ResponsiveImage from '@/components/ResponsiveImage.astro';
 				<div class="intro-text">
 					<h4>The Funkiest Disco Party Of The 21st Century Brings It Back To The Bay</h4>
 					<p>
-						It's time to start sculpting those funk muscles, Bay Area. The Mustache Bash—a force of a '70s shindig that's been building down south for decades—will be back in SF for Round 2 at The Phoenix Hotel this Fall. As tradition goes, we're taking over the whole joint, and packing a lineup so stacked, your heels' gonna dig a hole to China right through the dance floor.
-					</p>
-					<p>
-						The Phoenix may as well shut 'er down after this one, y'all. It's not getting any better.
+						It's time to start sculpting those funk muscles, Bay Area. The Mustache Bash—a force of a '70s shindig that's been building down south for decades—will be back in SF for Round 2 at The Phoenix Hotel this Fall. As tradition goes, we're taking over the whole joint, and packing a lineup so stacked, your heels' gonna dig a hole to China right through the dance floor. The Phoenix may as well shut 'er down after this one, y'all. It's not getting any better.
 					</p>
 				</div>
 			</div>
@@ -103,11 +101,75 @@ import ResponsiveImage from '@/components/ResponsiveImage.astro';
 
 	<section id="lineup-bands">
  		<PageContainer>
- 			<h4 class="lineup-header">Featuring 4 stages with live performances by:</h4>
+ 			<h4 class="lineup-header">Featuring Poolside Sets By:</h4>
 
  			<Bands bands={bandsData}/>
  		</PageContainer>
  	</section>
+
+	<section id="set-times">
+  		<PageContainer>
+  			<h3>Set Times</h3>
+  			<div class="flex-row">
+  				<div class="friday">
+  					<h4>Friday</h4>
+  					<dl>
+ 						<dt>Late Riser</dt>
+ 						<dd>12:15 am</dd>
+
+ 						<dt>Rumi</dt>
+ 						<dd>10:45 pm</dd>
+
+ 						<dt>HE2SHE</dt>
+ 						<dd>9:30 pm</dd>
+
+ 						<dt>Supertaste<small>(DJ Set)</small></dt>
+ 						<dd>8:00 pm</dd>
+
+						<dt>MNTRA B2B TCHiLT</dt>
+ 						<dd>6:30 pm</dd>
+
+						<dt>Mae Powell &amp;<br>The Local Honeys</dt>
+ 						<dd>5:15 pm</dd>
+
+						<dt>PeatsBeats</dt>
+ 						<dd>4:00 pm</dd>
+  					</dl>
+  				</div>
+  				<div class="saturday">
+  					<h4>Saturday</h4>
+  					<dl>
+ 						<dt>3Kelves B2B Dylan C. Greene</dt>
+ 						<dd>12:15 am</dd>
+
+ 						<dt>Starfari</dt>
+ 						<dd>10:45 pm</dd>
+
+ 						<dt>Discotoshi</dt>
+ 						<dd>9:45 pm</dd>
+
+ 						<dt>Classixx <small>(DJ Set)</small></dt>
+ 						<dd>8:15 pm</dd>
+
+						<dt>DJ Dials</dt>
+ 						<dd>7:30 pm</dd>
+
+						<dt>Harvey Sutherland <small>(Live)</small></dt>
+ 						<dd>6:15 pm</dd>
+
+						<dt>Abby Normal</dt>
+ 						<dd>5:30 pm</dd>
+
+						<dt>Ricky G</dt>
+ 						<dd>4:15 pm</dd>
+
+						<dt>Max Heegard</dt>
+ 						<dd>3:30 pm</dd>
+  					</dl>
+  				</div>
+  			</div>
+  		</PageContainer>
+  	</section>
 
 	<section id="venue">
 		<PageContainer>
@@ -156,6 +218,10 @@ import ResponsiveImage from '@/components/ResponsiveImage.astro';
 		</PageContainer>
 	</section>
 
+	<!-- <Tickets eventIds={[
+		'ade03d8e-9744-483e-8cbf-67f8d9c4055c' // bash
+	]}/> -->
+
 	<section id="gallery">
 		<div class="cover-wrapper">
 			<a href="/gallery">
@@ -201,7 +267,7 @@ import ResponsiveImage from '@/components/ResponsiveImage.astro';
 	#tagline-video .tagline {
 	  flex: 3 1;
 	}
-	@media (max-width: 390px) {
+	@media (max-width: 399px) {
 	  #tagline-video .tagline {
 	    margin: 0 auto 1em;
 	    width: 270px;
@@ -369,6 +435,95 @@ import ResponsiveImage from '@/components/ResponsiveImage.astro';
 	@media (max-width: 600px) {
 	  #lineup-bands .flex-row {
 	    display: block;
+	  }
+	}
+	#set-times {
+	  background: url('./_img/set-times.jpg') #ffffff no-repeat;
+	  background-position: bottom center;
+	  background-size: cover;
+	  padding: 6.25em 0 20em;
+	  /* 100/16 */
+	}
+	@media (max-width: 600px) {
+	  #set-times {
+	  	background-image: url('./_img/set-times-mobile.jpg');
+	    padding: 2em 0 10em;
+	  }
+	}
+	@media (min-width: 770px) {
+	  #set-times .family-band br {
+	    display: none;
+	  }
+	}
+	#set-times h3 {
+	  color: #000;
+	  text-align: center;
+	  margin-bottom: 0.25em;
+	}
+	@media (max-width: 600px) {
+	  #set-times h3 {
+	    text-align: left;
+	    margin-bottom: 0;
+	  }
+	}
+	#set-times h4 {
+	  color: #000;
+	}
+	@media (max-width: 600px) {
+	  #set-times h4 {
+	    font-size: 1.4375em;
+	    /* 23/16 */
+	  }
+	}
+	#set-times .flex-row {
+	  justify-content: center;
+	}
+	#set-times dl,
+	#set-times dt,
+	#set-times dd {
+	  margin: 0;
+	  padding: 0;
+	  text-transform: uppercase;
+	  color: #000;
+	}
+	#set-times dt {
+	  font-size: 1.375em;
+	  /* 22/16 */
+	  font-weight: 900;
+	  font-family: 'brandon-grotesque', Helvetica, Arial, sans-serif;
+	  line-height: 1em;
+	}
+	@media (max-width: 600px) {
+	  #set-times dt {
+	    font-size: 1.0625em;
+	    /* 17/16 */
+	  }
+	}
+	#set-times dd {
+	  font-size: 1em;
+	  /* 16/16 */
+	  margin-bottom: 1em;
+	}
+	@media (max-width: 600px) {
+	  #set-times dd {
+	    font-size: 0.75em;
+	    /* 12/16 */
+	  }
+	}
+	#set-times .friday,
+	#set-times .saturday {
+	  margin-bottom: 1em;
+	}
+	@media (min-width: 600px) {
+	  #set-times .friday,
+	  #set-times .saturday {
+	    flex: 0 0 25%;
+	    box-sizing: border-box;
+	  }
+	  #set-times .friday h4,
+	  #set-times .saturday h4 {
+	    margin-top: 0;
+	    margin-bottom: 1em;
 	  }
 	}
 	#venue {

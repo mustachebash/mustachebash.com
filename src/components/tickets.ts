@@ -5,8 +5,7 @@ import { API_HOST, BRAINTREE_TOKEN } from 'astro:env/client';
 
 import { format } from 'date-fns';
 
-const EVENT_2025_ID = '0fe92cbb-a22c-4b25-993e-773ca016a5f1';
-const EVENT_2025_AFTERPARTY_ID = 'f8b7a188-f9c7-48eb-bcb8-35462d76bb01';
+const EVENT_SF_2025_ID = 'ade03d8e-9744-483e-8cbf-67f8d9c4055c';
 
 function logError({ lineno, colno, message, filename, stack, name }: { lineno: number, colno: number, message: string, filename: string, stack: string, name: string }) {
 	fetch(API_HOST + '/v1/errors', {
@@ -847,16 +846,9 @@ type EventSettings = {
 };
 // Fetch the initial settings and products
 Promise.all([
-	fetch(API_HOST + `/v1/event-settings/${EVENT_2025_ID}`)
+	fetch(API_HOST + `/v1/event-settings/${EVENT_SF_2025_ID}`)
 		.then(response => {
 			if(!response.ok) throw new Error('Settings not loaded');
-
-			return response;
-		})
-		.then(response => (response.json() as Promise<EventSettings>)),
-	fetch(API_HOST + `/v1/event-settings/${EVENT_2025_AFTERPARTY_ID}`)
-		.then(response => {
-			if(!response.ok) throw new Error('Afterparty Settings not loaded');
 
 			return response;
 		})
