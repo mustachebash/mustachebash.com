@@ -25,10 +25,21 @@ type EventTicket = {
 	qrCode?: string;
 };
 
+type Accommodation = {
+	customerId: string;
+	orderId: string;
+	orderCreated: string;
+	productName: string;
+	eventId: string;
+	eventName: string;
+	eventDate: string;
+};
+
 const Main = () => {
 	const orderToken = new URLSearchParams(location.search).get('t'),
 		[customer, setCustomer] = useState<Record<string, any> | null>(null),
 		[tickets, setTickets] = useState<EventTicket[] | null>(null),
+		[accommodations, setAccommodations] = useState<Accommodation[] | null>(null),
 		[error, setError] = useState<Error | null>(null),
 		[selectedUpgradeTickets, setSelectedUpgradeTickets] = useState<string[]>([]),
 		[selectedTransferTickets, setSelectedTransferTickets] = useState<string[]>([]),
@@ -49,18 +60,20 @@ const Main = () => {
 					if(!response.ok) throw new Error('Tickets not loaded');
 
 					if (response.status === 204) {
-						return {customer: null, tickets: []} as {
+						return {customer: null, tickets: [], accommodations: []} as {
 							customer: null | Record<string, any>;
 							tickets: EventTicket[];
+							accommodations: Accommodation[];
 						};
 					}
 
 					return response.json() as Promise<{
 						customer: Record<string, any>;
 						tickets: EventTicket[];
+						accommodations: Accommodation[];
 					}>;
 				})
-				.then(async ({customer, tickets}) => {
+				.then(async ({customer, tickets, accommodations}) => {
 					for(const ticket of tickets) {
 						const { qrPayload } = ticket;
 
@@ -75,11 +88,12 @@ const Main = () => {
 						}
 					}
 
-					return {customer, tickets};
+					return {customer, tickets, accommodations};
 				})
-				.then(({customer, tickets}) => {
+				.then(({customer, tickets, accommodations}) => {
 					setCustomer(customer);
 					setTickets(tickets);
+					setAccommodations(accommodations);
 				})
 				.catch((e: Error) => {
 					setError(e);
@@ -270,11 +284,27 @@ const Main = () => {
 	return (
 		<main className={styles.main}>
 			<div className="container-1230">
+				{customer &&
+					<>
+						<h3>{customer.firstName} {customer.lastName}</h3>
+						<h2>{customer.email}</h2>
+					</>
+				}
+				{customer && !!accommodations?.length &&
+					<>
+						<h4>Active Accommodations</h4>
+						<ul>
+							{accommodations.map(accommodation => (
+								<li key={accommodation.orderId}>
+									{accommodation.productName} - Tickets Collected at Check-In
+								</li>
+							))}
+						</ul>
+					</>
+				}
 				{customer && !!tickets.length
 					? <>
 						<h4>Active tickets</h4>
-						<h3>{customer.firstName} {customer.lastName}</h3>
-						<h2>{customer.email}</h2>
 						<p className="download-wallet">
 							{/*<a className="wallet" href="#"><img src="./img/apple-wallet.svg" /></a>*/}
 						</p>
@@ -303,12 +333,14 @@ const Main = () => {
 							</Swiper>
 						</div>
 					</>
-					: <>
-						<h4>
-							You have no active tickets
-						</h4>
-						<p>If you believe you should have tickets, please contact support at <a href="mailto:contact@mustachebash.com">contact@mustachebash.com</a> and provide your email and order confirmation number.</p>
-					</>
+					: !accommodations?.length
+						? <>
+							<h4>
+								You have no active tickets
+							</h4>
+							<p>If you believe you should have tickets, please contact support at <a href="mailto:contact@mustachebash.com">contact@mustachebash.com</a> and provide your email and order confirmation number.</p>
+						</>
+						: null
 				}
 			</div>
 			{!!tickets.length &&
