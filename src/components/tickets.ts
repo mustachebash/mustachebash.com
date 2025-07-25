@@ -234,8 +234,8 @@ function purchaseFlowInit({hostedFieldsInstance, applePayInstance}: {hostedField
 
 		for(const id of Object.values(events).flatMap(({meta}) => meta.ticketsOrder)) {
 			if(!products[id]) continue;
-			const { name, price, status, eventId, admissionTier } = products[id],
-				isVip = admissionTier === 'vip',
+			const { name, price, status, eventId, admissionTier, type: productType } = products[id],
+				alwaysAvailable = admissionTier === 'vip' || productType === 'accomodation',
 				classes = [];
 
 			if(
@@ -250,7 +250,7 @@ function purchaseFlowInit({hostedFieldsInstance, applePayInstance}: {hostedField
 
 			ticketsListHTML.push(`<h6 class="${classes.join(' ')}" data-product-id="${id}">${name} - $${price}</h6>`);
 
-			if(status === 'active' && events[eventId].salesEnabled && (events[eventId].meta.currentTicket === id || isVip) && now > events[eventId].openingSales) {
+			if(status === 'active' && events[eventId].salesEnabled && (events[eventId].meta.currentTicket === id || alwaysAvailable) && now > events[eventId].openingSales) {
 				// The regex check is janky, but we don't want to pre-populate afterparty ticket quantities
 				quantitiesHTML.push(`
 					<div class="ticket flex-row flex-row-mobile">
@@ -259,7 +259,7 @@ function purchaseFlowInit({hostedFieldsInstance, applePayInstance}: {hostedField
 							<select name="${id}-quantity">
 								<option selected value="0">0</option>
 								<option value="1">1</option>
-								${!promo || promo.productId !== id
+								${(!promo || promo.productId !== id) && productType !== 'accomodation'
 								? `<option value="2">2</option>
 									<option value="3">3</option>
 									<option value="4">4</option>`
