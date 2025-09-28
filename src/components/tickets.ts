@@ -93,6 +93,21 @@ function updateCartQuantities() {
 	updateSubtotals();
 }
 
+async function sha256(str: string) {
+  // Convert the string to a Uint8Array
+  const encoder = new TextEncoder();
+  const data = encoder.encode(str);
+
+  // Use the subtle crypto API to hash the data
+  const hashBuffer = await window.crypto.subtle.digest('SHA-256', data);
+
+  // Convert the hash to a hex string
+  const hashArray = Array.from(new Uint8Array(hashBuffer));
+  const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+
+  return hashHex;
+}
+
 const targetGuestId = (new URLSearchParams(location.search).get('targetGuestId')) ?? undefined;
 function completePurchase(nonce: string) {
 	return fetch(API_HOST + '/v1/orders', {
@@ -182,6 +197,26 @@ function completePurchase(nonce: string) {
 				});
 			} catch(e) {
 				// Don't let FB break the site
+			}
+
+			try {
+				sha256(customer.email).then(hashedEmail => {
+					(window as any).ttq.identify({
+						// sha256 hash of the customer email address
+						email: hashedEmail
+					});
+					(window as any).ttq.track('Purchase', {
+						currency: 'USD',
+						value: total,
+						contents: cart.map(i => ({
+							content_id: i.productId,
+							content_type: products[i.productId].type,
+							content_name: products[i.productId].name
+						}))
+					});
+				}).catch(console.error);
+			} catch(e) {
+				// Don't let TikTok break the site
 			}
 		});
 }
