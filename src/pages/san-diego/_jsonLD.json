@@ -2,8 +2,8 @@
 	"@context": "http://schema.org",
 	"@type": "Event",
 	"name": "The Mustache Bash",
-	"startDate": "2025-03-22T14:00-07:00",
-	"endDate": "2025-03-22T23:00-07:00",
+	"startDate": "2026-03-21T14:00-07:00",
+	"endDate": "2026-03-21T23:00-07:00",
 	"eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
 	"eventStatus": "https://schema.org/EventScheduled",
 	"description": "Family. Freedom. Fun. The Funk. Welcome to The Mustache Bash. The Funkiest Disco Day on Earth.",
@@ -36,63 +36,7 @@
 	"performer": [
 		{
 			"@type": "PerformingGroup",
-			"name": "Chromeo"
-		},
-		{
-			"@type": "PerformingGroup",
-			"name": "Breakbot & Irfane"
-		},
-		{
-			"@type": "PerformingGroup",
-			"name": "Derrick Does Disco"
-		},
-		{
-			"@type": "PerformingGroup",
-			"name": "Classixx"
-		},
-		{
-			"@type": "PerformingGroup",
-			"name": "DJ KOCO aka SHIMOKITA"
-		},
-		{
-			"@type": "PerformingGroup",
 			"name": "The Mustache Bash Family Band"
-		},
-		{
-			"@type": "PerformingGroup",
-			"name": "Flying Mojito Bros"
-		},
-		{
-			"@type": "PerformingGroup",
-			"name": "Futuresexuals"
-		},
-		{
-			"@type": "PerformingGroup",
-			"name": "DJ Dials"
-		},
-		{
-			"@type": "PerformingGroup",
-			"name": "3kelves b2b Dylan C. Greene"
-		},
-		{
-			"@type": "PerformingGroup",
-			"name": "Discotoshi b2b Starfari"
-		},
-		{
-			"@type": "PerformingGroup",
-			"name": "Abby Normal"
-		},
-		{
-			"@type": "PerformingGroup",
-			"name": "Max Heegard"
-		},
-		{
-			"@type": "PerformingGroup",
-			"name": "Combover"
-		},
-		{
-			"@type": "PerformingGroup",
-			"name": "He2She"
 		}
 	],
 	"organizer": {
