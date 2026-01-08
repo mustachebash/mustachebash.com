@@ -19,7 +19,6 @@
 	}
 }
 
-
 .dialog button {
 	margin-right: 1rem;
 }
@@ -34,7 +33,7 @@
 	margin-bottom: 1em;
 }
 
-.dialog input[type="checkbox"] {
+.dialog input[type='checkbox'] {
 	margin-right: 1rem;
 }
 
@@ -69,12 +68,6 @@
 }
 
 ::backdrop {
-	background-image: linear-gradient(
-		45deg,
-		magenta,
-		rebeccapurple,
-		dodgerblue,
-		green
-	);
+	background-image: linear-gradient(45deg, magenta, rebeccapurple, dodgerblue, green);
 	opacity: 0.75;
 }

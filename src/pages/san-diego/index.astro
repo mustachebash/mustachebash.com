@@ -33,9 +33,9 @@ import ResponsiveImage from '@/components/ResponsiveImage.astro';
 		<PageContainer>
 			<div class="graphics">
 				<picture>
-					<source media="(min-width: 680px)" srcset={heroImg.src}>
-					<source srcset={heroImgMobile.src}>
-					<img src={heroImg.src} alt="Mustache Bash 2026 - March 21st">
+					<source media="(min-width: 680px)" srcset={heroImg.src} />
+					<source srcset={heroImgMobile.src} />
+					<img src={heroImg.src} alt="Mustache Bash 2026 - March 21st" />
 				</picture>
 			</div>
 		</PageContainer>
@@ -47,17 +47,15 @@ import ResponsiveImage from '@/components/ResponsiveImage.astro';
 				<div class="tagline">
 					<h3>
 						<!-- non-breaking space for mobile -->
-						Family. Freedom. Fun.<br>The Funk. Welcome to the&nbsp;Mustache&nbsp;Bash.
+						Family. Freedom. Fun.<br />The Funk. Welcome to the&nbsp;Mustache&nbsp;Bash.
 					</h3>
-					<h3 class="next-line">
-						The Funkiest Disco Day on&nbsp;Earth.
-					</h3>
+					<h3 class="next-line">The Funkiest Disco Day on&nbsp;Earth.</h3>
 				</div>
 				<div class="video img-wrap">
 					<a href="https://youtu.be/dAb-nCPd2rQ" target="_blank">
 						<picture>
-							<source media="(min-width: 680px)" srcset={videoCoverImg.src}>
-							<img src={videoCoverImg.src} alt="Mustache Bash Video">
+							<source media="(min-width: 680px)" srcset={videoCoverImg.src} />
+							<img src={videoCoverImg.src} alt="Mustache Bash Video" />
 						</picture>
 						<p>View More on Youtube <span>&#x2023;</span></p>
 					</a>
@@ -74,9 +72,16 @@ import ResponsiveImage from '@/components/ResponsiveImage.astro';
 				</div>
 
 				<div class="intro-text">
-					<h4>Looking Back<br>Bashing Forward</h4>
+					<h4>Looking Back<br />Bashing Forward</h4>
 					<p>
-						Last March was a historic day for San Diego—The Mustache Bash opened the doors at its new waterfront home in Mission Beach, six thousand Bashers unleashed on Mission Bay, Chromeo and Breakbot brought the grand finale and by the end of the night, all were abducted by the funk. Safe to say, anyone in attendance will be back next year, along with plenty of newcomers, and something tells us the future of funk and disco are looking bright! Building off the momentum of a tremendous success in San Diego, The Bash returns to San Francisco this October 12 ready to funk like The City's never funked before. Stay tuned—you don't want to miss this one! Follow <a style="color:#ffffff;" target="_blank" href="https://www.instagram.com/themustachebash/">@TheMustacheBash</a> and subscribe to our email list to be the first to know when tickets go on sale.
+						Last March was a historic day for San Diego—The Mustache Bash opened the doors at its new waterfront home in Mission Beach, six thousand Bashers unleashed on Mission Bay,
+						Chromeo and Breakbot brought the grand finale and by the end of the night, all were abducted by the funk. Safe to say, anyone in attendance will be back next year, along with
+						plenty of newcomers, and something tells us the future of funk and disco are looking bright! Building off the momentum of a tremendous success in San Diego, The Bash returns to
+						San Francisco this October 12 ready to funk like The City's never funked before. Stay tuned—you don't want to miss this one! Follow <a
+							style="color:#ffffff;"
+							target="_blank"
+							href="https://www.instagram.com/themustachebash/">@TheMustacheBash</a
+						> and subscribe to our email list to be the first to know when tickets go on sale.
 					</p>
 					<div class="follow-button"><a class="ghost-button" target="_blank" href="https://www.instagram.com/themustachebash/">Follow&nbsp;On&nbsp;Instagram</a></div>
 				</div>
@@ -85,29 +90,31 @@ import ResponsiveImage from '@/components/ResponsiveImage.astro';
 	</section>
 
 	<section id="lineup">
- 		<PageContainer>
- 			<div class="img-wrap lineup-image">
- 				<picture>
- 					<source media="(min-width: 680px)" srcset={lineupImg.src}>
-					<source srcset={lineupImgMobile.src}>
- 					<img src={lineupImg.src}>
- 				</picture>
- 			</div>
+		<PageContainer>
+			<div class="img-wrap lineup-image">
+				<picture>
+					<source media="(min-width: 680px)" srcset={lineupImg.src} />
+					<source srcset={lineupImgMobile.src} />
+					<img src={lineupImg.src} />
+				</picture>
+			</div>
 
 			<h4 class="lineup-header">Featuring 4 stages with live performances by:</h4>
 
-			<Bands bands={bandsData}/>
-	 	</PageContainer>
- 	</section>
+			<Bands bands={bandsData} />
+		</PageContainer>
+	</section>
 
- 	<section id="venue">
+	<section id="venue">
 		<PageContainer>
 			<div class="flex-row">
 				<div class="venue-description">
 					<h3>Venue</h3>
 					<h4>Mariner's Point Park</h4>
 					<p>
-						Sand, sailboats and a psychedelic sunset. Other than that, expect the same beautiful Bash as usual. Studio 54-style disco? Yup. Free-for-all roller rink? Double yup. Bottomless bars, four stages, live funk bands, disco DJs and thousands of funky souls spirited in their '70s best? You funkin' betcha! It's that same ole boogie by the bay, baby, only this time, a slightly different bay. And the best part—our friends won't be stuck outside missing all the fun.
+						Sand, sailboats and a psychedelic sunset. Other than that, expect the same beautiful Bash as usual. Studio 54-style disco? Yup. Free-for-all roller rink? Double yup. Bottomless
+						bars, four stages, live funk bands, disco DJs and thousands of funky souls spirited in their '70s best? You funkin' betcha! It's that same ole boogie by the bay, baby, only
+						this time, a slightly different bay. And the best part—our friends won't be stuck outside missing all the fun.
 					</p>
 					<a class="ghost-button" target="_blank" href="https://maps.app.goo.gl/g4kgUmC7oFbi4kRu9">Get Directions</a>
 				</div>
@@ -120,9 +127,9 @@ import ResponsiveImage from '@/components/ResponsiveImage.astro';
 		<div class="cover-wrapper">
 			<a href="/gallery">
 				<picture>
-					<source media="(min-width: 680px)" srcset={galleryCoverImg.src}>
-					<source srcset={galleryCoverImgMobile.src}>
-					<img src={galleryCoverImg.src} alt="Gallery">
+					<source media="(min-width: 680px)" srcset={galleryCoverImg.src} />
+					<source srcset={galleryCoverImgMobile.src} />
+					<img src={galleryCoverImg.src} alt="Gallery" />
 				</picture>
 			</a>
 		</div>
@@ -133,556 +140,556 @@ import ResponsiveImage from '@/components/ResponsiveImage.astro';
 
 <style>
 	#hero {
-	  background: #dfe3e6;
-	  box-sizing: border-box;
+		background: #dfe3e6;
+		box-sizing: border-box;
 	}
 	#hero .container-1230 {
-	  position: relative;
+		position: relative;
 	}
 	@media (max-width: 600px) {
-	  #hero {
-	    background: #dfe3e6;
-	    height: auto;
-	    padding-bottom: 3em;
-	  }
+		#hero {
+			background: #dfe3e6;
+			height: auto;
+			padding-bottom: 3em;
+		}
 	}
 	#hero .graphics {
-	  margin-left: -1.875em;
-	  margin-right: -1.875em;
+		margin-left: -1.875em;
+		margin-right: -1.875em;
 	}
 	#hero .graphics img,
 	#hero .graphics picture {
-	  max-width: 100%;
+		max-width: 100%;
 	}
 	#tagline-video {
-	  background-color: #dfe3e6;
-	  padding-bottom: 2em;
+		background-color: #dfe3e6;
+		padding-bottom: 2em;
 	}
 	#tagline-video .tagline {
-	  flex: 3 1;
+		flex: 3 1;
 	}
 	@media (max-width: 390px) {
-	  #tagline-video .tagline {
-	    margin: 0 auto 1em;
-	    width: 270px;
-	  }
+		#tagline-video .tagline {
+			margin: 0 auto 1em;
+			width: 270px;
+		}
 	}
 	@media (min-width: 400px) and (max-width: 600px) {
-	  #tagline-video .tagline {
-	    padding: 0 3em;
-	    margin-bottom: 3em;
-	  }
+		#tagline-video .tagline {
+			padding: 0 3em;
+			margin-bottom: 3em;
+		}
 	}
 	@media (min-width: 770px) {
-	  #tagline-video .tagline {
-	    padding-top: 3em;
-	  }
+		#tagline-video .tagline {
+			padding-top: 3em;
+		}
 	}
 	#tagline-video .tagline h3 {
-	  font-weight: 500;
-	  font-size: 3.75rem;
-	  color: #000000;
-	  text-transform: uppercase;
-	  margin: 0;
-	  padding: 0;
-	  line-height: 1em;
-	  letter-spacing: -0.5px;
+		font-weight: 500;
+		font-size: 3.75rem;
+		color: #000000;
+		text-transform: uppercase;
+		margin: 0;
+		padding: 0;
+		line-height: 1em;
+		letter-spacing: -0.5px;
 	}
 	@media (max-width: 600px) {
-	  #tagline-video .tagline h3 {
-	    font-size: 2.5em;
-	    margin-bottom: 0;
-	    line-height: 1em;
-	  }
+		#tagline-video .tagline h3 {
+			font-size: 2.5em;
+			margin-bottom: 0;
+			line-height: 1em;
+		}
 	}
 	#tagline-video .tagline h3.next-line {
-	  margin: 0;
+		margin: 0;
 	}
 	#tagline-video .video {
-	  flex: 5 1;
+		flex: 5 1;
 	}
 	#tagline-video .video p {
-	  font-size: 24px;
-	  letter-spacing: 1px;
-	  position: relative;
-	  font-family: 'league-gothic', Helvetica, Arial, sans-serif;
-	  text-align: center;
-	  text-transform: uppercase;
-	  color: #f00;
+		font-size: 24px;
+		letter-spacing: 1px;
+		position: relative;
+		font-family: 'league-gothic', Helvetica, Arial, sans-serif;
+		text-align: center;
+		text-transform: uppercase;
+		color: #f00;
 	}
 	#tagline-video .video p span {
-	  position: relative;
-	  display: inline-block;
-	  font-size: 50px;
-	  line-height: 24px;
-	  top: 9px;
+		position: relative;
+		display: inline-block;
+		font-size: 50px;
+		line-height: 24px;
+		top: 9px;
 	}
 	#intro {
-	  overflow: hidden;
-	  background-color: #000;
+		overflow: hidden;
+		background-color: #000;
 	}
 	#intro .intro-text {
-	  flex: 3 1;
+		flex: 3 1;
 	}
 	@media (min-width: 770px) {
-	  #intro .intro-text {
-	    margin-left: 7em;
-	    margin-top: 7em;
-	  }
+		#intro .intro-text {
+			margin-left: 7em;
+			margin-top: 7em;
+		}
 	}
 	#intro .intro-text h4 {
-	  color: #ffffff;
-	  line-height: 1em;
+		color: #ffffff;
+		line-height: 1em;
 	}
 	@media (max-width: 769px) {
-	  #intro .intro-text h4 {
-	    text-align: center;
-	  }
+		#intro .intro-text h4 {
+			text-align: center;
+		}
 	}
 	#intro .intro-text p {
-	  color: #ffffff;
-	  font-size: 1.125em;
-	  /* 18/16 */
+		color: #ffffff;
+		font-size: 1.125em;
+		/* 18/16 */
 	}
 	@media (max-width: 769px) {
-	  #intro .intro-text p {
-	    margin-top: 0;
-	    text-align: center;
-	  }
+		#intro .intro-text p {
+			margin-top: 0;
+			text-align: center;
+		}
 	}
 	@media (max-width: 600px) {
-	  #intro .intro-text p {
-	    margin-bottom: 2.125rem;
-	  }
+		#intro .intro-text p {
+			margin-bottom: 2.125rem;
+		}
 	}
 	#intro .intro-text p .white {
-	  color: #ffffff;
-	  font-weight: 700;
+		color: #ffffff;
+		font-weight: 700;
 	}
 	@media (max-width: 769px) {
-	  #intro .intro-text .follow-button {
-	    text-align: center;
-	    margin-bottom: 2em;
-	  }
+		#intro .intro-text .follow-button {
+			text-align: center;
+			margin-bottom: 2em;
+		}
 	}
 	#intro .intro-text .ghost-button {
-	  width: 14.5em;
-	  color: #ffffff;
-	  border-color: #ffffff;
-	  border-radius: 400px;
+		width: 14.5em;
+		color: #ffffff;
+		border-color: #ffffff;
+		border-radius: 400px;
 	}
 	#intro .intro-text .ghost-button:hover {
-	  background: transparent;
-	  color: #ffffff;
-	  box-shadow: inset 0 0 12px -1px #dfe3e6;
+		background: transparent;
+		color: #ffffff;
+		box-shadow: inset 0 0 12px -1px #dfe3e6;
 	}
 	@media (max-width: 769px) {
-	  #intro .intro-text .ghost-button {
-	    display: inline-block;
-	  }
+		#intro .intro-text .ghost-button {
+			display: inline-block;
+		}
 	}
 	#intro .intro-image {
-	  flex: 4 1;
-	  margin: 0 -2em;
+		flex: 4 1;
+		margin: 0 -2em;
 	}
 	#lineup .lineup-image {
-	  margin: 0 -1.875em;
+		margin: 0 -1.875em;
 	}
 	@media (max-width: 600px) {
-	  #lineup .lineup-image {
-	    margin-bottom: 2em;
-	  }
+		#lineup .lineup-image {
+			margin-bottom: 2em;
+		}
 	}
 	#lineup-bands .lineup-header {
-	  text-align: center;
-	  margin-bottom: 2em;
+		text-align: center;
+		margin-bottom: 2em;
 	}
 	@media (max-width: 600px) {
-	  #lineup-bands .lineup-header {
-	    font-size: 1em;
-	    margin-bottom: 0.5em;
-	  }
+		#lineup-bands .lineup-header {
+			font-size: 1em;
+			margin-bottom: 0.5em;
+		}
 	}
 	#lineup-bands .flex-row {
-	  justify-content: space-between;
+		justify-content: space-between;
 	}
 	@media (max-width: 600px) {
-	  #lineup-bands .flex-row {
-	    display: block;
-	  }
+		#lineup-bands .flex-row {
+			display: block;
+		}
 	}
 	#set-times {
-	  background: url('./_img/set-times.jpg') #ffffff no-repeat;
-	  background-position: bottom center;
-	  background-size: cover;
-	  padding: 6.25em 0 20em;
-	  /* 100/16 */
+		background: url('./_img/set-times.jpg') #ffffff no-repeat;
+		background-position: bottom center;
+		background-size: cover;
+		padding: 6.25em 0 20em;
+		/* 100/16 */
 	}
 	@media (max-width: 600px) {
-	  #set-times {
-	  	background-image: url('./_img/set-times-mobile.jpg');
-	    padding: 2em 0 10em;
-	  }
+		#set-times {
+			background-image: url('./_img/set-times-mobile.jpg');
+			padding: 2em 0 10em;
+		}
 	}
 	@media (min-width: 770px) {
-	  #set-times .family-band br {
-	    display: none;
-	  }
+		#set-times .family-band br {
+			display: none;
+		}
 	}
 	#set-times h3 {
-	  color: #ffffff;
-	  text-align: center;
-	  margin-bottom: 0.25em;
+		color: #ffffff;
+		text-align: center;
+		margin-bottom: 0.25em;
 	}
 	@media (max-width: 600px) {
-	  #set-times h3 {
-	    text-align: left;
-	    margin-bottom: 0;
-	  }
+		#set-times h3 {
+			text-align: left;
+			margin-bottom: 0;
+		}
 	}
 	#set-times h4 {
-	  color: #ffffff;
+		color: #ffffff;
 	}
 	@media (max-width: 600px) {
-	  #set-times h4 {
-	    font-size: 1.4375em;
-	    /* 23/16 */
-	  }
+		#set-times h4 {
+			font-size: 1.4375em;
+			/* 23/16 */
+		}
 	}
 	#set-times .flex-row {
-	  justify-content: center;
+		justify-content: center;
 	}
 	#set-times dl,
 	#set-times dt,
 	#set-times dd {
-	  margin: 0;
-	  padding: 0;
-	  text-transform: uppercase;
-	  color: #ffffff;
+		margin: 0;
+		padding: 0;
+		text-transform: uppercase;
+		color: #ffffff;
 	}
 	#set-times dt {
-	  font-size: 1.375em;
-	  /* 22/16 */
-	  font-weight: 900;
-	  font-family: 'brandon-grotesque', Helvetica, Arial, sans-serif;
-	  line-height: 1em;
+		font-size: 1.375em;
+		/* 22/16 */
+		font-weight: 900;
+		font-family: 'brandon-grotesque', Helvetica, Arial, sans-serif;
+		line-height: 1em;
 	}
 	@media (max-width: 600px) {
-	  #set-times dt {
-	    font-size: 1.0625em;
-	    /* 17/16 */
-	  }
+		#set-times dt {
+			font-size: 1.0625em;
+			/* 17/16 */
+		}
 	}
 	#set-times dd {
-	  font-size: 1em;
-	  /* 16/16 */
-	  margin-bottom: 1em;
+		font-size: 1em;
+		/* 16/16 */
+		margin-bottom: 1em;
 	}
 	@media (max-width: 600px) {
-	  #set-times dd {
-	    font-size: 0.75em;
-	    /* 12/16 */
-	  }
+		#set-times dd {
+			font-size: 0.75em;
+			/* 12/16 */
+		}
 	}
 	#set-times .water-stage,
 	#set-times .fire-stage,
 	#set-times .wind-stage,
 	#set-times .earth-stage {
-	  margin-bottom: 1em;
+		margin-bottom: 1em;
 	}
 	@media (min-width: 600px) {
-	  #set-times .water-stage,
-	  #set-times .fire-stage,
-	  #set-times .wind-stage,
-	  #set-times .earth-stage {
-	    flex: 0 0 25%;
-	    box-sizing: border-box;
-	  }
-	  #set-times .water-stage h4,
-	  #set-times .fire-stage h4,
-	  #set-times .wind-stage h4,
-	  #set-times .earth-stage h4 {
-	    margin-top: 0;
-	    margin-bottom: 1em;
-	  }
+		#set-times .water-stage,
+		#set-times .fire-stage,
+		#set-times .wind-stage,
+		#set-times .earth-stage {
+			flex: 0 0 25%;
+			box-sizing: border-box;
+		}
+		#set-times .water-stage h4,
+		#set-times .fire-stage h4,
+		#set-times .wind-stage h4,
+		#set-times .earth-stage h4 {
+			margin-top: 0;
+			margin-bottom: 1em;
+		}
 	}
 	#venue {
-	  background-color: #ffffff;
-	  padding-top: 4.5em;
-	  padding-bottom: 7em;
+		background-color: #ffffff;
+		padding-top: 4.5em;
+		padding-bottom: 7em;
 	}
 	#venue h3 {
-	  margin-bottom: 0;
+		margin-bottom: 0;
 	}
 	#venue h4 {
-	  margin-top: 0;
+		margin-top: 0;
 	}
 	#venue p {
-	  margin-bottom: 2em;
+		margin-bottom: 2em;
 	}
 	#venue .venue-image,
 	#venue .venue-description {
-	  flex: 1 0 50%;
-	  box-sizing: border-box;
+		flex: 1 0 50%;
+		box-sizing: border-box;
 	}
 	#venue .venue-image {
-	  position: relative;
-	  padding: 2em 0 3em;
+		position: relative;
+		padding: 2em 0 3em;
 	}
 	#venue .venue-description {
-	  padding: 1.25em 4.375em 0 0;
+		padding: 1.25em 4.375em 0 0;
 	}
 	#venue .ghost-button {
-	  color: #000000;
-	  border-color: #000000;
-	  border-radius: 400px;
+		color: #000000;
+		border-color: #000000;
+		border-radius: 400px;
 	}
 	#venue .ghost-button:hover {
-	  background: transparent;
-	  color: #231917;
-	  box-shadow: inset 0 0 12px -1px #dfe3e6;
+		background: transparent;
+		color: #231917;
+		box-shadow: inset 0 0 12px -1px #dfe3e6;
 	}
 	@media (max-width: 600px) {
-	  #venue {
-	    padding: 0;
-	  }
-	  #venue .venue-description {
-	    order: 1;
-	    padding: 2em 0 0;
-	  }
-	  #venue .venue-image {
-	    order: 2;
-	  }
-	  #venue .venue-image img {
-	    height: auto;
-	    max-width: 100%;
-	  }
+		#venue {
+			padding: 0;
+		}
+		#venue .venue-description {
+			order: 1;
+			padding: 2em 0 0;
+		}
+		#venue .venue-image {
+			order: 2;
+		}
+		#venue .venue-image img {
+			height: auto;
+			max-width: 100%;
+		}
 	}
 	#preparty {
-	  background: #e1e5e8;
-	  padding: 5.5em 0 4.75em;
-	  overflow: hidden;
+		background: #e1e5e8;
+		padding: 5.5em 0 4.75em;
+		overflow: hidden;
 	}
 	#preparty .preparty-description {
-	  flex: 3 1;
+		flex: 3 1;
 	}
 	@media (min-width: 770px) {
-	  #preparty .preparty-description {
-	    margin-right: 7em;
-	  }
+		#preparty .preparty-description {
+			margin-right: 7em;
+		}
 	}
 	#preparty .preparty-description h3 {
-	  color: #000000;
-	  margin-top: 0;
-	  margin-bottom: 0;
-	  line-height: 1em;
+		color: #000000;
+		margin-top: 0;
+		margin-bottom: 0;
+		line-height: 1em;
 	}
 	#preparty .preparty-description h4 {
-	  color: #000000;
-	  margin-top: 0;
+		color: #000000;
+		margin-top: 0;
 	}
 	#preparty .preparty-description p {
-	  color: #000000;
-	  font-size: 1em;
-	  margin-bottom: 1em;
+		color: #000000;
+		font-size: 1em;
+		margin-bottom: 1em;
 	}
 	#preparty .preparty-description .ghost-button {
-	  width: 14.5em;
-	  color: #000000;
-	  border-color: #000000;
-	  border-radius: 400px;
+		width: 14.5em;
+		color: #000000;
+		border-color: #000000;
+		border-radius: 400px;
 	}
 	#preparty .preparty-description .ghost-button:hover {
-	  background: transparent;
-	  color: #000000;
-	  box-shadow: inset 0 0 12px -1px #dfe3e6;
+		background: transparent;
+		color: #000000;
+		box-shadow: inset 0 0 12px -1px #dfe3e6;
 	}
 	@media (max-width: 769px) {
-	  #preparty .preparty-description .ghost-button {
-	    display: inline-block;
-	    margin-bottom: 3em;
-	  }
+		#preparty .preparty-description .ghost-button {
+			display: inline-block;
+			margin-bottom: 3em;
+		}
 	}
 	#preparty .preparty-image {
-	  flex: 4 1;
-	  margin: 0 -2em;
+		flex: 4 1;
+		margin: 0 -2em;
 	}
 	@media (min-width: 770px) {
-	  #preparty .preparty-image {
-	    margin: -6.25em -2em -6.25em;
-	  }
+		#preparty .preparty-image {
+			margin: -6.25em -2em -6.25em;
+		}
 	}
 	@media (max-width: 600px) {
-	  #preparty {
-	    padding: 0;
-	  }
-	  #preparty .preparty-description {
-	    order: 1;
-	    padding: 2em 0 0;
-	  }
-	  #preparty .preparty-image {
-	    order: 2;
-	  }
-	  #preparty .preparty-image img {
-	    height: auto;
-	    max-width: 100%;
-	  }
+		#preparty {
+			padding: 0;
+		}
+		#preparty .preparty-description {
+			order: 1;
+			padding: 2em 0 0;
+		}
+		#preparty .preparty-image {
+			order: 2;
+		}
+		#preparty .preparty-image img {
+			height: auto;
+			max-width: 100%;
+		}
 	}
 	#afterparty {
-	  background: #000000;
-	  padding: 5.5em 0;
-	  overflow: hidden;
+		background: #000000;
+		padding: 5.5em 0;
+		overflow: hidden;
 	}
 	#afterparty .afterparty-description {
-	  flex: 3 1;
+		flex: 3 1;
 	}
 	@media (min-width: 770px) {
-	  #afterparty .afterparty-description {
-	    margin-right: 7em;
-	  }
+		#afterparty .afterparty-description {
+			margin-right: 7em;
+		}
 	}
 	#afterparty .afterparty-description h3 {
-	  color: #ffffff;
-	  margin-bottom: 0;
-	  margin-top: 0;
-	  line-height: 1em;
+		color: #ffffff;
+		margin-bottom: 0;
+		margin-top: 0;
+		line-height: 1em;
 	}
 	#afterparty .afterparty-description h4 {
-	  color: #ffffff;
-	  margin-top: 0;
+		color: #ffffff;
+		margin-top: 0;
 	}
 	#afterparty .afterparty-description p {
-	  color: #ffffff;
-	  font-size: 1em;
-	  margin-bottom: 3em;
+		color: #ffffff;
+		font-size: 1em;
+		margin-bottom: 3em;
 	}
 	#afterparty .afterparty-description .ghost-button {
-	  width: 14.5em;
-	  color: #ffffff;
-	  border-color: #ffffff;
-	  border-radius: 400px;
+		width: 14.5em;
+		color: #ffffff;
+		border-color: #ffffff;
+		border-radius: 400px;
 	}
 	#afterparty .afterparty-description .ghost-button:hover {
-	  background: transparent;
-	  color: #ffffff;
-	  box-shadow: inset 0 0 12px -1px #dfe3e6;
+		background: transparent;
+		color: #ffffff;
+		box-shadow: inset 0 0 12px -1px #dfe3e6;
 	}
 	@media (max-width: 769px) {
-	  #afterparty .afterparty-description .ghost-button {
-	    display: inline-block;
-	    margin-bottom: 3em;
-	  }
+		#afterparty .afterparty-description .ghost-button {
+			display: inline-block;
+			margin-bottom: 3em;
+		}
 	}
 	#afterparty .afterparty-image {
-	  flex: 4 1;
-	  margin: 0 -2em;
+		flex: 4 1;
+		margin: 0 -2em;
 	}
 	@media (min-width: 770px) {
-	  #afterparty .afterparty-image {
-	    margin: -6.25em -2em -6.25em;
-	  }
+		#afterparty .afterparty-image {
+			margin: -6.25em -2em -6.25em;
+		}
 	}
 	@media (max-width: 600px) {
-	  #afterparty {
-	    padding: 0;
-	  }
-	  #afterparty .afterparty-description {
-	    order: 1;
-	    padding: 2em 0 0;
-	  }
-	  #afterparty .afterparty-image {
-	    order: 2;
-	  }
-	  #afterparty .afterparty-image img {
-	    height: auto;
-	    max-width: 100%;
-	  }
+		#afterparty {
+			padding: 0;
+		}
+		#afterparty .afterparty-description {
+			order: 1;
+			padding: 2em 0 0;
+		}
+		#afterparty .afterparty-image {
+			order: 2;
+		}
+		#afterparty .afterparty-image img {
+			height: auto;
+			max-width: 100%;
+		}
 	}
 	#vip {
-	  background: #e1e5e8;
-	  padding: 5.5em 0 3.75em;
-	  overflow: hidden;
+		background: #e1e5e8;
+		padding: 5.5em 0 3.75em;
+		overflow: hidden;
 	}
 	#vip .vip-description {
-	  flex: 3 1;
+		flex: 3 1;
 	}
 	@media (min-width: 770px) {
-	  #vip .vip-description {
-	    margin-right: 7em;
-	  }
+		#vip .vip-description {
+			margin-right: 7em;
+		}
 	}
 	#vip .vip-description h3 {
-	  color: #000000;
-	  margin-top: 0;
-	  margin-bottom: 0;
-	  line-height: 1em;
+		color: #000000;
+		margin-top: 0;
+		margin-bottom: 0;
+		line-height: 1em;
 	}
 	#vip .vip-description h4 {
-	  color: #000000;
-	  margin-top: 0;
+		color: #000000;
+		margin-top: 0;
 	}
 	#vip .vip-description p {
-	  color: #000000;
-	  font-size: 1em;
-	  margin-bottom: 1em;
+		color: #000000;
+		font-size: 1em;
+		margin-bottom: 1em;
 	}
 	#vip .vip-description p.vip-includes {
-	  text-transform: uppercase;
-	  line-height: 1.1em;
+		text-transform: uppercase;
+		line-height: 1.1em;
 	}
 	#vip .vip-description .ghost-button {
-	  width: 14.5em;
-	  color: #000000;
-	  border-color: #000000;
-	  border-radius: 400px;
+		width: 14.5em;
+		color: #000000;
+		border-color: #000000;
+		border-radius: 400px;
 	}
 	#vip .vip-description .ghost-button:hover {
-	  background: transparent;
-	  color: #000000;
-	  box-shadow: inset 0 0 12px -1px #dfe3e6;
+		background: transparent;
+		color: #000000;
+		box-shadow: inset 0 0 12px -1px #dfe3e6;
 	}
 	@media (max-width: 769px) {
-	  #vip .vip-description .ghost-button {
-	    display: inline-block;
-	    margin-bottom: 3em;
-	  }
+		#vip .vip-description .ghost-button {
+			display: inline-block;
+			margin-bottom: 3em;
+		}
 	}
 	#vip .vip-image {
-	  flex: 4 1;
-	  margin: 0 -2em;
+		flex: 4 1;
+		margin: 0 -2em;
 	}
 	@media (min-width: 770px) {
-	  #vip .vip-image {
-	    margin: -6.25em -2em -6.25em;
-	  }
+		#vip .vip-image {
+			margin: -6.25em -2em -6.25em;
+		}
 	}
 	@media (max-width: 600px) {
-	  #vip {
-	    padding: 0;
-	  }
-	  #vip .vip-description {
-	    order: 1;
-	    padding: 2em 0 0;
-	  }
-	  #vip .vip-image {
-	    order: 2;
-	  }
-	  #vip .vip-image img {
-	    height: auto;
-	    max-width: 100%;
-	  }
+		#vip {
+			padding: 0;
+		}
+		#vip .vip-description {
+			order: 1;
+			padding: 2em 0 0;
+		}
+		#vip .vip-image {
+			order: 2;
+		}
+		#vip .vip-image img {
+			height: auto;
+			max-width: 100%;
+		}
 	}
 	#hotels {
-	  background: #e1e5e8;
-	  padding: 5.5em 0 3.75em;
-	  overflow: hidden;
+		background: #e1e5e8;
+		padding: 5.5em 0 3.75em;
+		overflow: hidden;
 	}
 	#hotels .hotels-description {
-	  flex: 3 1;
+		flex: 3 1;
 	}
 	#hotels .hotels-description .links-flex {
-	  display: flex;
-	  justify-content: space-between;
+		display: flex;
+		justify-content: space-between;
 	}
 	#hotels .hotels-description .links-flex > div {
 		flex: 1 1 50%;
@@ -694,79 +701,78 @@ import ResponsiveImage from '@/components/ResponsiveImage.astro';
 		margin: 0 auto;
 	}
 	@media (min-width: 770px) {
-	  #hotels .hotels-description {
-	    margin-right: 7em;
-	  }
+		#hotels .hotels-description {
+			margin-right: 7em;
+		}
 	}
 	#hotels .hotels-description h3 {
-	  color: #000000;
-	  margin-top: 0;
-	  margin-bottom: 0;
-	  line-height: 1em;
+		color: #000000;
+		margin-top: 0;
+		margin-bottom: 0;
+		line-height: 1em;
 	}
 	#hotels .hotels-description h4 {
-	  color: #000000;
-	  margin-top: 0;
+		color: #000000;
+		margin-top: 0;
 	}
 	#hotels .hotels-description p {
-	  color: #000000;
-	  font-size: 1em;
-	  margin-bottom: 1em;
+		color: #000000;
+		font-size: 1em;
+		margin-bottom: 1em;
 	}
 	#hotels .hotels-description .ghost-button {
-	  width: 14.5em;
-	  color: #000000;
-	  border-color: #000000;
-	  border-radius: 400px;
+		width: 14.5em;
+		color: #000000;
+		border-color: #000000;
+		border-radius: 400px;
 	}
 	#hotels .hotels-description .ghost-button:hover {
-	  background: transparent;
-	  color: #000000;
-	  box-shadow: inset 0 0 12px -1px #dfe3e6;
+		background: transparent;
+		color: #000000;
+		box-shadow: inset 0 0 12px -1px #dfe3e6;
 	}
 	#hotels .hotels-image {
-	  flex: 4 1;
-	  margin: 0 -2em;
+		flex: 4 1;
+		margin: 0 -2em;
 	}
 	@media (min-width: 770px) {
-	  #hotels .hotels-image {
-	    margin: -6.25em -2em -6.25em;
-	  }
+		#hotels .hotels-image {
+			margin: -6.25em -2em -6.25em;
+		}
 	}
 	@media (max-width: 600px) {
-	  #hotels .hotels-description .ghost-button {
-	    max-width: 14.5em;
-	    width: auto;
-	  }
+		#hotels .hotels-description .ghost-button {
+			max-width: 14.5em;
+			width: auto;
+		}
 
-	  #hotels {
-	    padding: 0;
-	  }
-	  #hotels .hotels-description {
-	    order: 1;
-	    padding: 2em 0 0;
-	  }
-	  #hotels .hotels-image {
-	    order: 2;
-	  }
-	  #hotels .hotels-image img {
-	    height: auto;
-	    max-width: 100%;
-	  }
+		#hotels {
+			padding: 0;
+		}
+		#hotels .hotels-description {
+			order: 1;
+			padding: 2em 0 0;
+		}
+		#hotels .hotels-image {
+			order: 2;
+		}
+		#hotels .hotels-image img {
+			height: auto;
+			max-width: 100%;
+		}
 	}
 	#gallery {
-	  -webkit-user-select: none;
-	  user-select: none;
-	  position: relative;
+		-webkit-user-select: none;
+		user-select: none;
+		position: relative;
 	}
 	#gallery .cover-wrapper {
-	  text-align: center;
+		text-align: center;
 	}
 	#gallery .cover-wrapper img {
-	  max-width: 100%;
-	  border: none;
-	  margin: 0;
-	  padding: 0;
+		max-width: 100%;
+		border: none;
+		margin: 0;
+		padding: 0;
 	}
-
 </style>

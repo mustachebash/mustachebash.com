@@ -14,6 +14,7 @@
 		"check:updates": "ncu",
 		"update:deps": "ncu -u",
 		"lint": "prettier . --check && eslint . --ext .js,.ts,.tsx,.astro",
+		"format": "prettier . --write",
 		"test": "astro check && tsc --noEmit"
 	},
 	"browserslist": [
@@ -49,6 +50,7 @@
 		"npm-check-updates": "^19.2.0",
 		"prettier": "^3.7.4",
 		"prettier-plugin-astro": "^0.14.1",
-		"typescript": "^5.9.3"
+		"typescript": "^5.9.3",
+		"typescript-eslint": "^8.52.0"
 	}
 }

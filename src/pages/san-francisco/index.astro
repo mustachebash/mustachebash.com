@@ -37,9 +37,9 @@ import ResponsiveImage from '@/components/ResponsiveImage.astro';
 		<PageContainer>
 			<div class="graphics">
 				<picture>
-					<source media="(min-width: 680px)" srcset={heroImg.src}>
-					<source srcset={heroImgMobile.src}>
-					<img src={heroImg.src} alt="Mustache Bash SF 2025">
+					<source media="(min-width: 680px)" srcset={heroImg.src} />
+					<source srcset={heroImgMobile.src} />
+					<img src={heroImg.src} alt="Mustache Bash SF 2025" />
 				</picture>
 			</div>
 		</PageContainer>
@@ -49,18 +49,14 @@ import ResponsiveImage from '@/components/ResponsiveImage.astro';
 		<PageContainer>
 			<div class="flex-row">
 				<div class="tagline">
-					<h3>
-						Bringing the Disco to Frisco With a 2-Day
-					</h3>
-					<h3 class="next-line">
-						'70s Funk Fest At The Famous&nbsp;Phoenix&nbsp;Hotel
-					</h3>
+					<h3>Bringing the Disco to Frisco With a 2-Day</h3>
+					<h3 class="next-line">'70s Funk Fest At The Famous&nbsp;Phoenix&nbsp;Hotel</h3>
 				</div>
 				<div class="video img-wrap">
 					<a href="https://youtu.be/dAb-nCPd2rQ" target="_blank">
 						<picture>
-							<source media="(min-width: 680px)" srcset={videoCoverImg.src}>
-							<img src={videoCoverImg.src} alt="Mustache Bash Video">
+							<source media="(min-width: 680px)" srcset={videoCoverImg.src} />
+							<img src={videoCoverImg.src} alt="Mustache Bash Video" />
 						</picture>
 						<p>View More on Youtube <span>&#x2023;</span></p>
 					</a>
@@ -79,7 +75,9 @@ import ResponsiveImage from '@/components/ResponsiveImage.astro';
 				<div class="intro-text">
 					<h4>The Funkiest Disco Party Of The 21st Century Brings It Back To The Bay</h4>
 					<p>
-						It's time to start sculpting those funk muscles, Bay Area. The Mustache Bash—a force of a '70s shindig that's been building down south for decades—will be back in SF for Round 2 at The Phoenix Hotel this Fall. As tradition goes, we're taking over the whole joint, and packing a lineup so stacked, your heels' gonna dig a hole to China right through the dance floor. The Phoenix may as well shut 'er down after this one, y'all. It's not getting any better.
+						It's time to start sculpting those funk muscles, Bay Area. The Mustache Bash—a force of a '70s shindig that's been building down south for decades—will be back in SF for Round
+						2 at The Phoenix Hotel this Fall. As tradition goes, we're taking over the whole joint, and packing a lineup so stacked, your heels' gonna dig a hole to China right through the
+						dance floor. The Phoenix may as well shut 'er down after this one, y'all. It's not getting any better.
 					</p>
 				</div>
 			</div>
@@ -87,88 +85,88 @@ import ResponsiveImage from '@/components/ResponsiveImage.astro';
 	</section>
 
 	<section id="lineup">
- 		<PageContainer>
- 			<div class="img-wrap lineup-image">
- 				<picture>
- 					<source media="(min-width: 680px)" srcset={lineupImg.src}>
-					<source srcset={lineupImgMobile.src}>
- 					<img src={lineupImg.src}>
- 				</picture>
- 			</div>
- 		</PageContainer>
- 	</section>
+		<PageContainer>
+			<div class="img-wrap lineup-image">
+				<picture>
+					<source media="(min-width: 680px)" srcset={lineupImg.src} />
+					<source srcset={lineupImgMobile.src} />
+					<img src={lineupImg.src} />
+				</picture>
+			</div>
+		</PageContainer>
+	</section>
 
 	<section id="lineup-bands">
- 		<PageContainer>
- 			<h4 class="lineup-header">Featuring Poolside Sets By:</h4>
+		<PageContainer>
+			<h4 class="lineup-header">Featuring Poolside Sets By:</h4>
 
- 			<Bands bands={bandsData}/>
- 		</PageContainer>
- 	</section>
+			<Bands bands={bandsData} />
+		</PageContainer>
+	</section>
 
 	<section id="set-times">
-  		<PageContainer>
-  			<h3>Set Times</h3>
-  			<div class="flex-row">
-  				<div class="friday">
-  					<h4>Friday</h4>
-  					<dl>
- 						<dt>Late Riser</dt>
- 						<dd>12:15 am</dd>
+		<PageContainer>
+			<h3>Set Times</h3>
+			<div class="flex-row">
+				<div class="friday">
+					<h4>Friday</h4>
+					<dl>
+						<dt>Late Riser</dt>
+						<dd>12:15 am</dd>
 
- 						<dt>Rumi</dt>
- 						<dd>10:45 pm</dd>
+						<dt>Rumi</dt>
+						<dd>10:45 pm</dd>
 
- 						<dt>HE2SHE</dt>
- 						<dd>9:30 pm</dd>
+						<dt>HE2SHE</dt>
+						<dd>9:30 pm</dd>
 
- 						<dt>Supertaste<small>(DJ Set)</small></dt>
- 						<dd>8:00 pm</dd>
+						<dt>Supertaste<small>(DJ Set)</small></dt>
+						<dd>8:00 pm</dd>
 
 						<dt>MNTRA B2B TCHiLT</dt>
- 						<dd>6:30 pm</dd>
+						<dd>6:30 pm</dd>
 
-						<dt>Mae Powell &amp;<br>The Local Honeys</dt>
- 						<dd>5:15 pm</dd>
+						<dt>Mae Powell &amp;<br />The Local Honeys</dt>
+						<dd>5:15 pm</dd>
 
 						<dt>PeatsBeats</dt>
- 						<dd>4:00 pm</dd>
-  					</dl>
-  				</div>
-  				<div class="saturday">
-  					<h4>Saturday</h4>
-  					<dl>
- 						<dt>3Kelves B2B Dylan C. Greene</dt>
- 						<dd>12:15 am</dd>
+						<dd>4:00 pm</dd>
+					</dl>
+				</div>
+				<div class="saturday">
+					<h4>Saturday</h4>
+					<dl>
+						<dt>3Kelves B2B Dylan C. Greene</dt>
+						<dd>12:15 am</dd>
 
- 						<dt>Starfari</dt>
- 						<dd>10:45 pm</dd>
+						<dt>Starfari</dt>
+						<dd>10:45 pm</dd>
 
- 						<dt>Discotoshi</dt>
- 						<dd>9:45 pm</dd>
+						<dt>Discotoshi</dt>
+						<dd>9:45 pm</dd>
 
- 						<dt>Classixx <small>(DJ Set)</small></dt>
- 						<dd>8:15 pm</dd>
+						<dt>Classixx <small>(DJ Set)</small></dt>
+						<dd>8:15 pm</dd>
 
 						<dt>DJ Dials</dt>
- 						<dd>7:30 pm</dd>
+						<dd>7:30 pm</dd>
 
 						<dt>Harvey Sutherland <small>(Live)</small></dt>
- 						<dd>6:15 pm</dd>
+						<dd>6:15 pm</dd>
 
 						<dt>Abby Normal</dt>
- 						<dd>5:30 pm</dd>
+						<dd>5:30 pm</dd>
 
 						<dt>Ricky G</dt>
- 						<dd>4:15 pm</dd>
+						<dd>4:15 pm</dd>
 
 						<dt>Max Heegard</dt>
- 						<dd>3:30 pm</dd>
-  					</dl>
-  				</div>
-  			</div>
-  		</PageContainer>
-  	</section>
+						<dd>3:30 pm</dd>
+					</dl>
+				</div>
+			</div>
+		</PageContainer>
+	</section>
 
 	<section id="venue">
 		<PageContainer>
@@ -177,10 +175,12 @@ import ResponsiveImage from '@/components/ResponsiveImage.astro';
 					<h3>Venue</h3>
 					<h4>The Historic Phoenix Hotel</h4>
 					<p>
-						A vintage Palm Springs-style motor court nestled deep in the heart of the Tenderloin, The Phoenix Hotel is an iconic rock n roll oasis caught in time. Its tropical courtyard—ground zero for the upcoming Bash—played home to David Bowie, Madonna, Pearl Jam and Kurt Cobain, to name a few. Courtney Love even skinny dipped in the pool.
+						A vintage Palm Springs-style motor court nestled deep in the heart of the Tenderloin, The Phoenix Hotel is an iconic rock n roll oasis caught in time. Its tropical
+						courtyard—ground zero for the upcoming Bash—played home to David Bowie, Madonna, Pearl Jam and Kurt Cobain, to name a few. Courtney Love even skinny dipped in the pool.
 					</p>
 					<p>
-						With all that big-funk energy and one glorious Bash already under its belt, when we heard this year could be the last for The Phoenix, we had to book Round 2. Because, as the hotel's original owner, Chip Conley, once said, “it's one great place to throw a party!” The Bash is here to end it on a high note.
+						With all that big-funk energy and one glorious Bash already under its belt, when we heard this year could be the last for The Phoenix, we had to book Round 2. Because, as the
+						hotel's original owner, Chip Conley, once said, “it's one great place to throw a party!” The Bash is here to end it on a high note.
 					</p>
 					<div class="cta">
 						<a class="ghost-button" target="_blank" href="https://www.bunkhousehotels.com/phoenix-hotel">Hotel Website</a>
@@ -203,14 +203,15 @@ import ResponsiveImage from '@/components/ResponsiveImage.astro';
 					<h3>Get A Room</h3>
 					<h4>Hotel Takeover Friday &amp; Saturday&nbsp;Night</h4>
 					<p>
-						A two-night '70s slumber party with all our funky friends, late summer sunshine, a pool and a Bash at your doorstep!? We did a damn thing and rented out the whole hotel, and with less than 50 rooms at this boutique bungalow, many of which are already spoken for, only a limited supply remains. Don't sleep on this—sleep with&nbsp;the&nbsp;fam!
+						A two-night '70s slumber party with all our funky friends, late summer sunshine, a pool and a Bash at your doorstep!? We did a damn thing and rented out the whole hotel, and
+						with less than 50 rooms at this boutique bungalow, many of which are already spoken for, only a limited supply remains. Don't sleep on this—sleep with&nbsp;the&nbsp;fam!
 					</p>
 					<!-- <a class="ghost-button" href="#tickets">Book a Room</a> -->
 				</div>
 				<div class="room-image img-wrap">
 					<picture>
-						<source media="(min-width: 680px)" srcset={roomImg.src}>
-						<img src={roomImg.src} alt="Funk Intro">
+						<source media="(min-width: 680px)" srcset={roomImg.src} />
+						<img src={roomImg.src} alt="Funk Intro" />
 					</picture>
 				</div>
 			</div>
@@ -221,9 +222,9 @@ import ResponsiveImage from '@/components/ResponsiveImage.astro';
 		<div class="cover-wrapper">
 			<a href="/gallery">
 				<picture>
-					<source media="(min-width: 680px)" srcset={galleryCoverImg.src}>
-					<source srcset={galleryCoverImgMobile.src}>
-					<img src={galleryCoverImg.src} alt="Gallery">
+					<source media="(min-width: 680px)" srcset={galleryCoverImg.src} />
+					<source srcset={galleryCoverImgMobile.src} />
+					<img src={galleryCoverImg.src} alt="Gallery" />
 				</picture>
 			</a>
 		</div>
@@ -234,292 +235,292 @@ import ResponsiveImage from '@/components/ResponsiveImage.astro';
 
 <style>
 	#hero {
-	  background: #dfe3e6;
-	  box-sizing: border-box;
+		background: #dfe3e6;
+		box-sizing: border-box;
 	}
 	#hero .container-1230 {
-	  position: relative;
+		position: relative;
 	}
 	@media (max-width: 600px) {
-	  #hero {
-	    background: #dfe3e6;
-	    height: auto;
-	    padding-bottom: 3em;
-	  }
+		#hero {
+			background: #dfe3e6;
+			height: auto;
+			padding-bottom: 3em;
+		}
 	}
 	#hero .graphics {
-	  margin-left: -1.875em;
-	  margin-right: -1.875em;
+		margin-left: -1.875em;
+		margin-right: -1.875em;
 	}
 	#hero .graphics img,
 	#hero .graphics picture {
-	  max-width: 100%;
+		max-width: 100%;
 	}
 	#tagline-video {
-	  background-color: #dfe3e6;
-	  padding-bottom: 2em;
+		background-color: #dfe3e6;
+		padding-bottom: 2em;
 	}
 	#tagline-video .tagline {
-	  flex: 3 1;
+		flex: 3 1;
 	}
 	@media (max-width: 399px) {
-	  #tagline-video .tagline {
-	    margin: 0 auto 1em;
-	    width: 270px;
-	  }
+		#tagline-video .tagline {
+			margin: 0 auto 1em;
+			width: 270px;
+		}
 	}
 	@media (min-width: 400px) and (max-width: 600px) {
-	  #tagline-video .tagline {
-	    padding: 0 3em;
-	    margin-bottom: 3em;
-	  }
+		#tagline-video .tagline {
+			padding: 0 3em;
+			margin-bottom: 3em;
+		}
 	}
 	@media (min-width: 770px) {
-	  #tagline-video .tagline {
-	    padding-top: 3em;
-	  }
+		#tagline-video .tagline {
+			padding-top: 3em;
+		}
 	}
 	#tagline-video .tagline h3 {
-	  font-weight: 500;
-	  font-size: 3.75rem;
-	  color: #000000;
-	  text-transform: uppercase;
-	  margin: 0;
-	  padding: 0;
-	  line-height: 1em;
-	  letter-spacing: -0.5px;
+		font-weight: 500;
+		font-size: 3.75rem;
+		color: #000000;
+		text-transform: uppercase;
+		margin: 0;
+		padding: 0;
+		line-height: 1em;
+		letter-spacing: -0.5px;
 	}
 	@media (max-width: 600px) {
-	  #tagline-video .tagline h3 {
-	    font-size: 2.5em;
-	    margin-bottom: 0;
-	    line-height: 1em;
-	  }
+		#tagline-video .tagline h3 {
+			font-size: 2.5em;
+			margin-bottom: 0;
+			line-height: 1em;
+		}
 	}
 	#tagline-video .tagline h3.next-line {
-	  margin: 0;
+		margin: 0;
 	}
 	#tagline-video .video {
-	  flex: 5 1;
+		flex: 5 1;
 	}
 	#tagline-video .video p {
-	  font-size: 24px;
-	  letter-spacing: 1px;
-	  position: relative;
-	  font-family: 'league-gothic', Helvetica, Arial, sans-serif;
-	  text-align: center;
-	  text-transform: uppercase;
-	  color: #f00;
+		font-size: 24px;
+		letter-spacing: 1px;
+		position: relative;
+		font-family: 'league-gothic', Helvetica, Arial, sans-serif;
+		text-align: center;
+		text-transform: uppercase;
+		color: #f00;
 	}
 	#tagline-video .video p span {
-	  position: relative;
-	  display: inline-block;
-	  font-size: 50px;
-	  line-height: 24px;
-	  top: 9px;
+		position: relative;
+		display: inline-block;
+		font-size: 50px;
+		line-height: 24px;
+		top: 9px;
 	}
 	#intro {
-	  overflow: hidden;
-	  background-color: #000;
+		overflow: hidden;
+		background-color: #000;
 	}
 	#intro .intro-text {
-	  flex: 3 1;
+		flex: 3 1;
 	}
 	@media (min-width: 770px) {
-	  #intro .intro-text {
-	    margin-left: 7em;
-	    margin-top: 7em;
-	  }
+		#intro .intro-text {
+			margin-left: 7em;
+			margin-top: 7em;
+		}
 	}
 	#intro .intro-text h4 {
-	  color: #ffffff;
-	  line-height: 1em;
+		color: #ffffff;
+		line-height: 1em;
 	}
 	@media (max-width: 769px) {
-	  #intro .intro-text h4 {
-	    text-align: center;
-	  }
+		#intro .intro-text h4 {
+			text-align: center;
+		}
 	}
 	#intro .intro-text p {
-	  color: #ffffff;
-	  font-size: 1.125em;
-	  /* 18/16 */
+		color: #ffffff;
+		font-size: 1.125em;
+		/* 18/16 */
 	}
 	@media (max-width: 769px) {
-	  #intro .intro-text p {
-	    margin-top: 0;
-	    text-align: center;
-	  }
+		#intro .intro-text p {
+			margin-top: 0;
+			text-align: center;
+		}
 	}
 	@media (max-width: 600px) {
-	  #intro .intro-text p {
-	    margin-bottom: 2.125rem;
-	  }
+		#intro .intro-text p {
+			margin-bottom: 2.125rem;
+		}
 	}
 	#intro .intro-text p .white {
-	  color: #ffffff;
-	  font-weight: 700;
+		color: #ffffff;
+		font-weight: 700;
 	}
 	@media (max-width: 769px) {
-	  #intro .intro-text .follow-button {
-	    text-align: center;
-	    margin-bottom: 2em;
-	  }
+		#intro .intro-text .follow-button {
+			text-align: center;
+			margin-bottom: 2em;
+		}
 	}
 	#intro .intro-text .ghost-button {
-	  width: 14.5em;
-	  color: #ffffff;
-	  border-color: #ffffff;
-	  border-radius: 400px;
+		width: 14.5em;
+		color: #ffffff;
+		border-color: #ffffff;
+		border-radius: 400px;
 	}
 	#intro .intro-text .ghost-button:hover {
-	  background: transparent;
-	  color: #ffffff;
-	  box-shadow: inset 0 0 12px -1px #dfe3e6;
+		background: transparent;
+		color: #ffffff;
+		box-shadow: inset 0 0 12px -1px #dfe3e6;
 	}
 	@media (max-width: 769px) {
-	  #intro .intro-text .ghost-button {
-	    display: inline-block;
-	  }
+		#intro .intro-text .ghost-button {
+			display: inline-block;
+		}
 	}
 	#intro .intro-image {
-	  flex: 4 1;
-	  margin: 0 -2em;
+		flex: 4 1;
+		margin: 0 -2em;
 	}
 	#lineup .lineup-image {
-	  margin: 0 -1.875em;
-	  margin-bottom: 6.25em;
-	  /* 100/16 */
+		margin: 0 -1.875em;
+		margin-bottom: 6.25em;
+		/* 100/16 */
 	}
 	@media (max-width: 600px) {
-	  #lineup .lineup-image {
-	    margin-bottom: 2em;
-	  }
+		#lineup .lineup-image {
+			margin-bottom: 2em;
+		}
 	}
 	#lineup .lineup-header {
-	  text-align: center;
-	  margin-bottom: 2em;
+		text-align: center;
+		margin-bottom: 2em;
 	}
 	@media (max-width: 600px) {
-	  #lineup .lineup-header {
-	    font-size: 1em;
-	    margin-bottom: 0.5em;
-	  }
+		#lineup .lineup-header {
+			font-size: 1em;
+			margin-bottom: 0.5em;
+		}
 	}
 	#lineup .flex-row {
-	  justify-content: space-between;
+		justify-content: space-between;
 	}
 	@media (max-width: 600px) {
-	  #lineup .flex-row {
-	    display: block;
-	  }
+		#lineup .flex-row {
+			display: block;
+		}
 	}
 	#lineup-bands .lineup-header {
-	  text-align: center;
-	  margin-bottom: 2em;
+		text-align: center;
+		margin-bottom: 2em;
 	}
 	@media (max-width: 600px) {
-	  #lineup-bands .lineup-header {
-	    font-size: 1em;
-	    margin-bottom: 0.5em;
-	  }
+		#lineup-bands .lineup-header {
+			font-size: 1em;
+			margin-bottom: 0.5em;
+		}
 	}
 	#lineup-bands .flex-row {
-	  justify-content: space-between;
+		justify-content: space-between;
 	}
 	@media (max-width: 600px) {
-	  #lineup-bands .flex-row {
-	    display: block;
-	  }
+		#lineup-bands .flex-row {
+			display: block;
+		}
 	}
 	#set-times {
-	  background: url('./_img/set-times.jpg') #ffffff no-repeat;
-	  background-position: bottom center;
-	  background-size: cover;
-	  padding: 6.25em 0 20em;
-	  /* 100/16 */
+		background: url('./_img/set-times.jpg') #ffffff no-repeat;
+		background-position: bottom center;
+		background-size: cover;
+		padding: 6.25em 0 20em;
+		/* 100/16 */
 	}
 	@media (max-width: 600px) {
-	  #set-times {
-	  	background-image: url('./_img/set-times-mobile.jpg');
-	    padding: 2em 0 10em;
-	  }
+		#set-times {
+			background-image: url('./_img/set-times-mobile.jpg');
+			padding: 2em 0 10em;
+		}
 	}
 	@media (min-width: 770px) {
-	  #set-times .family-band br {
-	    display: none;
-	  }
+		#set-times .family-band br {
+			display: none;
+		}
 	}
 	#set-times h3 {
-	  color: #000;
-	  text-align: center;
-	  margin-bottom: 0.25em;
+		color: #000;
+		text-align: center;
+		margin-bottom: 0.25em;
 	}
 	@media (max-width: 600px) {
-	  #set-times h3 {
-	    text-align: left;
-	    margin-bottom: 0;
-	  }
+		#set-times h3 {
+			text-align: left;
+			margin-bottom: 0;
+		}
 	}
 	#set-times h4 {
-	  color: #000;
+		color: #000;
 	}
 	@media (max-width: 600px) {
-	  #set-times h4 {
-	    font-size: 1.4375em;
-	    /* 23/16 */
-	  }
+		#set-times h4 {
+			font-size: 1.4375em;
+			/* 23/16 */
+		}
 	}
 	#set-times .flex-row {
-	  justify-content: center;
+		justify-content: center;
 	}
 	#set-times dl,
 	#set-times dt,
 	#set-times dd {
-	  margin: 0;
-	  padding: 0;
-	  text-transform: uppercase;
-	  color: #000;
+		margin: 0;
+		padding: 0;
+		text-transform: uppercase;
+		color: #000;
 	}
 	#set-times dt {
-	  font-size: 1.375em;
-	  /* 22/16 */
-	  font-weight: 900;
-	  font-family: 'brandon-grotesque', Helvetica, Arial, sans-serif;
-	  line-height: 1em;
+		font-size: 1.375em;
+		/* 22/16 */
+		font-weight: 900;
+		font-family: 'brandon-grotesque', Helvetica, Arial, sans-serif;
+		line-height: 1em;
 	}
 	@media (max-width: 600px) {
-	  #set-times dt {
-	    font-size: 1.0625em;
-	    /* 17/16 */
-	  }
+		#set-times dt {
+			font-size: 1.0625em;
+			/* 17/16 */
+		}
 	}
 	#set-times dd {
-	  font-size: 1em;
-	  /* 16/16 */
-	  margin-bottom: 1em;
+		font-size: 1em;
+		/* 16/16 */
+		margin-bottom: 1em;
 	}
 	@media (max-width: 600px) {
-	  #set-times dd {
-	    font-size: 0.75em;
-	    /* 12/16 */
-	  }
+		#set-times dd {
+			font-size: 0.75em;
+			/* 12/16 */
+		}
 	}
 	#set-times .friday,
 	#set-times .saturday {
-	  margin-bottom: 1em;
+		margin-bottom: 1em;
 	}
 	@media (min-width: 600px) {
-	  #set-times .friday,
-	  #set-times .saturday {
-	    flex: 0 0 25%;
-	    box-sizing: border-box;
-	  }
-	  #set-times .friday h4,
-	  #set-times .saturday h4 {
-	    margin-top: 0;
-	    margin-bottom: 1em;
-	  }
+		#set-times .friday,
+		#set-times .saturday {
+			flex: 0 0 25%;
+			box-sizing: border-box;
+		}
+		#set-times .friday h4,
+		#set-times .saturday h4 {
+			margin-top: 0;
+			margin-bottom: 1em;
+		}
 	}
 	#venue {
 		background-color: #fff;
@@ -660,18 +661,17 @@ import ResponsiveImage from '@/components/ResponsiveImage.astro';
 	}
 
 	#gallery {
-	  -webkit-user-select: none;
-	  user-select: none;
-	  position: relative;
+		-webkit-user-select: none;
+		user-select: none;
+		position: relative;
 	}
 	#gallery .cover-wrapper {
-	  text-align: center;
+		text-align: center;
 	}
 	#gallery .cover-wrapper img {
-	  max-width: 100%;
-	  border: none;
-	  margin: 0;
-	  padding: 0;
+		max-width: 100%;
+		border: none;
+		margin: 0;
+		padding: 0;
 	}
-
 </style>

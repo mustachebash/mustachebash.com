@@ -8,32 +8,32 @@ export default defineConfig({
 	trailingSlash: 'never',
 
 	server: {
-			host: true
+		host: true
 	},
 
 	build: {
-			assets: 'assets'
+		assets: 'assets'
 	},
 
 	env: {
-			schema: {
-					API_HOST: envField.string({context: 'client', access: 'public'}),
-					BRAINTREE_TOKEN: envField.string({context: 'client', access: 'public'})
-			}
+		schema: {
+			API_HOST: envField.string({ context: 'client', access: 'public' }),
+			BRAINTREE_TOKEN: envField.string({ context: 'client', access: 'public' })
+		}
 	},
 
 	vite: {
-			build: {
-					sourcemap: true,
-					rollupOptions: {
-							output: {
-									sourcemapBaseUrl: 'https://mustachebash.com/assets/'
-							}
-					}
-			},
-			server: {
-				allowedHosts: true
+		build: {
+			sourcemap: true,
+			rollupOptions: {
+				output: {
+					sourcemapBaseUrl: 'https://mustachebash.com/assets/'
+				}
 			}
+		},
+		server: {
+			allowedHosts: true
+		}
 	},
 
 	integrations: [react()]

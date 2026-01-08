@@ -19,700 +19,696 @@ console.log(eventIds);
 				<h3>Tickets</h3>
 				<h4>Get 'Em While The Gettin' is Good</h4>
 				<p>
-					Tickets go fast and they sell out early! In other words: don't snooze on getting your Bash tickets – FOMO ain't no fun. If you're 21+ and ready to funk, we have a pass for you. All sales are final, but don't worry, you won't want to miss this anyway. ALL ROOMS INCLUDE 2 TICKETS!
+					Tickets go fast and they sell out early! In other words: don't snooze on getting your Bash tickets – FOMO ain't no fun. If you're 21+ and ready to funk, we have a pass for you. All
+					sales are final, but don't worry, you won't want to miss this anyway. ALL ROOMS INCLUDE 2 TICKETS!
 				</p>
 				<div class="flex-row flex-row-mobile">
-					<div class="prices" id="tickets-list">
-					</div>
+					<div class="prices" id="tickets-list"></div>
 					<div class="ticket-image"><ResponsiveImage src={ticketImg} alt="No Fees" /></div>
+				</div>
+			</div>
+			<div class="tickets-flow">
+				<div class="progress">
+					<div class="leg"></div>
+					<div class="leg"></div>
+					<div class="leg"></div>
+					<div class="flex-row flex-row-mobile ticks">
+						<div class="active"><span>Tickets</span></div>
+						<div><span>Info</span></div>
+						<div><span>Payment</span></div>
+						<div><span>Review</span></div>
 					</div>
 				</div>
-				<div class="tickets-flow">
-					<div class="progress">
-						<div class="leg"></div>
-						<div class="leg"></div>
-						<div class="leg"></div>
-						<div class="flex-row flex-row-mobile ticks">
-							<div class="active"><span>Tickets</span></div>
-							<div><span>Info</span></div>
-							<div><span>Payment</span></div>
-							<div><span>Review</span></div>
+				<div id="promo-details"></div>
+				<div class="steps">
+					<div class="step active">
+						<div class="quantity-selector">
+							<h6>Quantity</h6>
+							<div class="quantity-controls"></div>
+						</div>
+						<div class="step-footer">
+							<button id="confirm-quantity">Next</button>
 						</div>
 					</div>
-					<div id="promo-details"></div>
-					<div class="steps">
-						<div class="step active">
-							<div class="quantity-selector">
-								<h6>Quantity</h6>
-								<div class="quantity-controls">
+					<div class="step">
+						<form method="post" action="/" name="personal-info">
+							<h6>Enter Your Info</h6>
+							<fieldset name="name">
+								<label data-error-message="Please enter your first and last name">Full Name</label>
+								<input type="text" name="name" placeholder="Purchaser's Name" maxlength="45" />
+							</fieldset>
+							<fieldset name="email">
+								<label data-error-message="Please enter your email">Email</label>
+								<input type="email" name="email" placeholder="Enter your email for confirmation" maxlength="100" />
+							</fieldset>
+							<fieldset name="marketing-opt-in">
+								<input id="marketing-opt-in-checkbox" type="checkbox" name="marketing-opt-in" />
+								<label for="marketing-opt-in-checkbox">Send me all Bash and partner news</label>
+							</fieldset>
+						</form>
+						<div class="flex-row flex-row-mobile step-footer">
+							<button id="enter-personal-info">Next</button>
+							<a href="#" id="back-to-quantity">Back to Previous</a>
+						</div>
+					</div>
+					<div class="step">
+						<form method="post" action="/" name="payment-info">
+							<h6>Enter Your Payment Info</h6>
+							<fieldset name="payment-info">
+								<label>Credit Card Number</label>
+								<div id="card-number"></div>
+							</fieldset>
+							<div class="flex-row flex-row-mobile">
+								<fieldset name="expiration">
+									<label>Expiration Date</label>
+									<div id="expiration"></div>
+								</fieldset>
+								<fieldset name="cvv">
+									<label>CVV <span title="The 3 or 4 digit code on the back of your card">i</span></label>
+									<div id="cvv"></div>
+								</fieldset>
+							</div>
+						</form>
+						<div class="flex-row flex-row-mobile step-footer">
+							<button id="enter-payment-info">Next</button>
+							<a href="#" id="back-to-personal">Back to Previous</a>
+						</div>
+						<div class="apple-pay">
+							<p>- or -</p>
+							<div id="apple-pay-payment-option"><div class="apple-pay-button apple-pay-button-white"></div></div>
+						</div>
+					</div>
+					<div class="step">
+						<div class="review-order">
+							<h6>Review and Purchase</h6>
+							<p class="intro">Please review your payment details and order summary. ALL SALES ARE FINAL!</p>
+							<div class="flex-row summary">
+								<div class="reservation-details">
+									<strong>Reservation Details</strong>
+									<p>
+										<span class="reservation-details-name"></span><br />
+										<span class="reservation-details-email"></span>
+									</p>
+								</div>
+								<div class="order-summary">
+									<strong>Order Summary</strong>
+									<dl></dl>
 								</div>
 							</div>
-							<div class="step-footer">
-								<button id="confirm-quantity">Next</button>
-							</div>
 						</div>
-						<div class="step">
-							<form method="post" action="/" name="personal-info">
-								<h6>Enter Your Info</h6>
-								<fieldset name="name">
-									<label data-error-message="Please enter your first and last name">Full Name</label>
-									<input type="text" name="name" placeholder="Purchaser's Name" maxlength="45">
-								</fieldset>
-								<fieldset name="email">
-									<label data-error-message="Please enter your email">Email</label>
-									<input type="email" name="email" placeholder="Enter your email for confirmation" maxlength="100">
-								</fieldset>
-								<fieldset name="marketing-opt-in">
-									<input id="marketing-opt-in-checkbox" type="checkbox" name="marketing-opt-in">
-									<label for="marketing-opt-in-checkbox">Send me all Bash and partner news</label>
-								</fieldset>
-							</form>
-							<div class="flex-row flex-row-mobile step-footer">
-								<button id="enter-personal-info">Next</button>
-								<a href="#" id="back-to-quantity">Back to Previous</a>
-							</div>
+						<div class="flex-row flex-row-mobile step-footer">
+							<button id="confirm-order">Purchase</button>
+							<a href="#" id="back-to-payment">Back to Previous</a>
+							<p id="grand-total" class="total">Total $<span>0</span></p>
 						</div>
-						<div class="step">
-							<form method="post" action="/" name="payment-info">
-								<h6>Enter Your Payment Info</h6>
-								<fieldset name="payment-info">
-									<label>Credit Card Number</label>
-									<div id="card-number"></div>
-								</fieldset>
-								<div class="flex-row flex-row-mobile">
-									<fieldset name="expiration">
-										<label>Expiration Date</label>
-										<div id="expiration"></div>
-									</fieldset>
-									<fieldset name="cvv">
-										<label>CVV <span title="The 3 or 4 digit code on the back of your card">i</span></label>
-										<div id="cvv"></div>
-									</fieldset>
-								</div>
-							</form>
-							<div class="flex-row flex-row-mobile step-footer">
-								<button id="enter-payment-info">Next</button>
-								<a href="#" id="back-to-personal">Back to Previous</a>
-							</div>
-							<div class="apple-pay">
-								<p>- or -</p>
-								<div id="apple-pay-payment-option"><div class="apple-pay-button apple-pay-button-white"></div></div>
-							</div>
-						</div>
-						<div class="step">
-							<div class="review-order">
-								<h6>Review and Purchase</h6>
-								<p class="intro">
-									Please review your payment details and order summary. ALL SALES ARE FINAL!
-								</p>
-								<div class="flex-row summary">
-									<div class="reservation-details">
-										<strong>Reservation Details</strong>
-										<p>
-											<span class="reservation-details-name"></span><br>
-											<span class="reservation-details-email"></span>
-										</p>
-									</div>
-									<div class="order-summary">
-										<strong>Order Summary</strong>
-										<dl>
-
-										</dl>
-									</div>
-								</div>
-							</div>
-							<div class="flex-row flex-row-mobile step-footer">
-								<button id="confirm-order">Purchase</button>
-								<a href="#" id="back-to-payment">Back to Previous</a>
-								<p id="grand-total" class="total">Total $<span>0</span></p>
-							</div>
-						</div>
-						<div class="step">
-							<div class="order-confirmation">
-								<h6>
-									Congratulations!<br>
-									<!-- non-breaking space for mobile -->
-									You're Officially Bashin'.
-								</h6>
-								<p class="confirmation-number">Confirmation: <span></span></p>
-								<p class="order-number">Order: <span></span></p>
-								<p class="tickets-link"><a href="#" rel="nofollow" target="_blank">View Tickets</a></p>
-								<p class="confirmation-message">
-									Thanks for purchasing a Bash Pass! We sent you a confirmation email (it might be in your Spam folder) with a link to your ticket(s), which can also be accessed above. Now grow out those mo's and grab some '70s drip. We'll see you at the SF Bash October 10-11!
-								</p>
-								<p class="confirmation-footer">
-									Don't forget to check our <a href="/info">FAQs</a> before coming. Email <a href="mailto:contact@mustachebash.com">contact@mustachebash.com</a> for all other questions.
-								</p>
-							</div>
+					</div>
+					<div class="step">
+						<div class="order-confirmation">
+							<h6>
+								Congratulations!<br />
+								<!-- non-breaking space for mobile -->
+								You're Officially Bashin'.
+							</h6>
+							<p class="confirmation-number">Confirmation: <span></span></p>
+							<p class="order-number">Order: <span></span></p>
+							<p class="tickets-link"><a href="#" rel="nofollow" target="_blank">View Tickets</a></p>
+							<p class="confirmation-message">
+								Thanks for purchasing a Bash Pass! We sent you a confirmation email (it might be in your Spam folder) with a link to your ticket(s), which can also be accessed above.
+								Now grow out those mo's and grab some '70s drip. We'll see you at the SF Bash October 10-11!
+							</p>
+							<p class="confirmation-footer">
+								Don't forget to check our <a href="/info">FAQs</a> before coming. Email <a href="mailto:contact@mustachebash.com">contact@mustachebash.com</a> for all other questions.
+							</p>
 						</div>
 					</div>
 				</div>
 			</div>
+		</div>
 	</PageContainer>
 </section>
 
 <style is:global>
 	#tickets {
-	  background: #ffffff;
+		background: #ffffff;
 	}
 	#tickets h3 {
-	  margin-bottom: 0;
+		margin-bottom: 0;
 	}
 	#tickets h4 {
-	  margin-top: 0;
+		margin-top: 0;
 	}
 	#tickets p.total {
-	  text-align: right;
-	  text-transform: uppercase;
-	  font-weight: 900;
+		text-align: right;
+		text-transform: uppercase;
+		font-weight: 900;
 	}
 	#tickets .sales-off {
-	  padding-top: 2em;
+		padding-top: 2em;
 	}
 	@media (min-width: 770px) {
-	  #tickets .sales-off {
-	    padding-top: 13em;
-	  }
+		#tickets .sales-off {
+			padding-top: 13em;
+		}
 	}
 	#tickets .sales-off h5 {
-	  text-align: center;
+		text-align: center;
 	}
 	@media (min-width: 770px) {
-	  #tickets .sales-off h5 {
-	    padding: 0 3em;
-	  }
+		#tickets .sales-off h5 {
+			padding: 0 3em;
+		}
 	}
 	#tickets .tickets-description,
 	#tickets .tickets-flow,
 	#tickets .prices,
 	#tickets .ticket-image {
-	  box-sizing: border-box;
-	  flex: 1 0 50%;
+		box-sizing: border-box;
+		flex: 1 0 50%;
 	}
 	#tickets .tickets-description {
-	  padding: 6.25em 5em 6.25em 0;
-	  margin-bottom: -2em;
+		padding: 6.25em 5em 6.25em 0;
+		margin-bottom: -2em;
 	}
 	@media (min-width: 601px) {
-	  #tickets .tickets-description {
-	    margin-bottom: 3em;
-	  }
+		#tickets .tickets-description {
+			margin-bottom: 3em;
+		}
 	}
 	#tickets .tickets-description h6 {
-	  position: relative;
-	  font-family: 'brandon-grotesque', Helvetica, Arial, sans-serif;
-	  font-weight: 900;
-	  font-size: 1.375em;
-	  /* 22/16 */
-	  margin: 0;
-	  margin-bottom: 0.25em;
-	  text-transform: uppercase;
-	  color: #000000;
-	  white-space: nowrap;
+		position: relative;
+		font-family: 'brandon-grotesque', Helvetica, Arial, sans-serif;
+		font-weight: 900;
+		font-size: 1.375em;
+		/* 22/16 */
+		margin: 0;
+		margin-bottom: 0.25em;
+		text-transform: uppercase;
+		color: #000000;
+		white-space: nowrap;
 	}
 	#tickets .tickets-description h6 sup {
-	  position: absolute;
-	  top: 0;
-	  left: 0;
-	  color: #000000;
-	  font-size: 0.625rem;
-	  /* 10/16 */
+		position: absolute;
+		top: 0;
+		left: 0;
+		color: #000000;
+		font-size: 0.625rem;
+		/* 10/16 */
 	}
 	#tickets .tickets-description h6.disabled {
-	  color: rgba(0, 0, 0, 0.3);
+		color: rgba(0, 0, 0, 0.3);
 	}
 	#tickets .tickets-description h6.disabled sup {
-	  display: none;
+		display: none;
 	}
 	#tickets .tickets-description h6.promo {
-/*	  color: #f3e339;*/
+		/*	  color: #f3e339;*/
 	}
 	#tickets .tickets-description h6.promo:after {
-	  content: '*';
-	  display: inline-block;
-	  position: absolute;
-	  color: #f3e339;
-	  margin: 0;
-	  font-size: 3rem;
-	  top: -.5em;
+		content: '*';
+		display: inline-block;
+		position: absolute;
+		color: #f3e339;
+		margin: 0;
+		font-size: 3rem;
+		top: -0.5em;
 	}
 	#tickets .tickets-description h6.sold-out {
-	  text-decoration: line-through;
+		text-decoration: line-through;
 	}
 	#tickets .tickets-description h6.sold-out:after {
-	  content: 'Sold out!';
-	  display: inline-block;
-	  position: relative;
-	  white-space: nowrap;
-	  text-decoration: none;
-	  color: #f3e339;
-	  margin: 0;
-	  font-size: 0.625rem;
-	  /* 10/16 */
-	  left: -2em;
-	  top: -5px;
-	  transform: rotate(25deg);
+		content: 'Sold out!';
+		display: inline-block;
+		position: relative;
+		white-space: nowrap;
+		text-decoration: none;
+		color: #f3e339;
+		margin: 0;
+		font-size: 0.625rem;
+		/* 10/16 */
+		left: -2em;
+		top: -5px;
+		transform: rotate(25deg);
 	}
 	@media (max-width: 600px) {
-	  #tickets .tickets-description {
-	    padding: 2em 0;
-	  }
-	  #tickets .tickets-description h6 {
-	    font-size: 1.125em;
-	    /* 18/16 */
-	  }
-	  #tickets .tickets-description .prices {
-	    padding-top: 1em;
-	    flex: 3 0;
-	  }
+		#tickets .tickets-description {
+			padding: 2em 0;
+		}
+		#tickets .tickets-description h6 {
+			font-size: 1.125em;
+			/* 18/16 */
+		}
+		#tickets .tickets-description .prices {
+			padding-top: 1em;
+			flex: 3 0;
+		}
 	}
 	#tickets .ticket-image {
-	  flex: 2 0;
+		flex: 2 0;
 	}
 	#tickets #promo-details h5 {
 		text-align: center;
-/*		color: #f3e339;*/
+		/*		color: #f3e339;*/
 		background: #f3e339;
 	}
 	#tickets .tickets-flow {
-	  padding-left: 7.5em;
-	  /* 120/16 */
+		padding-left: 7.5em;
+		/* 120/16 */
 	}
 	@media (max-width: 600px) {
-	  #tickets .tickets-flow {
-	    padding-left: 0;
-	    padding-bottom: 3.5em;
-	  }
+		#tickets .tickets-flow {
+			padding-left: 0;
+			padding-bottom: 3.5em;
+		}
 	}
 	#tickets .tickets-flow .step-footer {
-	  position: relative;
-	  padding-top: 0.5em;
+		position: relative;
+		padding-top: 0.5em;
 	}
 	#tickets .tickets-flow .step-footer button {
-	  flex: 0 0 10.625em;
-	  /* 170/16 */
+		flex: 0 0 10.625em;
+		/* 170/16 */
 	}
 	#tickets .tickets-flow .step-footer a {
-	  display: block;
-	  margin: 1rem 0 0 1.5rem;
-	  text-align: center;
-	  text-transform: uppercase;
-	  font-weight: 700;
-	  font-size: 0.75em;
-	  /* 12/16 */
-	  color: #072039;
+		display: block;
+		margin: 1rem 0 0 1.5rem;
+		text-align: center;
+		text-transform: uppercase;
+		font-weight: 700;
+		font-size: 0.75em;
+		/* 12/16 */
+		color: #072039;
 	}
 	#tickets .tickets-flow .step-footer a:before {
-	  content: '';
-	  display: inline-block;
-	  margin-right: 0.5rem;
-	  width: 0;
-	  height: 0;
-	  border: 4px solid transparent;
-	  border-right-color: #072039;
+		content: '';
+		display: inline-block;
+		margin-right: 0.5rem;
+		width: 0;
+		height: 0;
+		border: 4px solid transparent;
+		border-right-color: #072039;
 	}
 	@media (max-width: 600px) {
-	  #tickets .tickets-flow .step-footer a {
-	    margin-left: 0.5rem;
-	  }
+		#tickets .tickets-flow .step-footer a {
+			margin-left: 0.5rem;
+		}
 	}
 	#tickets .tickets-flow .step-footer p {
-	  flex: 1 1;
-	  color: #072039;
-	  text-align: right;
-	  margin: 0.75rem 0 0;
+		flex: 1 1;
+		color: #072039;
+		text-align: right;
+		margin: 0.75rem 0 0;
 	}
 	#tickets .tickets-flow .step {
-	  display: none;
+		display: none;
 	}
 	#tickets .tickets-flow .step.active {
-	  display: block;
+		display: block;
 	}
 	#tickets .progress {
-	  margin: 4em auto 3.5em;
-	  height: 0;
-	  width: 80%;
+		margin: 4em auto 3.5em;
+		height: 0;
+		width: 80%;
 	}
 	@media (max-width: 600px) {
-	  #tickets .progress {
-	    margin: 3em auto 2em;
-	  }
+		#tickets .progress {
+			margin: 3em auto 2em;
+		}
 	}
 	#tickets .progress .leg {
-	  width: 33.33333333%;
-	  float: left;
-	  height: 0;
-	  border: 1px solid #5675e7;
-	  box-sizing: border-box;
+		width: 33.33333333%;
+		float: left;
+		height: 0;
+		border: 1px solid #5675e7;
+		box-sizing: border-box;
 	}
 	#tickets .progress .leg.active {
-	  border-color: #000000;
+		border-color: #000000;
 	}
 	#tickets .progress .ticks {
-	  justify-content: space-between;
-	  margin: 0 -1px;
-	  width: 101%;
-	  height: 0;
+		justify-content: space-between;
+		margin: 0 -1px;
+		width: 101%;
+		height: 0;
 	}
 	#tickets .progress .ticks div {
-	  position: relative;
-	  height: 15px;
-	  width: 15px;
-	  border: 2px solid #5675e7;
-	  background: #5675e7;
-	  transform: translateY(-50%);
-	  border-radius: 100%;
-	  z-index: 999;
+		position: relative;
+		height: 15px;
+		width: 15px;
+		border: 2px solid #5675e7;
+		background: #5675e7;
+		transform: translateY(-50%);
+		border-radius: 100%;
+		z-index: 999;
 	}
 	#tickets .progress .ticks div span {
-	  display: block;
-	  white-space: nowrap;
-	  position: absolute;
-	  bottom: 150%;
-	  left: 50%;
-	  transform: translateX(-50%);
-	  font-family: 'proxima-nova', Helvetica, Arial, sans-serif;
-	  font-weight: 700;
-	  font-size: 0.75em;
-	  /* 12/16 */
-	  text-transform: uppercase;
-	  color: #000000;
+		display: block;
+		white-space: nowrap;
+		position: absolute;
+		bottom: 150%;
+		left: 50%;
+		transform: translateX(-50%);
+		font-family: 'proxima-nova', Helvetica, Arial, sans-serif;
+		font-weight: 700;
+		font-size: 0.75em;
+		/* 12/16 */
+		text-transform: uppercase;
+		color: #000000;
 	}
 	#tickets .progress .ticks div.active,
 	#tickets .progress .ticks div.complete {
-	  border-color: #000000;
+		border-color: #000000;
 	}
 	#tickets .progress .ticks div.complete {
-	  background: #000000;
+		background: #000000;
 	}
 	#tickets .progress .ticks div.complete span {
-	  color: #000000;
+		color: #000000;
 	}
 	#tickets .progress .ticks div.complete:after {
-	  content: '';
-	  display: block;
-	  position: absolute;
-	  left: 4px;
-	  top: 0;
-	  width: 3px;
-	  height: 7px;
-	  border: 2px solid transparent;
-	  border-right-color: #ffffff;
-	  border-bottom-color: #ffffff;
-	  transform: rotate(45deg);
+		content: '';
+		display: block;
+		position: absolute;
+		left: 4px;
+		top: 0;
+		width: 3px;
+		height: 7px;
+		border: 2px solid transparent;
+		border-right-color: #ffffff;
+		border-bottom-color: #ffffff;
+		transform: rotate(45deg);
 	}
 	#tickets .quantity-selector {
-	  padding-top: 5.5em;
-	  margin-bottom: 2em;
-	  -webkit-user-select: none;
-	  user-select: none;
+		padding-top: 5.5em;
+		margin-bottom: 2em;
+		-webkit-user-select: none;
+		user-select: none;
 	}
 	@media (max-width: 600px) {
-	  #tickets .quantity-selector {
-	    padding-top: 3em;
-	  }
+		#tickets .quantity-selector {
+			padding-top: 3em;
+		}
 	}
 	#tickets .quantity-selector h6 {
-	  flex: 3 0;
-	  font-family: 'brandon-grotesque', Helvetica, Arial, sans-serif;
-	  font-weight: 900;
-	  font-size: 1.375em;
-	  /* 22/16 */
-	  text-align: center;
-	  margin: 0;
-	  text-transform: uppercase;
-	  color: #000000;
-	  line-height: 1em;
+		flex: 3 0;
+		font-family: 'brandon-grotesque', Helvetica, Arial, sans-serif;
+		font-weight: 900;
+		font-size: 1.375em;
+		/* 22/16 */
+		text-align: center;
+		margin: 0;
+		text-transform: uppercase;
+		color: #000000;
+		line-height: 1em;
 	}
 	@media (max-width: 600px) {
-	  #tickets .quantity-selector h6 {
-	    font-size: 1.125em;
-	    /* 18/16 */
-	    flex: 2 0;
-	  }
+		#tickets .quantity-selector h6 {
+			font-size: 1.125em;
+			/* 18/16 */
+			flex: 2 0;
+		}
 	}
 	@media (max-width: 361px) {
-	  #tickets .quantity-selector h6 {
-	    flex: 1 1;
-	  }
+		#tickets .quantity-selector h6 {
+			flex: 1 1;
+		}
 	}
 	#tickets .quantity-selector .quantity-controls {
-	  padding: 1.3em 0;
+		padding: 1.3em 0;
 	}
 	#tickets .quantity-selector .quantity-controls .ticket {
-	  justify-content: space-between;
-	  align-items: center;
-	  margin-bottom: 1em;
+		justify-content: space-between;
+		align-items: center;
+		margin-bottom: 1em;
 	}
 	#tickets .quantity-selector .quantity-controls .ticket .ticket-name {
-	  font-weight: 700;
+		font-weight: 700;
 	}
 	#tickets .quantity-selector .quantity-controls .ticket .select-wrap {
-	  flex: 0 1 4em;
+		flex: 0 1 4em;
 	}
 	#tickets .quantity-selector + .step-footer {
-	  text-align: center;
+		text-align: center;
 	}
 	#tickets #confirm-quantity:disabled {
-	  background-color: #818ed9;
-	  cursor: no-drop;
+		background-color: #818ed9;
+		cursor: no-drop;
 	}
 	#tickets #confirm-quantity:disabled:active {
-	  box-shadow: none;
+		box-shadow: none;
 	}
 	#tickets form h6 {
-	  font-family: 'brandon-grotesque', Helvetica, Arial, sans-serif;
-	  font-weight: 900;
-	  font-size: 1.375em;
-	  /* 22/16 */
-	  margin: 0 0 0.75em;
-	  text-transform: uppercase;
-	  color: #000000;
+		font-family: 'brandon-grotesque', Helvetica, Arial, sans-serif;
+		font-weight: 900;
+		font-size: 1.375em;
+		/* 22/16 */
+		margin: 0 0 0.75em;
+		text-transform: uppercase;
+		color: #000000;
 	}
-	#tickets fieldset[name="marketing-opt-in"] {
-	  margin-bottom: 1em;
+	#tickets fieldset[name='marketing-opt-in'] {
+		margin-bottom: 1em;
 	}
-	#tickets fieldset[name="marketing-opt-in"] label,
-	#tickets fieldset[name="marketing-opt-in"] input {
-	  display: inline;
+	#tickets fieldset[name='marketing-opt-in'] label,
+	#tickets fieldset[name='marketing-opt-in'] input {
+		display: inline;
 	}
 	#tickets .apple-pay {
-	  display: none;
+		display: none;
 	}
 	#tickets .apple-pay p {
-	  text-align: center;
+		text-align: center;
 	}
 	#tickets #apple-pay-payment-option {
-	  max-width: 300px;
-	  margin: 1em auto 0;
+		max-width: 300px;
+		margin: 1em auto 0;
 	}
 	@media (max-width: 600px) {
-	  #tickets #apple-pay-payment-option {
-	    max-width: 200px;
-	    text-align: center;
-	  }
+		#tickets #apple-pay-payment-option {
+			max-width: 200px;
+			text-align: center;
+		}
 	}
 	@supports (-webkit-appearance: -apple-pay-button) {
-	  #tickets .apple-pay-button {
-	    display: block;
-	    -webkit-appearance: -apple-pay-button;
-	    -apple-pay-button-type: check-out;
-	    -apple-pay-button-style: black;
-	    height: 2.5em;
-	    /* 40/16 */
-	  }
+		#tickets .apple-pay-button {
+			display: block;
+			-webkit-appearance: -apple-pay-button;
+			-apple-pay-button-type: check-out;
+			-apple-pay-button-style: black;
+			height: 2.5em;
+			/* 40/16 */
+		}
 	}
 	@supports not (-webkit-appearance: -apple-pay-button) {
-	  #tickets .apple-pay-button {
-	    display: block;
-	    background-size: 100% 60%;
-	    background-repeat: no-repeat;
-	    background-position: 50% 50%;
-	    border-radius: 5px;
-	    padding: 0px;
-	    box-sizing: border-box;
-	    min-width: 200px;
-	    height: 2.5em;
-	    max-height: 64px;
-	    background-image: -webkit-named-image(apple-pay-logo-white);
-	    background-color: black;
-	  }
+		#tickets .apple-pay-button {
+			display: block;
+			background-size: 100% 60%;
+			background-repeat: no-repeat;
+			background-position: 50% 50%;
+			border-radius: 5px;
+			padding: 0px;
+			box-sizing: border-box;
+			min-width: 200px;
+			height: 2.5em;
+			max-height: 64px;
+			background-image: -webkit-named-image(apple-pay-logo-white);
+			background-color: black;
+		}
 	}
-	#tickets fieldset[name="expiration"] {
-	  flex: 2 1;
-	  margin-right: 2em;
+	#tickets fieldset[name='expiration'] {
+		flex: 2 1;
+		margin-right: 2em;
 	}
-	#tickets fieldset[name="cvv"] {
-	  flex: 1 1;
+	#tickets fieldset[name='cvv'] {
+		flex: 1 1;
 	}
-	#tickets fieldset[name="cvv"] label {
-	  position: relative;
+	#tickets fieldset[name='cvv'] label {
+		position: relative;
 	}
-	#tickets fieldset[name="cvv"] label span {
-	  display: block;
-	  position: absolute;
-	  top: 0;
-	  right: 0;
-	  font-family: Times, serif;
-	  font-style: italic;
-	  font-size: 10px;
-	  text-transform: none;
-	  border-radius: 100%;
-	  background: #302922;
-	  color: #f7f1df;
-	  height: 13px;
-	  width: 13px;
-	  text-align: center;
-	  cursor: help;
+	#tickets fieldset[name='cvv'] label span {
+		display: block;
+		position: absolute;
+		top: 0;
+		right: 0;
+		font-family: Times, serif;
+		font-style: italic;
+		font-size: 10px;
+		text-transform: none;
+		border-radius: 100%;
+		background: #302922;
+		color: #f7f1df;
+		height: 13px;
+		width: 13px;
+		text-align: center;
+		cursor: help;
 	}
-	#tickets fieldset[name="cvv"] label span:after {
-	  content: attr(title);
-	  position: absolute;
-	  bottom: 100%;
-	  right: 0;
-	  display: block;
-	  font-family: 'proxima-nova', Helvetica, Arial, sans-serif;
-	  font-size: 12px;
-	  font-style: normal;
-	  padding: 0.125em 0.5em;
-	  border-radius: 3px;
-	  pointer-events: none;
-	  white-space: nowrap;
-	  background: #302922;
-	  color: #f7f1df;
-	  opacity: 0;
-	  transition: opacity 200ms;
+	#tickets fieldset[name='cvv'] label span:after {
+		content: attr(title);
+		position: absolute;
+		bottom: 100%;
+		right: 0;
+		display: block;
+		font-family: 'proxima-nova', Helvetica, Arial, sans-serif;
+		font-size: 12px;
+		font-style: normal;
+		padding: 0.125em 0.5em;
+		border-radius: 3px;
+		pointer-events: none;
+		white-space: nowrap;
+		background: #302922;
+		color: #f7f1df;
+		opacity: 0;
+		transition: opacity 200ms;
 	}
-	#tickets fieldset[name="cvv"] label span:hover:after {
-	  opacity: 1;
+	#tickets fieldset[name='cvv'] label span:hover:after {
+		opacity: 1;
 	}
 	#tickets .review-order h6 {
-	  font-family: 'brandon-grotesque', Helvetica, Arial, sans-serif;
-	  font-weight: 900;
-	  font-size: 1.375em;
-	  /* 22/16 */
-	  margin: 0 0 0.75em;
-	  text-transform: uppercase;
-	  color: #000000;
+		font-family: 'brandon-grotesque', Helvetica, Arial, sans-serif;
+		font-weight: 900;
+		font-size: 1.375em;
+		/* 22/16 */
+		margin: 0 0 0.75em;
+		text-transform: uppercase;
+		color: #000000;
 	}
 	#tickets .review-order p {
-	  color: #000000;
+		color: #000000;
 	}
 	#tickets .review-order p.intro {
-	  border-top: 1px solid #000000;
-	  border-bottom: 1px solid #000000;
-	  padding: 1em 0;
-	  margin-bottom: 1.5em;
+		border-top: 1px solid #000000;
+		border-bottom: 1px solid #000000;
+		padding: 1em 0;
+		margin-bottom: 1.5em;
 	}
 	#tickets .review-order .summary {
-	  border-bottom: 1px solid #000000;
-	  padding-bottom: 1.5em;
-	  margin-bottom: 2em;
+		border-bottom: 1px solid #000000;
+		padding-bottom: 1.5em;
+		margin-bottom: 2em;
 	}
 	#tickets .review-order .reservation-details,
 	#tickets .review-order .order-summary {
-	  flex: 1 0 50%;
-	  box-sizing: border-box;
+		flex: 1 0 50%;
+		box-sizing: border-box;
 	}
 	#tickets .review-order .reservation-details strong,
 	#tickets .review-order .order-summary strong {
-	  text-transform: uppercase;
-	  font-size: 0.75em;
-	  /* 12/16 */
+		text-transform: uppercase;
+		font-size: 0.75em;
+		/* 12/16 */
 	}
 	#tickets .review-order dl {
-	  margin: 0;
-	  padding: 1em 0 0;
+		margin: 0;
+		padding: 1em 0 0;
 	}
 	#tickets .review-order dt,
 	#tickets .review-order dd {
-	  margin: 0;
-	  padding: 0;
+		margin: 0;
+		padding: 0;
 	}
 	#tickets .review-order dt {
-	  float: left;
-	  clear: left;
+		float: left;
+		clear: left;
 	}
 	#tickets .review-order dd {
-	  float: right;
-	  clear: right;
-	  text-align: right;
-	  font-weight: 700;
+		float: right;
+		clear: right;
+		text-align: right;
+		font-weight: 700;
 	}
 	#tickets .order-confirmation {
-	  background: #dfe3e6;
-	  padding: 1em;
-	  border: 2px dashed #000000;
-	  margin-bottom: 2em;
+		background: #dfe3e6;
+		padding: 1em;
+		border: 2px dashed #000000;
+		margin-bottom: 2em;
 	}
 	#tickets .order-confirmation h6 {
-	  font-family: 'brandon-grotesque', Helvetica, Arial, sans-serif;
-	  font-weight: 900;
-	  font-size: 1.375em;
-	  /* 22/16 */
-	  margin: 0 0 0.75em;
-	  text-transform: uppercase;
+		font-family: 'brandon-grotesque', Helvetica, Arial, sans-serif;
+		font-weight: 900;
+		font-size: 1.375em;
+		/* 22/16 */
+		margin: 0 0 0.75em;
+		text-transform: uppercase;
 	}
 	@media (max-width: 600px) {
-	  #tickets .order-confirmation h6 {
-	    line-height: 1.125em;
-	  }
+		#tickets .order-confirmation h6 {
+			line-height: 1.125em;
+		}
 	}
 	#tickets .order-confirmation p.confirmation-number,
 	#tickets .order-confirmation p.order-number {
-	  text-transform: uppercase;
-	  font-weight: 700;
-	  margin: 0;
+		text-transform: uppercase;
+		font-weight: 700;
+		margin: 0;
 	}
 	#tickets .order-confirmation p.confirmation-number span,
 	#tickets .order-confirmation p.order-number span {
-	  color: #000000;
+		color: #000000;
 	}
 	#tickets .order-confirmation p.tickets-link {
-	  margin: 2em 0;
+		margin: 2em 0;
 	}
 	@media (max-width: 600px) {
-	  #tickets .order-confirmation p.tickets-link {
-	    text-align: center;
-	  }
+		#tickets .order-confirmation p.tickets-link {
+			text-align: center;
+		}
 	}
 	#tickets .order-confirmation p.tickets-link a {
-	  border-radius: 400px;
-	  background-color: #f3e339;
-	  text-transform: uppercase;
-	  font-weight: 700;
-	  color: #000000;
-	  padding: 0.5em 2em;
-	  border: 1px solid #000000;
+		border-radius: 400px;
+		background-color: #f3e339;
+		text-transform: uppercase;
+		font-weight: 700;
+		color: #000000;
+		padding: 0.5em 2em;
+		border: 1px solid #000000;
 	}
 	#tickets .order-confirmation p.confirmation-footer {
-	  margin-top: 3em;
-	  color: rgba(0, 0, 0, 0.7);
-	  font-size: 12px;
-	  text-align: center;
-	  line-height: 1.5em;
+		margin-top: 3em;
+		color: rgba(0, 0, 0, 0.7);
+		font-size: 12px;
+		text-align: center;
+		line-height: 1.5em;
 	}
 	#tickets .order-confirmation p.confirmation-footer a {
-	  text-decoration: underline;
+		text-decoration: underline;
 	}
 	#card-number,
 	#expiration,
 	#cvv {
-	  margin-bottom: 1em;
-	  border: 1px solid #072039;
-	  transition: box-shadow 200ms;
-	  height: 2.1875em;
-	  /* 35/16 */
-	  padding: 0 1em;
-	  box-sizing: border-box;
+		margin-bottom: 1em;
+		border: 1px solid #072039;
+		transition: box-shadow 200ms;
+		height: 2.1875em;
+		/* 35/16 */
+		padding: 0 1em;
+		box-sizing: border-box;
 	}
 	#card-number.braintree-hosted-fields-focused,
 	#expiration.braintree-hosted-fields-focused,
 	#cvv.braintree-hosted-fields-focused {
-	  box-shadow: 0 0 4px 1px rgba(7, 32, 57, 0.3);
+		box-shadow: 0 0 4px 1px rgba(7, 32, 57, 0.3);
 	}
 	#card-number.braintree-hosted-fields-invalid,
 	#expiration.braintree-hosted-fields-invalid,
 	#cvv.braintree-hosted-fields-invalid {
-	  position: relative;
-	  border-color: #302922;
+		position: relative;
+		border-color: #302922;
 	}
 	#card-number.braintree-hosted-fields-invalid:after,
 	#expiration.braintree-hosted-fields-invalid:after,
 	#cvv.braintree-hosted-fields-invalid:after {
-	  content: '!';
-	  display: block;
-	  position: absolute;
-	  right: 0.75em;
-	  top: 50%;
-	  transform: translateY(-50%);
-	  text-align: center;
-	  width: 20px;
-	  height: 20px;
-	  line-height: 20px;
-	  border-radius: 100%;
-	  color: #ffffff;
-	  background: #302922;
+		content: '!';
+		display: block;
+		position: absolute;
+		right: 0.75em;
+		top: 50%;
+		transform: translateY(-50%);
+		text-align: center;
+		width: 20px;
+		height: 20px;
+		line-height: 20px;
+		border-radius: 100%;
+		color: #ffffff;
+		background: #302922;
 	}
 </style>
 <script>

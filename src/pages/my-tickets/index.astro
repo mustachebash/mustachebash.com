@@ -5,14 +5,8 @@ import opengraphImg from './_img/opengraph-image.jpg';
 import Main from './_components/Main.tsx';
 ---
 
-<Layout
-	title="Mustache Bash - Your Tickets"
-	openGraphImage={opengraphImg}
-	openGraphTitle="Mustache Bash Info"
-	openGraphDescription="Do not share this link with anyone."
-	robots="noindex, nofollow"
->
-	<Main client:only='react' />
+<Layout title="Mustache Bash - Your Tickets" openGraphImage={opengraphImg} openGraphTitle="Mustache Bash Info" openGraphDescription="Do not share this link with anyone." robots="noindex, nofollow">
+	<Main client:only="react" />
 </Layout>
 
 <style is:global>
@@ -104,7 +98,7 @@ import Main from './_components/Main.tsx';
 		margin-bottom: 1em;
 	}
 	h3 {
-		margin-top: .2em;
+		margin-top: 0.2em;
 		margin-bottom: 0;
 		line-height: 1em;
 	}
@@ -112,10 +106,12 @@ import Main from './_components/Main.tsx';
 		margin: 0;
 		line-height: 1;
 	}
-	.disclaimer, .instructions {
+	.disclaimer,
+	.instructions {
 		font-size: 12px;
 	}
-	.disclaimer a, .instructions a {
+	.disclaimer a,
+	.instructions a {
 		color: #302922;
 		font-weight: 700;
 		text-decoration: underline;
@@ -130,7 +126,7 @@ import Main from './_components/Main.tsx';
 		background: #302922;
 		padding: 0.5em 2em;
 		text-transform: uppercase;
-		font-family: 'proxima-nova', Helvetica, Arial, sans-serif;;
+		font-family: 'proxima-nova', Helvetica, Arial, sans-serif;
 		font-weight: 700;
 		font-size: 1.125em;
 		color: #ffffff;
@@ -175,7 +171,8 @@ import Main from './_components/Main.tsx';
 		color: #302922;
 	}
 	@media (max-width: 600px) {
-		.tickets .swiper-button-next, .tickets .swiper-button-prev {
+		.tickets .swiper-button-next,
+		.tickets .swiper-button-prev {
 			display: none;
 		}
 	}
@@ -189,7 +186,10 @@ import Main from './_components/Main.tsx';
 	.tickets-list .event-group {
 		margin-bottom: 4em;
 	}
-	.tickets-list .event-info h3, .tickets-list .event-info h4, .tickets-list .event-info h5, .tickets-list .event-info p {
+	.tickets-list .event-info h3,
+	.tickets-list .event-info h4,
+	.tickets-list .event-info h5,
+	.tickets-list .event-info p {
 		color: #ffffff;
 	}
 	.tickets-list ul {

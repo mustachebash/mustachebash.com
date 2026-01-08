@@ -31,16 +31,12 @@ const imageFiles = await Astro.glob('./_gallery-images/*');
 
 		<div class="gallery-wrapper">
 			{
-			    imageFiles.map((img) => (
-			    	<div class="gallery-item">
-				      <Image
-				        src={img.default}
-				        layout="full-width"
-				        alt="Mustache Bash Photo"
-				      />
-				    </div>
-			    ))
-			  }
+				imageFiles.map(img => (
+					<div class="gallery-item">
+						<Image src={img.default} layout="full-width" alt="Mustache Bash Photo" />
+					</div>
+				))
+			}
 		</div>
 	</section>
 

@@ -4,7 +4,7 @@ import { Image } from 'astro:assets';
 type Props = {
 	src: ImageMetadata;
 	alt: string;
-}
+};
 
 const { src, alt } = Astro.props as Props;
 ---
@@ -14,9 +14,9 @@ const { src, alt } = Astro.props as Props;
 </div>
 <style>
 	.wrap img {
-	    display: block;
-	    margin: 0 auto;
-	    max-width: 100%;
-	    height: auto;
+		display: block;
+		margin: 0 auto;
+		max-width: 100%;
+		height: auto;
 	}
 </style>
