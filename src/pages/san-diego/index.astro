@@ -3,6 +3,8 @@ import Layout from '@/layouts/Layout.astro';
 
 import PageContainer from '@/components/PageContainer.astro';
 import NewsletterSignup from '@/components/NewsletterSignup.astro';
+import Bands from '@/components/Bands.astro';
+import bandsData from './_bands';
 
 import opengraphImg from './_img/opengraph-image.jpg';
 import jsonLD from './_jsonLD.json';
@@ -91,6 +93,10 @@ import ResponsiveImage from '@/components/ResponsiveImage.astro';
  					<img src={lineupImg.src}>
  				</picture>
  			</div>
+
+			<h4 class="lineup-header">Featuring 4 stages with live performances by:</h4>
+
+			<Bands bands={bandsData}/>
 	 	</PageContainer>
  	</section>
 

@@ -21,7 +21,7 @@
 		}
 	},
 	"image": [
-		"https://mustachebash.com/img/Gallery_Desktop_2022_8.fa498089587992c580ff.jpg"
+		"https://mustachebash.com/assets/opengraph-image.DQrCknSM.jpg"
 	],
 	"offers": [{
 			"@type": "Offer",
@@ -30,14 +30,26 @@
 			"name": "General Admission",
 			"priceCurrency": "USD",
 			"availability": "https://schema.org/LimitedAvailability",
-			"validFrom": "2025-01-18T09:00-08:00",
-			"validThrough": "2025-03-22T23:00-07:00"
+			"validFrom": "2026-01-16T09:00-08:00",
+			"validThrough": "2026-03-21T23:00-07:00"
 		}],
 	"performer": [
-		{
-			"@type": "PerformingGroup",
-			"name": "The Mustache Bash Family Band"
-		}
+		{ "@type": "PerformingGroup", "name": "Marc Rebillet" },
+		{ "@type": "PerformingGroup", "name": "Armand Van Helden" },
+		{ "@type": "PerformingGroup", "name": "Danilo Plessow (MCDE)" },
+		{ "@type": "PerformingGroup", "name": "Blu DeTiger" },
+		{ "@type": "PerformingGroup", "name": "Razor-N-Tape" },
+		{ "@type": "PerformingGroup", "name": "Gavin Turek" },
+		{ "@type": "PerformingGroup", "name": "The Mustache Bash Family Band" },
+		{ "@type": "PerformingGroup", "name": "DJ M3" },
+		{ "@type": "PerformingGroup", "name": "DJ Dials" },
+		{ "@type": "PerformingGroup", "name": "Discotoshi" },
+		{ "@type": "PerformingGroup", "name": "Combover B2B Louiv" },
+		{ "@type": "PerformingGroup", "name": "Abby Normal" },
+		{ "@type": "PerformingGroup", "name": "He2She" },
+		{ "@type": "PerformingGroup", "name": "Rusty Midway" },
+		{ "@type": "PerformingGroup", "name": "Porcelain (Funk Set)" },
+		{ "@type": "PerformingGroup", "name": "Feelaxx" }
 	],
 	"organizer": {
 		"@type": "Organization",

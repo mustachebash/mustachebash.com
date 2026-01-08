@@ -1,7 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 
-import { Picture } from 'astro:assets';
+import { Picture, Image } from 'astro:assets';
 
 import PageContainer from '../components/PageContainer.astro';
 import NewsletterSignup from '../components/NewsletterSignup.astro';
@@ -54,7 +54,7 @@ import tunesImg from './_img/tunes.jpg';
 				</div>
 				<div class="video img-wrap">
 					<a href="https://youtu.be/dAb-nCPd2rQ" target="_blank">
-						<Picture layout="full-width" src={videoCoverImg} alt="The Mustache Bash Experience" />
+						<Image layout="full-width" src={videoCoverImg} alt="The Mustache Bash Experience" />
 						<p>Watch the Bash Experience <span>&#x2023;</span></p>
 					</a>
 				</div>
@@ -68,7 +68,7 @@ import tunesImg from './_img/tunes.jpg';
 		<PageContainer>
 			<div class="flex-row">
 				<div class="intro-image img-wrap">
-					<Picture layout="full-width" src={introImg} alt="Funk Phenomenon" />
+					<Image layout="constrained" src={introImg} alt="Funk Phenomenon" />
 				</div>
 				<div class="intro-text">
 					<h4>Enter an Otherworldly<br>Phenomenon of Funk</h4>
@@ -427,7 +427,7 @@ import tunesImg from './_img/tunes.jpg';
 	  }
 	}
 	#events .event .img-wrap > img {
-	  width: 100%;
+	  max-width: 100%;
 	}
 	#events .event .cta {
 	  margin-bottom: 2em;
