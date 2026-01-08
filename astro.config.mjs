@@ -7,10 +7,6 @@ export default defineConfig({
 	site: 'https://mustachebash.com',
 	trailingSlash: 'never',
 
-	experimental: {
-			responsiveImages: true
-	},
-
 	server: {
 			host: true
 	},

@@ -18,7 +18,7 @@
 # WORKDIR /static
 
 # Base
-FROM node:23.6-alpine3.20 AS base
+FROM node:24.12-alpine3.23 AS base
 RUN mkdir -p /build
 WORKDIR /build
 COPY package.json package-lock.json ./
