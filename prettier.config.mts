@@ -12,6 +12,13 @@ export default {
 			options: {
 				parser: 'astro'
 			}
+		},
+		{
+			files: ['*.yml', '*.yaml'],
+			options: {
+				tabWidth: 2,
+				useTabs: false
+			}
 		}
 	]
 };
