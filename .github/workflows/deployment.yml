@@ -41,13 +41,13 @@ jobs:
           app_name: mustachebash-public
           token: ${{ secrets.DIGITALOCEAN_PAT }}
           images: '[
-              {
-                "name": "static-server",
-                "image":{
-                  "registry_type": "GHCR",
-                  "registry": "mustachebash",
-                  "repository": "public",
-                  "digest": "${{ steps.build.outputs.digest }}"
-                }
-              }
+            {
+            "name": "static-server",
+            "image":{
+            "registry_type": "GHCR",
+            "registry": "mustachebash",
+            "repository": "public",
+            "digest": "${{ steps.build.outputs.digest }}"
+            }
+            }
             ]'

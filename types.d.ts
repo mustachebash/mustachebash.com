@@ -7,5 +7,5 @@ type Band = {
 		instagram?: string;
 		youtube?: string;
 		website?: string;
-	}
+	};
 };

@@ -7,7 +7,7 @@ import { format } from 'date-fns';
 
 const EVENT_SF_2025_ID = 'ade03d8e-9744-483e-8cbf-67f8d9c4055c';
 
-function logError({ lineno, colno, message, filename, stack, name }: { lineno: number, colno: number, message: string, filename: string, stack: string, name: string }) {
+function logError({ lineno, colno, message, filename, stack, name }: { lineno: number; colno: number; message: string; filename: string; stack: string; name: string }) {
 	fetch(API_HOST + '/v1/errors', {
 		method: 'POST',
 		headers: {
@@ -22,8 +22,7 @@ function logError({ lineno, colno, message, filename, stack, name }: { lineno: n
 			stack,
 			path: location.href
 		})
-	})
-		.catch(console.error);
+	}).catch(console.error);
 }
 
 // Global error listener
@@ -54,7 +53,7 @@ let cart: Record<string, any>[] = [],
 });
 
 function updateSubtotals() {
-	const subtotal = cart.reduce((tot, cur) => tot + (cur.quantity * products[cur.productId].price), 0),
+	const subtotal = cart.reduce((tot, cur) => tot + cur.quantity * products[cur.productId].price, 0),
 		orderSummaryList = document.querySelector<HTMLDListElement>('.order-summary dl') as HTMLDListElement;
 
 	document.querySelector<HTMLSpanElement>('#grand-total span')!.innerText = subtotal.toFixed(2);
@@ -76,7 +75,7 @@ function updateCartQuantities() {
 	cart = [];
 	quantityControls.querySelectorAll<HTMLSelectElement>('.ticket select').forEach(el => {
 		const qty = Number(el.value);
-		if(qty) {
+		if (qty) {
 			cart.push({
 				productId: el.name.replace('-quantity', ''),
 				quantity: qty
@@ -84,7 +83,7 @@ function updateCartQuantities() {
 		}
 	});
 
-	if(!cart.length) {
+	if (!cart.length) {
 		document.querySelector<HTMLButtonElement>('#confirm-quantity')!.disabled = true;
 	} else {
 		document.querySelector<HTMLButtonElement>('#confirm-quantity')!.disabled = false;
@@ -94,21 +93,21 @@ function updateCartQuantities() {
 }
 
 async function sha256(str: string) {
-  // Convert the string to a Uint8Array
-  const encoder = new TextEncoder();
-  const data = encoder.encode(str);
+	// Convert the string to a Uint8Array
+	const encoder = new TextEncoder();
+	const data = encoder.encode(str);
 
-  // Use the subtle crypto API to hash the data
-  const hashBuffer = await window.crypto.subtle.digest('SHA-256', data);
+	// Use the subtle crypto API to hash the data
+	const hashBuffer = await window.crypto.subtle.digest('SHA-256', data);
 
-  // Convert the hash to a hex string
-  const hashArray = Array.from(new Uint8Array(hashBuffer));
-  const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+	// Convert the hash to a hex string
+	const hashArray = Array.from(new Uint8Array(hashBuffer));
+	const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
 
-  return hashHex;
+	return hashHex;
 }
 
-const targetGuestId = (new URLSearchParams(location.search).get('targetGuestId')) ?? undefined;
+const targetGuestId = new URLSearchParams(location.search).get('targetGuestId') ?? undefined;
 function completePurchase(nonce: string) {
 	return fetch(API_HOST + '/v1/orders', {
 		method: 'POST',
@@ -125,8 +124,8 @@ function completePurchase(nonce: string) {
 	})
 		.then(response => {
 			// Check for HTTP error statuses, throw errors to skip processing response body
-			if(response.status >= 400) {
-				const err: Error & {status?: number} = new Error(response.statusText);
+			if (response.status >= 400) {
+				const err: Error & { status?: number } = new Error(response.statusText);
 
 				err.status = response.status;
 
@@ -135,7 +134,7 @@ function completePurchase(nonce: string) {
 
 			return Promise.all([response.headers, response.json()]);
 		})
-		.then(([ headers, { confirmationId, orderId, token } ]) => {
+		.then(([headers, { confirmationId, orderId, token }]) => {
 			window.requestAnimationFrame(() => {
 				// In case Apple Pay takes us here
 				document.querySelectorAll('.step')[2]!.classList.remove('active');
@@ -145,10 +144,11 @@ function completePurchase(nonce: string) {
 				document.querySelector<HTMLSpanElement>('.confirmation-number span')!.innerText = `#${confirmationId}`;
 				document.querySelector<HTMLSpanElement>('.order-number span')!.innerText = `#${orderId.slice(0, 8)}`;
 
-				if(targetGuestId) {
+				if (targetGuestId) {
 					document.querySelector<HTMLAnchorElement>('.tickets-link a')!.style.display = 'none';
 					// eslint-disable-next-line max-len
-					document.querySelector<HTMLParagraphElement>('.confirmation-message')!.innerText = 'Thanks for purchasing a VIP upgrade! Your tickets have been upgraded. Use the link sent in your original purchase to access your tickets.';
+					document.querySelector<HTMLParagraphElement>('.confirmation-message')!.innerText =
+						'Thanks for purchasing a VIP upgrade! Your tickets have been upgraded. Use the link sent in your original purchase to access your tickets.';
 				} else {
 					document.querySelector<HTMLAnchorElement>('.tickets-link a')!.href = `/my-tickets?t=${token}`;
 				}
@@ -158,7 +158,7 @@ function completePurchase(nonce: string) {
 				tick!.classList.add('complete');
 			});
 
-			const total = cart.reduce((tot, cur) => tot + (cur.quantity * products[cur.productId].price), 0),
+			const total = cart.reduce((tot, cur) => tot + cur.quantity * products[cur.productId].price, 0),
 				transactionId = headers?.get('Location')?.split('/').pop();
 			try {
 				window.gtag?.('event', 'purchase', {
@@ -181,7 +181,7 @@ function completePurchase(nonce: string) {
 					value: total,
 					transaction_id: transactionId
 				});
-			} catch(e) {
+			} catch (e) {
 				// Don't let gtag break the site
 			}
 
@@ -195,39 +195,41 @@ function completePurchase(nonce: string) {
 						item_price: Number(products[i.productId].price)
 					}))
 				});
-			} catch(e) {
+			} catch (e) {
 				// Don't let FB break the site
 			}
 
 			try {
-				sha256(customer.email).then(hashedEmail => {
-					(window as any).ttq.identify({
-						// sha256 hash of the customer email address
-						email: hashedEmail
-					});
-					(window as any).ttq.track('Purchase', {
-						currency: 'USD',
-						value: total,
-						contents: cart.map(i => ({
-							content_id: i.productId,
-							content_type: products[i.productId].type,
-							content_name: products[i.productId].name
-						}))
-					});
-				}).catch(console.error);
-			} catch(e) {
+				sha256(customer.email)
+					.then(hashedEmail => {
+						(window as any).ttq.identify({
+							// sha256 hash of the customer email address
+							email: hashedEmail
+						});
+						(window as any).ttq.track('Purchase', {
+							currency: 'USD',
+							value: total,
+							contents: cart.map(i => ({
+								content_id: i.productId,
+								content_type: products[i.productId].type,
+								content_name: products[i.productId].name
+							}))
+						});
+					})
+					.catch(console.error);
+			} catch (e) {
 				// Don't let TikTok break the site
 			}
 		});
 }
 
-function purchaseFlowInit({hostedFieldsInstance, applePayInstance}: {hostedFieldsInstance: HostedFields, applePayInstance: ApplePay | null}) {
+function purchaseFlowInit({ hostedFieldsInstance, applePayInstance }: { hostedFieldsInstance: HostedFields; applePayInstance: ApplePay | null }) {
 	const ticketsList = document.querySelector<HTMLDivElement>('#tickets-list') as HTMLDivElement,
 		quantitiesHTML = [],
 		ticketsListHTML = [],
-		now = (new Date()).toISOString();
+		now = new Date().toISOString();
 
-	if(promo?.type === 'single-use') {
+	if (promo?.type === 'single-use') {
 		cart.push({
 			productId: promo.product.id,
 			quantity: promo.productQuantity
@@ -261,31 +263,26 @@ function purchaseFlowInit({hostedFieldsInstance, applePayInstance}: {hostedField
 			document.querySelectorAll<HTMLDivElement>('.leg')[0]!.classList.add('active');
 		});
 	} else {
-		if(promo && products[promo.productId]?.status === 'active') {
+		if (promo && products[promo.productId]?.status === 'active') {
 			document.querySelector('#promo-details')!.innerHTML = `<h5>$${promo.flatDiscount} off ${products[promo.productId].name} applied (limit 1)</h5>`;
 			// Very janky hack, just overwrite the price on the product
 			products[promo.productId].price = products[promo.productId].price - promo.flatDiscount;
 		}
 
-		for(const id of Object.values(events).flatMap(({meta}) => meta.ticketsOrder)) {
-			if(!products[id]) continue;
+		for (const id of Object.values(events).flatMap(({ meta }) => meta.ticketsOrder)) {
+			if (!products[id]) continue;
 			const { name, price, status, eventId, admissionTier, type: productType } = products[id],
 				alwaysAvailable = admissionTier === 'vip' || productType === 'accomodation',
 				classes = [];
 
-			if(
-				status !== 'active' ||
-				!Object.values(events).some(ev => ev.salesEnabled) ||
-				!events[eventId].meta.currentTicket ||
-				now < events[eventId].openingSales
-			) classes.push('disabled');
+			if (status !== 'active' || !Object.values(events).some(ev => ev.salesEnabled) || !events[eventId].meta.currentTicket || now < events[eventId].openingSales) classes.push('disabled');
 
-			if(status === 'archived') classes.push('sold-out');
-			if(promo && promo.productId === id) classes.push('promo');
+			if (status === 'archived') classes.push('sold-out');
+			if (promo && promo.productId === id) classes.push('promo');
 
 			ticketsListHTML.push(`<h6 class="${classes.join(' ')}" data-product-id="${id}">${name} - $${price}</h6>`);
 
-			if(status === 'active' && events[eventId].salesEnabled && (events[eventId].meta.currentTicket === id || alwaysAvailable) && now > events[eventId].openingSales) {
+			if (status === 'active' && events[eventId].salesEnabled && (events[eventId].meta.currentTicket === id || alwaysAvailable) && now > events[eventId].openingSales) {
 				// The regex check is janky, but we don't want to pre-populate afterparty ticket quantities
 				quantitiesHTML.push(`
 					<div class="ticket flex-row flex-row-mobile">
@@ -294,11 +291,13 @@ function purchaseFlowInit({hostedFieldsInstance, applePayInstance}: {hostedField
 							<select name="${id}-quantity">
 								<option selected value="0">0</option>
 								<option value="1">1</option>
-								${(!promo || promo.productId !== id) && productType !== 'accomodation'
-								? `<option value="2">2</option>
+								${
+									(!promo || promo.productId !== id) && productType !== 'accomodation'
+										? `<option value="2">2</option>
 									<option value="3">3</option>
 									<option value="4">4</option>`
-								: ''}
+										: ''
+								}
 							</select>
 						</div>
 					</div>
@@ -310,12 +309,12 @@ function purchaseFlowInit({hostedFieldsInstance, applePayInstance}: {hostedField
 		quantityControls.innerHTML = quantitiesHTML.join('\n');
 
 		const earliestOpeningSalesDate = Object.values(events).reduce((earliest, cur) => {
-			if(cur.salesEnabled && cur.openingSales < earliest) return cur.openingSales;
+			if (cur.salesEnabled && cur.openingSales < earliest) return cur.openingSales;
 			return earliest;
 		}, '2040-12-31T00:00:00.000Z');
 
 		// If we aren't on sale yet
-		if(now < earliestOpeningSalesDate) {
+		if (now < earliestOpeningSalesDate) {
 			document.querySelector<HTMLDivElement>('.ticket-image')!.style.display = 'none';
 			document.querySelector<HTMLDivElement>('.tickets-flow')!.innerHTML = `
 				<div class="sales-off">
@@ -325,46 +324,50 @@ function purchaseFlowInit({hostedFieldsInstance, applePayInstance}: {hostedField
 				</div>`;
 
 			return;
-		} else if(Object.values(events).some(ev => ev.salesEnabled) && quantitiesHTML.length) {
+		} else if (Object.values(events).some(ev => ev.salesEnabled) && quantitiesHTML.length) {
 			// Set the quantities if at least one event has ticket sales turned on, otherwise jump ship
 			updateCartQuantities();
 
 			// Bind the quantity listener
-			quantityControls.addEventListener('change', (e) => {
+			quantityControls.addEventListener('change', e => {
 				try {
 					const el = e.target as HTMLSelectElement;
 					const newQty = Number(el.value);
 					const productId = el.name.replace('-quantity', '');
 					const prevQty = cart.find(i => i.productId === productId)?.quantity || 0;
 					const qtyDiff = newQty - prevQty;
-					if(qtyDiff > 0) {
+					if (qtyDiff > 0) {
 						window.gtag?.('event', 'add_to_cart', {
 							currency: 'USD',
 							value: products[productId].price * qtyDiff,
-							items: [{
-								item_id: productId,
-								item_name: products[productId].name,
-								item_category: 'Tickets',
-								item_variant: products[productId].admissionTier,
-								price: products[productId].price,
-								quantity: qtyDiff
-							}]
+							items: [
+								{
+									item_id: productId,
+									item_name: products[productId].name,
+									item_category: 'Tickets',
+									item_variant: products[productId].admissionTier,
+									price: products[productId].price,
+									quantity: qtyDiff
+								}
+							]
 						});
-					} else if(qtyDiff < 0) {
+					} else if (qtyDiff < 0) {
 						window.gtag?.('event', 'remove_from_cart', {
 							currency: 'USD',
 							value: Math.abs(products[productId].price * qtyDiff),
-							items: [{
-								item_id: productId,
-								item_name: products[productId].name,
-								item_category: 'Tickets',
-								item_variant: products[productId].admissionTier,
-								price: products[productId].price,
-								quantity: qtyDiff
-							}]
+							items: [
+								{
+									item_id: productId,
+									item_name: products[productId].name,
+									item_category: 'Tickets',
+									item_variant: products[productId].admissionTier,
+									price: products[productId].price,
+									quantity: qtyDiff
+								}
+							]
 						});
 					}
-				} catch(e) {
+				} catch (e) {
 					// Don't let gtag break the site
 				}
 
@@ -383,7 +386,7 @@ function purchaseFlowInit({hostedFieldsInstance, applePayInstance}: {hostedField
 		}
 
 		// Set up Apple Pay listeners
-		if(applePayInstance) {
+		if (applePayInstance) {
 			// Show the Apple Pay button and acceptance mark
 			document.querySelector<HTMLDivElement>('.apple-pay')!.style.display = 'block';
 			document.querySelector<HTMLDivElement>('.apple-pay-button')!.addEventListener('click', () => {
@@ -405,7 +408,7 @@ function purchaseFlowInit({hostedFieldsInstance, applePayInstance}: {hostedField
 				try {
 					window.gtag?.('event', 'view_cart', {
 						currency: 'USD',
-						value: cart.reduce((tot, cur) => tot + (cur.quantity * products[cur.productId].price), 0),
+						value: cart.reduce((tot, cur) => tot + cur.quantity * products[cur.productId].price, 0),
 						items: cart.map(i => ({
 							item_id: i.productId,
 							item_name: products[i.productId].name,
@@ -415,14 +418,14 @@ function purchaseFlowInit({hostedFieldsInstance, applePayInstance}: {hostedField
 							quantity: i.quantity
 						}))
 					});
-				} catch(e) {
+				} catch (e) {
 					// Don't let gtag break the site
 				}
 
 				const paymentRequest = applePayInstance.createPaymentRequest({
 						total: {
 							label: 'Total (All sales final)',
-							amount: String(cart.reduce((tot, cur) => tot + (cur.quantity * products[cur.productId].price), 0))
+							amount: String(cart.reduce((tot, cur) => tot + cur.quantity * products[cur.productId].price, 0))
 						},
 						lineItems: cart.map(i => ({
 							label: `${products[i.productId].name} (${i.quantity} qty)`,
@@ -434,18 +437,21 @@ function purchaseFlowInit({hostedFieldsInstance, applePayInstance}: {hostedField
 							givenName: customer.firstName,
 							familyName: customer.lastName
 						},
-						shippingMethods: [{
-							label: `Free Electronic Delivery`,
-							detail: `Tickets sent to ${customer.email}`,
-							amount: 0,
-							identifier: 'electronicDelivery'
-						}],
+						shippingMethods: [
+							{
+								label: `Free Electronic Delivery`,
+								detail: `Tickets sent to ${customer.email}`,
+								amount: 0,
+								identifier: 'electronicDelivery'
+							}
+						],
 						requiredBillingContactFields: ['email']
 					}),
 					appleSession = new (window as any).ApplePaySession(3, paymentRequest) as ApplePaySession;
 
 				appleSession.onvalidatemerchant = event => {
-					applePayInstance.performValidation({validationURL: event.validationURL, displayName: 'Mustache Bash'})
+					applePayInstance
+						.performValidation({ validationURL: event.validationURL, displayName: 'Mustache Bash' })
 						.then(merchantSession => appleSession.completeMerchantValidation(merchantSession))
 						.catch(err => {
 							appleSession.abort();
@@ -463,14 +469,15 @@ function purchaseFlowInit({hostedFieldsInstance, applePayInstance}: {hostedField
 				};
 
 				appleSession.onpaymentauthorized = event => {
-					applePayInstance.tokenize({token: event.payment.token})
+					applePayInstance
+						.tokenize({ token: event.payment.token })
 						.then(payload => {
 							console.log(JSON.stringify(event.payment));
 
 							try {
 								window.gtag?.('event', 'add_payment_info', {
 									currency: 'USD',
-									value: cart.reduce((tot, cur) => tot + (cur.quantity * products[cur.productId].price), 0),
+									value: cart.reduce((tot, cur) => tot + cur.quantity * products[cur.productId].price, 0),
 									payment_type: 'Credit Card',
 									items: cart.map(i => ({
 										item_id: i.productId,
@@ -481,7 +488,7 @@ function purchaseFlowInit({hostedFieldsInstance, applePayInstance}: {hostedField
 										quantity: i.quantity
 									}))
 								});
-							} catch(e) {
+							} catch (e) {
 								// Don't let gtag break the site
 							}
 
@@ -496,7 +503,7 @@ function purchaseFlowInit({hostedFieldsInstance, applePayInstance}: {hostedField
 						.catch(e => {
 							appleSession.completePayment((window as any).ApplePaySession.STATUS_FAILURE);
 
-							if(e.status !== 410) {
+							if (e.status !== 410) {
 								// eslint-disable-next-line
 								alert('Order Failed, please check your payment details and try again');
 							} else {
@@ -519,7 +526,7 @@ function purchaseFlowInit({hostedFieldsInstance, applePayInstance}: {hostedField
 			// Make sure there's items in the cart to purchase
 			const valid = cart.length;
 
-			if(valid) {
+			if (valid) {
 				window.requestAnimationFrame(() => {
 					document.querySelectorAll<HTMLDivElement>('.step')[0]!.classList.remove('active');
 					document.querySelectorAll<HTMLDivElement>('.step')[1]!.classList.add('active');
@@ -534,7 +541,7 @@ function purchaseFlowInit({hostedFieldsInstance, applePayInstance}: {hostedField
 				try {
 					window.gtag?.('event', 'begin_checkout', {
 						currency: 'USD',
-						value: cart.reduce((tot, cur) => tot + (cur.quantity * products[cur.productId].price), 0),
+						value: cart.reduce((tot, cur) => tot + cur.quantity * products[cur.productId].price, 0),
 						items: cart.map(i => ({
 							item_id: i.productId,
 							item_name: products[i.productId].name,
@@ -544,7 +551,7 @@ function purchaseFlowInit({hostedFieldsInstance, applePayInstance}: {hostedField
 							quantity: i.quantity
 						}))
 					});
-				} catch(e) {
+				} catch (e) {
 					// Don't let gtag break the site
 				}
 			}
@@ -561,7 +568,7 @@ function purchaseFlowInit({hostedFieldsInstance, applePayInstance}: {hostedField
 			email = document.querySelector<HTMLInputElement>('input[name="email"]')!.value;
 
 		// Not much name validation - your bad if you put in a fake name for a guest list
-		if(!fullName || fullName.trim().split(' ').length < 2) {
+		if (!fullName || fullName.trim().split(' ').length < 2) {
 			// redundant here, but done for explicitness
 			nameValid = false;
 			document.querySelector<HTMLFieldSetElement>('fieldset[name="name"]')!.classList.add('invalid');
@@ -571,7 +578,7 @@ function purchaseFlowInit({hostedFieldsInstance, applePayInstance}: {hostedField
 		}
 
 		// There's no such thing as a simple email validator - but again, your bad if you put in a shit email for confirmation
-		if(!email || !/^\S+@\S+\.\S{2,}$/.test(email.trim())) {
+		if (!email || !/^\S+@\S+\.\S{2,}$/.test(email.trim())) {
 			emailValid = false;
 			document.querySelector<HTMLFieldSetElement>('fieldset[name="email"]')!.classList.add('invalid');
 		} else {
@@ -579,7 +586,7 @@ function purchaseFlowInit({hostedFieldsInstance, applePayInstance}: {hostedField
 			document.querySelector<HTMLFieldSetElement>('fieldset[name="email"]')!.classList.remove('invalid');
 		}
 
-		if(nameValid && emailValid) {
+		if (nameValid && emailValid) {
 			customer.email = email.trim();
 			customer.firstName = fullName.trim().split(' ')[0];
 			customer.lastName = fullName.trim().split(' ').slice(1).join(' ');
@@ -610,10 +617,9 @@ function purchaseFlowInit({hostedFieldsInstance, applePayInstance}: {hostedField
 		const state = hostedFieldsInstance.getState();
 
 		// Check the braintree fields with this slick copy/paste job they provided
-		paymentValid = Object.keys(state.fields).every(key => ((state.fields as any)[key].isValid));
+		paymentValid = Object.keys(state.fields).every(key => (state.fields as any)[key].isValid);
 
-
-		if(paymentValid) {
+		if (paymentValid) {
 			window.requestAnimationFrame(() => {
 				document.querySelectorAll<HTMLDivElement>('.step')[2]!.classList.remove('active');
 				document.querySelectorAll<HTMLDivElement>('.step')[3]!.classList.add('active');
@@ -622,7 +628,7 @@ function purchaseFlowInit({hostedFieldsInstance, applePayInstance}: {hostedField
 				try {
 					window.gtag?.('event', 'view_cart', {
 						currency: 'USD',
-						value: cart.reduce((tot, cur) => tot + (cur.quantity * products[cur.productId].price), 0),
+						value: cart.reduce((tot, cur) => tot + cur.quantity * products[cur.productId].price, 0),
 						items: cart.map(i => ({
 							item_id: i.productId,
 							item_name: products[i.productId].name,
@@ -632,7 +638,7 @@ function purchaseFlowInit({hostedFieldsInstance, applePayInstance}: {hostedField
 							quantity: i.quantity
 						}))
 					});
-				} catch(e) {
+				} catch (e) {
 					// Don't let gtag break the site
 				}
 
@@ -646,7 +652,7 @@ function purchaseFlowInit({hostedFieldsInstance, applePayInstance}: {hostedField
 			try {
 				window.gtag?.('event', 'add_payment_info', {
 					currency: 'USD',
-					value: cart.reduce((tot, cur) => tot + (cur.quantity * products[cur.productId].price), 0),
+					value: cart.reduce((tot, cur) => tot + cur.quantity * products[cur.productId].price, 0),
 					payment_type: 'Credit Card',
 					items: cart.map(i => ({
 						item_id: i.productId,
@@ -657,13 +663,13 @@ function purchaseFlowInit({hostedFieldsInstance, applePayInstance}: {hostedField
 						quantity: i.quantity
 					}))
 				});
-			} catch(e) {
+			} catch (e) {
 				// Don't let gtag break the site
 			}
 		}
 	});
 
-	if(!promo) {
+	if (!promo) {
 		document.querySelector<HTMLButtonElement>('#back-to-quantity')!.addEventListener('click', e => {
 			e.preventDefault();
 			window.requestAnimationFrame(() => {
@@ -699,7 +705,7 @@ function purchaseFlowInit({hostedFieldsInstance, applePayInstance}: {hostedField
 	let submitting = false;
 	document.querySelector<HTMLButtonElement>('#confirm-order')!.addEventListener('click', () => {
 		// Cool it, cowboy
-		if(submitting) return;
+		if (submitting) return;
 
 		submitting = true;
 		document.querySelector<HTMLButtonElement>('#confirm-order')!.innerText = 'Processing...';
@@ -708,11 +714,12 @@ function purchaseFlowInit({hostedFieldsInstance, applePayInstance}: {hostedField
 
 		try {
 			window.gtag?.('event', 'confirm_cart');
-		} catch(e) {
+		} catch (e) {
 			// Don't let gtag break the site
 		}
 
-		hostedFieldsInstance.tokenize({cardholderName: `${customer.firstName} ${customer.lastName}`})
+		hostedFieldsInstance
+			.tokenize({ cardholderName: `${customer.firstName} ${customer.lastName}` })
 			.then(({ nonce }) => completePurchase(nonce))
 			.catch(e => {
 				submitting = false;
@@ -720,7 +727,7 @@ function purchaseFlowInit({hostedFieldsInstance, applePayInstance}: {hostedField
 				document.querySelector<HTMLButtonElement>('#confirm-order')!.disabled = false;
 				document.querySelector<HTMLAnchorElement>('#back-to-payment')!.style.display = '';
 
-				if(e.status !== 410) {
+				if (e.status !== 410) {
 					// eslint-disable-next-line
 					alert('Order Failed, please check your payment details and try again');
 				} else {
@@ -735,7 +742,7 @@ function purchaseFlowInit({hostedFieldsInstance, applePayInstance}: {hostedField
 
 	document.querySelector<HTMLAnchorElement>('#back-to-payment')!.addEventListener('click', e => {
 		// Can't go back now
-		if(submitting) return;
+		if (submitting) return;
 
 		e.preventDefault();
 		window.requestAnimationFrame(() => {
@@ -753,7 +760,8 @@ function purchaseFlowInit({hostedFieldsInstance, applePayInstance}: {hostedField
 
 // Setup braintree client
 function braintreeInit() {
-	return client.create({authorization: BRAINTREE_TOKEN})
+	return client
+		.create({ authorization: BRAINTREE_TOKEN })
 		.then(clientInstance => {
 			const hostedFieldsPromise = hostedFields.create({
 				client: clientInstance,
@@ -798,11 +806,11 @@ function braintreeInit() {
 			}
 
 			let applePayPromise: Promise<null | ApplePay> = Promise.resolve(null);
-			if(applePaySupported) {
-				applePayPromise = applePay.create({client: clientInstance}).catch(applePayErr => console.error('Error creating applePayInstance:', applePayErr)) as Promise<ApplePay>;
+			if (applePaySupported) {
+				applePayPromise = applePay.create({ client: clientInstance }).catch(applePayErr => console.error('Error creating applePayInstance:', applePayErr)) as Promise<ApplePay>;
 			}
 
-			return Promise.all([hostedFieldsPromise, applePayPromise]).then(([hostedFieldsInstance, applePayInstance]) => ({hostedFieldsInstance, applePayInstance}));
+			return Promise.all([hostedFieldsPromise, applePayPromise]).then(([hostedFieldsInstance, applePayInstance]) => ({ hostedFieldsInstance, applePayInstance }));
 		})
 		.then(purchaseFlowInit)
 		.catch(e => {
@@ -817,43 +825,46 @@ function setPromo() {
 	const promoId = new URLSearchParams(location.search).get('promo');
 
 	// Fetch the initial settings and products
-	return !!promoId && fetch(`${API_HOST}/v1/promos/${promoId}`)
-		.then(response => {
-			if(!response.ok) {
-				const err: Error & {status?: number} = new Error('Promo Error');
+	return (
+		!!promoId &&
+		fetch(`${API_HOST}/v1/promos/${promoId}`)
+			.then(response => {
+				if (!response.ok) {
+					const err: Error & { status?: number } = new Error('Promo Error');
 
-				err.status = response.status;
-				throw err;
-			}
+					err.status = response.status;
+					throw err;
+				}
 
-			return response;
-		})
-		.then(response => response.json())
-		.then(responseJson => {
-			if(responseJson.status === 'active') {
-				return promo = responseJson;
-			} else {
-				return false;
-			}
-		})
-		.catch(e => {
-			let promoMessage;
-			switch(e.status) {
-				case 404:
-					promoMessage = 'Promo Code is not valid';
-					break;
+				return response;
+			})
+			.then(response => response.json())
+			.then(responseJson => {
+				if (responseJson.status === 'active') {
+					return (promo = responseJson);
+				} else {
+					return false;
+				}
+			})
+			.catch(e => {
+				let promoMessage;
+				switch (e.status) {
+					case 404:
+						promoMessage = 'Promo Code is not valid';
+						break;
 
-				case 410:
-					promoMessage = 'Promo Code is no longer valid';
-					break;
+					case 410:
+						promoMessage = 'Promo Code is no longer valid';
+						break;
 
-				default:
-					promoMessage = 'Something seems to be broken,<br>please refresh the page and try again';
-					break;
-			}
+					default:
+						promoMessage = 'Something seems to be broken,<br>please refresh the page and try again';
+						break;
+				}
 
-			document.querySelector<HTMLDivElement>('.tickets-flow')!.innerHTML = `<h5 style="padding-top: 5em; color: #e66a40; text-align: center">${promoMessage}</h5>`;
-		});
+				document.querySelector<HTMLDivElement>('.tickets-flow')!.innerHTML = `<h5 style="padding-top: 5em; color: #e66a40; text-align: center">${promoMessage}</h5>`;
+			})
+	);
 }
 
 type EventSettings = {
@@ -883,16 +894,18 @@ type EventSettings = {
 Promise.all([
 	fetch(API_HOST + `/v1/event-settings/${EVENT_SF_2025_ID}`)
 		.then(response => {
-			if(!response.ok) throw new Error('Settings not loaded');
+			if (!response.ok) throw new Error('Settings not loaded');
 
 			return response;
 		})
-		.then(response => (response.json() as Promise<EventSettings>)),
+		.then(response => response.json() as Promise<EventSettings>)
 ])
-	.then(evs => evs.forEach(({ products: siteProducts, ...ev }) => {
-		siteProducts.forEach(p => products[p.id] = p);
-		events[ev.id] = ev;
-	}))
+	.then(evs =>
+		evs.forEach(({ products: siteProducts, ...ev }) => {
+			siteProducts.forEach(p => (products[p.id] = p));
+			events[ev.id] = ev;
+		})
+	)
 	.then(setPromo)
 	.catch(e => {
 		console.error('Settings Error', e);
@@ -903,7 +916,8 @@ Promise.all([
 	.catch(e => {
 		// If anything errors, we need to show a message in the tickets section
 		// eslint-disable-next-line max-len
-		document.querySelector<HTMLDivElement>('.tickets-flow')!.innerHTML = '<h5 style="padding-top: 5em; color: #602a34; text-align: center">Something seems to be broken,<br>please refresh the page and try again</h5>';
+		document.querySelector<HTMLDivElement>('.tickets-flow')!.innerHTML =
+			'<h5 style="padding-top: 5em; color: #602a34; text-align: center">Something seems to be broken,<br>please refresh the page and try again</h5>';
 
 		logError(e);
 	});

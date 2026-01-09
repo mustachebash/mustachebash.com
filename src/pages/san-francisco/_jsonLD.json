@@ -19,17 +19,15 @@
 			"addressCountry": "US"
 		}
 	},
-	"image": [
-		"https://mustachebash.com/img/sf/lineup.jpg"
-	],
+	"image": ["https://mustachebash.com/img/sf/lineup.jpg"],
 	"offers": {
-			"@type": "Offer",
-			"url": "https://mustachebash.com/#tickets",
-			"price": "89",
-			"priceCurrency": "USD",
-			"availability": "https://schema.org/SoldOut",
-			"validFrom": "2023-08-01T09:00-08:00"
-		},
+		"@type": "Offer",
+		"url": "https://mustachebash.com/#tickets",
+		"price": "89",
+		"priceCurrency": "USD",
+		"availability": "https://schema.org/SoldOut",
+		"validFrom": "2023-08-01T09:00-08:00"
+	},
 	"performer": [
 		{
 			"@type": "PerformingGroup",
