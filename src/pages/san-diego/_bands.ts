@@ -50,8 +50,7 @@ const bands: Band[] = [
 		links: {
 			spotify: 'https://open.spotify.com/artist/5NyCIBCeU080ynEj33S4hC',
 			instagram: 'https://www.instagram.com/bludetiger/',
-			youtube: 'https://www.youtube.com/c/bludetiger',
-			website: 'https://www.bludetiger.com/'
+			youtube: 'https://www.youtube.com/c/bludetiger'
 		}
 	},
 	{
