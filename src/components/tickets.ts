@@ -5,7 +5,8 @@ import { API_HOST, BRAINTREE_TOKEN } from 'astro:env/client';
 
 import { format } from 'date-fns';
 
-const EVENT_SF_2025_ID = 'ade03d8e-9744-483e-8cbf-67f8d9c4055c';
+const ticketsSection = document.getElementById('tickets'),
+	eventIds: string[] = JSON.parse(ticketsSection?.dataset.eventIds || '[]');
 
 function logError({ lineno, colno, message, filename, stack, name }: { lineno: number; colno: number; message: string; filename: string; stack: string; name: string }) {
 	fetch(API_HOST + '/v1/errors', {
@@ -891,15 +892,17 @@ type EventSettings = {
 	}[];
 };
 // Fetch the initial settings and products
-Promise.all([
-	fetch(API_HOST + `/v1/event-settings/${EVENT_SF_2025_ID}`)
-		.then(response => {
-			if (!response.ok) throw new Error('Settings not loaded');
+Promise.all(
+	eventIds.map(eventId =>
+		fetch(API_HOST + `/v1/event-settings/${eventId}`)
+			.then(response => {
+				if (!response.ok) throw new Error('Settings not loaded');
 
-			return response;
-		})
-		.then(response => response.json() as Promise<EventSettings>)
-])
+				return response;
+			})
+			.then(response => response.json() as Promise<EventSettings>)
+	)
+)
 	.then(evs =>
 		evs.forEach(({ products: siteProducts, ...ev }) => {
 			siteProducts.forEach(p => (products[p.id] = p));

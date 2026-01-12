@@ -1,11 +1,12 @@
 ---
-import { Image } from 'astro:assets';
+import { Picture, Image, getImage } from 'astro:assets';
 import Layout from '@/layouts/Layout.astro';
 
 import PageContainer from '@/components/PageContainer.astro';
 import NewsletterSignup from '@/components/NewsletterSignup.astro';
 import Bands from '@/components/Bands.astro';
 import bandsData from './_bands';
+import Tickets from '@/components/Tickets.astro';
 
 import opengraphImg from './_img/opengraph-image.jpg';
 import jsonLD from './_jsonLD.json';
@@ -14,13 +15,22 @@ import heroImg from './_img/hero.jpg';
 import heroImgMobile from './_img/hero-mobile.jpg';
 import videoCoverImg from './_img/video-cover.jpg';
 import introImg from './_img/intro.jpg';
-import lineupImg from './_img/lineup.jpg';
-import lineupImgMobile from './_img/lineup-mobile.jpg';
+import lineupImgImport from './_img/lineup.jpg';
+import lineupImgMobileImport from './_img/lineup-mobile.jpg';
 import venueImg from './_img/venue.jpg';
+import prepartyImg from './_img/preparty.jpg';
+import afterpartyImg from './_img/afterparty.jpg';
+import vipImg from './_img/vip.jpg';
+// import hotelsImg from './_img/hotels.jpg';
+// import hyattImg from './_img/hyatt.png';
+// import danaImg from './_img/dana.png';
 
 import galleryCoverImg from './_img/gallery-cover-desktop.jpg';
 import galleryCoverImgMobile from './_img/gallery-cover-mobile.jpg';
 import ResponsiveImage from '@/components/ResponsiveImage.astro';
+
+const lineupImg = await getImage({ src: lineupImgImport, format: 'webp' });
+const lineupImgMobile = await getImage({ src: lineupImgMobileImport, format: 'webp' });
 ---
 
 <Layout
@@ -79,7 +89,7 @@ import ResponsiveImage from '@/components/ResponsiveImage.astro';
 							style="color:#ffffff;"
 							target="_blank"
 							href="https://www.instagram.com/themustachebash/">@TheMustacheBash</a
-						> and subscribe to our email list to be the first to know when tickets go on sale.
+						> and subscribe to our email list to be in the know.
 					</p>
 					<div class="follow-button"><a class="ghost-button" target="_blank" href="https://www.instagram.com/themustachebash/">Follow&nbsp;On&nbsp;Instagram</a></div>
 				</div>
@@ -120,6 +130,95 @@ import ResponsiveImage from '@/components/ResponsiveImage.astro';
 			</div>
 		</PageContainer>
 	</section>
+
+	<section id="preparty">
+		<PageContainer>
+			<div class="flex-row">
+				<div class="preparty-description">
+					<h3>Preparty</h3>
+					<h4>Good Night John Boy</h4>
+					<p>
+						To wet your whistle on Bash Eve, we’re heading to the hottest new disco joint in town—Good Night John Boy—for the Mustache Bash preparty on Friday night. Think Studio 54 meets your grandparents funky ‘70s basement, right in the heart of the Gaslamp Quarter, with all the vibes to kick Bash weekend off right. There’s even a light-up dancefloor to warm up those boogie shoes before the big day.
+					</p>
+					<p>
+						8:00PM–Late. $20 tickets, lineup coming soon.
+					</p>
+					<a class="ghost-button" href="#tickets">Get Tickets</a>
+				</div>
+				<div class="preparty-image"><ResponsiveImage src={prepartyImg} alt="Preparty: Good Night John Boy" /></div>
+			</div>
+		</PageContainer>
+	</section>
+
+	<section id="afterparty">
+		<PageContainer>
+			<div class="flex-row">
+				<div class="afterparty-description">
+					<h3>Afterparty</h3>
+					<h4>Disco for Dessert</h4>
+					<p>
+						The Bash is too much mojo to bottle into a single day, so naturally, a buck wild afterparty is in store! To keep the party blasting off all night, we’re hosting the official Bash Afterparty at Mavericks Beach Club in PB. Smolder in the grooves as Mavericks transforms into a disco dreamland with 3 rooms of tunes. Tack on an afterparty pass at checkout – just $45 bones to light up the dance floor and Bash the night away. Full lineup coming soon!
+					</p>
+					<a class="ghost-button" href="#tickets">Get Tickets</a>
+				</div>
+				<div class="afterparty-image"><ResponsiveImage src={afterpartyImg} alt="Afterparty: Mavericks" /></div>
+			</div>
+		</PageContainer>
+	</section>
+
+	<section id="vip">
+		<PageContainer>
+			<div class="flex-row">
+				<div class="vip-description">
+					<h3>VIP Experience</h3>
+					<h4>Upgrade Your Ticket</h4>
+					<p>
+						If you've ever Bashed, you know it's one big VIP experience—just getting through the gates makes you a VIP! But back again by popular demand, we present the Bash VIP experience for the funkiest among funky specimens—kinda like the Jimi Hendrix Experience, but with less acid. There's only a handful of these bad mamajamas available so get 'em while the gettin's good! VIP Tickets includes:
+					</p>
+					<p class="vip-includes">
+						<strong>Afterparty Ticket</strong><br>
+						Private VIP Lounge<br>
+						Private VIP Viewing Deck<br>
+						Front row Main Stage Access<br>
+						Separate VIP Entrance<br>
+						Private VIP Bar(s)<br>
+						Extra Restrooms<br>
+					</p>
+					<a class="ghost-button" href="#tickets">Get Tickets</a>
+				</div>
+				<div class="vip-image"><ResponsiveImage src={vipImg} alt="VIP Tickets" /></div>
+			</div>
+		</PageContainer>
+	</section>
+
+	<!-- <section id="hotels">
+		<PageContainer>
+			<div class="flex-row">
+				<div class="hotels-description">
+					<h3>Get a Room</h3>
+					<h4>Discounted Hotels Steps from the Bash</h4>
+					<p>
+						...no seriously. The Bash is an all-weekend affair, and with the new beachfront location, even locals won't wanna stray far. To keep everyone comfortable for the weekend, we partnered with Mission Beach's top hotels to offer discounted rooms exclusively for Bashers. Book using the links below:
+					</p>
+					<div class="links-flex">
+						<div><a class="ghost-button" target="_blank" href="https://res.windsurfercrs.com/ibe/details.aspx?propertyid=17116&nights=2&checkin=03/21/2025&group=MUSTACHEBASH25&lang=en-us&adults=2">Book the Dana</a></div>
+						<div><img src={danaImg.src} alt="Dana"/></div>
+					</div>
+					<div class="links-flex">
+						<div><a class="ghost-button" target="_blank" href="https://www.hyatt.com/en-US/group-booking/SANIS/G-MUST">Book the Hyatt</a></div>
+						<div><img src={hyattImg.src} alt="Hyatt"/></div>
+					</div>
+				</div>
+				<div class="hotels-image"><ResponsiveImage src={hotelsImg} alt="Hotels"></div>
+			</div>
+		</PageContainer>
+	</section> -->
+
+	<Tickets eventIds={[
+		'd716bc1b-4fae-45e1-be80-b359da47a1ea', // bash
+		'9b23cb4a-740e-4378-b09a-3e92aac472e0', // afterparty
+		'1c3bdc92-7411-4608-8b20-719fe32ef778' // preparty
+	]}/>
 
 	<section id="gallery">
 		<div class="cover-wrapper">

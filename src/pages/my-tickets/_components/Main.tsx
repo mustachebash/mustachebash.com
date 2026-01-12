@@ -73,23 +73,23 @@ const Main = () => {
 						accommodations: Accommodation[];
 					}>;
 				})
-				.then(async ({ customer, tickets, accommodations }) => {
-					for (const ticket of tickets) {
-						const { qrPayload } = ticket;
+				// .then(async ({ customer, tickets, accommodations }) => {
+				// 	for (const ticket of tickets) {
+				// 		const { qrPayload } = ticket;
 
-						if (qrPayload) {
-							try {
-								const qrCode = await qrcode.toDataURL(qrPayload, { scale: 8, errorCorrectionLevel: 'M' });
+				// 		if (qrPayload) {
+				// 			try {
+				// 				const qrCode = await qrcode.toDataURL(qrPayload, { scale: 8, errorCorrectionLevel: 'M' });
 
-								ticket.qrCode = qrCode;
-							} catch (e) {
-								console.error('QR code generation failed', e);
-							}
-						}
-					}
+				// 				ticket.qrCode = qrCode;
+				// 			} catch (e) {
+				// 				console.error('QR code generation failed', e);
+				// 			}
+				// 		}
+				// 	}
 
-					return { customer, tickets, accommodations };
-				})
+				// 	return { customer, tickets, accommodations };
+				// })
 				.then(({ customer, tickets, accommodations }) => {
 					setCustomer(customer);
 					setTickets(tickets);

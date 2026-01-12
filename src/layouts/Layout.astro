@@ -66,6 +66,7 @@ const ogImageURL = openGraphImage ? new URL(openGraphImage.src, Astro.site).href
 
 		<!-- Facebook Pixel Code -->
 		<script is:inline>
+			/* eslint-disable @typescript-eslint/no-unused-expressions, prefer-spread, prefer-rest-params */
 			!(function (f, b, e, v, n, t, s) {
 				if (f.fbq) return;
 				n = f.fbq = function () {
@@ -84,6 +85,7 @@ const ogImageURL = openGraphImage ? new URL(openGraphImage.src, Astro.site).href
 			})(window, document, 'script', 'https://connect.facebook.net/en_US/fbevents.js');
 			fbq('init', '1354987751343916');
 			fbq('track', 'PageView');
+			/* eslint-enable */
 		</script>
 		<noscript>
 			<img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1354987751343916&ev=PageView&noscript=1" />
@@ -93,6 +95,7 @@ const ogImageURL = openGraphImage ? new URL(openGraphImage.src, Astro.site).href
 		<!-- TikTok Pixel Code -->
 
 		<script is:inline>
+			/* eslint-disable @typescript-eslint/no-unused-expressions, @typescript-eslint/no-unused-vars, no-var, prefer-rest-params */
 			!(function (w, d, t) {
 				w.TiktokAnalyticsObject = t;
 				var ttq = (w[t] = w[t] || []);
@@ -137,6 +140,7 @@ const ogImageURL = openGraphImage ? new URL(openGraphImage.src, Astro.site).href
 				ttq.load('D3CBULBC77UCTDLGROGG');
 				ttq.page();
 			})(window, document, 'ttq');
+			/* eslint-enable */
 		</script>
 		<!-- End TikTok Pixel Code-->
 	</head>
@@ -202,7 +206,7 @@ const ogImageURL = openGraphImage ? new URL(openGraphImage.src, Astro.site).href
 						<p>In San Diego</p>
 						<p>March 21</p>
 					</div>
-					<!-- <div class="tickets-nav-mobile"><a href="/san-diego#tickets">GET TICKETS</a></div> -->
+					<div class="tickets-nav-mobile"><a href="/san-diego#tickets">GET TICKETS</a></div>
 					<div id="menu-icon">
 						<div></div>
 						<div></div>
@@ -215,7 +219,7 @@ const ogImageURL = openGraphImage ? new URL(openGraphImage.src, Astro.site).href
 							<li><a href="/tradition">Tradition</a></li>
 							<li><a href="/gallery">Gallery</a></li>
 							<li><a href="/info">Info</a></li>
-							<!-- <li class="tickets-nav"><a href="/san-diego#tickets">GET TICKETS</a></li> -->
+							<li class="tickets-nav"><a href="/san-diego#tickets">GET TICKETS</a></li>
 							<!-- <li><a href="#shop">Shop</a></li> -->
 							<li class="social">
 								<a href="https://www.facebook.com/MustacheBashSD/" target="_blank">
@@ -326,30 +330,8 @@ const ogImageURL = openGraphImage ? new URL(openGraphImage.src, Astro.site).href
 			<p id="privacy-refund">
 				<a href="/privacy-policy" target="_blank">Privacy Policy</a> - All Sales are Final
 			</p>
-			<p id="copyright">&copy;2011-2025 Mustache Bash. All Rights Reserved.</p>
+			<p id="copyright">&copy;2011-2026 Mustache Bash. All Rights Reserved.</p>
 		</footer>
-
-		<section id="newsletter-slider">
-			<div class="close">&times;</div>
-			<PageContainer>
-				<!-- non-breaking space for mobile -->
-				<h4>Get all the bash updates to&nbsp;your&nbsp;inbox</h4>
-				<form method="post" action="/" name="newsletter-slider" class="flex-row">
-					<fieldset name="newsletter-slider-name">
-						<label data-error-message="Please enter your first and last name">Full Name</label>
-						<input type="text" name="newsletter-slider-name" placeholder="Your Name" maxlength="75" />
-					</fieldset>
-					<fieldset name="newsletter-slider-email">
-						<label data-error-message="Please enter your email">Email</label>
-						<input type="email" name="newsletter-slider-email" placeholder="Enter your email" maxlength="75" />
-					</fieldset>
-					<fieldset name="newsletter-slider-submit">
-						<button id="newsletter-slider-submit">Sign Up</button>
-					</fieldset>
-				</form>
-				<h5 id="newsletter-success">You've successfully signed up!</h5>
-			</PageContainer>
-		</section>
 	</body>
 </html>
 
@@ -642,65 +624,6 @@ const ogImageURL = openGraphImage ? new URL(openGraphImage.src, Astro.site).href
 		footer #copyright {
 			font-size: 16px;
 		}
-	}
-	#newsletter-slider {
-		display: none;
-		position: fixed;
-		top: 100%;
-		left: 0;
-		width: 100%;
-		will-change: transform;
-		transition: transform 300ms;
-		z-index: 9999;
-		background: #dfe3e6;
-		box-shadow: 0 3px 10px #000000;
-	}
-	#newsletter-slider .close {
-		position: absolute;
-		right: 1rem;
-		top: 0;
-		font-size: 2.25rem;
-		cursor: pointer;
-	}
-	#newsletter-slider .slide-up {
-		transform: translateY(-100%);
-	}
-	#newsletter-slider h3 {
-		color: #302922;
-		text-align: center;
-		line-height: 1.1em;
-	}
-	#newsletter-slider h4 {
-		color: #302922;
-		text-align: center;
-	}
-	#newsletter-slider #newsletter-success {
-		max-width: 48.125rem;
-		/* 770/16 */
-		margin: 1em auto 0;
-		visibility: hidden;
-		text-align: center;
-	}
-	@media (min-width: 601px) {
-		#newsletter-slider #newsletter-success {
-			margin: 0 auto -1.25em;
-		}
-	}
-	#newsletter-slider form[name='newsletter-slider'] {
-		max-width: 48.125em;
-		/* 770/16 */
-		margin: 0 auto;
-	}
-	#newsletter-slider form[name='newsletter-slider'] fieldset {
-		flex: 1 0 auto;
-		margin: 0 0.3125em;
-		/* 5/16 */
-	}
-	#newsletter-slider form[name='newsletter-slider'] fieldset[name='newsletter-slider-submit'] {
-		margin-top: 0.85em;
-	}
-	#newsletter-slider form[name='newsletter-slider'] fieldset[name='newsletter-slider-submit'] button {
-		width: 100%;
 	}
 </style>
 
