@@ -351,7 +351,7 @@ const Main = () => {
 										</div>
 										<p>
 											{eventName}
-											{admissionTier === 'vip' ? ' &#128378;' : ''}
+											{admissionTier === 'vip' ? <> &#128378;</> : ''}
 										</p>
 										<p>
 											{i + 1}/{tickets.length}
