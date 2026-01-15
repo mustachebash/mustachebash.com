@@ -1,11 +1,12 @@
 ---
-import { Image } from 'astro:assets';
+import { Image, getImage } from 'astro:assets';
 import Layout from '@/layouts/Layout.astro';
 
 import PageContainer from '@/components/PageContainer.astro';
 import NewsletterSignup from '@/components/NewsletterSignup.astro';
 import Bands from '@/components/Bands.astro';
 import bandsData from './_bands';
+import Tickets from '@/components/Tickets.astro';
 
 import opengraphImg from './_img/opengraph-image.jpg';
 import jsonLD from './_jsonLD.json';
@@ -14,13 +15,23 @@ import heroImg from './_img/hero.jpg';
 import heroImgMobile from './_img/hero-mobile.jpg';
 import videoCoverImg from './_img/video-cover.jpg';
 import introImg from './_img/intro.jpg';
-import lineupImg from './_img/lineup.jpg';
-import lineupImgMobile from './_img/lineup-mobile.jpg';
+import lineupImgImport from './_img/lineup.jpg';
+import lineupImgMobileImport from './_img/lineup-mobile.jpg';
 import venueImg from './_img/venue.jpg';
+import prepartyImg from './_img/preparty.jpg';
+import afterpartyImg from './_img/afterparty.jpg';
+import vipImg from './_img/vip.jpg';
+import hotelsImg from './_img/hotels.jpg';
+import bahiaImg from './_img/bahia.png';
+import hyattImg from './_img/hyatt.png';
+import danaImg from './_img/dana.png';
 
 import galleryCoverImg from './_img/gallery-cover-desktop.jpg';
 import galleryCoverImgMobile from './_img/gallery-cover-mobile.jpg';
 import ResponsiveImage from '@/components/ResponsiveImage.astro';
+
+const lineupImg = await getImage({ src: lineupImgImport, format: 'webp' });
+const lineupImgMobile = await getImage({ src: lineupImgMobileImport, format: 'webp' });
 ---
 
 <Layout
@@ -72,15 +83,13 @@ import ResponsiveImage from '@/components/ResponsiveImage.astro';
 				<div class="intro-text">
 					<h4>Looking Back<br />Bashing Forward</h4>
 					<p>
-						Last March was a historic day for San Diego—The Mustache Bash opened the doors at its new waterfront home in Mission Beach, six thousand Bashers unleashed on Mission Bay,
-						Chromeo and Breakbot brought the grand finale and by the end of the night, all were abducted by the funk. Safe to say, anyone in attendance will be back next year, along with
-						plenty of newcomers, and something tells us the future of funk and disco are looking bright! Building off the momentum of a tremendous success in San Diego, The Bash returns to
-						San Francisco this October 12 ready to funk like The City's never funked before. Stay tuned—you don't want to miss this one! Follow <a
+						Last March was a historic day for San Diego—The Mustache Bash opened the doors at its new waterfront home in Mission Beach, six thousand Bashers unleashed on Mission Bay, Chromeo and Breakbot brought the grand finale and by the end of the night, all were abducted by the funk. Something tells us the future of funk and disco is looking fierce!
+					</p>
+					<p>Building off the momentum, The Bash returns to San Diego on March 21st, 2026 ready to funk like we’ve never funked before. Follow <a
 							style="color:#ffffff;"
 							target="_blank"
 							href="https://www.instagram.com/themustachebash/">@TheMustacheBash</a
-						> and subscribe to our email list to be the first to know when tickets go on sale.
-					</p>
+						> and subscribe to our email list to be the first to know when tickets go on sale.</p>
 					<div class="follow-button"><a class="ghost-button" target="_blank" href="https://www.instagram.com/themustachebash/">Follow&nbsp;On&nbsp;Instagram</a></div>
 				</div>
 			</div>
@@ -96,7 +105,83 @@ import ResponsiveImage from '@/components/ResponsiveImage.astro';
 					<img src={lineupImg.src} />
 				</picture>
 			</div>
+		</PageContainer>
+	</section>
 
+	<section id="set-times">
+  		<PageContainer>
+  			<h3>Set Times</h3>
+  			<div class="flex-row">
+  				<div class="water-stage">
+  					<h4>Water Stage</h4>
+  					<dl>
+ 						<dt>Marc Rebillet</dt>
+ 						<dd>8:45 pm</dd>
+
+ 						<dt>Blu DeTiger</dt>
+ 						<dd>6:30 pm</dd>
+
+ 						<dt>Mustache Bash<br>Family Band</dt>
+ 						<dd>4:30 pm</dd>
+
+ 						<dt>Porcelain (Funk Set)</dt>
+ 						<dd>2:30 pm</dd>
+  					</dl>
+  				</div>
+  				<div class="fire-stage">
+  					<h4>Fire Stage</h4>
+  					<dl>
+						<dt>Danilo Plessow (MCDE)</dt>
+						<dd>8:30 pm</dd>
+
+						<dt>Armand Van Helden</dt>
+ 						<dd>7:00 pm</dd>
+
+ 						<dt>Razor-N-Tape</dt>
+ 						<dd>5:30 pm</dd>
+
+ 						<dt>Gavin Turek</dt>
+ 						<dd>4:00 pm</dd>
+
+						<dt>Combover B2B Louiv</dt>
+ 						<dd>2:00 pm</dd>
+  					</dl>
+  				</div>
+  				<div class="wind-stage">
+  					<h4>Wind Stage</h4>
+  					<dl>
+						<dt>Abby Normal</dt>
+ 						<dd>7:45 pm</dd>
+
+ 						<dt>He2She</dt>
+ 						<dd>5:45 pm</dd>
+
+ 						<dt>Discotoshi</dt>
+ 						<dd>3:45 pm</dd>
+  					</dl>
+  				</div>
+  				<div class="earth-stage">
+  					<h4>Earth Stage</h4>
+  					<dl>
+						<dt>Rusty Midway</dt>
+ 						<dd>7:30 pm</dd>
+
+ 						<dt>DJ Dials</dt>
+ 						<dd>6:00 pm</dd>
+
+ 						<dt>DJ M3</dt>
+ 						<dd>4:30 pm</dd>
+
+						<dt>Feelaxx</dt>
+ 						<dd>3:00 pm</dd>
+  					</dl>
+  				</div>
+  			</div>
+  		</PageContainer>
+  	</section>
+
+	<section id="lineup-bands">
+		<PageContainer>
 			<h4 class="lineup-header">Featuring 4 stages with live performances by:</h4>
 
 			<Bands bands={bandsData} />
@@ -120,6 +205,96 @@ import ResponsiveImage from '@/components/ResponsiveImage.astro';
 			</div>
 		</PageContainer>
 	</section>
+
+	<section id="preparty">
+		<PageContainer>
+			<div class="flex-row">
+				<div class="preparty-description">
+					<h3>Preparty</h3>
+					<h4>Go ahead, wet your whistle</h4>
+					<p>
+						To get your engine warmed up and revving for the Bash, we’re kicking off Bash weekend with yet another epic preparty. Last year we lit up the hottest new disco joint in town—Good Night John Boy—with a party second to none (aside from the Bash, of course). This year, we’re throwing down even harder. Details coming soon!
+					</p>
+					<a class="ghost-button" href="#tickets">Get Tickets</a>
+				</div>
+				<div class="preparty-image"><ResponsiveImage src={prepartyImg} alt="Preparty: Go ahead, wet your whistle" /></div>
+			</div>
+		</PageContainer>
+	</section>
+
+	<section id="afterparty">
+		<PageContainer>
+			<div class="flex-row">
+				<div class="afterparty-description">
+					<h3>Afterparty</h3>
+					<h4>Disco for Dessert</h4>
+					<p>
+						Enter the Basher boss-layer, baby! After conquering the beach by day, we’re leveling up to the club by night for another epic Bash Afters. With performing alumni ranging from Breakbot to Yuksek to Young Franco, the Bash doesn’t pull any punches after hours. Stay tuned, lineup and more info coming soon.
+					</p>
+					<a class="ghost-button" href="#tickets">Get Tickets</a>
+				</div>
+				<div class="afterparty-image"><ResponsiveImage src={afterpartyImg} alt="Afterparty: Disco for Dessert" /></div>
+			</div>
+		</PageContainer>
+	</section>
+
+	<section id="vip">
+		<PageContainer>
+			<div class="flex-row">
+				<div class="vip-description">
+					<h3>VIP Experience</h3>
+					<h4>Upgrade Your Ticket</h4>
+					<p>
+						If you've ever Bashed, you know it's one giant VIP experience—just being present makes you a star! That said, for the funkiest among funky specimens, or just those with extra shekels,  this year we’re overhauling the Bash VIP experience with more and better amenities, more potties and a bigger bar. Upgrade your Bash Pass at checkout and lock in the best seat in the house!
+					</p>
+					<p class="vip-includes">
+						<strong>Afterparty Ticket</strong><br>
+						Private VIP Lounge<br>
+						Private VIP Viewing Deck<br>
+						Front row Main Stage Access<br>
+						Separate VIP Entrance<br>
+						Private VIP Bar(s)<br>
+						More Private Restrooms<br>
+					</p>
+					<a class="ghost-button" href="#tickets">Get Tickets</a>
+				</div>
+				<div class="vip-image"><ResponsiveImage src={vipImg} alt="VIP Tickets" /></div>
+			</div>
+		</PageContainer>
+	</section>
+
+	<section id="hotels">
+		<PageContainer>
+			<div class="flex-row">
+				<div class="hotels-description">
+					<h3>Get a Room</h3>
+					<h4>Discounted Hotels Steps from the Bash</h4>
+					<p>
+						...no seriously. The Bash is an all-weekend affair, and with the beachfront location, even locals won't wanna stray far. To keep everyone comfortable for the weekend, we partnered with Mission Beach's top hotels to offer discounted rooms exclusively for Bashers. Book using the links below:
+					</p>
+					<div class="links-flex">
+						<div><a class="ghost-button" target="_blank" href="https://be.synxis.com/?Hotel=64070&Chain=17551&arrive=2025-03-20&adult=1&promo=STACHE">Book the Bahia</a></div>
+						<div><img src={bahiaImg.src} alt="Bahia"/></div>
+					</div>
+					<div class="links-flex">
+						<div><a class="ghost-button" target="_blank" href="https://res.windsurfercrs.com/ibe/details.aspx?propertyid=17116&nights=2&checkin=3/20/2026&group=MUSTACHEBASH26&lang=en-us&adults=2">Book the Dana</a></div>
+						<div><img src={danaImg.src} alt="Dana"/></div>
+					</div>
+					<div class="links-flex">
+						<div><a class="ghost-button" target="_blank" href="https://www.hyatt.com/events/en-US/group-booking/SANIS/G-MUZ6">Book the Hyatt</a></div>
+						<div><img src={hyattImg.src} alt="Hyatt"/></div>
+					</div>
+				</div>
+				<div class="hotels-image"><ResponsiveImage src={hotelsImg} alt="Hotels" /></div>
+			</div>
+		</PageContainer>
+	</section>
+
+	<Tickets eventIds={[
+		'd716bc1b-4fae-45e1-be80-b359da47a1ea', // bash
+		'9b23cb4a-740e-4378-b09a-3e92aac472e0', // afterparty
+		'1c3bdc92-7411-4608-8b20-719fe32ef778' // preparty
+	]}/>
 
 	<section id="gallery">
 		<div class="cover-wrapper">
@@ -335,7 +510,7 @@ import ResponsiveImage from '@/components/ResponsiveImage.astro';
 		}
 	}
 	#set-times h3 {
-		color: #ffffff;
+		color: #000000;
 		text-align: center;
 		margin-bottom: 0.25em;
 	}
@@ -346,7 +521,7 @@ import ResponsiveImage from '@/components/ResponsiveImage.astro';
 		}
 	}
 	#set-times h4 {
-		color: #ffffff;
+		color: #000000;
 	}
 	@media (max-width: 600px) {
 		#set-times h4 {
@@ -363,7 +538,7 @@ import ResponsiveImage from '@/components/ResponsiveImage.astro';
 		margin: 0;
 		padding: 0;
 		text-transform: uppercase;
-		color: #ffffff;
+		color: #000000;
 	}
 	#set-times dt {
 		font-size: 1.375em;
