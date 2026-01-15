@@ -2,7 +2,7 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { API_HOST } from 'astro:env/client';
 
-import qrcode from 'qrcode';
+// import qrcode from 'qrcode';
 
 import classNames from 'classnames';
 import styles from './Main.module.css';
