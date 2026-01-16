@@ -79,14 +79,14 @@ const bands: Band[] = [
 		description:
 			'DJ M3 (Makes Me Move) has had a significant impact on the San Francisco music scene for decades; and come Bash this March, he’ll continues this noble quest as he spreads his signature sound, mixing Disco, House, Techno & Tech House for the movers tearing it up on the dance floor.',
 		img: djM3Img,
-		links: {}
+		links: {instagram: 'https://www.instagram.com/djm3sf'}
 	},
 	{
 		name: 'DJ Dials',
 		description:
 			'Long time DJ and producer, DJ Dials and the current live music scene are one in the same. With an improvisational approach that feeds off crowd energy, his love for good music and great people gives him everything he needs to deliver disco-drenched sets that challenge a crowd to have as much fun as he has doing it.',
 		img: djDialsImg,
-		links: {}
+		links: {instagram: 'https://www.instagram.com/djdialspresents'}
 	},
 	{
 		name: 'Discotoshi',
