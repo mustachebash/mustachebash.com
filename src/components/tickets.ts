@@ -159,7 +159,7 @@ function completePurchase(nonce: string) {
 				tick!.classList.add('complete');
 			});
 
-			const total = cart.reduce((tot, cur) => tot + cur.quantity * products[cur.productId].price, 0),
+			const total = cart.reduce((tot, cur) => tot + cur.quantity * (products[cur.productId]?.price ?? 0), 0),
 				transactionId = headers?.get('Location')?.split('/').pop();
 			try {
 				window.gtag?.('event', 'purchase', {
