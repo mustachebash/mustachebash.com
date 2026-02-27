@@ -635,7 +635,11 @@ const ogImageURL = openGraphImage ? new URL(openGraphImage.src, Astro.site).href
 		el.addEventListener('click', e => {
 			if (!(e.target instanceof HTMLAnchorElement)) return;
 
-			if (e.target.hash && e.target.pathname === location.pathname) {
+			// Normalize pathnames to handle trailing slash inconsistencies
+			const targetPath = e.target.pathname.replace(/\/$/, '') || '/';
+			const currentPath = location.pathname.replace(/\/$/, '') || '/';
+
+			if (e.target.hash && targetPath === currentPath) {
 				e.preventDefault();
 
 				// Track hero CTA clicks
