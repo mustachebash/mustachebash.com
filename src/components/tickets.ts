@@ -263,6 +263,45 @@ function purchaseFlowInit({ hostedFieldsInstance, applePayInstance }: { hostedFi
 			ticks[1]!.classList.add('active');
 			document.querySelectorAll<HTMLDivElement>('.leg')[0]!.classList.add('active');
 		});
+	} else if (promo?.type === 'coupon' && promo.meta?.bundleQuantity) {
+		const product = products[promo.productId],
+			bundleQuantity = promo.meta.bundleQuantity;
+
+		cart.push({ productId: promo.productId, quantity: bundleQuantity });
+
+		const price = product.price;
+		let discountedPrice: number;
+		if (promo.percentDiscount) {
+			discountedPrice = Math.round(price * (1 - promo.percentDiscount / 100) * 100) / 100;
+		} else {
+			discountedPrice = Math.round((price - promo.flatDiscount) * 100) / 100;
+		}
+
+		// Override the product price so order summary math works correctly
+		products[promo.productId].price = discountedPrice;
+
+		const subtotal = discountedPrice * bundleQuantity,
+			orderSummaryList = document.querySelector<HTMLDListElement>('.order-summary dl') as HTMLDListElement;
+
+		document.querySelector('#promo-details')!.innerHTML = `<h5>Bundle: ${product.name} - $${discountedPrice}/ea (${bundleQuantity} qty)</h5>`;
+
+		document.querySelector<HTMLSpanElement>('#grand-total span')!.innerText = subtotal.toFixed(2);
+
+		orderSummaryList.innerHTML = `
+			<dt>${product.name} (<span class="quantity">${bundleQuantity}</span>)</dt>
+			<dd>$<span class="subtotal">${subtotal.toFixed(2)}</span></dd>
+		`;
+
+		window.requestAnimationFrame(() => {
+			document.querySelectorAll<HTMLDivElement>('.step')[0]!.classList.remove('active');
+			document.querySelectorAll<HTMLDivElement>('.step')[1]!.classList.add('active');
+
+			const ticks = document.querySelectorAll<HTMLDivElement>('.ticks > div');
+			ticks[0]!.classList.remove('active');
+			ticks[0]!.classList.add('complete');
+			ticks[1]!.classList.add('active');
+			document.querySelectorAll<HTMLDivElement>('.leg')[0]!.classList.add('active');
+		});
 	} else {
 		if (promo && products[promo.productId]?.status === 'active') {
 			document.querySelector('#promo-details')!.innerHTML = `<h5>$${promo.flatDiscount} off ${products[promo.productId].name} applied (limit 1)</h5>`;
