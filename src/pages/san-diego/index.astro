@@ -4,8 +4,6 @@ import Layout from '@/layouts/Layout.astro';
 
 import PageContainer from '@/components/PageContainer.astro';
 import NewsletterSignup from '@/components/NewsletterSignup.astro';
-import Bands from '@/components/Bands.astro';
-import bandsData from './_bands';
 import Tickets from '@/components/Tickets.astro';
 
 import opengraphImg from './_img/opengraph-image.jpg';
@@ -17,14 +15,6 @@ import videoCoverImg from './_img/video-cover.jpg';
 import introImg from './_img/intro.jpg';
 import lineupImgImport from './_img/lineup.jpg';
 import lineupImgMobileImport from './_img/lineup-mobile.jpg';
-import venueImg from './_img/venue.jpg';
-import prepartyImg from './_img/preparty.jpg';
-import afterpartyImg from './_img/afterparty.jpg';
-import vipImg from './_img/vip.jpg';
-import hotelsImg from './_img/hotels.jpg';
-import bahiaImg from './_img/bahia.png';
-import hyattImg from './_img/hyatt.png';
-import danaImg from './_img/dana.png';
 
 import galleryCoverImg from './_img/gallery-cover-desktop.jpg';
 import galleryCoverImgMobile from './_img/gallery-cover-mobile.jpg';
@@ -37,7 +27,7 @@ const lineupImgMobile = await getImage({ src: lineupImgMobileImport, format: 'we
 <Layout
 	title="The Mustache Bash"
 	openGraphImage={opengraphImg}
-	openGraphTitle="San Diego Mustache Bash - March 21st"
+	openGraphTitle="San Diego Mustache Bash - March 2027"
 	openGraphDescription="San Diego Original - A party, a reunion, an excuse to take pride in the dirty fuzz you fertilize above your upper lip. Whatever you call it, let it be known: The Mustache Bash is calling."
 	jsonLD={jsonLD}
 >
@@ -47,7 +37,7 @@ const lineupImgMobile = await getImage({ src: lineupImgMobileImport, format: 'we
 				<picture>
 					<source media="(min-width: 680px)" srcset={heroImg.src} />
 					<source srcset={heroImgMobile.src} />
-					<img src={heroImg.src} alt="Mustache Bash 2026 - March 21st" />
+					<img src={heroImg.src} alt="Mustache Bash 2027" />
 				</picture>
 			</div>
 		</PageContainer>
@@ -83,9 +73,10 @@ const lineupImgMobile = await getImage({ src: lineupImgMobileImport, format: 'we
 				<div class="intro-text">
 					<h4>Looking Back<br />Bashing Forward</h4>
 					<p>
-						Last March was a historic day for San Diego—The Mustache Bash opened the doors at its new waterfront home in Mission Beach, six thousand Bashers unleashed on Mission Bay, Chromeo and Breakbot brought the grand finale and by the end of the night, all were abducted by the funk. Something tells us the future of funk and disco is looking fierce!
+						We’re still reeling from the 2026 Mustache Bash at Mariner’s Point Parl—and wow, did San Diego show up to shine. The sun was beaming, the vibes were pristine, and Bashers turned Mission Bay into a full-blown Disco Day Dream. History was made with the first-ever Stache-N-Fashion Show, where the fits were fierce, the struts were intergalactic, and our community proved once again that style is a state of funk. Bashers showed up and showed out!
 					</p>
-					<p>Building off the momentum, The Bash returns to San Diego on March 21st, 2026 ready to funk like we’ve never funked before. Follow <a
+					<p>And then there was that moment—Danilo Plessow closing out the night on the beach at the Fire Stage. A sweaty, shimmering, soul-lifting finale that reminded all of us why we Bash in the first place.</p>
+					<p>We’re gearing up to return on March 27, 2027—ready to funk harder, and brighter than ever before. Follow <a
 							style="color:#ffffff;"
 							target="_blank"
 							href="https://www.instagram.com/themustachebash/">@TheMustacheBash</a
@@ -108,193 +99,8 @@ const lineupImgMobile = await getImage({ src: lineupImgMobileImport, format: 'we
 		</PageContainer>
 	</section>
 
-	<section id="set-times">
-  		<PageContainer>
-  			<h3>Set Times</h3>
-  			<div class="flex-row">
-  				<div class="water-stage">
-  					<h4>Water Stage</h4>
-  					<dl>
- 						<dt>Marc Rebillet</dt>
- 						<dd>8:30 pm</dd>
-
- 						<dt>Blu DeTiger</dt>
- 						<dd>6:30 pm</dd>
-
- 						<dt>Mustache Bash<br>Family Band</dt>
- 						<dd>4:30 pm</dd>
-
- 						<dt>Porcelain (Funk Set)</dt>
- 						<dd>2:30 pm</dd>
-  					</dl>
-  				</div>
-  				<div class="fire-stage">
-  					<h4>Fire Stage</h4>
-  					<dl>
-						<dt>Danilo Plessow (MCDE)</dt>
-						<dd>8:30 pm</dd>
-
-						<dt>Armand Van Helden</dt>
- 						<dd>6:50 pm</dd>
-
- 						<dt>Razor-N-Tape</dt>
- 						<dd>5:20 pm</dd>
-
- 						<dt>Gavin Turek</dt>
- 						<dd>3:50 pm</dd>
-
-						<dt>Combover B2B Louiv</dt>
- 						<dd>2:00 pm</dd>
-  					</dl>
-  				</div>
-  				<div class="wind-stage">
-  					<h4>Wind Stage</h4>
-  					<dl>
-						<dt>DJ Dials</dt>
- 						<dd>7:45 pm</dd>
-
-						<dt>Discotoshi</dt>
- 						<dd>5:45 pm</dd>
-
- 						<dt>He2She</dt>
- 						<dd>3:45 pm</dd>
-
- 						<dt>He2She</dt>
- 						<dd>2:00 pm</dd>
-  					</dl>
-  				</div>
-  				<div class="earth-stage">
-  					<h4>Earth Stage</h4>
-  					<dl>
-						<dt>Rusty Midway</dt>
- 						<dd>7:30 pm</dd>
-
- 						<dt>Abby Normal</dt>
- 						<dd>5:55 pm</dd>
-
- 						<dt>DJ M3</dt>
- 						<dd>4:20 pm</dd>
-
-						<dt>Feelaxx</dt>
- 						<dd>3:00 pm</dd>
-  					</dl>
-  				</div>
-  			</div>
-  		</PageContainer>
-  	</section>
-
-	<section id="lineup-bands">
-		<PageContainer>
-			<h4 class="lineup-header">Featuring 4 stages with live performances by:</h4>
-
-			<Bands bands={bandsData} />
-		</PageContainer>
-	</section>
-
-	<section id="venue">
-		<PageContainer>
-			<div class="flex-row">
-				<div class="venue-description">
-					<h3>Venue</h3>
-					<h4>Mariner's Point Park</h4>
-					<p>
-						Sand, sailboats and a psychedelic sunset. Other than that, expect the same beautiful Bash as usual. Studio 54-style disco? Yup. Free-for-all roller rink? Double yup. Bottomless
-						bars, four stages, live funk bands, disco DJs and thousands of funky souls spirited in their '70s best? You funkin' betcha! It's that same ole boogie by the bay, baby, only
-						this time, a slightly different bay. And the best part—our friends won't be stuck outside missing all the fun.
-					</p>
-					<a class="ghost-button" target="_blank" href="https://maps.app.goo.gl/g4kgUmC7oFbi4kRu9">Get Directions</a>
-				</div>
-				<div class="venue-image"><ResponsiveImage src={venueImg} alt="Mariner's Point Park" /></div>
-			</div>
-		</PageContainer>
-	</section>
-
-	<section id="preparty">
-		<PageContainer>
-			<div class="flex-row">
-				<div class="preparty-description">
-					<h3>Preparty</h3>
-					<h4>Primetime at the Funk Pump</h4>
-					<p>
-						Put on your hard tires and consider this your official warm-up lap, Bashers. Before the official starting flag goes up, we’re warming up Bash weekend with a proper Preparty. Last year we packed out San Diego’s hottest disco den, Good Night John Boy, and the warmup that ensued could only be compared to hot yoga. This year, we’re staying the course, only we’re going full Bikram. Come early, stretch those disco legs, and get a head start on the party.
-					</p>
-					<p><strong>PRESALE CLOSE - TICKETS AVAILABLE AT THE DOOR</strong></p>
-				</div>
-				<div class="preparty-image"><ResponsiveImage src={prepartyImg} alt="Preparty: Go ahead, wet your whistle" /></div>
-			</div>
-		</PageContainer>
-	</section>
-
-	<section id="afterparty">
-		<PageContainer>
-			<div class="flex-row">
-				<div class="afterparty-description">
-					<h3>Afterparty</h3>
-					<h4>Disco for Dessert</h4>
-					<p>
-						You didn’t think we’d tuck you into bed after sunset, did you? When the beachside boogie subsides, The Bash dawns its nighttime vibes, and the dance floor turns into a full-blown funk furnace.  This year, we’re teaming up with Party Pupils, Sunsets, and six other disco-forward performers to take over The Beverly Beach Garden—just down the way from Bash. Save some gas in the tank and get ready for an afters like The Bash has ever seen.
-					</p>
-					<a class="ghost-button" href="#tickets">Get Tickets</a>
-				</div>
-				<div class="afterparty-image"><ResponsiveImage src={afterpartyImg} alt="Afterparty: Disco for Dessert" /></div>
-			</div>
-		</PageContainer>
-	</section>
-
-	<section id="vip">
-		<PageContainer>
-			<div class="flex-row">
-				<div class="vip-description">
-					<h3>VIP Experience</h3>
-					<h4>Upgrade Your Ticket</h4>
-					<p>
-						If you've ever Bashed, you know it's one giant VIP experience—just being present makes you a star! That said, for the funkiest among funky specimens, or just those with extra shekels,  this year we’re overhauling the Bash VIP experience with more and better amenities, more potties and a bigger bar. Upgrade your Bash Pass at checkout and lock in the best seat in the house!
-					</p>
-					<p class="vip-includes">
-						<strong>Afterparty Ticket</strong><br>
-						Private VIP Lounge<br>
-						Private VIP Viewing Deck<br>
-						Separate VIP Entrance<br>
-						Private VIP Bar<br>
-						More Private Restrooms<br>
-					</p>
-					<a class="ghost-button" href="#tickets">Get Tickets</a>
-				</div>
-				<div class="vip-image"><ResponsiveImage src={vipImg} alt="VIP Tickets" /></div>
-			</div>
-		</PageContainer>
-	</section>
-
-	<section id="hotels">
-		<PageContainer>
-			<div class="flex-row">
-				<div class="hotels-description">
-					<h3>Get a Room</h3>
-					<h4>Discounted Hotels Steps from the Bash</h4>
-					<p>
-						...no seriously. The Bash is an all-weekend affair, and with the beachfront location, even locals won't wanna stray far. To keep everyone comfortable for the weekend, we partnered with Mission Beach's top hotels to offer discounted rooms exclusively for Bashers. Book using the links below:
-					</p>
-					<div class="links-flex">
-						<div><a class="ghost-button" target="_blank" href="https://be.synxis.com/?Hotel=64070&Chain=17551&arrive=2025-03-20&adult=1&promo=STACHE">Book the Bahia</a></div>
-						<div><img src={bahiaImg.src} alt="Bahia"/></div>
-					</div>
-					<div class="links-flex">
-						<div><a class="ghost-button" target="_blank" href="https://res.windsurfercrs.com/ibe/details.aspx?propertyid=17116&nights=2&checkin=3/20/2026&group=MUSTACHEBASH26&lang=en-us&adults=2">Book the Dana</a></div>
-						<div><img src={danaImg.src} alt="Dana"/></div>
-					</div>
-					<div class="links-flex">
-						<div><a class="ghost-button" target="_blank" href="https://www.hyatt.com/events/en-US/group-booking/SANIS/G-MUZ6">Book the Hyatt</a></div>
-						<div><img src={hyattImg.src} alt="Hyatt"/></div>
-					</div>
-				</div>
-				<div class="hotels-image"><ResponsiveImage src={hotelsImg} alt="Hotels" /></div>
-			</div>
-		</PageContainer>
-	</section>
-
 	<Tickets eventIds={[
-		'd716bc1b-4fae-45e1-be80-b359da47a1ea', // bash
-		'9b23cb4a-740e-4378-b09a-3e92aac472e0' // afterparty
+		'86c2d349-1131-4f51-a750-34c3a2446897' // bash
 	]}/>
 
 	<section id="gallery">
@@ -408,7 +214,7 @@ const lineupImgMobile = await getImage({ src: lineupImgMobileImport, format: 'we
 	@media (min-width: 770px) {
 		#intro .intro-text {
 			margin-left: 7em;
-			margin-top: 7em;
+			margin-top: 3em;
 		}
 	}
 	#intro .intro-text h4 {
