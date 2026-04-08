@@ -2,7 +2,7 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { API_HOST } from 'astro:env/client';
 
-import qrcode from 'qrcode';
+// import qrcode from 'qrcode';
 
 import classNames from 'classnames';
 import styles from './Main.module.css';
@@ -74,19 +74,19 @@ const Main = () => {
 					}>;
 				})
 				.then(async ({ customer, tickets, accommodations }) => {
-					for (const ticket of tickets) {
-						const { qrPayload } = ticket;
+					// for (const ticket of tickets) {
+					// 	const { qrPayload } = ticket;
 
-						if (qrPayload) {
-							try {
-								const qrCode = await qrcode.toDataURL(qrPayload, { scale: 8, errorCorrectionLevel: 'M' });
+					// 	if (qrPayload) {
+					// 		try {
+					// 			const qrCode = await qrcode.toDataURL(qrPayload, { scale: 8, errorCorrectionLevel: 'M' });
 
-								ticket.qrCode = qrCode;
-							} catch (e) {
-								console.error('QR code generation failed', e);
-							}
-						}
-					}
+					// 			ticket.qrCode = qrCode;
+					// 		} catch (e) {
+					// 			console.error('QR code generation failed', e);
+					// 		}
+					// 	}
+					// }
 
 					return { customer, tickets, accommodations };
 				})
